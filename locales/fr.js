@@ -19,11 +19,6 @@ export default {
         path: 'artiste'
       },
       {
-        name: 'stores',
-        text: 'Points de ventes',
-        path: 'points-de-ventes'
-      },
-      {
         name: 'events',
         text: 'Évenements',
         path: 'evenements'

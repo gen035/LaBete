@@ -19,11 +19,6 @@ export default {
         path: 'artist'
       },
       {
-        name: 'stores',
-        text: 'Stores',
-        path: 'stores'
-      },
-      {
         name: 'events',
         text: 'Events',
         path: 'events'
