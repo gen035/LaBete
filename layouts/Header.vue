@@ -3,16 +3,6 @@
     <div class="top-bar">
       <ul class="top-bar-list">
         <li class="d-none d-sm-inline-block d-md-inline-block d-lg-inline-block">
-          <NuxtLink 
-            :to="localePath('stores')"
-            active-class="active"
-            exact
-          >
-            <i class="fas fa-map-marker-alt"></i>
-            {{ $t('top.store') }}
-          </NuxtLink>
-        </li>
-        <li class="d-none d-sm-inline-block d-md-inline-block d-lg-inline-block">
           <a :href="$t('top.online.link')" title="Etsy" data-track="" data-track-category="topNav" data-track-action="click" data-track-label="Acheter en ligne" target="_blank">
             <i class="fas fa-shopping-bag"></i>
               {{ $t('top.online.text') }}
