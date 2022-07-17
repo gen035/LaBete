@@ -72,37 +72,6 @@
         </div>
       </div>
     </section>
-    <section class="home-bottom container-fluid">
-      <div class="row no-gutters">
-        <div class="offset-md-3 col-md-3">
-          <div class="button">
-            <NuxtLink 
-              :to="localePath('stores')"
-              exact
-            >
-              <p class="button-text" data-track="" data-track-category="home" data-track-action="click" data-track-label="home-store">
-                  {{ $t('home.links.store')}}
-              </p>
-              <div class="button-icon-container">
-                <p class="button-icon fa fa-map-marker"></p>
-              </div>
-            </NuxtLink>
-          </div>
-        </div>
-        <div class="col-md-3">
-          <div class="button">
-            <a href="https://www.etsy.com/ca/shop/labetecreations" title="Online" target="_blank">
-              <p class="button-text" data-track="" data-track-category="home" data-track-action="click" data-track-label="Online">
-                  {{ $t('home.links.online')}}
-              </p>
-              <div class="button-icon-container">
-                <p class="button-icon fa fa-shopping-bag"></p>
-              </div>
-            </a>
-          </div>
-        </div>
-      </div>
-    </section>
   </div>
 </template>
 

@@ -1,6 +1,6 @@
 export default {
   top: {
-    //store: 'Buy in store',
+    store: 'Buy in store',
     online: {
       link: 'https://www.etsy.com/ca/shop/labetecreations',
       text: 'Buy online'

@@ -20,6 +20,19 @@
                 <i class="fab fa-facebook-f"></i>
               </a>
             </li>
+             <li v-if="facebookMessenger">
+              <a
+                :href="facebookMessenger"
+                title="Facebook Messenger"
+                target="_blank"
+                data-track=""
+                data-track-category="footer"
+                data-track-action="click"
+                data-track-label="Facebook Messenger"
+              >
+                <i class="fab fa-facebook-messenger"></i>
+              </a>
+            </li>
             <li v-if="store">
               <a
                 :href="store"
@@ -86,6 +99,9 @@
     computed: {
       facebook() {
         return this.$store.state.settings.facebook_link.url;
+      },
+      facebookMessenger() {
+        return this.$store.state.settings.facebook_messenger_link.url;
       },
       store() {
         return this.$store.state.settings.store_link.url;
