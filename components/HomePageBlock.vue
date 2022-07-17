@@ -6,14 +6,14 @@
       :class="`row ${isOdd}`"
     >
       <div :class="[
-        block.image ? 'col-md-6' : 'col-md-12',
+        block.image.url ? 'col-md-6' : 'col-md-12',
         'd-flex',
         'align-items-center',
         'home-page-block-text'
       ]">
         <div v-html="$prismic.asHtml(block.description)" />
       </div>
-      <div v-if="block.image" class="col-md-6 home-page-block-img" :style="{backgroundImage: `url(${block.image.url})`}" />
+      <div v-if="block.image.url" class="col-md-6 home-page-block-img" :style="{backgroundImage: `url(${block.image.url})`}" />
     </div>
   </section>
 </template>
