@@ -8,30 +8,14 @@
             />
         </div>
         <div class="row align-items-center justify-content-center">
-          <div class="col-md-4">
-            <div class="contact-item">
-              <a :href="`tel:+${formattedPhone}`" title="Telephone" data-track="" data-track-category="contact" data-track-action="click" data-track-label="telephone">
-                <h2>{{ $t('contact.phone') }}</h2>
-                <p>{{ content.phone[0].text }}</p>
-              </a>
-            </div>
-            <div class="contact-item">
-              <a :href="`mailto:${content.email[0].text}`" title="courriel" data-track="" data-track-category="contact" data-track-action="click" data-track-label="courriel">
-                <h2>{{ $t('contact.email') }}</h2>
-                <p>{{ content.email[0].text }}</p>
-              </a>
-            </div>
-            <div class="contact-item">
-              <a :href="`${content.facebook_messenger[0].text}`" title="messenger" data-track="" data-track-category="contact" data-track-action="click" data-track-label="messenger" target="_blank">
-                <h2>Messenger <i class="fab fa-facebook-messenger"></i></h2>
-              </a>
-            </div>
-            <div class="contact-item">
-              <a :href="`${content.instagram[0].text}`" title="instagram" data-track="" data-track-category="contact" data-track-action="click" data-track-label="insta" target="_blank">
-                <h2>Instagram</h2>
-                <p>@labetecreation</p>
-              </a>
-            </div>
+          <div v-if="content && content.contact_items" class="col-md-4">
+              <div v-for="(item, index) in content.contact_items" class="contact-item">
+                <a :href="`${item.link && item.link.url}`" :title="formattedTitle(item)" data-track="" data-track-category="contact" data-track-action="click" :data-track-label="formattedTitle(item)" target="_blank">
+                  <h2 v-if="item && item.label && item.label.length > 0">{{item.label[0].text}}<i v-if="item.fa_icon && item.fa_icon.length > 0" :class="item.fa_icon[0].text"></i></h2>
+                  <p v-if="item && item.display_text && item.display_text.length > 0">{{item.display_text[0].text}}</h2>
+                  <p v-if="item && item.label && item.handle.length > 0 && item.handle[0].text">{{ item.handle[0].text }}</p>
+                </a>
+              </div>
           </div>
           <div class="col-md-4">
             <img :src="content.image.url" :alt="$t('contact.alt')" class="contact-img-1" />
@@ -81,6 +65,7 @@
       seo = seo.data;
 
       if (content) {
+        console.log(content)
         return {
           content,
           seo
@@ -89,11 +74,11 @@
         error({ statusCode: 404, message: 'Page not found' })
       }
     },
-    computed: {
-      formattedPhone() {
-        if(this.content.phone[0].text) {
-          return this.content.phone[0].text.split('-').join('');
-        }
+    methods: {
+      formattedTitle(item) {
+        console.log(item)
+        const title = item && item.label && item.label.length > 0 && item.label[0].text.toLowerCase();
+        return title;
       }
     },
     head() {
