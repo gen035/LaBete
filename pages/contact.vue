@@ -65,7 +65,6 @@
       seo = seo.data;
 
       if (content) {
-        console.log(content)
         return {
           content,
           seo
@@ -76,7 +75,6 @@
     },
     methods: {
       formattedTitle(item) {
-        console.log(item)
         const title = item && item.label && item.label.length > 0 && item.label[0].text.toLowerCase();
         return title;
       }
