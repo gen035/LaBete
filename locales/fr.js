@@ -1,6 +1,6 @@
 export default {
   top: {
-    //store: 'Points de ventes',
+    store: 'Points de ventes',
     online: {
       link: 'https://www.etsy.com/ca/shop/labetecreations',
       text: 'Acheter en ligne'
@@ -32,7 +32,7 @@ export default {
   },
   home: {
     links: {
-      store: 'En magasin',
+
       online: 'En ligne'
     }
   },
