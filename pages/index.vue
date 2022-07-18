@@ -48,14 +48,14 @@
         :key="index"
       />
     </template>
-    <section class="home-bottom-slider-container">
+    <!--<section class="home-bottom-slider-container">
       <div class="row">
         <div class="col-12">
           <Slider :data="sliderBottom" />
         </div>
-      </div>
+      </div>-->
     </section>
-    <!--<section class="container home-images">
+    <section class="container home-images">
       <div class="row align-items-center">
         <div class="col-md-6 home-image">
           <Media
@@ -78,7 +78,7 @@
           />
         </div>
       </div>
-    </section> -->
+    </section>
   </div>
 </template>
 
@@ -122,9 +122,9 @@
       const sliderData = await app.$prismic.api.getByID(content.slider.id);
       slider = sliderData.data;
 
-      let sliderBottom = {};
-      const sliderBottomData = await app.$prismic.api.getByID(content.bottom_slider.id);
-      sliderBottom = sliderBottomData.data;
+      // let sliderBottom = {};
+      // const sliderBottomData = await app.$prismic.api.getByID(content.bottom_slider.id);
+      // sliderBottom = sliderBottomData.data;
 
       if (content) {
         return {
@@ -132,8 +132,7 @@
           seo,
           blocks,
           cards,
-          slider,
-          sliderBottom
+          slider
         }
       } else {
         error({ statusCode: 404, message: 'Page not found' })
