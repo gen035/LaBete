@@ -3,6 +3,8 @@
     <Header />
     <nuxt />
     <MobileNav />
+    <NewsletterModal />
+    <MessageModal />
     <Footer />
   </div>
 </template>
@@ -11,13 +13,15 @@
   import Header from './Header';
   import MobileNav from './MobileNav';
   import NewsletterModal from './../components/NewsletterModal';
+  import MessageModal from './../components/MessageModal';
   export default {
-    middleware: ['settings', 'newsletter'],
+    middleware: ['settings', 'newsletter', 'message'],
     components: {
       Footer,
       Header,
       MobileNav,
-      NewsletterModal
+      NewsletterModal,
+      MessageModal
     }
   }
 </script>
