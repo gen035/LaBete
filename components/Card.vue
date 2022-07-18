@@ -1,7 +1,6 @@
 <template>
   <a
-    :target="linkTarget"
-    :href="card.link.url"
+    @click="goTo()"
     :title="card.title[0].text"
   >
     <Media
@@ -26,12 +25,16 @@
         default: () => ({})
       }
     },
-    computed: {
-      linkTarget() {
-        if (this.card.link.url.indexOf('etsy') === -1) {
-          return "_self"
-        } else {
-          return "_blank"
+    methods: {
+      goTo() {
+        const openModal = this.card.open_modal;
+        if(openModal) {
+          this.$store.commit('SET_MESSAGE', true);
+        }else{
+          const locale = this.$store.state.i18n.locale;
+          const url = this.card && this.card.link && this.card.link.url;
+          const page = url.split("/").pop();
+          this.$router.push(`${locale === 'en' ? '/' + locale : ''}/${page}`)
         }
       }
     },
