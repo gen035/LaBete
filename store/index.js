@@ -1,7 +1,7 @@
 export const state = () => ({
   newsletter: [],
   newsletterOpened: false,
-  messageOpened: true,
+  messageOpened: false,
   message: [],
   settings: []
 })

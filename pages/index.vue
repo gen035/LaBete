@@ -48,6 +48,13 @@
         :key="index"
       />
     </template>
+    <!--<section class="home-bottom-slider-container">
+      <div class="row">
+        <div class="col-12">
+          <Slider :data="sliderBottom" />
+        </div>
+      </div>-->
+    </section>
     <section class="container home-images">
       <div class="row align-items-center">
         <div class="col-md-6 home-image">
@@ -114,6 +121,10 @@
       let slider = {};
       const sliderData = await app.$prismic.api.getByID(content.slider.id);
       slider = sliderData.data;
+
+      // let sliderBottom = {};
+      // const sliderBottomData = await app.$prismic.api.getByID(content.bottom_slider.id);
+      // sliderBottom = sliderBottomData.data;
 
       if (content) {
         return {
