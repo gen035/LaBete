@@ -3,10 +3,10 @@
     <div class="top-bar">
       <ul class="top-bar-list">
         <li class="d-none d-sm-inline-block d-md-inline-block d-lg-inline-block">
-          <a href="/#block2" title="Online" data-track="" data-track-category="topNav" data-track-action="click" data-track-label="Acheter en ligne">
+          <span @click="openModal()" title="Online" data-track="" data-track-category="topNav" data-track-action="click" data-track-label="Acheter en ligne">
             <i class="fas fa-shopping-bag"></i>
               {{ $t('top.online.text') }}
-          </a>
+          </span>
         </li>
         <li>
           <Nuxt-link :to="switchLocalePath('fr')">Français</Nuxt-link>
@@ -82,6 +82,9 @@
         links.map((item) => {
           this.nav.push(item);
         });
+      },
+      openModal() {
+        this.$store.commit('SET_MESSAGE', true);
       }
     },
     components: {
