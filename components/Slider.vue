@@ -7,7 +7,6 @@
 </template>
 <script>
   import VueSlickCarousel from 'vue-slick-carousel';
-  import 'vue-slick-carousel/dist/vue-slick-carousel.css';
 
   export default {
     props: {
@@ -23,7 +22,7 @@
           arrows: this.data.arrows,
           autoplay: this.data.autoplay,
           autoplaySpeed: this.data.autoplay_speed,
-          dots: false,
+          dots: this.data.dots,
           fade: this.data.fade,
           infinite: this.data.infinite,
           pauseOnHover: this.data.pause_on_hover,
