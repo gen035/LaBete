@@ -6520,6 +6520,11 @@ pbkdf2@^3.0.3:
     safe-buffer "^5.0.1"
     sha.js "^2.4.8"
 
+photoswipe@^5.3.0:
+  version "5.3.0"
+  resolved "https://registry.yarnpkg.com/photoswipe/-/photoswipe-5.3.0.tgz#fe118b147dddaf58ccc17c9403c7d7148805f8d2"
+  integrity sha512-vZMwziQorjiagzX7EvWimVT0YHO0DWNtR9UT6cv3yW1FA199LgsTpj4ziB2oJ/X/197gKmi56Oux5PudWUAmuw==
+
 picocolors@^0.2.1:
   version "0.2.1"
   resolved "https://registry.yarnpkg.com/picocolors/-/picocolors-0.2.1.tgz#570670f793646851d1ba135996962abad587859f"
@@ -9263,6 +9268,11 @@ vue-i18n@^8.11.2:
   version "8.27.1"
   resolved "https://registry.yarnpkg.com/vue-i18n/-/vue-i18n-8.27.1.tgz#fe660f6c14793ae404d6a715875d772594a3324f"
   integrity sha512-lWrGm4F25qReJ7XxSnFVb2h3PfW54ldnM4C+YLBGGJ75+Myt/kj4hHSTKqsyDLamvNYpvINMicSOdW+7yuqgIQ==
+
+vue-light-gallery@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/vue-light-gallery/-/vue-light-gallery-1.0.1.tgz#9416121b6940d0874b0ee6d9a48cfb7a7903d9a9"
+  integrity sha512-xNKNZ3upRIHgIeFIOQ+3RZcHsr3CwZvSFq3SqcsZ2rBWlHqc9IsVpWlpD2EOJyy7ovgODTC8C2rfaiRchQ2GOA==
 
 vue-loader@^15.9.7:
   version "15.9.8"

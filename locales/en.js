@@ -19,6 +19,11 @@ export default {
         path: 'artist'
       },
       {
+        name: 'creations',
+        text: 'Our Creations',
+        path: 'our-creations'
+      },
+      {
         name: 'events',
         text: 'Events',
         path: 'events'

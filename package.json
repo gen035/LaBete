@@ -24,6 +24,7 @@
     "stylelint": "^13.3.2",
     "stylelint-order": "^4.0.0",
     "stylelint-scss": "^3.16.1",
+    "vue-light-gallery": "^1.0.1",
     "vue-slick-carousel": "^1.0.5",
     "vue2-gmap-custom-marker": "^5.5.4",
     "vue2-google-maps": "^0.10.6"
