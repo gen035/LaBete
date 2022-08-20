@@ -51,7 +51,8 @@ export default {
   */
   plugins: [
     '~/plugins/map.js',
-    '~/plugins/axios.js'
+    '~/plugins/axios.js',
+    '~/plugins/lightGallery.client.js'
   ],
   /*
   ** Nuxt.js modules
