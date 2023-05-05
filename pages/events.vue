@@ -109,7 +109,7 @@
               const currentYear = parseInt(list.year)
 
               if (currentYear === eventYear) {
-                passed[index].events.unshift(event.name[0].text)
+                passed[index].events.unshift({name: event.name[0].text, city: event.city && event.city.length > 0 && event.city[0].text})
               }
             });
           }

@@ -19,7 +19,7 @@
         v-for="(event, index) in events"
         :key="index"
       >
-        {{ event }}
+        {{ event.name }} <span v-if="event.city">({{event.city}})</span>
       </li>
     </ul>
   </li>
