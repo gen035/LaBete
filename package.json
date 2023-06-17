@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@nuxtjs/axios": "^5.5.4",
+    "@nuxtjs/dotenv": "^1.4.1",
     "@nuxtjs/google-analytics": "^2.2.0",
     "bootstrap": "^4.4.1",
     "cookie-universal-nuxt": "^2.1.4",
@@ -24,6 +25,7 @@
     "stylelint": "^13.3.2",
     "stylelint-order": "^4.0.0",
     "stylelint-scss": "^3.16.1",
+    "swell-js": "^3.22.1",
     "vue-light-gallery": "^1.0.1",
     "vue-slick-carousel": "^1.0.5",
     "vue2-gmap-custom-marker": "^5.5.4",

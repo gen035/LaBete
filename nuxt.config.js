@@ -52,7 +52,8 @@ export default {
   plugins: [
     '~/plugins/map.js',
     '~/plugins/axios.js',
-    '~/plugins/lightGallery.client.js'
+    '~/plugins/lightGallery.client.js',
+    { src: '~/plugins/swell.js', mode: 'client' },
   ],
   /*
   ** Nuxt.js modules
@@ -87,7 +88,8 @@ export default {
     ['@nuxtjs/google-analytics', {
       id: 'UA-34334834-1'
     }],
-    '@nuxtjs/axios'
+    '@nuxtjs/axios',
+    '@nuxtjs/dotenv',
   ],
   /*
   ** Build configuration
