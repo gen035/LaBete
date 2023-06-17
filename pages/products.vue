@@ -15,7 +15,7 @@
         </div>
         <div class="row">
             <div class="col-md-2">
-              <Filters :attributes="attributes" :categories="categories"/>
+              <Filters :attributes="attributes" :categories="categories" />
             </div>
             <div class="col-md-10">
               <h2 v-if="products.length <=0">NO PROD</h2>
@@ -56,9 +56,10 @@
 
       let attributes = await app.$swell.attributes.list();
       attributes = attributes && attributes.results && attributes.results.length > 0 ? attributes.results : [];
-    
+
       if (content) {
         return {
+          attributes,
           categories,
           content,
           products,
