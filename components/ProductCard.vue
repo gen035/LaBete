@@ -7,7 +7,7 @@
       <span>{{product.price}}$</span>
       <s>{{product.orig_price}}$</s>
     </div>
-    <div class="button" data-track="" data-track-category="product" data-track-action="click" :data-track-label="product.id">
+    <div class="button" @click="addToCart" data-track="" data-track-category="product" data-track-action="click" :data-track-label="product.id">
       <a>
         <p class="button-text">
           Add to cart
@@ -44,6 +44,13 @@
           const page = url.split("/").pop();
           this.$router.push(`${locale === 'en' ? '/' + locale : ''}/${page}`)
         }
+      },
+      async addToCart() {
+        await this.$store.dispatch('addCartItem', {
+            productId: this.product.id,
+            quantity: 1
+          });
+        console.log('dd')
       }
     },
     components: {

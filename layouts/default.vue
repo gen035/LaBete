@@ -1,6 +1,7 @@
 <template>
   <div :class="$route.name">
     <Header />
+    <Cart />
     <nuxt />
     <MobileNav />
     <NewsletterModal />
@@ -9,6 +10,7 @@
   </div>
 </template>
 <script>
+  import Cart from './../components/Cart';
   import Footer from './Footer';
   import Header from './Header';
   import MobileNav from './MobileNav';
@@ -17,6 +19,7 @@
   export default {
     middleware: ['settings', 'newsletter', 'message'],
     components: {
+      Cart,
       Footer,
       Header,
       MobileNav,

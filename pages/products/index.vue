@@ -10,7 +10,7 @@
         <div class="row" v-if="content.content">
           <div
             v-html="$prismic.asHtml(content.content)"
-            class="col-md-8 offset-md-2 text-center"
+            class="col-md-8 offset-md-2 text-center product-description"
           />
         </div>
         <div class="row">
@@ -19,7 +19,9 @@
             </div>
             <div class="col-md-10">
               <h2 v-if="products.length <=0">NO PROD</h2>
-              <ProductCard v-if="products.length > 0" v-for="(product, index) in products" :product="product" :key="index"/>
+              <div class="row">
+                <ProductCard v-if="products.length > 0" v-for="(product, index) in products" :product="product" :key="index"/>
+              </div>
             </div>
         </div>
       </section>
@@ -48,7 +50,7 @@
       let seo = await app.$prismic.api.getByID(content.seo.id)
       seo = seo.data;
 
-      let products = await app.$swell.products.list();
+      let products = await this.$swell.products.list();
       products = products && products.results && products.results.length > 0 ? products.results : [];
 
       let categories = await app.$swell.categories.list();

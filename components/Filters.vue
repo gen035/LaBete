@@ -7,10 +7,16 @@
       </ul>
     </div>
     <div v-for="(attribute, index) in attributes" :key="index" class="filters-type">
-      <h3>{{attribute.name}}</h3>
-      <ul>
-        <li v-for="(value, index) in attribute.values" :key="index">{{value}}</li>
-      </ul>
+      <template v-if="attribute.filterable">
+        <h3>{{attribute.name}}</h3>
+          <b-form-checkbox-group
+            :id="attribute.id"
+            v-model="attribute.id"
+            :options="attribute.values"
+            :aria-describedby="ariaDescribedby"
+            :name="attribute.id"
+          ></b-form-checkbox-group>
+      </template>
     </div>
   </aside>
 </template>
@@ -31,5 +37,11 @@
     created() {
       console.log('attr',this.attributes)
     },
+    data() {
+      return {
+        color: [],
+        material: []
+      }
+    }
   }
 </script>
