@@ -88,6 +88,7 @@ export default {
     ['@nuxtjs/google-analytics', {
       id: 'UA-34334834-1'
     }],
+    ['bootstrap-vue/nuxt'],
     '@nuxtjs/axios',
     '@nuxtjs/dotenv',
   ],

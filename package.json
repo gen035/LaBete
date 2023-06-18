@@ -16,6 +16,7 @@
     "@nuxtjs/dotenv": "^1.4.1",
     "@nuxtjs/google-analytics": "^2.2.0",
     "bootstrap": "^4.4.1",
+    "bootstrap-vue": "^2.23.1",
     "cookie-universal-nuxt": "^2.1.4",
     "nuxt": "^2.0.0",
     "nuxt-i18n": "^5.12.7",
