@@ -7,6 +7,19 @@
   display: inline-block
   margin: 0 10px
   position: relative
+  &:last-child
+    margin-left: auto
+    .fa
+      font-size: 18px
+    span
+      background-color: red
+      height: 5px
+      width: 5px
+      border-radius: 50%
+      display: block
+      top: 0
+      right: -10px
+      position: absolute
 
 .nav li a.active::after
   background-color: $gold

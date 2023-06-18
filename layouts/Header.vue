@@ -40,6 +40,7 @@
                   {{ link.text }}
                 </NuxtLink>
               </li>
+              <li><i class="fa fa-shopping-bag" aria-hidden="true"></i><span></span></li>
           </ul>
         </div>
         <div class="col-4 nav-mobile-trigger" @click="toggleMobileNav">
