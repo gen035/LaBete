@@ -1,13 +1,13 @@
 <template>
-  <div class="button" @click="addToCart" data-track="" data-track-category="cart" data-track-action="click" :data-track-label="product.id">
-    <a>
+  <div>
+    <button class="button" @click="addToCart" data-track="" data-track-category="cart" data-track-action="click" :data-track-label="product.id">
       <p class="button-text">
-        Add to cart
-      </p>
-      <div class="button-icon-container">
-        <p class="button-icon fas fa-shopping-cart"></p>
-      </div>
-    </a>
+          {{this.$store.state.cartIsUpdating && this.$store.state.cartIsUpdatingId === product.id ? $t('cart.addToCartPending') : $t('cart.addToCart') }}
+        </p>
+        <div class="button-icon-container">
+          <p class="button-icon fas fa-shopping-cart"></p>
+        </div>
+    </button>
   </div>
 </template>
 <script>
@@ -17,6 +17,11 @@
         type: Object,
         require: true,
         default: () => ({})
+      }
+    },
+    data() {
+      return {
+        cartIsUpdating: this.$store.state.cartIsUpdating
       }
     },
     created() {

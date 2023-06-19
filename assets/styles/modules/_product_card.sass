@@ -3,12 +3,22 @@
   flex-direction: column
   justify-content: space-between
   padding: 15px
-  img
-    transition: opacity 250ms linear
-    margin-bottom: 10px
   .button
     width: 100%
     margin: 20px 0 0 0
+    padding: 0
+    border: none
+  &-image
+    height: 100%
+    width: 100%
+    max-height: 600px
+    max-width: 400px
+    overflow: hidden
+    margin-bottom: 10px
+    img
+      height: 100%
+      width: auto
+      transition: transform 250ms linear
   &-name
     text-transform: uppercase
     margin-bottom: 10px
@@ -18,7 +28,18 @@
       s
         color: red
         font-size: 12px
+  &-sale
+    position: absolute
+    top: 25px
+    left: 25px
+    background-color: red
+    border-radius: 5px
+    color: $white
+    padding: 5px 10px
+    text-transform: uppercase
+    z-index: 9
+    font-size: 12px
   &:hover
     cursor: pointer
     img
-      opacity: 0.85
+      transform: scale(1.1)

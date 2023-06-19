@@ -1,6 +1,9 @@
 <template>
   <div class="product-card col-sm-3">
-    <img :src="product.images[0].file.url" />
+    <div v-if="product.sale" class="product-card-sale">{{$t('product.sale')}}</div>
+    <div class="product-card-image">
+      <img :src="product.images[0].file.url" />
+    </div>
     <div class="product-card-name">{{ product.name }}</div>
     <div v-if="!product.sale" class="product-card-price">{{product.price}}$</div>
     <div v-if="product.sale" class="product-card-price product-card-price--sale">
