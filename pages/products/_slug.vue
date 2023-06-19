@@ -3,15 +3,15 @@
       <section class="container-fluid">
         <div class="row">
           <div class="col-md-12">
-            <h1>{{category.name}}</h1>
+            <h1>{{category.meta_title || category.name}}</h1>
           </div>
         </div>
         <div class="row" v-if="category.description">
-          <div class="col-md-6 offset-md-3 text-center product-description">{{category.description}}</div>
+          <div class="col-md-6 offset-md-3 text-center product-description" v-html="category.description"/>
         </div>
         <div class="row">
             <div class="col-md-2">
-              <Filters :attributes="attributes" :categories="categories" />
+              <Filters :attributes="attributes" :categories="[category]" />
             </div>
             <div class="col-md-10">
               <h2 v-if="products.length <=0">NO PROD</h2>
@@ -25,14 +25,21 @@
 <script>
   import Filters from '~/components/Filters';
   import ProductCard from '~/components/ProductCard';
-
+  import { categoryMapping } from './constants';
+  
   export default {
     async asyncData({ app, error, store, $swell, params}) {
       const locale = store.state.i18n.locale;
+      const language = locale.split('-')[0];
       let content = [];
 
-      const category = await app.$swell.categories.get(params && params.category);
-      const categories = [category];
+      const mappedCategory = categoryMapping.hasOwnProperty(language) && categoryMapping[language].hasOwnProperty(params && params.category) && categoryMapping[language][params && params.category] || null;
+      
+      if(mappedCategory === null) {
+        error({ statusCode: 404, message: 'Page not found' })
+      }
+    
+      const category = await app.$swell.categories.get(mappedCategory);
 
       let attributes = await app.$swell.attributes.list();
       attributes = attributes && attributes.results && attributes.results.length > 0 ? attributes.results : [];
@@ -40,13 +47,13 @@
       let products = await app.$swell.products.list({
         category: category.id
       });
+
       products = products && products.results && products.results.length > 0 ? products.results : [];
 
       if (content) {
         return {
           attributes,
           category,
-          categories,
           products,
         }
       } else {
