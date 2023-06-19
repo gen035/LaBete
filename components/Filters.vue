@@ -10,12 +10,9 @@
       <template v-if="attribute.filterable">
         <h3>{{attribute.name}}</h3>
           <b-form-checkbox-group
-            :id="attribute.id"
-            v-model="attribute.id"
-            :options="attribute.values"
-            :aria-describedby="ariaDescribedby"
-            :name="attribute.id"
-          ></b-form-checkbox-group>
+            v-model="selectedFilters[attribute.id]"
+            :options="attribute.values">
+          </b-form-checkbox-group>
       </template>
     </div>
   </aside>
@@ -39,8 +36,26 @@
     },
     data() {
       return {
-        color: [],
-        material: []
+        selectedFilters: {}
+      }
+    },
+    watch: {
+      selectedFilters: {
+        handler(newVal) {
+          if (!this.isEqual(newVal, this.oldObject)) {
+            this.$emit('newFilters', JSON.stringify(newVal));
+          }
+          this.oldObject = this.deepCopy(newVal);
+        },
+        deep: true
+      }
+    },
+    methods: {
+      isEqual(obj1, obj2) {
+        return JSON.stringify(obj1) === JSON.stringify(obj2);
+      },
+      deepCopy(obj) {
+        return JSON.parse(JSON.stringify(obj));
       }
     }
   }

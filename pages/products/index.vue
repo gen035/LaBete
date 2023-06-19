@@ -15,11 +15,11 @@
         </div>
         <div class="row">
             <div class="col-md-2">
-              <Filters :attributes="attributes" :categories="categories" />
+              <Filters :attributes="attributes" :categories="categories" @newFilters="(newFilters) => handleFilters(newFilters)" />
             </div>
             <div class="col-md-10">
               <div class="row" v-if="products.length > 0">
-                <div class="col-md-2">
+                <div class="col-md-2 d-flex align-items-center">
                   {{$t('products.sort')}}
                   <b-form-select v-model="order" :options="orderOptions"></b-form-select>
                 </div>
@@ -95,7 +95,8 @@
           { value: null, text: this.$t('products.orderSelection') },
           { value: 'asc', text: this.$t('products.asc') },
           { value: 'desc', text: this.$t('products.desc') }
-        ]
+        ],
+        filters: {}
       }
     },
     watch: {
@@ -105,6 +106,19 @@
         } else {
           this.products.sort((a, b) => b.price - a.price);
         }
+      }
+    },
+    methods: {
+      handleFilters(filters) {
+        console.log('NEW', filters);
+        this.filters = JSON.parse(filters);
+        this.filterProducts();
+      },
+      async filterProducts() {
+        const newProducts = await this.$swell.products.list({
+          $filters: this.filters
+        });
+        console.log(newProducts)
       }
     },
     components: {
