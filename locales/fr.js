@@ -1,9 +1,28 @@
 export default {
-  top: {
-    store: 'Points de ventes',
-    online: {
-      link: 'https://www.etsy.com/ca/shop/labetecreations',
-      text: 'Acheter en ligne'
+  cart: {
+    addToCart: 'Ajouter au panier',
+    addToCartPending: 'Ajout en cours...'
+  },
+  contact: {
+    phone: 'Téléphone',
+    email: 'Courriel',
+    alt: 'bijoux, cuir, fait a la main'
+  },
+  error: {
+    title: 'Une erreur est survenue',
+    home: 'Retour à l\'acceuil',
+    notFound: {
+      text: 'Page introuvable'
+    }
+  },
+  event: {
+    map: 'Voir sur la carte',
+    info: 'Information'
+  },
+  home: {
+    links: {
+      store: 'En magasin',
+      online: 'En ligne'
     }
   },
   nav: {
@@ -35,11 +54,9 @@ export default {
       }
     ]
   },
-  home: {
-    links: {
-
-      online: 'En ligne'
-    }
+  newsletter: {
+    title: 'S\'abonner à l\'infolettre',
+    placeholder: 'Courriel'
   },
   passed_events: [
     {
@@ -156,24 +173,32 @@ export default {
       events: [],
     }
   ],
-  event: {
-    map: 'Voir sur la carte',
-    info: 'Information'
+  product: {
+    color: {
+      blanc: "blanc",
+      noir: "noir",
+      gris: "gris",
+      orange: "orange",
+      rouge: "route",
+      jaune: "jaune",
+      vert: "vert",
+      bleu: "bleu",
+      rose: "rose",
+    },
+    material: {
+      cuir: "cuir",
+      tissu: "tissu",
+      metal: "métal",
+      fourrure: "fourrire",
+      bois: "bois"
+    },
+    sale: "Vente"
   },
-  contact: {
-    phone: 'Téléphone',
-    email: 'Courriel',
-    alt: 'bijoux, cuir, fait a la main'
-  },
-  newsletter: {
-    title: 'S\'abonner à l\'infolettre',
-    placeholder: 'Courriel'
-  },
-  error: {
-    title: 'Une erreur est survenue',
-    home: 'Retour à l\'acceuil',
-    notFound: {
-      text: 'Page introuvable'
+  top: {
+    store: 'Points de ventes',
+    online: {
+      link: 'https://www.etsy.com/ca/shop/labetecreations',
+      text: 'Acheter en ligne'
     }
   }
 }
