@@ -26,6 +26,7 @@
       Header,
       MobileNav,
       NewsletterModal,
+      Notification,
       MessageModal
     }
   }

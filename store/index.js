@@ -8,7 +8,8 @@ export const state = () => ({
   notification: {
     show: true,
     text: 'HELLO',
-    type: 'success'
+    type: 'success',
+    dismissible: true
   },
   newsletterOpened: false,
   messageOpened: false,
@@ -22,6 +23,9 @@ export const mutations = {
   },
   SET_NEWSLETTER_MODAL(state, modal) {
     state.newsletter = modal;
+  },
+  SET_NOTIFICATION(state, notification) {
+    state.notification = notification;
   },
   SET_MESSAGE(state, isOpened) {
     state.messageOpened = isOpened;
