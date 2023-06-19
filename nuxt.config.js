@@ -53,7 +53,7 @@ export default {
     '~/plugins/map.js',
     '~/plugins/axios.js',
     '~/plugins/lightGallery.client.js',
-    { src: '~/plugins/swell.js', mode: 'client' },
+    '~/plugins/swell.js'
   ],
   /*
   ** Nuxt.js modules
