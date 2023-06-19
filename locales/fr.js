@@ -194,6 +194,12 @@ export default {
     },
     sale: "Vente"
   },
+  products: {
+    asc: 'Prix (montant)',
+    desc: 'Prix (descendant)',
+    sort: 'Trier: ',
+    orderSelection: 'Choisir'
+  },
   top: {
     store: 'Points de ventes',
     online: {

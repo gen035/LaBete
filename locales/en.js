@@ -194,6 +194,12 @@ export default {
     },
     sale: "Sale"
   },
+  products: {
+    asc: 'Price (asc)',
+    desc: 'Price (desc)',
+    sort: 'Sort: ',
+    orderSelection: 'Select'
+  },
   top: {
     store: 'Buy in store',
     online: {

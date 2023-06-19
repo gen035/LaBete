@@ -18,8 +18,14 @@
               <Filters :attributes="attributes" :categories="categories" />
             </div>
             <div class="col-md-10">
-              <h2 v-if="products.length <=0">NO PROD</h2>
+              <div class="row" v-if="products.length > 0">
+                <div class="col-md-2">
+                  {{$t('products.sort')}}
+                  <b-form-select v-model="order" :options="orderOptions"></b-form-select>
+                </div>
+              </div>
               <div class="row">
+                <h2 v-if="products.length <=0">NO PROD</h2>
                 <ProductCard v-if="products.length > 0" v-for="(product, index) in products" :product="product" :key="index"/>
               </div>
             </div>
@@ -80,6 +86,25 @@
         meta: [
           { hid: 'description', name: 'description', content: this.$prismic.asText(this.seo.description) }
         ]
+      }
+    },
+    data() {
+      return {
+        order: null,
+        orderOptions: [
+          { value: null, text: this.$t('products.orderSelection') },
+          { value: 'asc', text: this.$t('products.asc') },
+          { value: 'desc', text: this.$t('products.desc') }
+        ]
+      }
+    },
+    watch: {
+      order() {
+        if(this.order === 'asc') {
+          this.products.sort((a, b) => a.price - b.price);
+        } else {
+          this.products.sort((a, b) => b.price - a.price);
+        }
       }
     },
     components: {
