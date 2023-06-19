@@ -2,6 +2,7 @@
   <div :class="$route.name">
     <Header />
     <Cart />
+    <Notification />
     <nuxt />
     <MobileNav />
     <NewsletterModal />
@@ -15,6 +16,7 @@
   import Header from './Header';
   import MobileNav from './MobileNav';
   import NewsletterModal from './../components/NewsletterModal';
+  import Notification from './Notification';
   import MessageModal from './../components/MessageModal';
   export default {
     middleware: ['settings', 'newsletter', 'message'],

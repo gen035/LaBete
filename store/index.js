@@ -5,10 +5,15 @@ export const state = () => ({
   cartIsActive: false,
   cartIsUpdating: false,
   newsletter: [],
+  notification: {
+    show: true,
+    text: 'HELLO',
+    type: 'success'
+  },
   newsletterOpened: false,
   messageOpened: false,
   message: [],
-  settings: []
+  settings: [],
 })
 
 export const mutations = {
