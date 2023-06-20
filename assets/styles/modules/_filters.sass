@@ -1,18 +1,38 @@
 .filters
   border-right: 1px solid $gold
   &-type
+    border-bottom: 1px solid $gold
+    padding: 10px 0
+    &:last-child
+      border: 0
     h3
       color: $dark-grey
-      text-transform: uppercase
       margin-bottom: 5px
-    ul
-      padding: 0 0 0 15px
-      li
+      font-weight: 600
+      font-family: 'PT Serif', serif
+      text-transform: capitalize
+    div
+      &.custom-control-inline
+        display: block
+        cursor: pointer
         text-transform: capitalize
-        position: relative
-        &::before
-          content: "-"
-          color: $gold
+  &-categories
+    a
+      display: block
+      margin: 5px auto
+      text-transform: capitalize
+      position: relative
+      &.active
+        font-weight: bold
+        color: $gold
+        &:after
+          content: ""
+          background-color: $dark-grey
+          bottom: -3px
+          left: 0
           position: absolute
-          left: -7px
-          top: 4px
+          width: 15px
+          height: 2px
+      &:hover
+        color: $gold
+        text-decoration: none

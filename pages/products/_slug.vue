@@ -11,11 +11,19 @@
         </div>
         <div class="row">
             <div class="col-md-2">
-              <Filters />
+              <Filters :currentCategoryId="category.id" @newFilters="(newFilters) => handleFilters(newFilters)"/>
             </div>
             <div class="col-md-10">
-              <h2 v-if="products.length <=0">NO PROD</h2>
-              <ProductCard v-if="products.length > 0" v-for="(product, index) in products" :product="product" :key="index"/>
+              <div class="row" v-if="products.length > 0">
+                <div class="col-md-2 d-flex align-items-center">
+                  {{$t('products.sort')}}
+                  <b-form-select v-model="order" :options="orderOptions"></b-form-select>
+                </div>
+              </div>
+              <div class="row">
+                <h2 v-if="products.length <=0">NO PROD</h2>
+                <ProductCard v-if="products.length > 0" v-for="(product, index) in products" :product="product" :key="index"/>
+              </div>
             </div>
         </div>
       </section>
@@ -68,6 +76,41 @@
         meta: [
           { hid: 'description', name: 'description', content: this.category.meta_description || this.category.description }
         ]
+      }
+    },
+    data() {
+      return {
+        order: null,
+        orderOptions: [
+          { value: null, text: this.$t('products.orderSelection') },
+          { value: 'asc', text: this.$t('products.asc') },
+          { value: 'desc', text: this.$t('products.desc') }
+        ],
+        filters: {}
+      }
+    },
+    watch: {
+      order() {
+        if(this.order === 'asc') {
+          this.products.sort((a, b) => a.price - b.price);
+        } else {
+          this.products.sort((a, b) => b.price - a.price);
+        }
+      },
+      filters() {
+        this.getNewProducts();
+      }
+    },
+    methods: {
+      handleFilters(filters) {
+        this.filters = JSON.parse(filters);
+      },
+      async getNewProducts() {
+        const newProducts = await this.$swell.products.list({
+          categories: [this.category.id, "648201e2572a710011315ed7"],
+          $filters: this.filters
+        });
+        this.products = newProducts && newProducts.results;
       }
     },
     components: {

@@ -2,26 +2,31 @@
   <aside class="filters">
     <div class="filters-type">
       <h3>Categories</h3>
-      <div class="filters-categories">
-         <NuxtLink 
-            v-for="(category, index) in getCategories"
-            :key="index"
-            :to="`${filterSlug(category.slug)}`"
-            active-class="active"
-            exact
-          >{{category.name}}</NuxtLink>
-      </div>
+      <b-form-checkbox-group
+        v-model="selectedCategories"
+        name="category"
+        :options="getCategories"
+        textField="name"
+        valueField="id"
+        >
+      </b-form-checkbox-group>
     </div>
     <div v-for="(attribute, index) in getAttributes" :key="index" class="filters-type">
-      <template v-if="attribute.filterable">
-        <h3>{{attribute.name}}</h3>
-          <b-form-checkbox-group
-            v-model="selectedFilters[attribute.id]"
-            :name="attribute.name"
-            :options="attribute.values">
-          </b-form-checkbox-group>
-      </template>
+      <h3>{{attribute.name}}</h3>
+      <b-form-checkbox-group
+        v-model="selectedFilters[attribute.id]"
+        :name="attribute.name"
+        :options="attribute.values">
+      </b-form-checkbox-group>
     </div>
+    <button class="button" @click="clearFilters" data-track="" data-track-category="filters" data-track-action="click" data-track-label="clear">
+      <p class="button-text">
+          Clear
+        </p>
+        <div class="button-icon-container">
+          <p class="button-icon fa fa-undo"></p>
+        </div>
+    </button>
   </aside>
 </template>
 <script>
@@ -30,6 +35,7 @@
   export default {
     data() {
       return {
+        selectedCategories: [], 
         selectedFilters: {}
       }
     },
@@ -42,6 +48,13 @@
           this.oldObject = this.deepCopy(newVal);
         },
         deep: true
+      },
+      selectedCategories: {
+        handler(newVal, oldVal) {
+          if(newVal !== oldVal) {
+            this.$emit('newCategories', JSON.stringify(newVal));
+          }
+        }
       }
     },
     methods: {
@@ -54,9 +67,16 @@
       filterSlug(slug) {
         const locale = this.$store.state.i18n.locale;
         return categorySlugMapping.hasOwnProperty(locale) && categorySlugMapping[locale].hasOwnProperty(slug) && categorySlugMapping[locale][slug] || null;
+      },
+      clearFilters() {
+        this.selectedCategories = [];
+        this.selectedFilters = {};
       }
     },
     computed: {
+      locale() {
+        return this.$store.state.i18n.locale;
+      },
       ...mapGetters([
           "getAttributes",
           "getCategories"

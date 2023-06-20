@@ -21,9 +21,9 @@ export const categorySlugMapping = {
     'boucles-doreille': '/products/earrings'
   },
   fr: {
-    collier: '/produitcs/colliers',
-    bracelet: '/produitcs/bracelets',
-    montre: '/produitcs/montres',
-    'boucles-doreille': '/produitcs/boucle-doreille'
+    collier: '/produits/colliers',
+    bracelet: '/produits/bracelets',
+    montre: '/produits/montres',
+    'boucles-doreille': '/produits/boucle-doreille'
   },
 }

@@ -15,7 +15,7 @@
         </div>
         <div class="row">
             <div class="col-md-2">
-              <Filters @newFilters="(newFilters) => handleFilters(newFilters)" />
+              <Filters @newCategories="(newCategories) => handleCategories(newCategories)" @newFilters="(newFilters) => handleFilters(newFilters)" />
             </div>
             <div class="col-md-10">
               <div class="row" v-if="products.length > 0">
@@ -88,6 +88,7 @@
           { value: 'asc', text: this.$t('products.asc') },
           { value: 'desc', text: this.$t('products.desc') }
         ],
+        categories: [],
         filters: {}
       }
     },
@@ -101,17 +102,25 @@
       },
       filters() {
         this.getNewProducts();
+      },
+      categories() {
+        this.getNewProducts();
       }
     },
     methods: {
+      handleCategories(categories) {
+        this.categories = JSON.parse(categories);
+      },
       handleFilters(filters) {
         this.filters = JSON.parse(filters);
       },
       async getNewProducts() {
         const newProducts = await this.$swell.products.list({
+          categories: this.categories,
           $filters: this.filters
         });
         this.products = newProducts && newProducts.results;
+        this.order = null;
       }
     },
     components: {
