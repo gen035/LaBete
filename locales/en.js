@@ -19,6 +19,27 @@ export default {
     map: 'See on a map',
     info: 'More information'
   },
+  filters: {
+    color: {
+      blanc: "White",
+      noir: "Black",
+      gris: "Grey",
+      orange: "Orange",
+      rouge: "Red",
+      jaune: "Yellow",
+      vert: "Green",
+      bleu: "Blue",
+      rose: "Pink",
+    },
+    clear: 'Clear filters',
+    material: {
+      cuir: "Leather",
+      tissu: "Fabric",
+      metal: "Metal",
+      fourrure: "Fur",
+      bois: "Wood",
+    }
+  },
   home: {
     links: {
       store: 'In store',

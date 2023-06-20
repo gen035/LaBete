@@ -15,18 +15,13 @@
       <h3>{{attribute.name}}</h3>
       <b-form-checkbox-group
         v-model="selectedFilters[attribute.id]"
-        :name="attribute.name"
-        :options="attribute.values">
+        :name="attribute.name">
+        <b-form-checkbox v-for="(value, index) in attribute.values" :value="value" :key="index">{{$t(`filters.${attribute.id}.${value}`)}}</b-form-checkbox>
       </b-form-checkbox-group>
     </div>
-    <button class="button" @click="clearFilters" data-track="" data-track-category="filters" data-track-action="click" data-track-label="clear">
-      <p class="button-text">
-          Clear
-        </p>
-        <div class="button-icon-container">
-          <p class="button-icon fa fa-undo"></p>
-        </div>
-    </button>
+    <div class="filters-clear" @click="clearFilters" data-track="" data-track-category="filters" data-track-action="click" data-track-label="clear">
+      <i class="fa fa-undo"></i>{{$t('filters.clear')}}
+    </div>
   </aside>
 </template>
 <script>

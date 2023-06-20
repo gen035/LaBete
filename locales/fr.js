@@ -15,6 +15,27 @@ export default {
       text: 'Page introuvable'
     }
   },
+  filters: {
+    color: {
+      blanc: "Blanc",
+      noir: "Noir",
+      gris: "Gris",
+      orange: "Orange",
+      rouge: "Rouge",
+      jaune: "Jaune",
+      vert: "Vert",
+      bleu: "Bleu",
+      rose: "Rose",
+    },
+    clear: 'Effacer filtres',
+    material: {
+      cuir: "Cuir",
+      tissu: "Tissu",
+      metal: "Metal",
+      fourrure: "Fourrure",
+      bois: "Bois",
+    }
+  },
   event: {
     map: 'Voir sur la carte',
     info: 'Information'
