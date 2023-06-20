@@ -1,9 +1,12 @@
 export const state = () => ({
   addedItem: null,
+  attributes: [],
   cart: null,
   cartError: null,
   cartIsActive: false,
   cartIsUpdating: false,
+  cartIsUpdatingId: null,
+  categories: [],
   newsletter: [],
   notification: {
     show: true,
@@ -18,6 +21,9 @@ export const state = () => ({
 })
 
 export const mutations = {
+  SET_ATTRIBUTES(state, attributes) {
+    state.attributes = attributes;
+  },
   SET_NEWSLETTER(state, isOpened) {
     state.newsletterOpened = isOpened;
   },
@@ -44,6 +50,21 @@ export const mutations = {
   },
   SET_CART_UPDATING(state, cartIsUpdating) {
     state.cartIsUpdating = cartIsUpdating;
+  },
+  SET_CART_UPDATING_ID(state, cartIsUpdatingId) {
+    state.cartIsUpdatingId = cartIsUpdatingId;
+  },
+  SET_CATEGORIES(state, categories) {
+    state.categories = categories;
+  }
+}
+
+export const getters = {
+  getAttributes(state) {
+    return state.attributes;
+  },
+  getCategories(state) {
+    return state.categories;
   }
 }
 
@@ -58,12 +79,12 @@ export const actions = {
     if (state.cartIsUpdating) return;
     // Set flag to show loading indicator
     commit('SET_CART_UPDATING', true);
+    commit('SET_CART_UPDATING_ID', item && item.product_id);
 
     try {
-      console.log(app);
       // Check if validate stock on add is active
       const validateCartStock = this.$swell.settings.get('cart.validateStock');
-      console.log(validateCartStock)
+      console.log(item)
       if (validateCartStock) {
         try {
           const cartItemHasStock = await dispatch('checkCartItemHasStock', {
@@ -72,6 +93,7 @@ export const actions = {
 
           if (!cartItemHasStock) {
             commit('SET_CART_UPDATING', false);
+            commit('SET_CART_UPDATING_ID', null);
             throw new Error('invalid_stock');
           }
         } catch (err) {
@@ -81,10 +103,12 @@ export const actions = {
 
       // Make Swell API call
       const cart = await this.$swell.cart.addItem(item);
-
+      
       if (cart.errors) {
         //dispatch('handleModelErrors', cart.errors);
         commit('SET_CART_UPDATING', false);
+        commit('SET_CART_UPDATING_ID', null);
+        commit('SET_CART_ERROR', cart.errors)
         return;
       }
 

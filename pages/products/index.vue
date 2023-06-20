@@ -15,7 +15,7 @@
         </div>
         <div class="row">
             <div class="col-md-2">
-              <Filters :attributes="attributes" :categories="categories" @newFilters="(newFilters) => handleFilters(newFilters)" />
+              <Filters @newFilters="(newFilters) => handleFilters(newFilters)" />
             </div>
             <div class="col-md-10">
               <div class="row" v-if="products.length > 0">
@@ -39,10 +39,10 @@
   import ProductCard from '~/components/ProductCard';
 
   export default {
-    async asyncData({ app, error, store, $swell}) {
+    async asyncData({ app, error, store, $swell }) {
       const locale = store.state.i18n.locale;
       let content = [];
-
+      
       await app.$prismic.api.query(
         app.$prismic.predicates.at('document.type', 'products'), {
            lang: `${locale}-ca`
@@ -56,19 +56,11 @@
       let seo = await app.$prismic.api.getByID(content.seo.id)
       seo = seo.data;
 
-      let products = await this.$swell.products.list();
+      let products = await app.$swell.products.list();
       products = products && products.results && products.results.length > 0 ? products.results : [];
-
-      let categories = await app.$swell.categories.list();
-      categories = categories && categories.results && categories.results.length > 0 ? categories.results : [];
-
-      let attributes = await app.$swell.attributes.list();
-      attributes = attributes && attributes.results && attributes.results.length > 0 ? attributes.results : [];
 
       if (content) {
         return {
-          attributes,
-          categories,
           content,
           products,
           seo
@@ -106,19 +98,20 @@
         } else {
           this.products.sort((a, b) => b.price - a.price);
         }
+      },
+      filters() {
+        this.getNewProducts();
       }
     },
     methods: {
       handleFilters(filters) {
-        console.log('NEW', filters);
         this.filters = JSON.parse(filters);
-        this.filterProducts();
       },
-      async filterProducts() {
+      async getNewProducts() {
         const newProducts = await this.$swell.products.list({
           $filters: this.filters
         });
-        console.log(newProducts)
+        this.products = newProducts && newProducts.results;
       }
     },
     components: {

@@ -11,7 +11,7 @@
         </div>
         <div class="row">
             <div class="col-md-2">
-              <Filters :attributes="attributes" :categories="[category]" />
+              <Filters />
             </div>
             <div class="col-md-10">
               <h2 v-if="products.length <=0">NO PROD</h2>
@@ -30,10 +30,9 @@
   export default {
     async asyncData({ app, error, store, $swell, params}) {
       const locale = store.state.i18n.locale;
-      const language = locale.split('-')[0];
       let content = [];
 
-      const mappedCategory = categoryMapping.hasOwnProperty(language) && categoryMapping[language].hasOwnProperty(params && params.category) && categoryMapping[language][params && params.category] || null;
+      const mappedCategory = categoryMapping.hasOwnProperty(locale) && categoryMapping[locale].hasOwnProperty(params && params.category) && categoryMapping[locale][params && params.category] || null;
       
       if(mappedCategory === null) {
         error({ statusCode: 404, message: 'Page not found' })

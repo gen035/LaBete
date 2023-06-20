@@ -2,15 +2,22 @@
   <aside class="filters">
     <div class="filters-type">
       <h3>Categories</h3>
-      <ul>
-        <li v-for="(category, index) in categories" :key="index">{{category.name}}</li>
-      </ul>
+      <div class="filters-categories">
+         <NuxtLink 
+            v-for="(category, index) in getCategories"
+            :key="index"
+            :to="`${filterSlug(category.slug)}`"
+            active-class="active"
+            exact
+          >{{category.name}}</NuxtLink>
+      </div>
     </div>
-    <div v-for="(attribute, index) in attributes" :key="index" class="filters-type">
+    <div v-for="(attribute, index) in getAttributes" :key="index" class="filters-type">
       <template v-if="attribute.filterable">
         <h3>{{attribute.name}}</h3>
           <b-form-checkbox-group
             v-model="selectedFilters[attribute.id]"
+            :name="attribute.name"
             :options="attribute.values">
           </b-form-checkbox-group>
       </template>
@@ -18,22 +25,9 @@
   </aside>
 </template>
 <script>
+  import { mapGetters } from 'vuex';
+  import { categorySlugMapping } from '../pages/products/constants.js';
   export default {
-    props: {
-      attributes: {
-        type: Array,
-        require: true,
-        default: () => ({})
-      },
-      categories: {
-        type: Array,
-        require: true,
-        default: () => ({})
-      }
-    },
-    created() {
-      console.log('attr',this.attributes)
-    },
     data() {
       return {
         selectedFilters: {}
@@ -56,7 +50,17 @@
       },
       deepCopy(obj) {
         return JSON.parse(JSON.stringify(obj));
+      },
+      filterSlug(slug) {
+        const locale = this.$store.state.i18n.locale;
+        return categorySlugMapping.hasOwnProperty(locale) && categorySlugMapping[locale].hasOwnProperty(slug) && categorySlugMapping[locale][slug] || null;
       }
+    },
+    computed: {
+      ...mapGetters([
+          "getAttributes",
+          "getCategories"
+      ])
     }
   }
 </script>
