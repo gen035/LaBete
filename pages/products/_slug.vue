@@ -2,16 +2,16 @@
   <section class="content product">
       <section class="container-fluid">
         <div class="row">
-          <div class="col-md-3">
+          <div class="offset-lg-2 col-md-6 col-lg-4 product-slider">
             <VueSlickCarousel v-bind="settings">
               <template v-for="(image, index) in product.images">
                 <img :key="index" :src="image.file.url" />
               </template>
             </VueSlickCarousel>
           </div>
-          <div class="col-md-4">
-            <h2>{{product.name}}</h2>
-            <div v-html="product.description" />
+          <div class="col-md-6 col-lg-4 product-detail">
+            <h2 class="product-title">{{product.name}}</h2>
+            <div class="product-desc"v-html="product.description" />
             <div v-if="!product.sale" class="product-price">{{product.price}}$</div>
             <div v-if="product.sale" class="product-price product-price--sale">
               <span>{{product.price}}$</span>
@@ -52,9 +52,28 @@
         ]
       }
     },
-    data() {
-    },
-    methods: {
+    data(){
+      return {
+        settings: {
+          adaptiveHeight: true,
+          arrows: false,
+          autoplay: true,
+          autoplaySpeed: 2000,
+          dots: true,
+          fade: true,
+          infinite: true,
+          pauseOnHover: true,
+          slidesToShow: 1,
+          responsive: [
+            {
+              breakpoint: 768,
+              settings: {
+                dots: true
+              }
+            }
+          ]
+        }
+      }
     },
     components: {
       AddToCart,

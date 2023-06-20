@@ -1,0 +1,41 @@
+.product
+  padding-top: 25px
+  @media (min-width: 576px)
+    padding-top: 50px
+  &-title
+    font-family: 'PT Serif', serif
+    font-size: 28px
+    margin: 18px auto
+    @media (min-width: 576px)
+      font-size: 32px
+      margin: 0 0 28px 0
+  &-desc
+    font-size: 16px
+    line-height: 1.2
+    margin-bottom: 28px
+    position: relative
+    &::after
+      content: ""
+      position: absolute
+      width: 50px
+      height: 5px
+      bottom: -15px
+      left: 50%
+      transform: translateX(-50%)
+      background-color: $gold
+    @media (min-width: 576px)
+      font-size: 18px
+      line-height: 1.2
+      margin-bottom: 28px
+  &-price
+    font-weight: 600
+    &--sale
+      font-size: 22px
+      @media (min-width: 576px)
+        font-size: 24px
+      s
+        color: red
+        font-size: 16px
+        font-weight: 400
+        @media (min-width: 576px)
+          font-size: 18px
