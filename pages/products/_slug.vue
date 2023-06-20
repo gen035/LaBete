@@ -1,12 +1,33 @@
 <template>
   <section class="content product">
       <section class="container-fluid">
-        HELLO
+        <div class="row">
+          <div class="col-md-3">
+            <VueSlickCarousel v-bind="settings">
+              <template v-for="(image, index) in product.images">
+                <img :key="index" :src="image.file.url" />
+              </template>
+            </VueSlickCarousel>
+          </div>
+          <div class="col-md-4">
+            <h2>{{product.name}}</h2>
+            <div v-html="product.description" />
+            <div v-if="!product.sale" class="product-price">{{product.price}}$</div>
+            <div v-if="product.sale" class="product-price product-price--sale">
+              <span>{{product.price}}$</span>
+              <s>{{product.orig_price}}$</s>
+            </div>
+            <AddToCart :product="product" />
+          </div>
+        </div>
       </section>
   </section>
 </template>
 
-<script>  
+<script>
+  import AddToCart from '~/components/AddToCart';
+  import VueSlickCarousel from 'vue-slick-carousel';
+
   export default {
     async asyncData({ app, error, store, params}) {
       const locale = store.state.i18n.locale;
@@ -33,11 +54,11 @@
     },
     data() {
     },
-    watch: {
-    },
     methods: {
     },
     components: {
+      AddToCart,
+      VueSlickCarousel
     },
     nuxtI18n: {
       paths: {

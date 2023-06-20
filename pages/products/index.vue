@@ -18,12 +18,12 @@
               <Filters @newCategories="(newCategories) => handleCategories(newCategories)" @newFilters="(newFilters) => handleFilters(newFilters)" />
             </div>
             <div class="col-md-10">
-              <div class="row" v-if="products.length > 0">
+              <!-- <div class="row" v-if="products.length > 0">
                 <div class="col-md-2 d-flex align-items-center">
                   {{$t('products.sort')}}
                   <b-form-select v-model="order" :options="orderOptions"></b-form-select>
                 </div>
-              </div>
+              </div> -->
               <div class="row">
                 <NoProducts v-if="products.length === 0" />
                 <ProductCard v-if="products.length > 0" v-for="(product, index) in products" :product="product" :key="index"/>
@@ -83,9 +83,9 @@
     },
     data() {
       return {
-        order: null,
+        order: 'date',
         orderOptions: [
-          { value: null, text: this.$t('products.orderSelection') },
+          { value: 'date', text: this.$t('products.orderSelection') },
           { value: 'asc', text: this.$t('products.asc') },
           { value: 'desc', text: this.$t('products.desc') }
         ],
@@ -95,11 +95,7 @@
     },
     watch: {
       order() {
-        if(this.order === 'desc') {
-          this.products.sort((a, b) => b.price - a.price);
-        } else {
-          this.products.sort((a, b) => a.price - b.price);
-        }
+        this.products = this.sortProducts(this.order);
       },
       filters() {
         this.getNewProducts();
@@ -115,6 +111,21 @@
       handleFilters(filters) {
         this.filters = JSON.parse(filters);
       },
+      sortProducts(order, newProducts) {
+        const productsToOrder = newProducts || this.products;
+
+        switch (order) {
+          case 'asc':
+            return productsToOrder.sort((a, b) => a.price - b.price);
+            break;
+          case 'desc':
+            return productsToOrder.sort((a, b) => b.price - a.price);
+            break;
+          default:
+            console.log('def')
+            return productsToOrder.sort((a, b) => new Date(b.date_created) - new Date(a.date_created));
+        }
+      },
       async getNewProducts() {
         const newProducts = await this.$swell.products.list({
           categories: this.categories,
@@ -122,12 +133,7 @@
         });
         
         const newProductsResults = newProducts && newProducts.results;
-        
-        if(this.order === 'asc') {
-          this.products = newProductsResults.sort((a, b) => a.price - b.price);
-        } else {
-          this.products = newProductsResults.sort((a, b) => b.price - a.price);
-        }
+        this.products = this.sortProducts(this.order, newProductsResults);
       }
     },
     components: {

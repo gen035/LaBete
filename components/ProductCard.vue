@@ -1,14 +1,16 @@
 <template>
   <div class="product-card col-sm-3">
-    <div v-if="product.sale" class="product-card-sale">{{$t('product.sale')}}</div>
-    <div class="product-card-image">
-      <img :src="product.images[0].file.url" />
-    </div>
-    <div class="product-card-name">{{ product.name }}</div>
-    <div v-if="!product.sale" class="product-card-price">{{product.price}}$</div>
-    <div v-if="product.sale" class="product-card-price product-card-price--sale">
-      <span>{{product.price}}$</span>
-      <s>{{product.orig_price}}$</s>
+    <div @click="goTo">
+      <div v-if="product.sale" class="product-card-sale">{{$t('product.sale')}}</div>
+      <div class="product-card-image">
+        <img :src="product.images[0].file.url" />
+      </div>
+      <div class="product-card-name">{{ product.name }}</div>
+      <div v-if="!product.sale" class="product-card-price">{{product.price}}$</div>
+      <div v-if="product.sale" class="product-card-price product-card-price--sale">
+        <span>{{product.price}}$</span>
+        <s>{{product.orig_price}}$</s>
+      </div>
     </div>
     <AddToCart :product="product" />
   </div>
@@ -30,15 +32,8 @@
     },
     methods: {
       goTo() {
-        const openModal = this.card.open_modal;
-        if(openModal) {
-          this.$store.commit('SET_MESSAGE', true);
-        }else{
-          const locale = this.$store.state.i18n.locale;
-          const url = this.card && this.card.link && this.card.link.url;
-          const page = url.split("/").pop();
-          this.$router.push(`${locale === 'en' ? '/' + locale : ''}/${page}`)
-        }
+        const locale = this.$store.state.i18n.locale;
+        this.$router.push(`${locale === 'en' ? '/' + locale + '/products/': '/produits/'}${this.product.slug}`)
       }
     },
     components: {
