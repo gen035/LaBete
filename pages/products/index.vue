@@ -25,7 +25,7 @@
                 </div>
               </div>
               <div class="row">
-                <h2 v-if="products.length <=0">NO PROD</h2>
+                <NoProducts v-if="products.length === 0" />
                 <ProductCard v-if="products.length > 0" v-for="(product, index) in products" :product="product" :key="index"/>
               </div>
             </div>
@@ -36,8 +36,9 @@
 
 <script>
   import Filters from '~/components/Filters';
+  import NoProducts from '~/components/NoProducts';
   import ProductCard from '~/components/ProductCard';
-
+  
   export default {
     async asyncData({ app, error, store, $swell }) {
       const locale = store.state.i18n.locale;
@@ -94,10 +95,10 @@
     },
     watch: {
       order() {
-        if(this.order === 'asc') {
-          this.products.sort((a, b) => a.price - b.price);
-        } else {
+        if(this.order === 'desc') {
           this.products.sort((a, b) => b.price - a.price);
+        } else {
+          this.products.sort((a, b) => a.price - b.price);
         }
       },
       filters() {
@@ -119,12 +120,19 @@
           categories: this.categories,
           $filters: this.filters
         });
-        this.products = newProducts && newProducts.results;
-        this.order = null;
+        
+        const newProductsResults = newProducts && newProducts.results;
+        
+        if(this.order === 'asc') {
+          this.products = newProductsResults.sort((a, b) => a.price - b.price);
+        } else {
+          this.products = newProductsResults.sort((a, b) => b.price - a.price);
+        }
       }
     },
     components: {
       Filters,
+      NoProducts,
       ProductCard
     },
     nuxtI18n: {
