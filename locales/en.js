@@ -1,7 +1,9 @@
 export default {
   cart: {
     addToCart: 'Add to cart',
-    addToCartPending: 'Adding to cart...'
+    addToCartPending: 'Adding to cart...',
+    delete: 'Delete',
+    title: 'Order'
   },
   contact: {
     phone: 'Phone',

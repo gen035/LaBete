@@ -1,19 +1,14 @@
 export const state = () => ({
-  addedItem: null,
   attributes: [],
   cart: null,
   cartError: null,
   cartIsActive: false,
   cartIsUpdating: false,
   cartIsUpdatingId: null,
+  cartIsOpened: false,
   categories: [],
   newsletter: [],
-  notification: {
-    show: true,
-    text: 'HELLO',
-    type: 'success',
-    dismissible: true
-  },
+  notification: {},
   newsletterOpened: false,
   messageOpened: false,
   message: [],
@@ -42,11 +37,11 @@ export const mutations = {
   SET_SETTINGS(state, settings) {
     state.settings = settings;
   },
-  SET_ADDED_ITEM(state, item) {
-    state.addedItem = item;
-  },
   SET_CART(state, cart) {
     state.cart = cart;
+  },
+  SET_CART_ISOPENED(state, isOpened) {
+    state.cartIsOpened = isOpened;
   },
   SET_CART_UPDATING(state, cartIsUpdating) {
     state.cartIsUpdating = cartIsUpdating;
@@ -63,12 +58,83 @@ export const getters = {
   getAttributes(state) {
     return state.attributes;
   },
+  getCart(state) {
+    return state.cart;
+  },
+  getCartProducts(state) {
+    return state.cart && state.cart.items;
+  },
   getCategories(state) {
     return state.categories;
   }
 }
 
 export const actions = {
+    /**
+   * Check if a product is in stock to be added/modified within the cart
+   * @property {Object} item - The product or cart item
+   * @property {string} id - The cart item id
+   * @property {number} quantityToAdd - The quantity to add to cart
+   */
+  async checkCartItemHasStock({ state }, { item, id }) {
+    // Get cart items
+    const items = state.cart?.items;
+
+    let cartItem;
+    let stockPurchasable;
+    let stockTracking;
+    let stockLevel;
+    let product;
+    let currentQuantity = 0;
+
+    const quantityToAdd = item ? item.quantity : 1;
+
+    if (item) {
+      product = await this.$swell.products.get(item.productId);
+    } else if (id) {
+      product = await this.$swell.products.get(id);
+    }
+
+    if (!product) throw new Error('Product in cart could not be found.');
+
+    if (items) {
+      let variant;
+      // If a product item is provided
+      if (item) variant = this.$swell.products.variation(product, item.options);
+      cartItem = items.find((item) => {
+        if (id) {
+          return item.id === id;
+        } else if (item) {
+          return item.variant
+            ? item.variantId === variant?.variantId
+            : item.productId === variant?.id;
+        }
+        return null;
+      });
+    }
+
+    // Get stock availability of cart item
+    if (cartItem) {
+      stockPurchasable = cartItem.product.stockPurchasable;
+      stockTracking = cartItem.product.stockTracking;
+      stockLevel = cartItem.product.stockLevel;
+      // If variant, get respective stock level
+      if (cartItem.variant) {
+        stockLevel = cartItem.variant.stockLevel;
+      }
+      currentQuantity = cartItem.quantity;
+    } else {
+      // Get stock availability of product to be added
+      stockPurchasable = product.stockPurchasable;
+      stockTracking = product.stockTracking;
+      stockLevel = product.stockLevel;
+    }
+
+    // If product is purchasable out of stock or doesn't track stock, allow add to cart
+    if (stockPurchasable || !stockTracking) return true;
+    if (currentQuantity + quantityToAdd > stockLevel) return false;
+    return true;
+  },
   /**
    * Adds a product to the cart
    *
@@ -84,7 +150,6 @@ export const actions = {
     try {
       // Check if validate stock on add is active
       const validateCartStock = this.$swell.settings.get('cart.validateStock');
-      console.log(item)
       if (validateCartStock) {
         try {
           const cartItemHasStock = await dispatch('checkCartItemHasStock', {
@@ -114,35 +179,15 @@ export const actions = {
 
       // Replace cart state
       commit('SET_CART', cart);
+      commit('SET_CART_ISOPENED', true);
       // Set item to be displayed in the notification
-      commit('SET_ADDED_ITEM', item);
-
-      if (state.notification !== null) {
-        // If notification is already visible, close it to show new notification
-        commit('setState', { key: 'notification', value: null });
-
-        window.setTimeout(() => {
-          dispatch('showNotification', {
-            message: `Added ${item.quantity} item(s) to cart`,
-            type: 'product',
-            isSticky: true,
-          });
-        }, 200);
-      } else {
-        // Trigger success confirmation
-        dispatch('showNotification', {
-          message: `Added ${item.quantity} item(s) to cart`,
-          type: 'product',
-          isSticky: true,
-        });
-      }
     } catch (err) {
       if (err.message === 'invalid_stock') throw new Error('invalid_stock');
-      console.log('error', err)
+      console.log('error', err);
       //dispatch('handleError', err);
     }
 
     // Reset flag to hide loading indicator
-    commit('setState', { key: 'cartIsUpdating', value: false });
+    commit('SET_CART_UPDATING', false);
   }
 }
