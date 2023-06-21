@@ -1,6 +1,6 @@
 <template>
   <div class="product-card col-sm-3">
-    <div @click="goTo">
+    <div class="product-card-wrapper" @click="goTo">
       <div v-if="product.sale" class="product-card-sale">{{$t('product.sale')}}</div>
       <div class="product-card-image">
         <img :src="product.images[0].file.url" />

@@ -1,14 +1,12 @@
 <template>
-  <div>
-    <button class="button" @click="addToCart" data-track="" data-track-category="cart" data-track-action="click" :data-track-label="product.id">
-      <p class="button-text">
-          {{this.$store.state.cartIsUpdating && this.$store.state.cartIsUpdatingId === product.id ? $t('cart.addToCartPending') : $t('cart.addToCart') }}
-        </p>
-        <div class="button-icon-container">
-          <p class="button-icon fas fa-shopping-cart"></p>
-        </div>
-    </button>
-  </div>
+  <button class="button" @click="addToCart" data-track="" data-track-category="cart" data-track-action="click" :data-track-label="product.id">
+    <p class="button-text">
+        {{this.$store.state.cartIsUpdating && this.$store.state.cartIsUpdatingId === product.id ? $t('cart.addToCartPending') : $t('cart.addToCart') }}
+      </p>
+      <div class="button-icon-container">
+        <p class="button-icon fas fa-shopping-cart"></p>
+      </div>
+  </button>
 </template>
 <script>
   export default {
