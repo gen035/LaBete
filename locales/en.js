@@ -3,7 +3,11 @@ export default {
     already: 'This product is already in your cart',
     addToCart: 'Add to cart',
     addToCartPending: 'Adding to cart...',
-    delete: 'Delete',
+    delete: 'Remove',
+    empty: 'No product in your cart',
+    qty: 'Qty:',
+    shipping: 'Shipping',
+    subtotal: 'Subtotal',
     title: 'Order'
   },
   contact: {

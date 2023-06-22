@@ -3,7 +3,11 @@ export default {
     already: 'Ce produit est déja dans votre panier',
     addToCart: 'Ajouter au panier',
     addToCartPending: 'Ajout en cours...',
-    delete: 'Supprimer',
+    delete: 'Enlever',
+    empty: 'Aucun produits dans votre panier',
+    qty: 'Qte:',
+    shipping: 'Livraison',
+    subtotal: 'Sous-total',
     title: 'Commande'
   },
   contact: {
