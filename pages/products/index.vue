@@ -14,7 +14,7 @@
           />
         </div>
         <div class="row">
-            <div class="col-md-2">
+            <div class="col-md-2 d-none d-sm-block">
               <Filters @newCategories="(newCategories) => handleCategories(newCategories)" @newFilters="(newFilters) => handleFilters(newFilters)" />
             </div>
             <div class="col-md-10">
@@ -43,7 +43,7 @@
     async asyncData({ app, error, store, $swell }) {
       const locale = store.state.i18n.locale;
       let content = [];
-      
+
       await app.$prismic.api.query(
         app.$prismic.predicates.at('document.type', 'products'), {
            lang: `${locale}-ca`

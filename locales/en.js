@@ -1,5 +1,6 @@
 export default {
   cart: {
+    already: 'This product is already in your cart',
     addToCart: 'Add to cart',
     addToCartPending: 'Adding to cart...',
     delete: 'Delete',

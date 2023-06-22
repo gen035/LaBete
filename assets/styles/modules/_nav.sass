@@ -17,16 +17,18 @@
     .fa
       font-size: 18px
     span
+      display: none
       background-color: red
       height: 5px
       width: 5px
       border-radius: 50%
-      display: block
       top: 0
       right: -10px
       position: absolute
       transform: scale(1)
-      animation: pulse-red 2s infinite
+      &.hasProducts
+        display: block
+        animation: pulse-red 2s infinite
 
 .nav li a.active::after
   background-color: $gold

@@ -21,7 +21,7 @@
                   Qty: {{item.quantity}}
                 </div>
                 <div class="col-6 cart-delete">
-                  <span>{{$t('cart.delete')}}</span>
+                  <span @click="removeItem(item)">{{$t('cart.delete')}}</span>
                 </div>
               </div>
             </div>
@@ -35,9 +35,17 @@
   import { mapGetters } from 'vuex';
   export default {
     methods: {
+      removeItem(product) {
+        this.$store.dispatch('removeCartItem', product);
+      },
       closed() {
         this.$store.commit('SET_CART_ISOPENED', false);
       }
+    },
+    mounted() {
+      // Pass a checkout ID as a query string param to recover a specific cart
+      const { checkout: checkoutId } = this.$route.query;
+      this.$store.dispatch('initializeCart', { checkoutId });
     },
     computed: {
       ...mapGetters([

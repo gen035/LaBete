@@ -1,5 +1,6 @@
 export default {
   cart: {
+    already: 'Ce produit est déja dans votre panier',
     addToCart: 'Ajouter au panier',
     addToCartPending: 'Ajout en cours...',
     delete: 'Supprimer',

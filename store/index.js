@@ -143,6 +143,17 @@ export const actions = {
   async addCartItem({ commit, dispatch, state }, item) {
     // Bail if an update is already in progress
     if (state.cartIsUpdating) return;
+
+    //Bail if product is already in cart
+    if(state.cart && state.cart.items.some((currentItem) => currentItem.product_id === item.product_id)) {
+        commit('SET_NOTIFICATION', {
+          show: true,
+          type: 'danger',
+          dismissible: true,
+          text: 'cart.already'
+        });
+        return;
+    };
     // Set flag to show loading indicator
     commit('SET_CART_UPDATING', true);
     commit('SET_CART_UPDATING_ID', item && item.product_id);
@@ -189,5 +200,43 @@ export const actions = {
 
     // Reset flag to hide loading indicator
     commit('SET_CART_UPDATING', false);
+  },
+    /**
+   * Removes an item from the cart
+   *
+   * @param {CartItem} item - Cart item to remove
+   */
+  async removeCartItem({ commit, dispatch, state }, item) {
+    if (state.cartIsUpdating) return;
+    commit('SET_CART_UPDATING', true);
+
+    try {
+      const cart = await this.$swell.cart.removeItem(item.id);
+      commit('SET_CART', cart);
+      // dispatch('showNotification', { message: 'Removed from cart' })
+    } catch (err) {
+      console.log(err);
+      //dispatch('handleError', err);
+    }
+
+    commit('SET_CART_UPDATING', false);
+  },
+  async initializeCart({ commit, dispatch, state }, { checkoutId }) {
+    let cart = state.cart;
+
+    try {
+      if (checkoutId) {
+        // Recover cart if checkoutId provided
+        cart = await this.$swell.cart.recover(checkoutId);
+      } else {
+        // Get cart from session (returns null if nothing in cart)
+        cart = await this.$swell.cart.get();
+      }
+      // Update cart state
+      commit('SET_CART', cart);
+    } catch (err) {
+      console.log('error', err);
+      //dispatch('handleError', err);
+    }
   }
 }

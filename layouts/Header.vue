@@ -40,7 +40,7 @@
                   {{ link.text }}
                 </NuxtLink>
               </li>
-              <li v-b-toggle.sidebar-cart><i class="fa fa-shopping-bag" aria-hidden="true"></i><span></span></li>
+              <li v-b-toggle.sidebar-cart><i class="fa fa-shopping-bag" aria-hidden="true"></i><span :class="this.getCartProducts && this.getCartProducts.length > 0 ? 'hasProducts' : ''"></span></li>
           </ul>
         </div>
         <div class="col-4 nav-mobile-trigger" @click="toggleMobileNav">
@@ -52,6 +52,8 @@
 </template>
 <script>
   import Media from '~/components/Media';
+  import { mapGetters } from 'vuex';
+
   export default {
     computed: {
       locale() {
@@ -90,6 +92,11 @@
     },
     components: {
       Media
+    },
+    computed: {
+      ...mapGetters([
+          "getCartProducts"
+      ])
     }
   }
 </script>
