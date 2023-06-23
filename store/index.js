@@ -12,12 +12,19 @@ export const state = () => ({
   newsletterOpened: false,
   messageOpened: false,
   message: [],
+  products: null,
   settings: [],
 })
 
 export const mutations = {
   SET_ATTRIBUTES(state, attributes) {
     state.attributes = attributes;
+  },
+  SET_MESSAGE(state, isOpened) {
+    state.messageOpened = isOpened;
+  },
+  SET_MESSAGE_MODAL(state, modal) {
+    state.message = modal;
   },
   SET_NEWSLETTER(state, isOpened) {
     state.newsletterOpened = isOpened;
@@ -28,11 +35,8 @@ export const mutations = {
   SET_NOTIFICATION(state, notification) {
     state.notification = notification;
   },
-  SET_MESSAGE(state, isOpened) {
-    state.messageOpened = isOpened;
-  },
-  SET_MESSAGE_MODAL(state, modal) {
-    state.message = modal;
+  SET_PRODUCTS(state, products) {
+    state.products = products;
   },
   SET_SETTINGS(state, settings) {
     state.settings = settings;
@@ -66,6 +70,10 @@ export const getters = {
   },
   getCategories(state) {
     return state.categories;
+  },
+  getProducts(state) {
+    if(state.products.count === 0) return
+    return state.products.results;
   }
 }
 
