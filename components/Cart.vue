@@ -48,7 +48,7 @@
             </b-row>
           </b-card>
         </div>
-        <div v-else class="cart-empty">EMPTY</div>
+        <div v-else class="cart-empty text-center mt-5">{{$t('cart.empty')}}</div>
       </div>
     </b-sidebar>
 </template>
