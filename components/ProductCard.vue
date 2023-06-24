@@ -33,7 +33,8 @@
     methods: {
       goTo() {
         const locale = this.$store.state.i18n.locale;
-        this.$router.push(`${locale === 'en' ? '/' + locale + '/products/': '/produits/'}${this.product.slug}`)
+        const pathPrefix = locale === 'en' ? `/${locale}/products/product/` : '/produits/produit/';
+        this.$router.push(`${pathPrefix}${this.product.slug}`);
       }
     },
     components: {

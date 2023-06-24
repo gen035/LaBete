@@ -2,14 +2,12 @@
   <aside class="filters">
     <div class="filters-type">
       <h3>Categories</h3>
-      <b-form-checkbox-group
-        v-model="selectedCategories"
-        name="category"
-        :options="getCategories"
-        textField="name"
-        valueField="id"
-        >
-      </b-form-checkbox-group>
+      <NuxtLink
+        v-for="(category, index) in getCategories"
+        :to="localePath({name: 'products-slug', params: { category: category.slug }})"
+      >
+        {{ category.name }}
+      </NuxtLink>
     </div>
     <div v-for="(attribute, index) in getAttributes" :key="index" class="filters-type">
       <h3>{{attribute.name}}</h3>

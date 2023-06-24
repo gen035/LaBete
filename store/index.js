@@ -71,6 +71,9 @@ export const getters = {
   getCategories(state) {
     return state.categories;
   },
+  getCategory(state, slug) {
+    return state.categories.filter((category => category.slug === slug));
+  },
   getProducts(state) {
     if(state.products.count === 0) return
     return state.products.results;
