@@ -40,6 +40,7 @@ export default {
     },
     clear: 'Clear filters',
     material: {
+      charbon: "Coal",
       cuir: "Leather",
       tissu: "Fabric",
       metal: "Metal",
@@ -220,7 +221,8 @@ export default {
       fourrure: "fur",
       bois: "wood"
     },
-    sale: "Sale"
+    sale: "Sale",
+    recommended: "You will also like..."
   },
   products: {
     asc: 'Price (asc)',
