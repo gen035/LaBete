@@ -1,5 +1,5 @@
 <template>
-  <div class="product-card col-sm-3">
+  <div class="product-card col-xl-2 col-lg-3 col-md-4 col-6">
     <div class="product-card-wrapper" @click="goTo">
       <div v-if="product.sale" class="product-card-sale">{{$t('product.sale')}}</div>
       <div class="product-card-image">

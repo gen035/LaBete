@@ -13,10 +13,10 @@
           />
         </div>
         <div class="row">
-            <div class="col-md-2 d-none d-sm-block">
+            <div class="col-md-2 d-none d-md-block">
               <Filters @newFilters="(newFilters) => handleFilters(newFilters)" />
             </div>
-            <div class="col-md-10">
+            <div class="col-md-10 col-sm-12">
               <!-- <div class="row" v-if="products.length > 0">
                 <div class="col-md-2 d-flex align-items-center">
                   {{$t('products.sort')}}
