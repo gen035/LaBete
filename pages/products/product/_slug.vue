@@ -82,7 +82,7 @@
     nuxtI18n: {
       paths: {
         fr: '/produits/produit/:slug',
-        en: '/products/products/:slug'
+        en: '/products/product/:slug'
       }
     },
   }
