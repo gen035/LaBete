@@ -21,12 +21,25 @@
           <div class="col-6">Shipping</div>
           <div class="col-6 text-right">---</div>
         </div>
+        <div class="row">
+          <div class="col-12">
+            <button class="button" data-track="" data-track-category="cart" data-track-action="click" data-track-label="checkout">
+              <p class="button-text">
+                  Checkout
+                </p>
+                <div class="button-icon-container">
+                  <p class="button-icon fa fa-credit-card-alt"></p>
+                </div>
+            </button>     
+          </div>
+        </div>
       </template>
       <div class="px-3 py-2 container">
         <h2 class="cart-title title-h2">{{$t('cart.title')}}</h2>
         <div v-if="getCartProducts && getCartProducts.length > 0" class="cart-items">
           <b-card
             v-for="(item, index) in getCartProducts"
+            :key="index"
             no-body
             class="overflow-hidden cart-item"
             style="max-width: 540px;"
