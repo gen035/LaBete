@@ -6,13 +6,16 @@
         <img :src="product.images[0].file.url" />
       </div>
       <div class="product-card-name">{{ product.name }}</div>
-      <div v-if="!product.sale" class="product-card-price">{{product.price}}$</div>
+      <div v-if="!product.sale && product.stock_status === 'in_stock'" class="product-card-price">{{product.price}}$</div>
       <div v-if="product.sale" class="product-card-price product-card-price--sale">
         <span>{{product.price}}$</span>
         <s>{{product.orig_price}}$</s>
       </div>
+      <div v-if="product.stock_status !== 'in_stock'" class="product-card-price product-card-price--sold">
+        <span>{{$t('product.sold')}}</span>
+      </div>
     </div>
-    <AddToCart :product="product" />
+    <AddToCart v-if="product.stock_status === 'in_stock'" :product="product" />
   </div>
 </template>
 <script>
@@ -26,9 +29,6 @@
         require: true,
         default: () => ({})
       }
-    },
-    created() {
-      console.log(this.product)
     },
     methods: {
       goTo() {

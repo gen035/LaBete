@@ -12,13 +12,21 @@
           <div class="col-md-6 col-lg-4 product-detail">
             <h2 class="product-title">{{product.name}}</h2>
             <div class="product-desc"v-html="product.description" />
-            <div v-if="!product.sale" class="product-price">{{product.price}}$</div>
+            <div v-if="!product.sale && product.stock_status === 'in_stock'" class="product-price">{{product.price}}$</div>
             <div v-if="product.sale" class="product-price product-price--sale">
               <span>{{product.price}}$</span>
               <s>{{product.orig_price}}$</s>
             </div>
-            <AddToCart :product="product" />
+            <div v-if="product.stock_status !== 'in_stock'" class="product-price product-price--sold">
+              <span>{{$t('product.sold')}}</span>
+            </div>
+            <AddToCart v-if="product.stock_status === 'in_stock'" :product="product" />
           </div>
+        </div>
+        <RecommendedProducts
+          v-if="product.cross_sells && product.cross_sells.length > 0"
+          :products="product.cross_sells"
+        />
         </div>
       </section>
   </section>
@@ -26,16 +34,20 @@
 
 <script>
   import AddToCart from '~/components/AddToCart';
+  import RecommendedProducts from '~/components/RecommendedProducts';
   import VueSlickCarousel from 'vue-slick-carousel';
 
   export default {
     async asyncData({ app, error, store, params}) {
       const locale = store.state.i18n.locale;
-      let product = await app.$swell.products.get(params && params.slug)
+      let recommendedProducts = [];
+      let product = await app.$swell.products.get(params && params.slug, {
+        expand: ['cross_sells']
+      });
 
       if (product) {
         return {
-          product,
+          product
         }
       } else {
         error({ statusCode: 404, message: 'Page not found' })
@@ -77,6 +89,7 @@
     },
     components: {
       AddToCart,
+      RecommendedProducts,
       VueSlickCarousel
     },
     nuxtI18n: {

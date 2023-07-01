@@ -19,47 +19,59 @@
         </div>
         <div class="row">
           <div class="col-6">Shipping</div>
-          <div class="col-6 text-right">---</div>
+          <div class="col-6 text-right cart-shipping">{{$t('cart.shipping_amount')}}</div>
         </div>
         <div class="row">
           <div class="col-12">
-            <button class="button" data-track="" data-track-category="cart" data-track-action="click" data-track-label="checkout">
-              <p class="button-text">
-                  Checkout
+          <div class="button" data-track="" data-track-category="cart" data-track-action="click" data-track-label="checkout">
+              <a :href="getCart && getCart.checkout_url">
+                <p class="button-text">
+                  {{$t('cart.checkout')}}
                 </p>
                 <div class="button-icon-container">
-                  <p class="button-icon fa fa-credit-card-alt"></p>
+                  <p class="button-icon fa fa-credit-card"></p>
                 </div>
-            </button>     
+              </a>
+            </div>
           </div>
         </div>
       </template>
       <div class="px-3 py-2 container">
         <h2 class="cart-title title-h2">{{$t('cart.title')}}</h2>
         <div v-if="getCartProducts && getCartProducts.length > 0" class="cart-items">
-          <b-card
-            v-for="(item, index) in getCartProducts"
-            :key="index"
-            no-body
-            class="overflow-hidden cart-item"
-            style="max-width: 540px;"
-          >
-            <b-row no-gutters>
-              <b-col
-                class="cart-image"
-                md="4"
-                v-bind:style="{ backgroundImage: `url(${item.product.images[0].file.url})` }"
-              />
-              <b-col md="8">
-                <b-card-body class="d-flex flex-column justify-content-between" :title="item.product.name">
-                  <b-card-text class="row">
-                    <div class="col-6 cart-item-qty">{{$t('cart.qty')}} {{item.quantity}}</div>
-                    <div class="col-6 cart-item-delete" @click="removeItem(item)">{{$t('cart.delete')}}</div>
-                  </b-card-text>
-                </b-card-body>
-              </b-col>
-            </b-row>
-          </b-card>
+          <div v-for="(item, index) in getCartProducts">
+            <b-card
+              v-if="item.product"
+              :key="index"
+              no-body
+              class="overflow-hidden cart-item"
+            >
+              <div
+                v-if="item.stock_status !== 'in_stock'"
+                class="cart-unavailable"
+                @click="removeItem(item)"
+              >
+                <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                <h3>{{$t('cart.unavailable')}}</h3>
+                <p>{{$t('cart.delete')}}</p>
+              </div>
+              <b-row no-gutters>
+                <b-col
+                  class="cart-image"
+                  md="4"
+                  v-bind:style="{ backgroundImage: `url(${item.product.images[0].file.url})` }"
+                />
+                <b-col md="8">
+                  <b-card-body class="d-flex flex-column justify-content-between" :title="item.product.name">
+                    <b-card-text class="row">
+                      <div class="col-6 cart-item-qty">{{$t('cart.qty')}} {{item.quantity}}</div>
+                      <div class="col-6 cart-item-delete" @click="removeItem(item)">{{$t('cart.delete')}}</div>
+                    </b-card-text>
+                  </b-card-body>
+                </b-col>
+              </b-row>
+            </b-card>
+          </div>
         </div>
         <div v-else class="cart-empty text-center mt-5">{{$t('cart.empty')}}</div>
       </div>

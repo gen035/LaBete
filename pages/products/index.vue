@@ -14,21 +14,8 @@
           />
         </div>
         <div class="row">
-            <div class="col-md-2 d-none d-sm-block">
-              <Filters @newCategories="(newCategories) => handleCategories(newCategories)" @newFilters="(newFilters) => handleFilters(newFilters)" />
-            </div>
-            <div class="col-md-10">
-              <!-- <div class="row" v-if="products.length > 0">
-                <div class="col-md-2 d-flex align-items-center">
-                  {{$t('products.sort')}}
-                  <b-form-select v-model="order" :options="orderOptions"></b-form-select>
-                </div>
-              </div> -->
-              <div class="row">
-                <NoProducts v-if="products.length === 0" />
-                <ProductCard v-if="products.length > 0" v-for="(product, index) in products" :product="product" :key="index"/>
-              </div>
-            </div>
+          <NoProducts v-if="products.length === 0" />
+          <ProductCard v-if="products.length > 0" v-for="(product, index) in products" :product="product" :key="index"/>
         </div>
       </section>
   </section>

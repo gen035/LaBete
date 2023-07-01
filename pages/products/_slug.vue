@@ -13,21 +13,8 @@
           />
         </div>
         <div class="row">
-            <div class="col-md-2 d-none d-md-block">
-              <Filters @newFilters="(newFilters) => handleFilters(newFilters)" />
-            </div>
-            <div class="col-md-10 col-sm-12">
-              <!-- <div class="row" v-if="products.length > 0">
-                <div class="col-md-2 d-flex align-items-center">
-                  {{$t('products.sort')}}
-                  <b-form-select v-model="order" :options="orderOptions"></b-form-select>
-                </div>
-              </div> -->
-              <div class="row">
-                <NoProducts v-if="products.length === 0" />
-                <ProductCard v-if="products.length > 0" v-for="(product, index) in products" :product="product" :key="index"/>
-              </div>
-            </div>
+          <NoProducts v-if="products.length === 0" />
+          <ProductCard v-if="products.length > 0" v-for="(product, index) in products" :product="product" :key="index"/>
         </div>
       </section>
   </section>
@@ -62,6 +49,7 @@
       });
 
       products = products && products.results && products.results.length > 0 ? products.results : [];
+      products.filter(product => product.stock_status === 'in_stock');
 
       if (content) {
         return {

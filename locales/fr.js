@@ -1,14 +1,17 @@
 export default {
   cart: {
     already: 'Ce produit est déja dans votre panier',
-    addToCart: 'Ajouter au panier',
+    addToCart: 'Ajouter',
     addToCartPending: 'Ajout en cours...',
+    checkout: 'Paiement',
     delete: 'Enlever',
     empty: 'Aucun produits dans votre panier',
     qty: 'Qte:',
     shipping: 'Livraison',
+    shipping_amount: 'Calculé au paiement',
     subtotal: 'Sous-total',
-    title: 'Commande'
+    title: 'Commande',
+    unavailable: 'Non disponible'
   },
   contact: {
     phone: 'Téléphone',
@@ -23,7 +26,7 @@ export default {
     }
   },
   filters: {
-    color: {
+    couleur: {
       blanc: "Blanc",
       noir: "Noir",
       gris: "Gris",
@@ -33,6 +36,7 @@ export default {
       vert: "Vert",
       bleu: "Bleu",
       rose: "Rose",
+      argent: "Argenté"
     },
     clear: 'Effacer filtres',
     material: {
@@ -203,7 +207,7 @@ export default {
     }
   ],
   product: {
-    color: {
+    couleur: {
       blanc: "blanc",
       noir: "noir",
       gris: "gris",
@@ -213,6 +217,7 @@ export default {
       vert: "vert",
       bleu: "bleu",
       rose: "rose",
+      argent: "argent"
     },
     material: {
       cuir: "cuir",
@@ -222,6 +227,7 @@ export default {
       bois: "bois"
     },
     sale: "Vente",
+    sold: "VENDU",
     recommended: "Vous aimerez aussi..."
   },
   products: {
