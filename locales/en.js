@@ -234,7 +234,12 @@ export default {
     asc: 'Price (asc)',
     desc: 'Price (desc)',
     sort: 'Sort: ',
-    orderSelection: 'Select'
+    orderSelection: 'Select',
+    categories: {
+      all: 'All',
+      text: 'Categories'
+    },
+    none: 'No products available'
   },
   top: {
     store: 'Buy in store',

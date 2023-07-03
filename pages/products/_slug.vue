@@ -13,6 +13,22 @@
           />
         </div>
         <div class="row">
+          <div class="col-12 text-center">
+            <b-dropdown
+              v-if="categories && categories.length > 0"
+              id="category"
+              :text="$t('categories.text')"
+              class="m-md-2"
+            >
+              <b-dropdown-item
+                v-for="(category, index)  in categories"
+              >
+                {{category.name}}
+              </b-dropdown-item>
+            </b-dropdown>
+          </div>
+        </div>
+        <div class="row">
           <NoProducts v-if="products.length === 0" />
           <ProductCard v-if="products.length > 0" v-for="(product, index) in products" :product="product" :key="index"/>
         </div>

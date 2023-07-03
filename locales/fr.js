@@ -234,7 +234,12 @@ export default {
     asc: 'Prix (montant)',
     desc: 'Prix (descendant)',
     sort: 'Trier: ',
-    orderSelection: 'Choisir'
+    orderSelection: 'Choisir',
+    categories: {
+      all: 'Tout',
+      text: 'Categories'
+    },
+    none: 'Pas de produits disponibles'
   },
   top: {
     store: 'Points de ventes',
