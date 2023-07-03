@@ -1,6 +1,6 @@
 <template>
-  <div class="noProductsncol-md-6 text-center">
+  <div class="noProducts col-12 text-center">
     <i class="fa fa-shopping-bag" aria-hidden="true"></i>
-    <h2>No products</h2>
+    <h3>{{$t('products.none')}}</h3>
   </div>
 </template>
