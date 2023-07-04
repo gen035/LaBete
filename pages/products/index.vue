@@ -15,19 +15,7 @@
         </div>
         <div class="row">
           <div class="col-12 text-center">
-            <b-dropdown
-              v-if="getCategories && getCategories.length > 0"
-              id="category"
-              :text="$t('products.categories.text')"
-              class="m-md-2"
-            >
-              <b-dropdown-item>{{$t('products.categories.all')}}</b-dropdown-item>
-              <b-dropdown-item v-for="(category, index) in getCategories">
-                <NuxtLink :to="localePath({name: 'products-slug', params: { category: category.slug }})">
-                  {{ category.name }}
-                </NuxtLink>
-              </b-dropdown-item>
-            </b-dropdown>
+            <CategoriesDropdown />
           </div>
         </div>
         <div class="row">
@@ -39,11 +27,10 @@
 </template>
 
 <script>
+  import CategoriesDropdown from '~/components/CategoriesDropdown';
   import Filters from '~/components/Filters';
   import NoProducts from '~/components/NoProducts';
   import ProductCard from '~/components/ProductCard';
-  import { mapGetters } from 'vuex';
-  import { categorySlugMapping } from '~/pages/products/constants.js';
 
   export default {
     async asyncData({ app, error, store, $swell }) {
@@ -143,14 +130,10 @@
       // }
     },
     components: {
+      CategoriesDropdown,
       Filters,
       NoProducts,
       ProductCard
-    },
-    computed: {
-      ...mapGetters([
-          "getCategories"
-      ])
     },
     nuxtI18n: {
       paths: {

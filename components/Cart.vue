@@ -14,8 +14,8 @@
   >
       <template #footer="{ hide }">
         <div class="row">
-          <div class="col-6">{{$t('cart.subtotal')}}</div>
-          <div class="col-6 text-right">{{getCart && getCart.grand_total}}</div>
+          <div class="col-6">{{$t('cart.subtotal')}}$</div>
+          <div class="col-6 text-right">{{getCart && getCart.grand_total}}$</div>
         </div>
         <div class="row">
           <div class="col-6">Shipping</div>
@@ -47,7 +47,7 @@
               class="overflow-hidden cart-item"
             >
               <div
-                v-if="item.stock_status !== 'in_stock'"
+                v-if="item.product.stock_level <= 0"
                 class="cart-unavailable"
                 @click="removeItem(item)"
               >

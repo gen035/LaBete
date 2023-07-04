@@ -14,18 +14,7 @@
         </div>
         <div class="row">
           <div class="col-12 text-center">
-            <b-dropdown
-              v-if="categories && categories.length > 0"
-              id="category"
-              :text="$t('categories.text')"
-              class="m-md-2"
-            >
-              <b-dropdown-item
-                v-for="(category, index)  in categories"
-              >
-                {{category.name}}
-              </b-dropdown-item>
-            </b-dropdown>
+            <CategoriesDropdown />
           </div>
         </div>
         <div class="row">
@@ -37,6 +26,7 @@
 </template>
 
 <script>
+  import CategoriesDropdown from '~/components/CategoriesDropdown';
   import Filters from '~/components/Filters';
   import NoProducts from '~/components/NoProducts';
   import ProductCard from '~/components/ProductCard';
@@ -147,6 +137,7 @@
       }
     },
     components: {
+      CategoriesDropdown,
       Filters,
       NoProducts,
       ProductCard
