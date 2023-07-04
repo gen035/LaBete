@@ -16,17 +16,15 @@
   import Newsletter from '~/components/Newsletter';
   export default {
     created() {
-      const hasCookie = this.$cookies.get('labete_newsletter');
-
-      if(!hasCookie) {
-        this.$store.commit('SET_NEWSLETTER', true);
-      }
+      this.resetTimeout(); // Start the initial timeout
     },
     data() {
       return {
+        hasCookie: this.$cookies.get('labete_newsletter'),
         title: this.$store.state.newsletter.title,
         description: this.$store.state.newsletter.description,
-        image: this.$store.state.newsletter.image
+        image: this.$store.state.newsletter.image,
+        timeoutId: null,
       }
     },
     methods: {
@@ -39,7 +37,17 @@
             maxAge: 1 * 24 * 60 * 60
           }
         );
-      }
+      },
+      resetTimeout() {
+        clearTimeout(this.timeoutId); // Clear the previous timeout (if any)
+
+        this.timeoutId = setTimeout(() => {
+          if(!this.hasCookie) {
+            this.$store.commit('SET_NEWSLETTER', true);
+          }
+          this.resetTimeout();
+        }, 10000); // Set the timeout duration (e.g., 10 seconds)
+      },
     },
     components: {
       Media,
