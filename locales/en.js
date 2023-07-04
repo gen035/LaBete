@@ -71,9 +71,9 @@ export default {
         path: 'artist'
       },
       {
-        name: 'creations',
-        text: 'Our Creations',
-        path: 'our-creations'
+        name: 'products',
+        text: 'Our Products',
+        path: '/products'
       },
       {
         name: 'events',

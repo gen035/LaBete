@@ -3,10 +3,12 @@
     <div class="top-bar">
       <ul class="top-bar-list">
         <li class="d-none d-sm-inline-block d-md-inline-block d-lg-inline-block">
-          <span @click="openModal()" title="Online" data-track="" data-track-category="topNav" data-track-action="click" data-track-label="Acheter en ligne">
+          <NuxtLink
+            :to="localePath('products')"
+          >
             <i class="fas fa-shopping-bag"></i>
               {{ $t('top.online.text') }}
-          </span>
+          </NuxtLink>
         </li>
         <li>
           <Nuxt-link :to="switchLocalePath('fr')">Français</Nuxt-link>
