@@ -45,6 +45,7 @@
               :key="index"
               no-body
               class="overflow-hidden cart-item"
+              @click="goTo(item)"
             >
               <div
                 v-if="item.product.stock_level <= 0"
@@ -89,6 +90,16 @@
       },
       closed() {
         this.$store.commit('SET_CART_ISOPENED', false);
+      },
+      goTo(item) {
+        const slug = item.product && item.product.slug;
+        const inStock = item.product.stock_level > 0;
+
+        if (!inStock) { return }
+
+        const locale = this.$store.state.i18n.locale;
+        const pathPrefix = locale === 'en' ? `/${locale}/products/product/` : '/produits/produit/';
+        this.$router.push(`${pathPrefix}${slug}`);
       }
     },
     mounted() {

@@ -1,4 +1,5 @@
 .cart
+  cursor: pointer
   &-image
     background-size: cover
     background-position: center center
@@ -9,6 +10,9 @@
   &-item
     margin: 0 auto 20px auto
     position: relative
+    transition: border-color 125ms linear
+    &:hover
+      border-color: $gold
     .cart-item-price
       margin-bottom: 2px
       font-weight: 600
