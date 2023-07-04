@@ -20,7 +20,7 @@
     </div>
     <header class="header container">
       <div class="row align-items-center">
-        <div class="col-8 col-sm-12 col-md-4 header-logo-wrapper">
+        <div class="col-6 col-sm-12 col-md-4 header-logo-wrapper">
           <a href="/" title="La Bete" data-track="" data-track-category="nav" data-track-action="click" data-track-label="Logo">
             <Media
               classes="header-logo"
@@ -29,7 +29,7 @@
           </a>
         </div>
         <div class="col-md-8 col-sm-12 header-nav-wrapper">
-          <ul class="nav">
+          <ul class="header-nav">
              <li
                 v-for="(link, index) in  nav"
                 :key="index"
@@ -45,8 +45,11 @@
               <li v-b-toggle.sidebar-cart><i class="fa fa-shopping-bag" aria-hidden="true"></i><span :class="this.getCartProducts && this.getCartProducts.length > 0 ? 'hasProducts' : ''"></span></li>
           </ul>
         </div>
-        <div class="col-4 nav-mobile-trigger" @click="toggleMobileNav">
+        <div class="col-4 header-nav-mobile-trigger" @click="toggleMobileNav">
           <span>Menu<i class="fa fa-chevron-down"></i></span>
+        </div>
+        <div class="col-2 header-nav-mobile-cart" v-b-toggle.sidebar-cart>
+          <i class="fa fa-shopping-bag" aria-hidden="true"></i><span :class="this.getCartProducts && this.getCartProducts.length > 0 ? 'hasProducts' : ''"></span>
         </div>
       </div>
     </header>

@@ -1,24 +1,99 @@
 header
   &.header
-    padding: 16px 0 
+    padding: 16px
     @media (min-width: 768px)
       height: 120px
-
-header
-  &.header
     img
       width: 145px
+  .header-logo-wrapper
+    @media (min-width: 576px)
+      text-align: center
+    @media (min-width: 768px)
+      text-align: left
 
-.header-logo-wrapper
-  @media (min-width: 576px)
-    text-align: center
-  @media (min-width: 768px)
-    text-align: left
+  .header-nav-wrapper
+    display: none
+    @media (min-width: 576px)
+      display: block
+      text-align: center
+    @media (min-width: 768px)
+      text-align: right
+    .header-nav
+      margin-top: 24px
+      @media (min-width: 768px)
+        margin-top: 0
 
-.header-nav-wrapper
-  display: none
-  @media (min-width: 576px)
-    display: block
-    text-align: center
-  @media (min-width: 768px)
+    .header-nav li
+      display: inline-block
+      margin: 0 10px
+      position: relative
+      a
+        &:hover
+          color: $dark-grey
+          text-decoration: none
+      &:last-child
+        cursor: pointer
+        @media (min-width: 768px)
+          margin-left: auto
+        .fa
+          font-size: 18px
+        span
+          display: none
+          background-color: red
+          height: 5px
+          width: 5px
+          border-radius: 50%
+          top: 0
+          right: -10px
+          position: absolute
+          transform: scale(1)
+          &.hasProducts
+            display: block
+            animation: pulse-red 2s infinite
+
+      .header-nav li a.active::after
+        background-color: $gold
+        bottom: -4px
+        content: ''
+        height: 2px
+        left: 0
+        position: absolute
+        width: 100%
+
+  .header-nav-mobile-trigger,
+  .header-nav-mobile-cart
+    cursor: pointer
     text-align: right
+    @media (min-width: 576px)
+      display: none
+
+  .header-nav-mobile-trigger
+    span
+      text-transform: uppercase
+    
+  .header-nav-mobile-trigger
+    span
+      i
+        color: $gold
+        margin-left: 16px
+        transition: all 250ms linear
+  
+  .header-nav-mobile-cart
+    text-align: center
+    span
+      display: none
+      background-color: red
+      height: 5px
+      width: 5px
+      border-radius: 50%
+      top: -5px
+      right: 15px
+      position: absolute
+      transform: scale(1)
+      &.hasProducts
+        display: block
+        animation: pulse-red 2s infinite
+  .is-nav-opened
+    span
+      i
+        transform: rotate(180deg)
