@@ -31,6 +31,15 @@ header
         &:hover
           color: $dark-grey
           text-decoration: none
+        &.active
+          &::after
+            background-color: $gold
+            bottom: -4px
+            content: ''
+            height: 2px
+            left: 0
+            position: absolute
+            width: 100%
       &:last-child
         cursor: pointer
         @media (min-width: 768px)
@@ -50,16 +59,6 @@ header
           &.hasProducts
             display: block
             animation: pulse-red 2s infinite
-
-      .header-nav li a.active::after
-        background-color: $gold
-        bottom: -4px
-        content: ''
-        height: 2px
-        left: 0
-        position: absolute
-        width: 100%
-
   .header-nav-mobile-trigger,
   .header-nav-mobile-cart
     cursor: pointer
