@@ -14,7 +14,7 @@
   >
       <template #footer="{ hide }">
         <div class="row">
-          <div class="col-6">{{$t('cart.subtotal')}}$</div>
+          <div class="col-6">{{$t('cart.subtotal')}}</div>
           <div class="col-6 text-right">{{getCart && getCart.grand_total}}$</div>
         </div>
         <div class="row">
@@ -63,6 +63,9 @@
                 />
                 <b-col md="8">
                   <b-card-body class="d-flex flex-column justify-content-between" :title="item.product.name">
+                    <b-card-text class="row">
+                      <div class="col-12 cart-item-price">{{item.price}}$</div>
+                    </b-card-text>
                     <b-card-text class="row">
                       <div class="col-6 cart-item-qty">{{$t('cart.qty')}} {{item.quantity}}</div>
                       <div class="col-6 cart-item-delete" @click="removeItem(item)">{{$t('cart.delete')}}</div>
