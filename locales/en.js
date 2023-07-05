@@ -242,6 +242,7 @@ export default {
     none: 'No products available'
   },
   top: {
+    shipping: 'Free shipping for orders over 200$',
     store: 'Buy in store',
     online: {
       link: 'https://www.etsy.com/ca/shop/labetecreations',

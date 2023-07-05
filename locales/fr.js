@@ -3,7 +3,7 @@ export default {
     already: 'Ce produit est déja dans votre panier',
     addToCart: 'Ajouter',
     addToCartPending: 'Ajout en cours...',
-    checkout: 'Paiement',
+    checkout: 'Commander',
     delete: 'Enlever',
     empty: 'Aucun produits dans votre panier',
     qty: 'Qte:',
@@ -242,6 +242,7 @@ export default {
     none: 'Pas de produits disponibles'
   },
   top: {
+    shipping: 'Livraison gratuite pour les commandes de plus de 200$',
     store: 'Points de ventes',
     online: {
       link: 'https://www.etsy.com/ca/shop/labetecreations',
