@@ -5,6 +5,7 @@
       <NuxtLink
         v-for="(category, index) in getCategories"
         :to="localePath({name: 'products-slug', params: { category: category.slug }})"
+        :key="index"
       >
         {{ category.name }}
       </NuxtLink>
