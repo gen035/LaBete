@@ -10,6 +10,9 @@
             </VueSlickCarousel>
           </div>
           <div class="col-md-6 col-lg-4 product-detail">
+            <div v-if="product.stock_level <= 0" class="product-price product-price--sold">
+              <span>{{$t('product.sold')}}</span>
+            </div>
             <h2 class="product-title">{{product.name}}</h2>
             <div class="product-desc"v-html="product.description" />
             <div v-if="!product.sale && product.stock_level > 0" class="product-price">{{product.price}}$</div>
@@ -17,16 +20,8 @@
               <span>{{product.price}}$</span>
               <s>{{product.orig_price}}$</s>
             </div>
-            <div v-if="product.stock_level <= 0" class="product-price product-price--sold">
-              <span>{{$t('product.sold')}}</span>
-            </div>
             <AddToCart v-if="product.stock_level > 0" :product="product" />
           </div>
-        </div>
-        <RecommendedProducts
-          v-if="product.cross_sells && product.cross_sells.length > 0"
-          :products="product.cross_sells"
-        />
         </div>
       </section>
   </section>
