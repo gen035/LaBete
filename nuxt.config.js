@@ -50,7 +50,6 @@ export default {
   ** Plugins to load before mounting the App
   */
   plugins: [
-    '~/plugins/map.js',
     '~/plugins/axios.js',
     '~/plugins/lightGallery.client.js',
     '~/plugins/swell.js'
@@ -101,6 +100,5 @@ export default {
     */
     extend(config, ctx) {
     },
-    transpile: [/^vue2-google-maps($|\/)/, 'vue2-gmap-custom-marker'],
   }
 }

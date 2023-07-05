@@ -73,7 +73,7 @@ export default {
       {
         name: 'products',
         text: 'Our Products',
-        path: '/products'
+        path: 'products'
       },
       {
         name: 'events',
