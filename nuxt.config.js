@@ -100,5 +100,9 @@ export default {
     */
     extend(config, ctx) {
     },
+  },
+  publicRuntimeConfig: {
+    swellPublicKey: process.env.SWELL_PUBLIC_KEY,
+    swellStoreId: process.env.SWELL_STORE_ID
   }
 }

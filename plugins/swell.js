@@ -2,8 +2,8 @@ import swell from 'swell-js';
 
 export default async (context, inject) => {
   const locale = context.app.i18n.locale;
-  const storeId = process.env.SWELL_STORE_ID;
-  const publicKey = process.env.SWELL_PUBLIC_KEY;
+  const storeId = context.$config.swellStoreId;
+  const publicKey = context.$config.swellPublicKey;
 
   // Bail if options aren't provided
   if (!storeId) {
