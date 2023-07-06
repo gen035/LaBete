@@ -59,10 +59,10 @@
               <b-row no-gutters>
                 <b-col
                   class="cart-image"
-                  md="4"
+                  cols="4"
                   v-bind:style="{ backgroundImage: `url(${item.product.images[0].file.url})` }"
                 />
-                <b-col md="8">
+                <b-col cols="8">
                   <b-card-body class="d-flex flex-column justify-content-between" :title="item.product.name">
                     <b-card-text class="row">
                       <div class="col-12 cart-item-price">{{item.price}}$</div>
