@@ -1,0 +1,57 @@
+.filters
+  border-right: 1px solid $gold
+  &-clear
+    color: $dark-grey
+    cursor: pointer
+    padding: 10px 5px
+    &:hover
+      i
+        transform: rotate(-45deg)
+    i
+      color: $gold
+      margin-right: 5px
+      font-size: 12px
+      transition: 250ms transform linear
+  &-type
+    border-bottom: 1px solid $gold
+    padding: 10px 0
+    &:last-child
+      border: 0
+    h3
+      color: $dark-grey
+      margin-bottom: 5px
+      font-weight: 600
+      font-family: 'PT Serif', serif
+      text-transform: capitalize
+    div
+      &.custom-control-inline
+        display: block
+        cursor: pointer
+        text-transform: capitalize
+    a
+      display: block
+      text-transform: capitalize
+      transition: 125ms color linear
+      text-decoration: none
+      &:hover
+        color: $gold
+  &-categories
+    a
+      display: block
+      margin: 5px auto
+      text-transform: capitalize
+      position: relative
+      &.active
+        font-weight: bold
+        color: $gold
+        &:after
+          content: ""
+          background-color: $dark-grey
+          bottom: -3px
+          left: 0
+          position: absolute
+          width: 15px
+          height: 2px
+      &:hover
+        color: $gold
+        text-decoration: none

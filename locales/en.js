@@ -1,12 +1,64 @@
 export default {
-  top: {
-    store: 'Buy in store',
-    online: {
-      link: 'https://www.etsy.com/ca/shop/labetecreations',
-      text: 'Buy online'
+  cart: {
+    already: 'This product is already in your cart',
+    addToCart: 'Add',
+    addToCartPending: 'Adding to cart...',
+    checkout: 'Checkout',
+    delete: 'Remove',
+    empty: 'No product in your cart',
+    qty: 'Qty:',
+    shipping: 'Shipping',
+    shipping_amount: 'Calculated at checkout',
+    subtotal: 'Subtotal',
+    title: 'Order',
+    unavailable: 'Unavailable'
+  },
+  contact: {
+    phone: 'Phone',
+    email: 'Email',
+    alt: 'jewelry, leather, hand made'
+  },
+  error: {
+    title: 'An Error Occured',
+    home: 'Back home',
+    notFound: {
+      text: 'Page not found'
     }
   },
-  nav: {
+  event: {
+    map: 'See on a map',
+    info: 'More information'
+  },
+  filters: {
+    couleur: {
+      blanc: "White",
+      noir: "Black",
+      gris: "Grey",
+      orange: "Orange",
+      rouge: "Red",
+      jaune: "Yellow",
+      vert: "Green",
+      bleu: "Blue",
+      rose: "Pink",
+      argent: "Silver"
+    },
+    clear: 'Clear filters',
+    material: {
+      charbon: "Coal",
+      cuir: "Leather",
+      tissu: "Fabric",
+      metal: "Metal",
+      fourrure: "Fur",
+      bois: "Wood",
+    }
+  },
+  home: {
+    links: {
+      store: 'In store',
+      online: 'Online'
+    }
+  },
+    nav: {
     links: [
       {
         name: 'index',
@@ -19,9 +71,9 @@ export default {
         path: 'artist'
       },
       {
-        name: 'creations',
-        text: 'Our Creations',
-        path: 'our-creations'
+        name: 'products',
+        text: 'Our Products',
+        path: 'products'
       },
       {
         name: 'events',
@@ -35,11 +87,9 @@ export default {
       }
     ]
   },
-  home: {
-    links: {
-      store: 'In store',
-      online: 'Online'
-    }
+  newsletter: {
+    title: 'Subscribe to our newsletter',
+    placeholder: 'Email'
   },
   passed_events: [
     {
@@ -156,24 +206,47 @@ export default {
       events: [],
     }
   ],
-  event: {
-    map: 'See on a map',
-    info: 'More information'
+  product: {
+    couleur: {
+      blanc: "white",
+      noir: "black",
+      gris: "grey",
+      orange: "orange",
+      rouge: "red",
+      jaune: "yellow",
+      vert: "green",
+      bleu: "blue",
+      rose: "pink",
+      argent: "silver"
+    },
+    material: {
+      cuir: "leather",
+      tissu: "fabric",
+      metal: "metal",
+      fourrure: "fur",
+      bois: "wood"
+    },
+    sale: "Sale",
+    sold: "SOLD",
+    recommended: "You will also like..."
   },
-  contact: {
-    phone: 'Phone',
-    email: 'Email',
-    alt: 'jewelry, leather, hand made'
+  products: {
+    asc: 'Price (asc)',
+    desc: 'Price (desc)',
+    sort: 'Sort: ',
+    orderSelection: 'Select',
+    categories: {
+      all: 'All',
+      text: 'Categories'
+    },
+    none: 'No products available'
   },
-  newsletter: {
-    title: 'Subscribe to our newsletter',
-    placeholder: 'Email'
-  },
-  error: {
-    title: 'An Error Occured',
-    home: 'Back home',
-    notFound: {
-      text: 'Page not found'
+  top: {
+    shipping: 'Free shipping for orders over 200$',
+    store: 'Buy in store',
+    online: {
+      link: 'https://www.etsy.com/ca/shop/labetecreations',
+      text: 'Buy online'
     }
   }
 }

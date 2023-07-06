@@ -22,25 +22,6 @@
             <img :src="content.image_mobile.url" :alt="$t('contact.alt')" class="contact-img-2" />
           </div>
         </div>
-        <div class="row justify-content-center contact-downloads">
-          <div
-            v-for="(document, index) in content.documents"
-            :key="index"
-            class="col-md-4"
-          >
-            <h2 class="title-h2">{{ document.name[0].text }}</h2>
-            <div class="button" data-track="" data-track-category="download" data-track-action="click" :data-track-label="document.document.name">
-              <a :href="document.document.url" :title="document.document.name">
-                <p class="button-text">
-                  {{ document.boutton[0].text }}
-                </p>
-                <div class="button-icon-container">
-                  <p class="button-icon fas fa-download"></p>
-                </div>
-              </a>
-            </div>
-          </div>
-        </div>
       </section>
   </section>
 </template>

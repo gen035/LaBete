@@ -50,9 +50,9 @@ export default {
   ** Plugins to load before mounting the App
   */
   plugins: [
-    '~/plugins/map.js',
     '~/plugins/axios.js',
-    '~/plugins/lightGallery.client.js'
+    '~/plugins/lightGallery.client.js',
+    '~/plugins/swell.js'
   ],
   /*
   ** Nuxt.js modules
@@ -87,7 +87,9 @@ export default {
     ['@nuxtjs/google-analytics', {
       id: 'UA-34334834-1'
     }],
-    '@nuxtjs/axios'
+    ['bootstrap-vue/nuxt'],
+    '@nuxtjs/axios',
+    '@nuxtjs/dotenv',
   ],
   /*
   ** Build configuration
@@ -98,6 +100,5 @@ export default {
     */
     extend(config, ctx) {
     },
-    transpile: [/^vue2-google-maps($|\/)/, 'vue2-gmap-custom-marker'],
   }
 }
