@@ -72,13 +72,18 @@ export default {
       },
       {
         name: 'products',
-        text: 'Nos Produits',
+        text: 'Produits',
         path: 'produits'
       },
       {
         name: 'events',
         text: 'Évenements',
         path: 'evenements'
+      },
+      {
+        name: 'creations',
+        text: 'Créations',
+        path: 'nos-creations'
       },
       {
         name: 'contact',

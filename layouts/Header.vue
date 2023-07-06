@@ -20,7 +20,7 @@
     </div>
     <header class="header container">
       <div class="row align-items-center">
-        <div class="col-6 col-sm-12 col-md-4 header-logo-wrapper">
+        <div class="col-6 col-sm-12 col-md-3 header-logo-wrapper">
           <a href="/" title="La Bete" data-track="" data-track-category="nav" data-track-action="click" data-track-label="Logo">
             <Media
               classes="header-logo"
@@ -28,7 +28,7 @@
             />
           </a>
         </div>
-        <div class="col-md-8 col-sm-12 header-nav-wrapper">
+        <div class="col-md-9 col-sm-12 header-nav-wrapper">
           <ul class="header-nav">
              <li
                 v-for="(link, index) in  nav"
