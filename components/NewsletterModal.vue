@@ -20,7 +20,6 @@
     },
     data() {
       return {
-        hasCookie: this.$cookies.get('labete_newsletter'),
         title: this.$store.state.newsletter.title,
         description: this.$store.state.newsletter.description,
         image: this.$store.state.newsletter.image,
@@ -42,7 +41,7 @@
         clearTimeout(this.timeoutId); // Clear the previous timeout (if any)
 
         this.timeoutId = setTimeout(() => {
-          if(!this.hasCookie) {
+          if(!this.$cookies.get('labete_newsletter')) {
             this.$store.commit('SET_NEWSLETTER', true);
           }
           this.resetTimeout();
