@@ -3,7 +3,7 @@
       <section class="container-fluid">
         <div class="row">
           <div class="offset-lg-2 col-md-6 col-lg-4 product-slider">
-            <VueSlickCarousel v-bind="settings">
+            <VueSlickCarousel v-if="product.images && product.images.length > 0" v-bind="settings">
               <template v-for="(image, index) in product.images">
                 <img :key="index" :src="image.file.url" />
               </template>

@@ -3,7 +3,14 @@
     <div class="product-card-wrapper" @click="goTo">
       <div v-if="product.sale && this.in_stock" class="product-card-sale">{{$t('product.sale')}}</div>
       <div class="product-card-image">
-        <img :src="product.images[0].file.url" />
+        <img
+          v-if="product.images && product.images.length > 0 && product.images[0].file.url"
+          :src="product.images[0].file.url"
+        />
+        <img
+          v-else
+          src="~/assets/images/product_placeholder.jpg"
+        />
       </div>
       <div class="product-card-name">{{ product.name }}</div>
       <div v-if="!product.sale && this.in_stock" class="product-card-price">{{product.price}}$</div>
