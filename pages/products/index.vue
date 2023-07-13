@@ -50,7 +50,9 @@
       let seo = await app.$prismic.api.getByID(content.seo.id)
       seo = seo.data;
 
-      let products = await app.$swell.products.list();
+      let products = await app.$swell.products.list({
+        limit: 100
+      });
       products = products && products.results && products.results.length > 0 ? products.results : [];
 
       if (content) {
