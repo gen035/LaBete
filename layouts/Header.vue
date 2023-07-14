@@ -42,14 +42,15 @@
                   {{ link.text }}
                 </NuxtLink>
               </li>
-              <li v-b-toggle.sidebar-cart><i class="fa fa-shopping-bag" aria-hidden="true"></i><span :class="this.getCartProducts && this.getCartProducts.length > 0 ? 'hasProducts' : ''"></span></li>
+              <li v-b-toggle.sidebar-cart><i class="fa fa-shopping-bag" aria-hidden="true"></i><span :class="this.cartHasItems ? 'hasProducts' : ''"></span></li>
           </ul>
         </div>
         <div class="col-4 header-nav-mobile-trigger" @click="toggleMobileNav">
           <span>Menu<i class="fa fa-chevron-down"></i></span>
         </div>
         <div class="col-2 header-nav-mobile-cart" v-b-toggle.sidebar-cart>
-          <i class="fa fa-shopping-bag" aria-hidden="true"></i><span :class="this.getCartProducts && this.getCartProducts.length > 0 ? 'hasProducts' : ''"></span>
+          <i class="fa fa-shopping-bag" aria-hidden="true"></i>
+          <span:class="this.cartHasItems ? 'hasProducts' : ''"></span>
         </div>
       </div>
     </header>
@@ -63,6 +64,9 @@
     computed: {
       locale() {
         return this.$store.state.i18n.locale;
+      },
+      cartHasItems() {
+        return this.$store.state.cart && this.$store.state.cart.items && this.$store.state.cart.items.length > 0;
       }
     },
     data() {
@@ -97,11 +101,6 @@
     },
     components: {
       Media
-    },
-    computed: {
-      ...mapGetters([
-          "getCartProducts"
-      ])
     }
   }
 </script>

@@ -5,29 +5,26 @@ export default async (context, inject) => {
   const storeId = context.$config.swellStoreId;
   const publicKey = context.$config.swellPublicKey;
 
-  // Bail if options aren't provided
-  if (!storeId) {
-    throw new Error('[swell module]: a store ID must be provided');
+  if (!storeId || !publicKey) {
+    throw new Error('[swell module]: Both store ID and public API key must be provided');
   }
-  if (!publicKey) {
-    throw new Error('[swell module]: a public API key must be provided');
-  }
-  // Set up swell-js client
-  swell.init(storeId, publicKey, { locale: `${locale}-CA` });
 
-  await swell.settings.load();
+  const initSwell = async (newLocale) => {
+    const clientOptions = {
+      locale: `${newLocale}-CA`
+    };
 
-  // Set currency and locale after loading settings
-  // Settings are necessary for correct execution of currency.set
-  // swell.currency.set(currency);
-  // swell.currency.locale = locale;
+    await swell.init(storeId, publicKey, clientOptions);
+    await swell.settings.load();
 
-  // swell.locale.set(locale);
+      context.$swell = swell;
+      inject('swell', swell);
+  };
 
-  // Inject client into nuxt context as $swell
-  context.$swell = swell;
-  inject('swell', swell);
+  // Initial setup
+  await initSwell(locale);
 
-  // context.store.commit('setState', { key: 'currency', value: currency });
-  // context.store.commit('setState', { key: 'locale', value: locale });
+  context.app.i18n.onLanguageSwitched = async (oldLocale, newLocale) => {
+    await initSwell(newLocale);
+  };
 };

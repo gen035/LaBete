@@ -68,6 +68,9 @@ export const getters = {
   getCartProducts(state) {
     return state.cart && state.cart.items;
   },
+  getCartProductsCount(state) {
+    return state.cart && state.cart.items && state.cart.items.length;
+  },
   getCategories(state) {
     return state.categories;
   },
