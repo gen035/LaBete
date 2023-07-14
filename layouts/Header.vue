@@ -50,7 +50,7 @@
         </div>
         <div class="col-2 header-nav-mobile-cart" v-b-toggle.sidebar-cart>
           <i class="fa fa-shopping-bag" aria-hidden="true"></i>
-          <span:class="this.cartHasItems ? 'hasProducts' : ''"></span>
+          <span :class="this.cartHasItems ? 'hasProducts' : ''"></span>
         </div>
       </div>
     </header>
