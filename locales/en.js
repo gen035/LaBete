@@ -67,12 +67,12 @@ export default {
       },
       {
         name: 'artist',
-        text: 'Artist',
+        text: 'Artistic approach',
         path: 'artist'
       },
       {
         name: 'products',
-        text: 'Products',
+        text: 'Store',
         path: 'products'
       },
       {
@@ -82,13 +82,8 @@ export default {
       },
       {
         name: 'creations',
-        text: 'Creations',
+        text: 'Photos',
         path: 'our-creations'
-      },
-      {
-        name: 'contact',
-        text: 'Contact',
-        path: 'contact'
       }
     ]
   },
@@ -247,6 +242,11 @@ export default {
     none: 'No products available'
   },
   top: {
+    contact:  {
+      name: 'contact',
+      text: 'Contact',
+      path: 'contact'
+    },
     shipping: 'Free shipping for orders over 200$',
     store: 'Buy in store',
     online: {

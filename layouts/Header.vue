@@ -4,10 +4,10 @@
       <ul class="top-bar-list">
         <li class="d-none d-sm-inline-block d-md-inline-block d-lg-inline-block">
           <NuxtLink
-            :to="localePath('products')"
+            :to="localePath('contact')"
           >
-            <i class="fas fa-shopping-bag"></i>
-              {{ $t('top.online.text') }}
+            <i class="fa fa-comment" aria-hidden="true"></i>
+            {{ $t('top.contact.text') }}
           </NuxtLink>
         </li>
         <li>
@@ -20,7 +20,7 @@
     </div>
     <header class="header container">
       <div class="row align-items-center">
-        <div class="col-6 col-sm-12 col-md-3 header-logo-wrapper">
+        <div class="col-6 col-sm-12 col-lg-3 header-logo-wrapper">
           <a href="/" title="La Bete" data-track="" data-track-category="nav" data-track-action="click" data-track-label="Logo">
             <Media
               classes="header-logo"
@@ -28,7 +28,7 @@
             />
           </a>
         </div>
-        <div class="col-md-9 col-sm-12 header-nav-wrapper">
+        <div class="col-lg-9 col-md-12 header-nav-wrapper">
           <ul class="header-nav">
              <li
                 v-for="(link, index) in  nav"

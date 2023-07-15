@@ -12,6 +12,15 @@
         {{ link.text }}
       </NuxtLink>
     </li>
+    <li>
+      <NuxtLink 
+        @click.native="toggleMobileNav"
+        :to="localePath('contact')"
+        exact
+      >
+        Contact
+      </NuxtLink>
+    </li>
   </ul>
 </template>
 <script>
