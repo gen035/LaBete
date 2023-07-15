@@ -84,13 +84,14 @@ export default {
       defaultLocale: 'fr',
       lazy: true
     }],
-    ['@nuxtjs/google-analytics', {
-      id: 'UA-34334834-1'
-    }],
     ['bootstrap-vue/nuxt'],
     '@nuxtjs/axios',
     '@nuxtjs/dotenv',
+    '@nuxtjs/google-analytics'
   ],
+  googleAnalytics: {
+    id: 'G-TBQWHYP39H',
+  },
   /*
   ** Build configuration
   */
