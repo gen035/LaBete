@@ -51,6 +51,7 @@
 
       const category =  params && params.category;
       let products = await app.$swell.products.list({
+        limit: 100,
         categories: category
       });
 
