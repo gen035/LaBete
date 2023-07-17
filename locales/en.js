@@ -72,7 +72,7 @@ export default {
       },
       {
         name: 'products',
-        text: 'Store',
+        text: 'Buy',
         path: 'products'
       },
       {

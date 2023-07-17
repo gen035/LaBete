@@ -87,7 +87,8 @@ export default {
     ['bootstrap-vue/nuxt'],
     '@nuxtjs/axios',
     '@nuxtjs/dotenv',
-    '@nuxtjs/google-analytics'
+    '@nuxtjs/google-analytics',
+    '@nuxtjs/sitemap'
   ],
   googleAnalytics: {
     id: 'G-TBQWHYP39H',

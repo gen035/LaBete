@@ -72,7 +72,7 @@ export default {
       },
       {
         name: 'products',
-        text: 'Achat',
+        text: 'Achetez nos bijoux',
         path: 'produits'
       },
       {

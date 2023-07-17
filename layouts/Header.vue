@@ -20,7 +20,7 @@
     </div>
     <header class="header container">
       <div class="row align-items-center">
-        <div class="col-6 col-sm-12 col-lg-3 header-logo-wrapper">
+        <div class="col-6 col-md-12 col-lg-3 header-logo-wrapper">
           <a href="/" title="La Bete" data-track="" data-track-category="nav" data-track-action="click" data-track-label="Logo">
             <Media
               classes="header-logo"
