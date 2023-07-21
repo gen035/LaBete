@@ -2,10 +2,21 @@
   background-color: $dark-grey
   font-family: 'Source Sans Pro', sans-serif
   padding: 8px
+  text-align: center
+  @media(min-width: 768px)
+    display: flex
+    justify-content: space-between
+    align-items: center
+    text-align: left
 
+.top-bar-shipping
+  color: $white
+  font-size: 11px
+  text-transform: uppercase
 .top-bar-list
-  text-align: right
-
+  text-align: center
+  @media(min-width: 768px)
+    text-align: right
 .top-bar-list li
   color: $white
   display: inline-block

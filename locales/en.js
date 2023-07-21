@@ -247,7 +247,7 @@ export default {
       text: 'Contact',
       path: 'contact'
     },
-    shipping: 'Free shipping for orders over 200$',
+    shipping: 'Free shipping to Canada on orders over 200$',
     store: 'Buy in store',
     online: {
       link: 'https://www.etsy.com/ca/shop/labetecreations',

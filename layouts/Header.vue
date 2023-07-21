@@ -1,6 +1,9 @@
 <template>
   <div>
     <div class="top-bar">
+      <div class="top-bar-shipping">
+        {{$t('top.shipping')}}
+      </div>
       <ul class="top-bar-list">
         <li class="d-none d-sm-inline-block d-md-inline-block d-lg-inline-block">
           <NuxtLink
