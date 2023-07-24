@@ -57,7 +57,7 @@
         </div>
       </div>
     </header>
-    <div class="promotion">{{promo}}</div>
+    <div v-if="promo" class="promotion">{{promo}}</div>
   </div>
 </template>
 <script>
