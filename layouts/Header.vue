@@ -57,6 +57,7 @@
         </div>
       </div>
     </header>
+    <div class="promotion">{{promo}}</div>
   </div>
 </template>
 <script>
@@ -70,6 +71,9 @@
       },
       cartHasItems() {
         return this.$store.state.cart && this.$store.state.cart.items && this.$store.state.cart.items.length > 0;
+      },
+      promo() {
+        return this.$store.state.settings.promo;
       }
     },
     data() {
