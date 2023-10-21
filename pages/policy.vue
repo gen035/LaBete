@@ -61,8 +61,8 @@
     },
     nuxtI18n: {
       paths: {
-        fr: '/contact',
-        en: '/contact'
+        fr: '/politique',
+        en: '/policy'
       }
     },
   }
