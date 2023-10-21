@@ -253,5 +253,8 @@ export default {
       link: 'https://www.etsy.com/ca/shop/labetecreations',
       text: 'Acheter en ligne'
     }
+  },
+  footer: {
+    policy: 'Politique de confidentialité'
   }
 }

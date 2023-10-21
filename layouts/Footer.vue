@@ -86,6 +86,11 @@
           <div class="footer-copyright">
             {{ this.$store.state.settings.footer_copyright[0].text }} {{ date }}
           </div>
+          <div class="footer-policy">
+            <NuxtLink :to="localePath('policy')" exact>
+                {{ $t('footer.policy') }}
+              </NuxtLink>
+          </div>
         </div>
       </div>
     </div>
