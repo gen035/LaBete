@@ -88,8 +88,11 @@
           </div>
           <div class="footer-policy">
             <NuxtLink :to="localePath('policy')" exact>
-                {{ $t('footer.policy') }}
-              </NuxtLink>
+              {{ $t('footer.policy') }}
+            </NuxtLink>
+            <span>
+              {{ $t('footer.cookies') }}
+            </span>
           </div>
         </div>
       </div>

@@ -255,6 +255,7 @@ export default {
     }
   },
   footer: {
+    cookies: 'Set cookies',
     policy: 'Privacy policy'
   }
 }
