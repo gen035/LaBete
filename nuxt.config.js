@@ -34,6 +34,9 @@ export default {
       { name:'msapplication-square310x310logo', content:'/mstile-310x310.png' },
       { rel: 'stylesheet', type: 'text/css', href: '//use.fontawesome.com/releases/v5.4.2/css/all.css'},
       { rel: 'stylesheet', type: 'text/css', href: '//fonts.googleapis.com/css?family=Assistant:200,300,400,600,700,800|PT+Serif'},
+    ],
+    script: [
+      { src: 'ga.js', async: true}
     ]
   },
   /*
@@ -87,12 +90,8 @@ export default {
     ['bootstrap-vue/nuxt'],
     '@nuxtjs/axios',
     '@nuxtjs/dotenv',
-    '@nuxtjs/google-analytics',
     '@nuxtjs/sitemap'
   ],
-  googleAnalytics: {
-    id: 'G-TBQWHYP39H',
-  },
   /*
   ** Build configuration
   */
