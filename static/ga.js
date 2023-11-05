@@ -1,6 +1,7 @@
 // ga4.js
 // Your Google Analytics 4 tracking code here
 (function (w, d, s, l, i) {
+  console.log('GA')
   w[l] = w[l] || [];
   w[l].push({
     'gtm.start': new Date().getTime(),

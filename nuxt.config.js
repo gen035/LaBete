@@ -36,7 +36,7 @@ export default {
       { rel: 'stylesheet', type: 'text/css', href: '//fonts.googleapis.com/css?family=Assistant:200,300,400,600,700,800|PT+Serif'},
     ],
     script: [
-      { src: 'ga.js', async: true}
+      { src: '/ga.js', async: true}
     ]
   },
   /*
