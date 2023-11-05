@@ -1,0 +1,44 @@
+.cookieModalWrapper
+  background-color: $medium-grey
+  position: fixed
+  left: 0
+  bottom: 0
+  padding: 20px
+  width: 100%
+  z-index: 999
+  @media (min-width: 576px)
+    border-top-right-radius: 10px
+    width: 80%
+    max-width: 500px
+
+  .cookieModal
+    &-content
+      color: $white
+      line-height: 1.1
+    &-buttons
+      margin-top: 10px
+      display: flex
+      flex-direction: column
+      @media (min-width: 576px)
+        flex-direction: row
+        justify-content: center
+      button
+        background-color: $gold
+        text-transform: uppercase
+        border: 1px solid $gold
+        color: $white
+        border-radius: 10px
+        display: block
+        margin: 5px auto
+        min-width: 200px
+        max-width: 200px
+        padding: 10px
+        cursor: pointer
+        display: block
+        @media (min-width: 576px)
+          margin: 5px
+        &:hover
+          background-color: $dark-grey
+        &:last-child
+          background-color: transparent
+          color: $gold

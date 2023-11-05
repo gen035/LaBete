@@ -18,6 +18,19 @@ export default {
     email: 'Courriel',
     alt: 'bijoux, cuir, fait a la main'
   },
+  cookie: {
+    text: 'Ce site Web utilise des cookies pour vous garantir la meilleure expérience sur notre site. En continuant à utiliser ce site Web, vous consentez à l\'utilisation de cookies conformément à notre politique de confidentialité.',
+    accept: 'Accepter',
+    params: 'Paramètres',
+    list: {
+      essential: 'Essentiels',
+      essential_description: 'DESC',
+      performance: 'Performance',
+      performance_description: 'DESC',
+      personalisation: 'Personalisation',
+      personalisation_description: 'DESC'
+    }
+  },
   error: {
     title: 'Une erreur est survenue',
     home: 'Retour à l\'acceuil',

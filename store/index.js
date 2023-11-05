@@ -7,6 +7,7 @@ export const state = () => ({
   cartIsUpdatingId: null,
   cartIsOpened: false,
   categories: [],
+  cookieModalOpened: true,
   newsletter: [],
   notification: {},
   newsletterOpened: false,
@@ -19,6 +20,9 @@ export const state = () => ({
 export const mutations = {
   SET_ATTRIBUTES(state, attributes) {
     state.attributes = attributes;
+  },
+  SET_COOKIE_MODAL(state, isOpened) {
+    state.cookieModalOpened = isOpened;
   },
   SET_MESSAGE(state, isOpened) {
     state.messageOpened = isOpened;

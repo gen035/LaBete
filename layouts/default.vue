@@ -6,12 +6,14 @@
     <nuxt />
     <MobileNav />
     <NewsletterModal />
+    <CookieModal />
     <MessageModal />
     <Footer />
   </div>
 </template>
 <script>
   import Cart from './../components/Cart';
+  import CookieModal from './../components/CookieModal';
   import Footer from './Footer';
   import Header from './Header';
   import MobileNav from './MobileNav';
@@ -22,6 +24,7 @@
     middleware: ['attributes', 'categories', 'settings', 'newsletter', 'message'],
     components: {
       Cart,
+      CookieModal,
       Footer,
       Header,
       MobileNav,

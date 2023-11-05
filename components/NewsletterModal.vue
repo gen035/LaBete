@@ -33,7 +33,7 @@
           'labete_newsletter',
           true,
           {
-            maxAge: 7 * 24 * 60 * 60
+            maxAge: 1 * 24 * 60 * 60
           }
         );
       },

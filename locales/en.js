@@ -18,6 +18,19 @@ export default {
     email: 'Email',
     alt: 'jewelry, leather, hand made'
   },
+  cookie: {
+    text: 'This website uses cookies to ensure you get the best experience on our site. By continuing to use this website, you consent to the use of cookies in accordance with our Privacy Policy.',
+    accept: 'Accept',
+    params: 'Settings',
+    list: {
+      essential: 'Essential cookies',
+      essential_description: 'DESC',
+      performance: 'Performance cookies',
+      performance_description: 'DESC',
+      personalisation: 'Personalisation cookies',
+      personalisation_description: 'DESC'
+    }
+  },
   error: {
     title: 'An Error Occured',
     home: 'Back home',
