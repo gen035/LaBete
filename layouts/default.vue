@@ -7,6 +7,7 @@
     <MobileNav />
     <NewsletterModal />
     <CookieModal />
+    <CookiePreferencesModal />
     <MessageModal />
     <Footer />
   </div>
@@ -14,6 +15,7 @@
 <script>
   import Cart from './../components/Cart';
   import CookieModal from './../components/CookieModal';
+  import CookiePreferencesModal from './../components/CookiePreferencesModal';
   import Footer from './Footer';
   import Header from './Header';
   import MobileNav from './MobileNav';
@@ -25,6 +27,7 @@
     components: {
       Cart,
       CookieModal,
+      CookiePreferencesModal,
       Footer,
       Header,
       MobileNav,

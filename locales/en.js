@@ -22,13 +22,14 @@ export default {
     text: 'This website uses cookies to ensure you get the best experience on our site. By continuing to use this website, you consent to the use of cookies in accordance with our Privacy Policy.',
     accept: 'Accept',
     params: 'Settings',
+    save: 'Save',
     list: {
       essential: 'Essential cookies',
-      essential_description: 'DESC',
+      essential_description: 'Essential cookies do not collect personal data or track user behavior for marketing purposes and are fundamental for delivering a seamless and secure user experience on websites.',
       performance: 'Performance cookies',
-      performance_description: 'DESC',
+      performance_description: 'Performance cookies collect data on website usage (e.g., page views) for analysis and site improvement.',
       personalisation: 'Personalisation cookies',
-      personalisation_description: 'DESC'
+      personalisation_description: 'DEPersonalization cookies customize user experiences based on preferences but are not used for marketing or data sharing.SC'
     }
   },
   error: {

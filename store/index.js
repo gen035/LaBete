@@ -8,6 +8,7 @@ export const state = () => ({
   cartIsOpened: false,
   categories: [],
   cookieModalOpened: true,
+  cookiePreferencesModalOpened: false,
   newsletter: [],
   notification: {},
   newsletterOpened: false,
@@ -23,6 +24,10 @@ export const mutations = {
   },
   SET_COOKIE_MODAL(state, isOpened) {
     state.cookieModalOpened = isOpened;
+  },
+  SET_COOKIE_PREFERENCES_MODAL(state, isOpened) {
+    console.log('DDDDD', isOpened)
+    state.cookiePreferencesModalOpened = isOpened;
   },
   SET_MESSAGE(state, isOpened) {
     state.messageOpened = isOpened;

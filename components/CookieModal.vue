@@ -6,7 +6,7 @@
       </div>
       <div class="cookieModal-buttons">
         <button v-on:click="accept" class="cookieModal-buttons--accept">{{ $t('cookie.accept') }}</button>
-        <button v-on:click="" class="cookieModal-buttons--params">{{ $t('cookie.params') }}</button>
+        <button v-on:click="openSettings" class="cookieModal-buttons--params">{{ $t('cookie.params') }}</button>
       </div>
     </div>
   </div>
@@ -33,6 +33,10 @@
       forcePageReload() {
         window.location.reload();
       },
+      openSettings() {
+        this.setModalCookie();
+        this.$store.commit('SET_COOKIE_PREFERENCES_MODAL', true);
+      }
     },
   }
 </script>
