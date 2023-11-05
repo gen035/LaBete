@@ -88,8 +88,14 @@
           </div>
           <div class="footer-policy">
             <NuxtLink :to="localePath('policy')" exact>
-                {{ $t('footer.policy') }}
-              </NuxtLink>
+              {{ $t('footer.policy') }}
+            </NuxtLink>
+            <NuxtLink :to="localePath('cookie-policy')" exact>
+              {{ $t('footer.policy-cookie') }}
+            </NuxtLink>
+            <span v-on:click="openPreferences">
+              {{ $t('footer.cookies') }}
+            </span>
           </div>
         </div>
       </div>
@@ -121,6 +127,11 @@
     data() {
       return {
         date: new Date().getFullYear()
+      }
+    },
+    methods: {
+      openPreferences() {
+        this.$store.commit('SET_COOKIE_PREFERENCES_MODAL', true);
       }
     },
     components: {

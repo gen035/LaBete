@@ -18,6 +18,20 @@ export default {
     email: 'Courriel',
     alt: 'bijoux, cuir, fait a la main'
   },
+  cookie: {
+    text: 'Ce site Web utilise des cookies pour vous garantir la meilleure expérience sur notre site. En continuant à utiliser ce site Web, vous consentez à l\'utilisation de cookies conformément à notre politique de confidentialité.',
+    accept: 'Accepter',
+    params: 'Paramètres',
+    save: 'Sauvegarder',
+    list: {
+      essential: 'Essentiels',
+      essential_description: 'Les cookies essentiels ne collectent pas de données personnelles et ne suivent pas le comportement des utilisateurs à des fins de marketing et sont fondamentaux pour offrir une expérience utilisateur transparente et sécurisée sur les sites Web.',
+      performance: 'Performance',
+      performance_description: 'Les cookies de performance collectent des données sur l\'utilisation du site Web (par exemple, les pages vues) à des fins d\'analyse et d\'amélioration du site.',
+      personalisation: 'Personalisation',
+      personalisation_description: 'Les cookies de personnalisation personnalisent l\'expérience utilisateur en fonction des préférences, mais ne sont pas utilisés à des fins de marketing ou de partage de données.'
+    }
+  },
   error: {
     title: 'Une erreur est survenue',
     home: 'Retour à l\'acceuil',
@@ -255,6 +269,8 @@ export default {
     }
   },
   footer: {
-    policy: 'Politique de confidentialité'
+    cookies: 'Paramétrer les cookies',
+    policy: 'Politique de confidentialité',
+    'policy-cookie': 'Politique de cookie'
   }
 }
