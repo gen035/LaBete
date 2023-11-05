@@ -270,6 +270,7 @@ export default {
   },
   footer: {
     cookies: 'Set cookies',
-    policy: 'Privacy policy'
+    policy: 'Privacy policy',
+    'policy-cookie': 'Cookie policy'
   }
 }

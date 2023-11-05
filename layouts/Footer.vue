@@ -90,6 +90,9 @@
             <NuxtLink :to="localePath('policy')" exact>
               {{ $t('footer.policy') }}
             </NuxtLink>
+            <NuxtLink :to="localePath('cookie-policy')" exact>
+              {{ $t('footer.policy-cookie') }}
+            </NuxtLink>
             <span v-on:click="openPreferences">
               {{ $t('footer.cookies') }}
             </span>
