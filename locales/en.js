@@ -220,6 +220,9 @@ export default {
       events: [],
     }
   ],
+  events: {
+    empty: "Currently, there are no upcoming events scheduled."
+  },
   product: {
     couleur: {
       blanc: "white",
