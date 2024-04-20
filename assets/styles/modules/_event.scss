@@ -1,0 +1,73 @@
+.event {
+  border: 1px solid $gold;
+  display: block;
+  margin-bottom: 32px;
+  transition: opacity 250ms ease-in;
+  @media (min-width: 992px) {
+    display: flex;
+  }
+}
+.event:hover {
+  opacity: .8;
+}
+.event-content {
+  width: 100%;
+  @media (min-width: 992px) {
+    min-height: 300px;
+    width: 40%;
+  }
+}
+.event-content > div {
+  padding: 15px;
+  width: 100%;
+}
+.event-image {
+  background-position: center;
+  background-size: cover;
+  min-height: 200px;
+  width: 100%;
+  @media (min-width: 992px) {
+    width: 60%;
+  }
+}
+.event-image a {
+  display: block;
+  height: 100%;
+  width: 100%;
+}
+.event-name {
+  font-size: 18px;
+  margin-bottom: 5px;
+}
+.event-city {
+  color: $gold;
+  font-size: 14px;
+  margin-bottom: 14px;
+}
+.event-venue {
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+.event-desc {
+  strong {
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+  p {
+    margin: 3px 0;
+  }
+}
+.event-links {
+  display: flex;
+  padding: 32px 0 0 0;
+}
+.event-links i {
+  color: $gold;
+}
+.event-link {
+  width: 50%;
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+}
