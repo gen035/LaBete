@@ -220,6 +220,9 @@ export default {
       events: [],
     }
   ],
+  events: {
+    empty: "Actuellement, aucun événement n'est prévu."
+  },
   product: {
     couleur: {
       blanc: "blanc",

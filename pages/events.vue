@@ -3,8 +3,11 @@
     <div class="row">
       <div class="offset-md-1 col-md-10">
         <h2 class="title-h2">{{ content.title[0].text }}</h2>
+        <div v-if="events.length === 0" class="events-empty text-center">{{ $t('events.empty') }}</div>
         <template
-          v-for="(event, index) in events">
+            v-if="events.length > 0"
+            v-for="(event, index) in events"
+          >
           <Event
             :event="event"
             :key="index"
