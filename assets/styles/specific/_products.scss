@@ -1,0 +1,19 @@
+.products {
+  h2 {
+    text-transform: capitalize;
+  }
+  .product-description {
+    padding-bottom: 50px;
+  }
+  .noProducts {
+    h3 {
+      text-transform: uppercase;
+      font-size: 12px;
+    }
+    i {
+      font-size: 28px;
+      color: $very-light-grey;
+      margin-bottom: 14px;
+    }
+  }
+}

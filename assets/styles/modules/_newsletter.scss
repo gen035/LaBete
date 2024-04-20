@@ -1,0 +1,122 @@
+.newsletter-title {
+  color: $white;
+  margin: 10px 0;
+}
+.newsletter-form-wrapper {
+  position: relative;
+}
+.newsletter-wrapper {
+  position: relative;
+  width: 300px;
+}
+
+.footer-newsletter {
+  input[type='text'] {
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    background-color: $light-grey;
+    border: 0;
+    border-radius: 3px;
+    color: $white;
+    height: 50px;
+    padding: 5px;
+    width: 300px;
+    &::placeholder {
+      color: $dark-grey;
+      font-size: 14px;
+    }
+  }
+  button {
+    -webkit-appearance: none;
+    -webkit-appearance: none;
+    background-color: $gold;
+    border: 0;
+    border-bottom-right-radius: 3px;
+    border-top-right-radius: 3px;
+    color: $white;
+    cursor: pointer;
+    height: 50px;
+    margin: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    transition: color .25s linear;
+    width: 50px;
+  }
+  &.isDisabled {
+    background-color: $dark-grey;
+    opacity: .5;
+    pointer-events: none;
+  }
+}
+.modal-content {
+  .modal-envelope {
+    display: block;
+    text-align: center;
+    @media (min-width: 768px) {
+      text-align: left;
+    }
+  }
+  #newsletter {
+    display: block;
+    margin: 0 auto;
+    text-align: left;
+    width: 100%;
+  }
+  .newsletter-title {
+    color: $dark-grey;
+    font-size: 24px;
+    font-weight: bold;
+    margin: 10px 0;
+    text-align: center;
+    @media (min-width: 768px) {
+      font-size: 32px;
+      text-align: left;
+    }
+  }
+  .newsletter-description {
+    margin: 5px 0;
+    text-align: center;
+    @media (min-width: 768px) {
+      text-align: left;
+    }
+  }
+  .newsletter-description small {
+    display: block;
+    font-size: 10px;
+  }
+  .newsletter-form-wrapper input[type='text'] {
+    background-color: $white;
+    border: 0;
+    border: 1px solid $gold;
+    color: $dark-grey;
+    height: 50px;
+    padding: 5px;
+    width: 100%;
+
+    @media (min-width: 768px) {
+      max-width: 100%;
+      width: 300px;
+    }
+  }
+  .newsletter-form-wrapper input[type='submit'] {
+    background-color: $gold;
+    border: 1px solid $gold;
+    border-radius: 3px;
+    color: $white;
+    cursor: pointer;
+    display: block;
+    margin: 10px 0;
+    position: relative;
+    transition: color .25s linear;
+    width: 100%;
+    @media (min-width: 768px) {
+      width: auto;
+    }
+  }
+  .newsletter-form-wrapper input[type='submit'].isDisabled {
+    background-color: $dark-grey;
+    opacity: .5;
+    pointer-events: none;
+  }
+}

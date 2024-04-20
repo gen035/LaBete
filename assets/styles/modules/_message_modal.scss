@@ -1,0 +1,90 @@
+.messageModalWrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+  width: 100%;
+  height: 100%;
+}
+.modal-content {
+  .message-title {
+    color: $dark-grey;
+    font-size: 24px;
+    font-weight: bold;
+    margin: 10px 0;
+    text-align: center;
+    @media (min-width: 768px) {
+      font-size: 32px;
+      text-align: left;
+    }
+  }
+  .message-description {
+    margin: 5px 0;
+    text-align: center;
+    @media (min-width: 768px) {
+      text-align: left;
+    }
+  }
+}
+.messageModal {
+  display: flex;
+  flex-direction: column;
+  background-color: $white;
+  height: 90vh;
+  max-height: 400px;
+  width: 90%;
+  max-width: 800px;
+  margin: 0 auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateY(-50%) translateX(-50%);
+  @media (min-width: 768px) {
+    flex-direction: row;
+  }
+}
+.messageModal-img {
+  background-size: cover;
+  background-position: center;
+  width: 100%;
+  height: 30%;
+  @media (min-width: 768px) {
+    height: 100%;
+  }
+}
+.messageModal-content {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  justify-content: center;
+  padding: 20px;
+  @media (min-width: 768px) {
+    height: 100%;
+  }
+  h1 {
+    font-size: 22px;
+    margin: 0;
+  }
+  p {
+    margin: 32px auto;
+    text-align: center;
+  }
+  a {
+    color: $gold;
+    text-decoration: underline;
+  }
+}
+.messageModal-close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  font-size: 22px;
+  color: $gold;
+  cursor: pointer;
+  transition: opacity 250ms linear, transform 250ms linear;
+  &:hover {
+    opacity: 0.8;
+    transform: rotate(45deg);
+  }
+}

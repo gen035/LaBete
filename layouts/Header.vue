@@ -37,7 +37,7 @@
                 v-for="(link, index) in  nav"
                 :key="index"
               >
-                <NuxtLink 
+                <NuxtLink
                   :to="localePath(link.name)"
                   active-class="active"
                   exact

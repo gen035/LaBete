@@ -1,0 +1,55 @@
+@import 'bootstrap/scss/bootstrap.scss';
+@import 'vue-slick-carousel/dist/vue-slick-carousel.css';
+@import 'vue-slick-carousel/dist/vue-slick-carousel-theme.css';
+//
+// Configs
+//
+@import "config/settings";
+
+//
+// Base
+//
+@import "base/animations";
+@import "base/reset";
+@import "base/base";
+@import "base/fonts";
+
+//
+// Modules
+//
+@import "modules/accordion";
+@import "modules/button";
+@import "modules/cart";
+@import "modules/categories_dropdown";
+@import "modules/cookie_modal";
+@import "modules/cookie_preferences_modal";
+@import "modules/event";
+@import "modules/filters";
+@import "modules/header";
+@import "modules/hero";
+@import "modules/newsletter";
+@import "modules/newsletter_modal";
+@import "modules/notification";
+@import "modules/message_modal";
+@import "modules/pages";
+@import "modules/promotion";
+@import "modules/mobile_nav";
+@import "modules/modal";
+@import "modules/footer";
+@import "modules/visuals";
+@import "modules/top_bar";
+@import "modules/slider";
+@import "modules/product_card";
+//
+// Specifics
+//
+@import "specific/artist";
+@import "specific/contact";
+@import "specific/creations";
+@import "specific/cookie_policy";
+@import "specific/home";
+@import "specific/error";
+@import "specific/stores";
+@import "specific/policy";
+@import "specific/product";
+@import "specific/products";
