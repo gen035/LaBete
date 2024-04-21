@@ -10,6 +10,7 @@
     border: none;
   }
   &-image {
+    min-height: 285px;
     max-height: 600px;
     max-width: 400px;
     overflow: hidden;
@@ -20,6 +21,10 @@
   &-name {
     text-transform: uppercase;
     margin: 10px 0;
+    max-height: 32px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
   &-price {
     font-weight: 600;

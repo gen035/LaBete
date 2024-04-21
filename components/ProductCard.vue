@@ -22,7 +22,7 @@
         <span>{{$t('product.sold')}}</span>
       </div>
     </div>
-    <AddToCart v-if="product.stock_status === 'in_stock'" :product="product" />
+    <AddToCart :product="product" />
   </div>
 </template>
 <script>
