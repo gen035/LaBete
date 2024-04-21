@@ -30,7 +30,7 @@
   import Filters from '~/components/Filters';
   import NoProducts from '~/components/NoProducts';
   import ProductCard from '~/components/ProductCard';
-  
+
   export default {
     async asyncData({ app, error, store, params }) {
       const locale = store.state.i18n.locale;
@@ -122,7 +122,7 @@
           categories: this.category,
           $filters: this.filters
         });
-        
+
         const newProductsResults = newProducts && newProducts.results;
         this.products = this.sortProducts(this.order, newProductsResults);
       }
@@ -137,6 +137,7 @@
         return category ? category.description : null;
       }
     },
+    middleware: 'categories',
     components: {
       CategoriesDropdown,
       Filters,

@@ -126,11 +126,12 @@
       //     categories: this.categories,
       //     $filters: this.filters
       //   });
-        
+
       //   const newProductsResults = newProducts && newProducts.results;
       //   this.products = this.sortProducts(this.order, newProductsResults);
       // }
     },
+    middleware: 'categories',
     components: {
       CategoriesDropdown,
       Filters,
