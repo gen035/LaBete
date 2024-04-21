@@ -11,6 +11,9 @@
     "generate": "nuxt generate",
     "lint:sass": "stylelint '**/*.sass'"
   },
+  "engines": {
+    "node": "20.x"
+  },
   "dependencies": {
     "@nuxtjs/axios": "^5.5.4",
     "@nuxtjs/dotenv": "^1.4.1",
