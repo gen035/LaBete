@@ -2,14 +2,14 @@
   <section class="content product">
       <section class="container-fluid">
         <div class="row">
-          <div class="offset-lg-2 offset-xl-3 col-md-6 col-lg-4 col-xl-3 product-slider">
+          <div class="col-md-6 col-lg-5 col-xl-4 col-xxl-3 offset-lg-1 offset-xl-2 offset-xxl-3 product-slider">
             <VueSlickCarousel v-if="product.images && product.images.length > 0" v-bind="settings">
               <template v-for="(image, index) in product.images">
                 <img :key="index" :src="image.file.url" />
               </template>
             </VueSlickCarousel>
           </div>
-          <div class="col-md-6 col-lg-4 col-xl-3 product-detail">
+          <div class="col-md-6 col-lg-5 col-xl-4 col-xxl-3 product-detail">
             <div v-if="product.stock_level <= 0" class="product-price product-price--sold">
               <span>{{$t('product.sold')}}</span>
             </div>
