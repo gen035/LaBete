@@ -6,7 +6,7 @@
           <div class="col-md-8 col-sm-12">
             <Slider :data="slider" />
           </div>
-          <div class="col-md-4 d-none d-md-block">
+          <div class="col-md-4 d-none d-md-block position-relative">
             <h1 class="home-title">{{ content.hero_title[0].text }}</h1>
           </div>
         </div>
@@ -86,7 +86,7 @@
     async asyncData({ app, error, store}) {
       const locale = store.state.i18n.locale;
       let content = []
-      
+
       await app.$prismic.api.query(
         app.$prismic.predicates.at('document.type', 'home'), {
             lang: `${locale}-ca`
