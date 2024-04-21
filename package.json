@@ -16,6 +16,7 @@
     "@nuxtjs/dotenv": "^1.4.1",
     "@nuxtjs/sitemap": "^2.4.0",
     "bootstrap": "^5.3.3",
+    "bootstrap-vue": "^2.23.1",
     "cookie-universal-nuxt": "^2.1.4",
     "fsevents": "^2.3.3",
     "nuxt": "^2.0.0",

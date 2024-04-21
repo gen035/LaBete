@@ -1,5 +1,5 @@
 <template>
-  <button :class="['button', {'button--disabled' : (this.product.stock_status === 'out_of_stock')}]" @click="addToCart" data-track="" data-track-category="cart" data-track-action="click" :data-track-label="product.id">
+  <button :class="['button', {'button--disabled' : (this.product.stock_status !== 'in_stock')}]" @click="addToCart" data-track="" data-track-category="cart" data-track-action="click" :data-track-label="product.id">
     <p class="button-text">
         {{this.$store.state.cartIsUpdating && this.$store.state.cartIsUpdatingId === this.product.id ? $t('cart.addToCartPending') : $t('cart.addToCart') }}
       </p>

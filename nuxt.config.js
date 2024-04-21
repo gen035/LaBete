@@ -87,6 +87,7 @@ export default {
       defaultLocale: 'fr',
       lazy: true
     }],
+    ['bootstrap-vue/nuxt'],
     '@nuxtjs/axios',
     '@nuxtjs/dotenv',
     '@nuxtjs/sitemap'
