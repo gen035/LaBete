@@ -9,7 +9,7 @@
         </div>
       </div>
     </div>
-  </client-only>/
+  </client-only>
 </template>
 <script>
   import Media from '~/components/Media';
@@ -31,10 +31,11 @@
         this.setModalCookie();
       },
       forcePageReload() {
+        console.log('forcePageReloadx');
         window.location.reload();
       },
       openSettings() {
-        this.setModalCookie();
+        this.$store.commit('SET_COOKIE_MODAL', false);
         this.$store.commit('SET_COOKIE_PREFERENCES_MODAL', true);
       }
     },

@@ -47,9 +47,10 @@
         } else {
           console.log(`ADD COOKIE: - ${category}:`, cookieExists)
           this.$cookies.set(category, true, { maxAge: 365 * 24 * 60 * 60 });
-        }
+          }
       },
       save() {
+        this.$cookies.set('labete_cookie_seen', true, { maxAge: 365 * 24 * 60 * 60 });
         this.forcePageReload();
       },
       checkCookie(cookie) {
