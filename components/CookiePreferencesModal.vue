@@ -1,33 +1,35 @@
 <template>
-  <div class="cookiePreferencesModalWrapper" v-if="this.$store.state.cookiePreferencesModalOpened">
-    <div class="cookiePreferencesModal">
-      <div class="cookiePreferencesModal-content">
-        <h1>{{ $t('cookie.params') }}</h1>
-      </div>
-      <div class="cookiePreferencesModal-cookie">
-        <div class="cookiePreferencesModal--text">
-          <h3>{{ $t('cookie.list.essential') }}</h3>
-          <p>{{ $t('cookie.list.essential_description') }}</p>
+  <client-only>
+    <div class="cookiePreferencesModalWrapper" v-if="this.$store.state.cookiePreferencesModalOpened">
+      <div class="cookiePreferencesModal">
+        <div class="cookiePreferencesModal-content">
+          <h1>{{ $t('cookie.params') }}</h1>
         </div>
-        <b-form-checkbox checked="true" name="check-button" size="md" switch disabled/>
-      </div>
-      <div class="cookiePreferencesModal-cookie">
-        <div class="cookiePreferencesModal--text">
-          <h3>{{ $t('cookie.list.performance') }}</h3>
-          <p>{{ $t('cookie.list.performance_description') }}</p>
+        <div class="cookiePreferencesModal-cookie">
+          <div class="cookiePreferencesModal--text">
+            <h3>{{ $t('cookie.list.essential') }}</h3>
+            <p>{{ $t('cookie.list.essential_description') }}</p>
+          </div>
+          <b-form-checkbox checked="true" name="check-button" size="md" switch disabled/>
         </div>
-        <b-form-checkbox v-model="$cookies.get('LABETE_PRIVACY_PERF')" name="check-button" size="md" @change="setCookieCategory('LABETE_PRIVACY_PERF')" switch />
-      </div>
-      <div class="cookiePreferencesModal-cookie">
-        <div class="cookiePreferencesModal--text">
-          <h3>{{ $t('cookie.list.personalisation') }}</h3>
-          <p>{{ $t('cookie.list.personalisation_description') }}</p>
+        <div class="cookiePreferencesModal-cookie">
+          <div class="cookiePreferencesModal--text">
+            <h3>{{ $t('cookie.list.performance') }}</h3>
+            <p>{{ $t('cookie.list.performance_description') }}</p>
+          </div>
+          <b-form-checkbox v-model="$cookies.get('LABETE_PRIVACY_PERF')" name="check-button" size="md" @change="setCookieCategory('LABETE_PRIVACY_PERF')" switch />
         </div>
-        <b-form-checkbox v-model="$cookies.get('LABETE_PRIVACY_PERSO')" name="check-button" size="md" @change="setCookieCategory('LABETE_PRIVACY_PERSO')" switch />
+        <div class="cookiePreferencesModal-cookie">
+          <div class="cookiePreferencesModal--text">
+            <h3>{{ $t('cookie.list.personalisation') }}</h3>
+            <p>{{ $t('cookie.list.personalisation_description') }}</p>
+          </div>
+          <b-form-checkbox v-model="$cookies.get('LABETE_PRIVACY_PERSO')" name="check-button" size="md" @change="setCookieCategory('LABETE_PRIVACY_PERSO')" switch />
+        </div>
+        <button v-on:click="save" class="cookiePreferencesModal-buttons--save">{{ $t('cookie.save') }}</button>
       </div>
-      <button v-on:click="save" class="cookiePreferencesModal-buttons--save">{{ $t('cookie.save') }}</button>
     </div>
-  </div>
+  </client-only>
 </template>
 <script>
   import Media from '~/components/Media';
