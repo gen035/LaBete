@@ -1,13 +1,15 @@
 <template>
-  <div class="cookieModalWrapper" v-if="this.$store.state.cookieModalOpened && !this.$cookies.get('labete_cookie_seen')">
-    <div class="cookieModal">
-      <div class="cookieModal-content" v-html="this.$t('cookie.text')" />
-      <div class="cookieModal-buttons">
-        <button v-on:click="accept" class="cookieModal-buttons--accept">{{ $t('cookie.accept') }}</button>
-        <button v-on:click="openSettings" class="cookieModal-buttons--params">{{ $t('cookie.params') }}</button>
+  <client-only>
+    <div class="cookieModalWrapper" v-if="this.$store.state.cookieModalOpened && !this.$cookies.get('labete_cookie_seen')">
+      <div class="cookieModal">
+        <div class="cookieModal-content" v-html="this.$t('cookie.text')" />
+        <div class="cookieModal-buttons">
+          <button v-on:click="accept" class="cookieModal-buttons--accept">{{ $t('cookie.accept') }}</button>
+          <button v-on:click="openSettings" class="cookieModal-buttons--params">{{ $t('cookie.params') }}</button>
+        </div>
       </div>
     </div>
-  </div>
+  </client-only>/
 </template>
 <script>
   import Media from '~/components/Media';
