@@ -26,7 +26,6 @@ export const mutations = {
     state.cookieModalOpened = isOpened;
   },
   SET_COOKIE_PREFERENCES_MODAL(state, isOpened) {
-    console.log('DDDDD', isOpened)
     state.cookiePreferencesModalOpened = isOpened;
   },
   SET_MESSAGE(state, isOpened) {
@@ -202,7 +201,7 @@ export const actions = {
 
       // Make Swell API call
       const cart = await this.$swell.cart.addItem(item);
-      
+
       if (cart.errors) {
         //dispatch('handleModelErrors', cart.errors);
         commit('SET_CART_UPDATING', false);
