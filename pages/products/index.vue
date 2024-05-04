@@ -18,13 +18,15 @@
             <CategoriesDropdown />
           </div>
         </div>
-        <div v-if="this.hasFetched" class="row">
-          <NoProducts v-if="productsResults.length === 0" />
-          <ProductCard v-if="productsResults.length > 0" v-for="(product, index) in productsResults" :product="product" :key="index"/>
-        </div>
-        <div v-if="this.hasFetched" class="row">
-          <CustomButton :text="$t('products.more')" v-on:click.native="loadMore" icon="fa-plus" :disabled="this.page >= this.pageCount"/>
-        </div>
+        <template v-if="getProducts.hasFetched">
+          <div class="row">
+            <NoProducts v-if="getProductsResults && getProductsResults.length === 0" />
+            <ProductCard v-else v-for="(product, index) in getProductsResults" :product="product" :key="index"/>
+          </div>
+          <div class="row">
+            <CustomButton :text="$t('products.more')" v-on:click.native="loadMore" icon="fa-plus" :disabled="getProducts.page >= getProducts.page_count"/>
+          </div>
+        </template>
       </section>
   </section>
 </template>
@@ -35,6 +37,7 @@
   import NoProducts from '~/components/NoProducts';
   import ProductCard from '~/components/ProductCard';
   import CustomButton from '~/components/CustomButton.vue';
+  import {mapGetters} from "vuex";
 
   export default {
     async asyncData({ app, error, store }) {
@@ -76,9 +79,6 @@
     },
     data() {
       return {
-        hasFetched: false,
-        products: [],
-        productsResults: [],
         pageCount: 0,
         page: 1,
       }
@@ -105,23 +105,18 @@
       // }
     },
     async mounted() {
-      this.products = await this.$swell.products.list({
-        limit: 25
-      });
-
-      this.productsResults = this.products && this.products.results && this.products.results.length > 0 ? this.products.results : [];
-      this.pageCount = this.products && this.products.page_count;
-      this.hasFetched = true;
+      // this.products = await this.$swell.products.list({
+      //   limit: 25
+      // });
+      //
+      // this.productsResults = this.products && this.products.results && this.products.results.length > 0 ? this.products.results : [];
+      // this.pageCount = this.products && this.products.page_count;
+      // this.hasFetched = true;
     },
     methods: {
-      async loadMore() {
-        const newProducts = await this.$swell.products.list({
-          limit: 25,
-          page: this.page + 1,
-        });
-
-        this.page = this.page + 1;
-        this.productsResults = [...this.productsResults, ...newProducts.results];
+      loadMore() {
+        this.$store.dispatch('fetchProducts', {page: this.page + 1, limit: 25});
+        this.page += 1;
       }
       // handleCategories(categories) {
       //   this.categories = JSON.parse(categories);
@@ -154,7 +149,16 @@
       //   this.products = this.sortProducts(this.order, newProductsResults);
       // }
     },
-    middleware: 'categories',
+    computed: {
+      ...mapGetters([
+        'getProducts',
+        'getProductsResults'
+      ])
+    },
+    middleware: [
+      'categories',
+      'products'
+    ],
     components: {
       CategoriesDropdown,
       CustomButton,

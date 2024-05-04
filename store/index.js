@@ -14,7 +14,9 @@ export const state = () => ({
   newsletterOpened: false,
   messageOpened: false,
   message: [],
-  products: null,
+  products: {
+    hasFetched: false
+  },
   settings: [],
 })
 
@@ -87,7 +89,10 @@ export const getters = {
   },
   getProducts(state) {
     return state.products;
-  }
+  },
+  getProductsResults(state) {
+    return state.products.results;
+  },
 }
 
 export const actions = {
@@ -97,7 +102,16 @@ export const actions = {
    * @property {string} id - The cart item id
    * @property {number} quantityToAdd - The quantity to add to cart
    */
-  async checkCartItemHasStock({ state }, { item, id }) {
+  async fetchProducts({ commit, state }, {page, limit}) {
+      let products = await this.$swell.products.list({
+        page,
+        limit,
+      });
+
+      products.results = [...state.products.results, ...products.results];
+      commit('SET_PRODUCTS', { hasFetched: true, ...products });
+    },
+    async checkCartItemHasStock({ state }, { item, id }) {
     // Get cart items
     const items = state.cart?.items;
 
