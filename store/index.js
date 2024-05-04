@@ -86,8 +86,7 @@ export const getters = {
     return state.categories.filter((category => category.slug === slug));
   },
   getProducts(state) {
-    if(state.products.count === 0) return
-    return state.products.results;
+    return state.products;
   }
 }
 
