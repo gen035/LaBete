@@ -10,7 +10,7 @@
             </VueSlickCarousel>
           </div>
           <div class="col-md-6 col-lg-5 col-xl-4 col-xxl-3 product-detail">
-            <div v-if="product.stock_level <= 0" class="product-price product-price--sold">
+            <div v-if="product.stock_level <= 0" class="mb-2 product-price product-price--sold">
               <span>{{$t('product.sold')}}</span>
             </div>
             <h2 class="product-title">{{product.name}}</h2>

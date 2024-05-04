@@ -19,8 +19,11 @@
           </div>
         </div>
         <div class="row">
-          <NoProducts v-if="products.length === 0" />
-          <ProductCard v-if="products.length > 0" v-for="(product, index) in products" :product="product" :key="index"/>
+          <NoProducts v-if="productsResults.length === 0" />
+          <ProductCard v-if="productsResults.length > 0" v-for="(product, index) in productsResults" :product="product" :key="index"/>
+        </div>
+        <div class="row">
+          <CustomButton :text="$t('products.more')" v-on:click.native="loadMore" icon="fa-plus" :disabled="this.page >= this.pageCount"/>
         </div>
       </section>
   </section>
@@ -31,6 +34,7 @@
   import Filters from '~/components/Filters';
   import NoProducts from '~/components/NoProducts';
   import ProductCard from '~/components/ProductCard';
+  import CustomButton from '~/components/CustomButton.vue';
 
   export default {
     async asyncData({ app, error, store, $swell }) {
@@ -51,14 +55,17 @@
       seo = seo.data;
 
       let products = await app.$swell.products.list({
-        limit: 100
+        limit: 25
       });
-      products = products && products.results && products.results.length > 0 ? products.results : [];
+      let productsResults = products && products.results && products.results.length > 0 ? products.results : [];
+      let pageCount = products.page_count;
 
       if (content) {
         return {
           content,
+          pageCount,
           products,
+          productsResults,
           seo
         }
       } else {
@@ -77,6 +84,9 @@
       }
     },
     data() {
+      return {
+        page: 1,
+      }
       // return {
       //   order: 'date',
       //   orderOptions: [
@@ -100,6 +110,16 @@
       // }
     },
     methods: {
+      async loadMore() {
+        console.log('CLICKY')
+        const newProducts = await this.$swell.products.list({
+          limit: 25,
+          page: this.page + 1,
+        });
+
+        this.page = this.page + 1;
+        this.productsResults = [...this.productsResults, ...newProducts.results];
+      }
       // handleCategories(categories) {
       //   this.categories = JSON.parse(categories);
       // },
@@ -134,6 +154,7 @@
     middleware: 'categories',
     components: {
       CategoriesDropdown,
+      CustomButton,
       Filters,
       NoProducts,
       ProductCard
