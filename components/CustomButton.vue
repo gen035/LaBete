@@ -1,5 +1,5 @@
 <template>
-  <button :class="['button', {'button--disabled' : (this.disabled)}]">
+  <button :class="['button', {'button--disabled' : (this.disabled)}]" v-on:click="click">
     <p class="button-text">
       {{this.text}}
     </p>
@@ -19,18 +19,27 @@ export default {
       type: String,
       require: false,
     },
+    target: {
+      type: String,
+      require: false,
+    },
     disabled: {
       type: Boolean,
       default: false
-    },
-    target: {
-      type: String,
-      default: '_self',
     },
     icon: {
       type: String,
       require: true,
       default: 'fa-shopping-cart'
+    }
+  },
+  methods: {
+    click() {
+      if(!this.url)  {
+        return;
+      }
+
+      window.open(this.url, this.target);
     }
   }
 }

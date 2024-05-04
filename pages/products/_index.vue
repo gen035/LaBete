@@ -111,7 +111,6 @@
     },
     methods: {
       async loadMore() {
-        console.log('CLICKY')
         const newProducts = await this.$swell.products.list({
           limit: 25,
           page: this.page + 1,

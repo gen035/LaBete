@@ -1,15 +1,13 @@
 <template>
-  <button :class="['button', {'button--disabled' : (this.product.stock_status !== 'in_stock')}]" @click="addToCart" data-track="" data-track-category="cart" data-track-action="click" :data-track-label="product.id">
-    <p class="button-text">
-        {{this.$store.state.cartIsUpdating && this.$store.state.cartIsUpdatingId === this.product.id ? $t('cart.addToCartPending') : $t('cart.addToCart') }}
-      </p>
-      <div class="button-icon-container">
-        <p class="button-icon fas fa-shopping-cart"></p>
-      </div>
-  </button>
+  <CustomButton
+      v-on:click.native="addToCart"
+      :text="this.$store.state.cartIsUpdating && this.$store.state.cartIsUpdatingId === this.product.id ? $t('cart.addToCartPending') : $t('cart.addToCart')"
+      :disabled="this.product.stock_status !== 'in_stock'"
+      icon="fa-shopping-cart"
+  />
 </template>
 <script>
-  import { mapGetters } from 'vuex';
+  import CustomButton from "@/components/CustomButton.vue";
   export default {
     props: {
       product: {
@@ -25,6 +23,9 @@
             quantity: 1
           });
       }
-    }
+    },
+    components: {
+      CustomButton,
+    },
   }
 </script>
