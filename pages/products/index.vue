@@ -18,11 +18,11 @@
             <CategoriesDropdown />
           </div>
         </div>
-        <div class="row">
+        <div v-if="this.hasFetched" class="row">
           <NoProducts v-if="productsResults.length === 0" />
           <ProductCard v-if="productsResults.length > 0" v-for="(product, index) in productsResults" :product="product" :key="index"/>
         </div>
-        <div class="row">
+        <div v-if="this.hasFetched" class="row">
           <CustomButton :text="$t('products.more')" v-on:click.native="loadMore" icon="fa-plus" :disabled="this.page >= this.pageCount"/>
         </div>
       </section>
@@ -37,7 +37,7 @@
   import CustomButton from '~/components/CustomButton.vue';
 
   export default {
-    async asyncData({ app, error, store, $swell }) {
+    async asyncData({ app, error, store }) {
       const locale = store.state.i18n.locale;
       let content = [];
 
@@ -54,18 +54,9 @@
       let seo = await app.$prismic.api.getByID(content.seo.id)
       seo = seo.data;
 
-      let products = await app.$swell.products.list({
-        limit: 25
-      });
-      let productsResults = products && products.results && products.results.length > 0 ? products.results : [];
-      let pageCount = products.page_count;
-
       if (content) {
         return {
           content,
-          pageCount,
-          products,
-          productsResults,
           seo
         }
       } else {
@@ -85,6 +76,10 @@
     },
     data() {
       return {
+        hasFetched: false,
+        products: [],
+        productsResults: [],
+        pageCount: 0,
         page: 1,
       }
       // return {
@@ -108,6 +103,15 @@
       // categories() {
       //   this.getNewProducts();
       // }
+    },
+    async mounted() {
+      this.products = await this.$swell.products.list({
+        limit: 25
+      });
+
+      this.productsResults = this.products && this.products.results && this.products.results.length > 0 ? this.products.results : [];
+      this.pageCount = this.products && this.products.page_count;
+      this.hasFetched = true;
     },
     methods: {
       async loadMore() {
