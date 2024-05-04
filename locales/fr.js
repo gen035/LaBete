@@ -256,7 +256,8 @@ export default {
       all: 'Tout',
       text: 'Categories'
     },
-    none: 'Pas de produits disponibles'
+    none: 'Pas de produits disponibles',
+    more: 'Voir plus...'
   },
   top: {
     contact: {

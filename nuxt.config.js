@@ -26,7 +26,7 @@ export default {
       { rel:'icon', type:'image/png', href:'/favicon-32x32.png', sizes:'32x32' },
       { rel:'icon', type:'image/png', href:'/favicon-16x16.png', sizes:'16x16' },
       { rel:'icon', type:'image/png', href:'/favicon-128.png', sizes:'128x128' },
-      { name:'application-name', content:'Genevieve Perron Migneron'},
+      { name:'application-name', content:'La Bête'},
       { name:'msapplication-TileColor', content:'#343434' },
       { name:'msapplication-TileImage', content:'/mstile-144x144.png' },
       { name:'msapplication-square70x70logo', content:'/mstile-70x70.png' },

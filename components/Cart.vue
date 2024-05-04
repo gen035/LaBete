@@ -22,17 +22,13 @@
           <div class="col-6 text-right cart-shipping">{{$t('cart.shipping_amount')}}</div>
         </div>
         <div class="row">
-          <div class="col-12">
-          <div class="button" data-track="" data-track-category="cart" data-track-action="click" data-track-label="checkout">
-              <a :href="getCart && getCart.checkout_url">
-                <p class="button-text">
-                  {{$t('cart.checkout')}}
-                </p>
-                <div class="button-icon-container">
-                  <p class="button-icon fa fa-credit-card"></p>
-                </div>
-              </a>
-            </div>
+          <div class="col-12 text-center">
+            <CustomButton
+                :url="getCart && getCart.checkout_url"
+                target="_self"
+                :text="$t('cart.checkout')"
+                icon="fa-credit-card"
+            />
           </div>
         </div>
       </template>
@@ -63,13 +59,13 @@
                   v-bind:style="{ backgroundImage: `url(${item.product.images[0].file.url})` }"
                 />
                 <b-col cols="8">
-                  <b-card-body class="d-flex flex-column justify-content-between" :title="item.product.name">
+                  <b-card-body class="d-flex flex-column justify-content-between" :title="item.product.name && item.product.name.substring(0, 20) + '...'">
                     <b-card-text class="row">
                       <div class="col-12 cart-item-price">{{item.price}}$</div>
                     </b-card-text>
                     <b-card-text class="row">
                       <div class="col-6 cart-item-qty">{{$t('cart.qty')}} {{item.quantity}}</div>
-                      <div class="col-6 cart-item-delete" @click="removeItem(item)">{{$t('cart.delete')}}</div>
+                      <div class="col-6 cart-item-delete" @click.stop="removeItem(item)">{{$t('cart.delete')}}</div>
                     </b-card-text>
                   </b-card-body>
                 </b-col>
@@ -83,6 +79,7 @@
 </template>
 <script>
   import { mapGetters } from 'vuex';
+  import CustomButton from "@/components/CustomButton.vue";
   export default {
     methods: {
       removeItem(product) {
@@ -112,6 +109,9 @@
           "getCart",
           "getCartProducts"
       ])
-    }
+    },
+    components: {
+      CustomButton,
+    },
   }
 </script>

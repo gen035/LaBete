@@ -29,6 +29,11 @@
       cursor: pointer;
       font-size: 12px;
       text-transform: uppercase;
+      transition: color 125ms linear;
+      text-align: right;
+      &:hover {
+        color: $gold;
+      }
     }
   }
   &-shipping {

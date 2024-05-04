@@ -256,7 +256,8 @@ export default {
       all: 'All',
       text: 'Categories'
     },
-    none: 'No products available'
+    none: 'No products available',
+    more: 'See More...'
   },
   top: {
     contact:  {
