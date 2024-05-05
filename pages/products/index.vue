@@ -18,13 +18,15 @@
             <CategoriesDropdown />
           </div>
         </div>
-        <div v-if="this.hasFetched" class="row">
-          <NoProducts v-if="productsResults.length === 0" />
-          <ProductCard v-if="productsResults.length > 0" v-for="(product, index) in productsResults" :product="product" :key="index"/>
-        </div>
-        <div v-if="this.hasFetched" class="row">
-          <CustomButton :text="$t('products.more')" v-on:click.native="loadMore" icon="fa-plus" :disabled="this.page >= this.pageCount"/>
-        </div>
+        <template v-if="this.hasFetched">
+          <div class="row">
+            <NoProducts v-if="this.productsResults && this.productsResults.length === 0" />
+            <ProductCard v-else v-for="(product, index) in this.productsResults" :product="product" :key="index"/>
+          </div>
+          <div class="row">
+            <CustomButton :text="$t('products.more')" v-on:click.native="loadMore" icon="fa-plus" :disabled="this.products && this.products.page >= this.products.page_count"/>
+          </div>
+        </template>
       </section>
   </section>
 </template>
@@ -76,11 +78,9 @@
     },
     data() {
       return {
+        products: null,
+        productsResults: null,
         hasFetched: false,
-        products: [],
-        productsResults: [],
-        pageCount: 0,
-        page: 1,
       }
       // return {
       //   order: 'date',
@@ -110,19 +110,9 @@
       });
 
       this.productsResults = this.products && this.products.results && this.products.results.length > 0 ? this.products.results : [];
-      this.pageCount = this.products && this.products.page_count;
       this.hasFetched = true;
     },
     methods: {
-      async loadMore() {
-        const newProducts = await this.$swell.products.list({
-          limit: 25,
-          page: this.page + 1,
-        });
-
-        this.page = this.page + 1;
-        this.productsResults = [...this.productsResults, ...newProducts.results];
-      }
       // handleCategories(categories) {
       //   this.categories = JSON.parse(categories);
       // },
@@ -154,7 +144,9 @@
       //   this.products = this.sortProducts(this.order, newProductsResults);
       // }
     },
-    middleware: 'categories',
+    middleware: [
+      'categories',
+    ],
     components: {
       CategoriesDropdown,
       CustomButton,

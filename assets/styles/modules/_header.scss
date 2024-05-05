@@ -84,9 +84,6 @@ header {
     font-weight: bolder;
     cursor: pointer;
     text-align: right;
-    @media (min-width: 768px) {
-      display: none;
-    }
   }
   .header-nav-mobile-trigger {
     span {

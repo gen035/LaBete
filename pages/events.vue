@@ -10,7 +10,6 @@
           >
           <Event
             :event="event"
-            :key="index"
             :index="index"
           />
         </template>
@@ -76,7 +75,7 @@
     },
     data() {
       return {
-        today: new Date(),
+        today: new Date().setHours(0, 0, 0, 0),
         passed: []
       }
     },
@@ -94,7 +93,7 @@
     created() {
       const events = this.$t('passed_events');
 
-      events.map((item) => {
+      events.forEach((item) => {
         this.passed.push(item);
       });
 
@@ -104,8 +103,10 @@
       getDynamicPassedEvents() {
         const passed = JSON.parse(JSON.stringify( this.passed ));
 
-        this.events.map((event) => {
-          if (this.today > this.$prismic.asDate(event.end_date)) {
+        this.events.forEach((event) => {
+          const endDate = new Date(event.end_date).setHours(23, 59, 59, 999);
+
+          if (this.today > endDate) {
             const eventYear = this.$prismic.asDate(event.end_date).getFullYear();
 
             passed.map((list, index) => {
@@ -117,7 +118,7 @@
             });
           }
         });
-
+        this.events = this.events.filter(event => this.today < new Date(event.end_date).setHours(23, 59, 59, 999));
         this.passed = passed;
       }
     },

@@ -14,7 +14,6 @@ export const state = () => ({
   newsletterOpened: false,
   messageOpened: false,
   message: [],
-  products: null,
   settings: [],
 })
 
@@ -42,9 +41,6 @@ export const mutations = {
   },
   SET_NOTIFICATION(state, notification) {
     state.notification = notification;
-  },
-  SET_PRODUCTS(state, products) {
-    state.products = products;
   },
   SET_SETTINGS(state, settings) {
     state.settings = settings;
@@ -84,10 +80,6 @@ export const getters = {
   },
   getCategory(state, slug) {
     return state.categories.filter((category => category.slug === slug));
-  },
-  getProducts(state) {
-    if(state.products.count === 0) return
-    return state.products.results;
   }
 }
 
@@ -98,7 +90,7 @@ export const actions = {
    * @property {string} id - The cart item id
    * @property {number} quantityToAdd - The quantity to add to cart
    */
-  async checkCartItemHasStock({ state }, { item, id }) {
+    async checkCartItemHasStock({ state }, { item, id }) {
     // Get cart items
     const items = state.cart?.items;
 

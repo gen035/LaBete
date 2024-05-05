@@ -1,16 +1,13 @@
 .mobile-nav {
   background-color: $dark-grey;
-  bottom: -400px;
+  bottom: -460px;
   box-shadow: 0px -2px 10px -1px rgba(0, 0, 0, .75);
   min-height: 155px;
   padding: 0;
   position: fixed;
-  transition: all 250ms linear;
+  transition: all 125ms linear;
   width: 100%;
   z-index: 1;
-  @media (min-width: 576px) {
-    display: none;
-  }
 }
 .is-nav-opened .mobile-nav {
   bottom: 0;

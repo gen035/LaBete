@@ -1,6 +1,5 @@
 <template>
   <div
-    v-if="!isPassed"
     :class="`event ${isOdd}`">
     <div
       class="event-image"
@@ -77,12 +76,6 @@
           return 'flex-row-reverse';
         }
         return '';
-      },
-      isPassed() {
-        if (this.today > this.$prismic.asDate(this.event.end_date)) {
-          return true;
-        }
-        return false;
       }
     }
   }

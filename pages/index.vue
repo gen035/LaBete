@@ -23,13 +23,13 @@
     </section>
     <section
       v-if="cards"
-      class="home-links-container"
+      class="py-5"
     >
       <div class="container">
         <div class="row align-items-center justify-content-center">
           <div
             v-for="(card, index) in cards"
-            class="col-6 col-md-4 home-links"
+            class="col-6 col-md-4 home-link"
             :key="index"
           >
             <Card
@@ -45,30 +45,22 @@
       <HomePageBlock
         :block="block"
         :index="index"
-        :key="index"
       />
     </template>
-    </section>
-    <section class="container home-images">
+    <section class="container home-images p-5">
       <div class="row align-items-center">
-        <div class="col-md-6 home-image">
-          <Media
-            classes="home-image3"
-            :image="content.image_1"
+        <div class="col-md-6 home-image text-center p-4">
+          <Media :image="content.image_1"
           />
         </div>
-        <div class="col-md-6 home-image">
-          <Media
-            classes="home-image3"
-            :image="content.image_2"
+        <div class="col-md-6 home-image text-center p-4">
+          <Media :image="content.image_2"
           />
         </div>
       </div>
       <div class="row">
-        <div class="col-md-12 home-image">
-          <Media
-            classes="home-image3"
-            :image="content.image_3"
+        <div class="col-md-12 home-image text-center p-4">
+          <Media :image="content.image_3"
           />
         </div>
       </div>
