@@ -137,7 +137,6 @@
         return category ? category.description : null;
       }
     },
-    middleware: 'categories',
     components: {
       CategoriesDropdown,
       Filters,

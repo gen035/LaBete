@@ -23,7 +23,6 @@
   import Notification from './Notification';
   import MessageModal from './../components/MessageModal';
   export default {
-    middleware: ['settings', 'newsletter', 'message'],
     components: {
       Cart,
       CookieModal,

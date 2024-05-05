@@ -1,7 +1,7 @@
 <template>
   <b-sidebar
     @hidden="closed()"
-    :visible="this.$store.state.cartIsOpened"
+    :visible="getCartOpened"
     id="sidebar-cart"
     class="cart"
     aria-label="Cart"
@@ -15,7 +15,7 @@
       <template #footer="{ hide }">
         <div class="row">
           <div class="col-6">{{$t('cart.subtotal')}}</div>
-          <div class="col-6 text-right">{{getCart && getCart.grand_total}}$</div>
+          <div class="col-6 text-right">{{getCart?.grand_total || 0}}$</div>
         </div>
         <div class="row">
           <div class="col-6">{{$t('cart.shipping')}}</div>
@@ -24,7 +24,7 @@
         <div class="row">
           <div class="col-12 text-center">
             <CustomButton
-                :url="getCart && getCart.checkout_url"
+                :url="getCart?.checkout_url"
                 target="_self"
                 :text="$t('cart.checkout')"
                 icon="fa-credit-card"
@@ -34,7 +34,7 @@
       </template>
       <div class="px-3 py-2 container">
         <h2 class="cart-title title-h2">{{$t('cart.title')}}</h2>
-        <div v-if="getCartProducts && getCartProducts.length > 0" class="cart-items">
+        <div v-if="getCartProducts?.length > 0" class="cart-items">
           <div v-for="(item, index) in getCartProducts">
             <b-card
               v-if="item.product"
@@ -83,14 +83,14 @@
   export default {
     methods: {
       removeItem(product) {
-        this.$store.dispatch('removeCartItem', product);
+        this.$store.dispatch('cart/removeCartItem', product);
       },
       closed() {
-        this.$store.commit('SET_CART_ISOPENED', false);
+        this.$store.commit('cart/SET_CART_ISOPENED', false);
       },
       goTo(item) {
-        const slug = item.product && item.product.slug;
-        const inStock = item.product.stock_level > 0;
+        const slug = item.product?.slug;
+        const inStock = item.product?.stock_level > 0;
 
         if (!inStock) { return }
 
@@ -102,12 +102,13 @@
     mounted() {
       // Pass a checkout ID as a query string param to recover a specific cart
       const { checkout: checkoutId } = this.$route.query;
-      this.$store.dispatch('initializeCart', { checkoutId });
+      this.$store.dispatch('cart/initializeCart', { checkoutId });
     },
     computed: {
-      ...mapGetters([
-          "getCart",
-          "getCartProducts"
+      ...mapGetters('cart', [
+          'getCart',
+          'getCartOpened',
+          'getCartProducts'
       ])
     },
     components: {

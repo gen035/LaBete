@@ -4,15 +4,15 @@
       <div class="cookieModal">
         <div class="cookieModal-content" v-html="this.$t('cookie.text')" />
         <div class="cookieModal-buttons">
-          <button v-on:click="accept" class="cookieModal-buttons--accept">{{ $t('cookie.accept') }}</button>
-          <button v-on:click="openSettings" class="cookieModal-buttons--params">{{ $t('cookie.params') }}</button>
+          <CustomButton v-on:click.native="accept" :text="$t('cookie.accept')" icon="fa-check"/>
+          <CustomButton v-on:click.native="openSettings" :text="$t('cookie.params')" icon="fa-cog"/>
         </div>
       </div>
     </div>
   </client-only>
 </template>
 <script>
-  import Media from '~/components/Media';
+  import CustomButton from "@/components/CustomButton.vue";
   export default {
     data() {
       return {
@@ -31,13 +31,15 @@
         this.setModalCookie();
       },
       forcePageReload() {
-        console.log('forcePageReloadx');
         window.location.reload();
       },
       openSettings() {
         this.$store.commit('SET_COOKIE_MODAL', false);
         this.$store.commit('SET_COOKIE_PREFERENCES_MODAL', true);
       }
+    },
+    components: {
+      CustomButton,
     },
   }
 </script>

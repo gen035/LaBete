@@ -80,11 +80,11 @@
           <a href="" title="La Bete" data-track="" data-track-category="footer" data-track-action="click" data-track-label="Logo">
             <Media
               classes="footer-logo"
-              :image="this.$store.state.settings.footer_logo"
+              :image="this.getSettings.footer_logo"
             />
           </a>
           <div class="footer-copyright">
-            {{ this.$store.state.settings.footer_copyright[0].text }} {{ date }}
+            {{ this.getSettings.footer_copyright[0].text }} {{ date }}
           </div>
           <div class="footer-policy">
             <NuxtLink :to="localePath('policy')" exact>
@@ -105,24 +105,28 @@
 <script>
   import Newsletter from '~/components/Newsletter';
   import Media from '~/components/Media';
+  import { mapGetters } from 'vuex';
 
   export default {
     computed: {
       facebook() {
-        return this.$store.state.settings.facebook_link.url;
+        return this.getSettings.facebook_link.url;
       },
       facebookMessenger() {
-        return this.$store.state.settings.facebook_messenger_link.url;
+        return this.getSettings.facebook_messenger_link.url;
       },
       store() {
-        return this.$store.state.settings.store_link.url;
+        return this.getSettings.store_link.url;
       },
       instagram() {
-        return this.$store.state.settings.instagram_link.url;
+        return this.getSettings.instagram_link.url;
       },
       linkedin() {
-        return this.$store.state.settings.linkedin_link.url;
-      }
+        return this.getSettings.linkedin_link.url;
+      },
+      ...mapGetters([
+        "getSettings"
+      ])
     },
     data() {
       return {

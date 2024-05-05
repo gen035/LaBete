@@ -41,22 +41,8 @@
       }
     }
     button {
-      background-color: $gold;
-      text-transform: uppercase;
-      border: 1px solid $gold;
-      color: $white;
-      border-radius: 10px;
+      margin: 20px auto;
       display: block;
-      margin: 5px auto;
-      min-width: 200px;
-      max-width: 200px;
-      padding: 10px;
-      cursor: pointer;
-      display: block;
-      transition: 250ms linear;
-      &:hover {
-        background-color: $dark-grey;
-      }
     }
   }
 }
