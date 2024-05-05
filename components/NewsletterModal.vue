@@ -1,11 +1,11 @@
 <template>
-  <div class="newsletterModalWrapper" v-if="this.getNewsletter.isOpened">
+  <div class="newsletterModalWrapper" v-if="getNewsletter.isOpened">
     <div class="newsletterModal">
       <i class="far fa-times-circle newsletterModal-close" v-on:click="close"></i>
-      <div class="newsletterModal-img" v-bind:style="{ 'background-image': 'url(' + this.getNewsletter.data.image.url +')' }"></div>
+      <div class="newsletterModal-img" v-bind:style="{ 'background-image': 'url(' + getNewsletter.data?.image?.url +')' }"></div>
       <div class="newsletterModal-content">
-        <h1>{{ this.getNewsletter.data.title }}</h1>
-        <p>{{ this.getNewsletter.data.description }}</p>
+        <h1>{{ getNewsletter.data?.title }}</h1>
+        <p>{{ getNewsletter.data?.description }}</p>
         <Newsletter :isModal="true" />
       </div>
     </div>

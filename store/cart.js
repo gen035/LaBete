@@ -1,26 +1,28 @@
 // store/cart.js
 export default {
     namespaced: true, // Important for module encapsulation
-    state: {
+    state: () => ({
         cart: null,
-        cartError: null,
-        cartIsActive: false,
-        cartIsUpdating: false,
-        cartIsUpdatingId: null,
-        cartIsOpened: false,
-    },
+        error: null,
+        isUpdating: false,
+        isUpdatingId: null,
+        isOpened: false,
+    }),
     mutations: {
         SET_CART(state, cart) {
             state.cart = cart;
         },
+        SET_CART_ERROR(state, error) {
+          state.error = error;
+        },
         SET_CART_ISOPENED(state, isOpened) {
-            state.cartIsOpened = isOpened;
+            state.isOpened = isOpened;
         },
-        SET_CART_UPDATING(state, cartIsUpdating) {
-            state.cartIsUpdating = cartIsUpdating;
+        SET_CART_UPDATING(state, isUpdating) {
+            state.isUpdating = isUpdating;
         },
-        SET_CART_UPDATING_ID(state, cartIsUpdatingId) {
-            state.cartIsUpdatingId = cartIsUpdatingId;
+        SET_CART_UPDATING_ID(state, isUpdatingId) {
+            state.isUpdatingId = isUpdatingId;
         },
     },
     actions: {
@@ -90,7 +92,7 @@ export default {
          */
         async addCartItem({ commit, dispatch, state }, item) {
             // Bail if an update is already in progress
-            if (state.cartIsUpdating) return;
+            if (state.isUpdating) return;
 
             //Bail if product is already in cart
             if(state.cart && state.cart.items.some((currentItem) => currentItem.product_id === item.product_id)) {
@@ -155,7 +157,7 @@ export default {
          * @param {CartItem} item - Cart item to remove
          */
         async removeCartItem({ commit, dispatch, state }, item) {
-            if (state.cartIsUpdating) return;
+            if (state.isUpdating) return;
             commit('SET_CART_UPDATING', true);
 
             try {
@@ -192,11 +194,20 @@ export default {
         getCart(state) {
             return state.cart;
         },
+        getCartOpened(state) {
+            return state.isOpened;
+        },
         getCartProducts(state) {
-            return state.cart && state.cart.items;
+            return state.cart?.items || [];
         },
         getCartProductsCount(state) {
-            return state.cart && state.cart.items && state.cart.items.length;
+            return state.cart?.item_quantity || 0;
         },
+        getCartUpdating(state) {
+            return state.isUpdating
+        },
+        getCartUpdatingId(state) {
+            return state.isUpdatingId
+        }
     }
 };

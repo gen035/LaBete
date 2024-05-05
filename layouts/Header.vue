@@ -27,7 +27,7 @@
           <a href="/" title="La Bete" data-track="" data-track-category="nav" data-track-action="click" data-track-label="Logo">
             <Media
               classes="header-logo"
-              :image="this.getSettings.header_logo"
+              :image="getSettings.header_logo"
             />
           </a>
         </div>
@@ -45,7 +45,7 @@
                   {{ link.text }}
                 </NuxtLink>
               </li>
-              <li v-b-toggle.sidebar-cart><i class="fa fa-shopping-bag" aria-hidden="true"></i><span :class="this.cartHasItems ? 'hasProducts' : ''"></span></li>
+              <li v-b-toggle.sidebar-cart><i class="fa fa-shopping-bag" aria-hidden="true"></i><span :class="getCartProductsCount > 0 ? 'hasProducts' : ''"></span></li>
           </ul>
         </div>
         <div class="col-4 header-nav-mobile-trigger d-md-none" @click="toggleMobileNav">
@@ -53,7 +53,7 @@
         </div>
         <div class="col-2 header-nav-mobile-cart d-md-none" v-b-toggle.sidebar-cart>
           <i class="fa fa-shopping-bag" aria-hidden="true"></i>
-          <span :class="this.cartHasItems ? 'hasProducts' : ''"></span>
+          <span :class="getCartProductsCount > 0 ? 'hasProducts' : ''"></span>
         </div>
       </div>
     </header>
@@ -69,15 +69,13 @@
       locale() {
         return this.$store.state.i18n.locale;
       },
-      cartHasItems() {
-        return this.$store.state.cart && this.$store.state.cart.items && this.$store.state.cart.items.length > 0;
-      },
       promo() {
         return this.getSettings.promo;
       },
-      ...mapGetters([
-        "getSettings"
-      ])
+      ...mapGetters('cart', [
+        'getCartProductsCount',
+      ]),
+      ...mapGetters(['getSettings'])
     },
     data() {
       return {
@@ -101,7 +99,7 @@
         const links = this.$t('nav.links');
         this.nav = [];
 
-        links.map((item) => {
+        links.forEach((item) => {
           this.nav.push(item);
         });
       },

@@ -8,6 +8,7 @@ export const state = () => ({
     categories: [],
     cookieModalOpened: true,
     cookiePreferencesModalOpened: false,
+    error: null,
     newsletter: {
         data: null,
         isOpened: false,
@@ -31,6 +32,9 @@ export const mutations = {
     SET_COOKIE_PREFERENCES_MODAL(state, isOpened) {
         state.cookiePreferencesModalOpened = isOpened;
     },
+    SET_ERROR(state, error) {
+      state.error = error;
+    },
     SET_MESSAGE(state, isOpened) {
         state.messageOpened = isOpened;
     },
@@ -49,7 +53,6 @@ export const mutations = {
     SET_SETTINGS(state, settings) {
         state.settings = settings;
     },
-
 }
 
 export const getters = {
@@ -79,6 +82,8 @@ export const actions = {
      */
     async nuxtServerInit({ commit }, { app }) {
         try {
+            const locale = app.store.state.i18n.locale || 'fr';
+
             let categories = await this.$swell.categories.list();
             categories = categories && categories.results && categories.results.length > 0 ? categories.results : [];
             commit('SET_CATEGORIES', categories);
@@ -90,18 +95,19 @@ export const actions = {
             // Get newsletter
             const newsletterModalResponse = await app.$prismic.api.query(
                 app.$prismic.predicates.at('document.type', 'newslettermodal'),
-                { lang: `${app.store.state.i18n.locale}-ca` }
+                { lang: `${locale}-ca` }
             );
             newsletterModalResponse.results.forEach(result => commit('SET_NEWSLETTER_MODAL_DATA', result.data));
 
             // Get message
             const messageModalResponse = await app.$prismic.api.query(
                 app.$prismic.predicates.at('document.type', 'message_modal'),
-                { lang: `${app.store.state.i18n.locale}-ca` }
+                { lang: `${locale}-ca` }
             );
             messageModalResponse.results.forEach(result => commit('SET_MESSAGE_MODAL', result.data));
         } catch (error) {
-            console.log(error)
+            commit('SET_ERROR', error);
+            console.log('STORE', error)
         }
     }
 }
