@@ -26,13 +26,13 @@
           </div>
           <b-form-checkbox v-model="$cookies.get('LABETE_PRIVACY_PERSO')" name="check-button" size="md" @change="setCookieCategory('LABETE_PRIVACY_PERSO')" switch />
         </div>
-        <button v-on:click="save" class="cookiePreferencesModal-buttons--save">{{ $t('cookie.save') }}</button>
+        <CustomButton v-on:click.native="save" :text="$t('cookie.save')" icon="fa-save"/>
       </div>
     </div>
   </client-only>
 </template>
 <script>
-  import Media from '~/components/Media';
+  import CustomButton from "@/components/CustomButton.vue";
   export default {
     methods: {
       forcePageReload() {
@@ -66,6 +66,9 @@
           this.$cookies.remove(cookieName);
         });
       }
+    },
+    components: {
+      CustomButton,
     },
   }
 </script>
