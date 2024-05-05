@@ -1,14 +1,20 @@
 footer {
-  background-color: $dark-grey;
   margin-top: 48px;
   padding: 32px 0;
 }
 .footer-newsletter {
-  margin: 0 0 16px 0;
+  margin-bottom: 16px;
   text-align: center;
+
+ .newsletter-wrapper {
+   margin: 0 auto;
+ }
+  
   @media (min-width: 768px) {
-    margin: 0;
     text-align: left;
+    .newsletter-wrapper {
+      margin: 0;
+    }
   }
 }
 .footer-links {
@@ -45,7 +51,7 @@ footer {
     position: relative;
     cursor: pointer;
     &:hover {
-      color: white;
+      color: $gold;
       text-decoration: none;
     }
   }
