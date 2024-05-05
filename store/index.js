@@ -8,9 +8,11 @@ export const state = () => ({
     categories: [],
     cookieModalOpened: true,
     cookiePreferencesModalOpened: false,
-    newsletter: [],
+    newsletter: {
+        data: null,
+        isOpened: false,
+    },
     notification: {},
-    newsletterOpened: false,
     messageOpened: false,
     message: [],
     settings: null,
@@ -35,11 +37,11 @@ export const mutations = {
     SET_MESSAGE_MODAL(state, modal) {
         state.message = modal;
     },
-    SET_NEWSLETTER(state, isOpened) {
-        state.newsletterOpened = isOpened;
+    SET_NEWSLETTER_OPENED(state, isOpened) {
+        state.newsletter.isOpened = isOpened;
     },
-    SET_NEWSLETTER_MODAL(state, modal) {
-        state.newsletter = modal;
+    SET_NEWSLETTER_MODAL_DATA(state, modal) {
+        state.newsletter.data = modal;
     },
     SET_NOTIFICATION(state, notification) {
         state.notification = notification;
@@ -59,6 +61,9 @@ export const getters = {
     },
     getCategory(state, slug) {
         return state.categories.filter((category => category.slug === slug));
+    },
+    getNewsletter(state) {
+      return state.newsletter;
     },
     getSettings(state) {
         return state.settings;
@@ -87,7 +92,7 @@ export const actions = {
                 app.$prismic.predicates.at('document.type', 'newslettermodal'),
                 { lang: `${app.store.state.i18n.locale}-ca` }
             );
-            newsletterModalResponse.results.forEach(result => commit('SET_NEWSLETTER_MODAL', result.data));
+            newsletterModalResponse.results.forEach(result => commit('SET_NEWSLETTER_MODAL_DATA', result.data));
 
             // Get message
             const messageModalResponse = await app.$prismic.api.query(
