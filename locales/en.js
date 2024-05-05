@@ -218,6 +218,10 @@ export default {
     {
       year: '2023',
       events: [],
+    },
+    {
+      year: '2024',
+      events: [],
     }
   ],
   events: {
