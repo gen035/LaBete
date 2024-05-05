@@ -144,9 +144,6 @@
       //   this.products = this.sortProducts(this.order, newProductsResults);
       // }
     },
-    middleware: [
-      'categories',
-    ],
     components: {
       CategoriesDropdown,
       CustomButton,

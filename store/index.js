@@ -90,6 +90,47 @@ export const actions = {
    * @property {string} id - The cart item id
    * @property {number} quantityToAdd - The quantity to add to cart
    */
+    async nuxtServerInit({ commit }, { app }) {
+      try {
+        // Get Categories
+        let categories = await this.$swell.categories.list();
+        categories = categories && categories.results && categories.results.length > 0 ? categories.results : [];
+        commit('SET_CATEGORIES', categories);
+
+        // Get Settings
+        await app.$prismic.api.query(
+            app.$prismic.predicates.at('document.type', 'settings')
+        ).then((response) => {
+          response.results.forEach(result => {
+            commit('SET_SETTINGS', result.data);
+          });
+        });
+
+        // Get newsletter
+        await app.$prismic.api.query(
+            app.$prismic.predicates.at('document.type', 'newslettermodal'), {
+              lang: `${app.store.state.i18n.locale}-ca`
+            }
+        ).then((response) => {
+          response.results.forEach(result => {
+            commit('SET_NEWSLETTER_MODAL', result.data);
+          });
+        });
+
+        // Get message
+        await app.$prismic.api.query(
+            app.$prismic.predicates.at('document.type', 'message_modal'), {
+              lang: `${app.store.state.i18n.locale}-ca`
+            }
+        ).then((response) => {
+          response.results.forEach(result => {
+            commit('SET_MESSAGE_MODAL', result.data);
+          });
+        })
+      } catch (error) {
+        console.log(error)
+      }
+    },
     async checkCartItemHasStock({ state }, { item, id }) {
     // Get cart items
     const items = state.cart?.items;
