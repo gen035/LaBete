@@ -18,7 +18,7 @@
           <div class="col-6 text-right">{{getCart && getCart.grand_total}}$</div>
         </div>
         <div class="row">
-          <div class="col-6">Shipping</div>
+          <div class="col-6">{{$t('cart.shipping')}}</div>
           <div class="col-6 text-right cart-shipping">{{$t('cart.shipping_amount')}}</div>
         </div>
         <div class="row">
