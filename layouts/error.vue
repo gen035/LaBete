@@ -9,7 +9,7 @@
         <nuxt-link to="/">{{ $t('error.home') }}</nuxt-link>
         <Media
           classes="error-img"
-          :image="this.$store.state.settings.error_image"
+          :image="this.getSettings.error_image"
         />
       </div>
     </div>
@@ -18,10 +18,16 @@
 
 <script>
   import Media from './../components/Media';
+  import { mapGetters } from 'vuex';
 
   export default {
     props: ['error'],
     layout: 'error',// you can set a custom layout for the error page
+    computed: {
+      ...mapGetters([
+        "getSettings"
+      ])
+    },
     components: {
       Media
     }
