@@ -14,9 +14,6 @@ export const state = () => ({
   newsletterOpened: false,
   messageOpened: false,
   message: [],
-  products: {
-    hasFetched: false
-  },
   settings: [],
 })
 
@@ -44,9 +41,6 @@ export const mutations = {
   },
   SET_NOTIFICATION(state, notification) {
     state.notification = notification;
-  },
-  SET_PRODUCTS(state, products) {
-    state.products = products;
   },
   SET_SETTINGS(state, settings) {
     state.settings = settings;
@@ -86,13 +80,7 @@ export const getters = {
   },
   getCategory(state, slug) {
     return state.categories.filter((category => category.slug === slug));
-  },
-  getProducts(state) {
-    return state.products;
-  },
-  getProductsResults(state) {
-    return state.products.results;
-  },
+  }
 }
 
 export const actions = {
@@ -102,15 +90,6 @@ export const actions = {
    * @property {string} id - The cart item id
    * @property {number} quantityToAdd - The quantity to add to cart
    */
-  async fetchProducts({ commit, state }, {page, limit}) {
-      let products = await this.$swell.products.list({
-        page,
-        limit,
-      });
-
-      products.results = [...state.products.results, ...products.results];
-      commit('SET_PRODUCTS', { hasFetched: true, ...products });
-    },
     async checkCartItemHasStock({ state }, { item, id }) {
     // Get cart items
     const items = state.cart?.items;
