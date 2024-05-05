@@ -42,20 +42,29 @@
   padding: 18px;
   transition: transform 250ms ease-in, opacity 250ms ease-in;
   cursor: pointer;
+  position: relative;
 
   h2 {
-    background-color: $dark-grey;
+    /* From https://css.glass */
+    background: rgba(0, 0, 0, 0.23);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5.5px);
+    -webkit-backdrop-filter: blur(5.5px);
     color: $white;
     font-size: 18px;
-    padding: 16px 0;
+    padding: 16px;
     text-align: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateY(-50%) translateX(-50%);
   }
 
   img {
     border-radius: 0;
     @media (min-width: 768px) {
-      border-top-left-radius: 25px;
-      border-top-right-radius: 25px;
+      border-radius: 25px;
     }
   }
 
