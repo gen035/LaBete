@@ -4,8 +4,8 @@
       <div class="top-bar-shipping">
         {{$t('top.shipping')}}
       </div>
-      <ul class="top-bar-list">
-        <li class="d-none d-sm-inline-block d-md-inline-block d-lg-inline-block">
+      <ul class="top-bar-list d-none d-md-inline-block d-lg-inline-block">
+        <li>
           <NuxtLink
             :to="localePath('contact')"
           >
@@ -48,10 +48,10 @@
               <li v-b-toggle.sidebar-cart><i class="fa fa-shopping-bag" aria-hidden="true"></i><span :class="this.cartHasItems ? 'hasProducts' : ''"></span></li>
           </ul>
         </div>
-        <div class="col-4 header-nav-mobile-trigger" @click="toggleMobileNav">
+        <div class="col-4 header-nav-mobile-trigger d-md-none" @click="toggleMobileNav">
           <span>Menu<i class="fa fa-chevron-down"></i></span>
         </div>
-        <div class="col-2 header-nav-mobile-cart" v-b-toggle.sidebar-cart>
+        <div class="col-2 header-nav-mobile-cart d-md-none" v-b-toggle.sidebar-cart>
           <i class="fa fa-shopping-bag" aria-hidden="true"></i>
           <span :class="this.cartHasItems ? 'hasProducts' : ''"></span>
         </div>
