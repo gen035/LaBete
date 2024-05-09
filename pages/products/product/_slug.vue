@@ -47,8 +47,7 @@
         expand: ['cross_sells', 'up_sells']
       });
 
-      recommendedProducts = [...product.up_sells, ...product.cross_sells];
-      await store.dispatch('product/fetchProductsBySlugs', recommendedProducts);
+      await store.dispatch('product/fetchProductsBySlugs', product && product.up_sells);
 
       if (product) {
         return {
