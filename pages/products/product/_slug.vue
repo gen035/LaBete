@@ -24,7 +24,7 @@
           </div>
         </div>
         <div class="row" v-if="getProductRecommended && getProductRecommended.length > 0">
-          <div class="col-md-12"><h1>Vous aimerez aussi</h1></div>
+          <div class="col-md-12"><h1>{{ $t('product.recommended') }}</h1></div>
           <div class="row d-flex justify-content-center">
             <ProductCard v-for="(upsell, index) in getProductRecommended" :product="upsell" :key="index"/>
           </div>
@@ -47,7 +47,7 @@
         expand: ['cross_sells', 'up_sells']
       });
 
-      await store.dispatch('product/fetchProductsBySlugs', product && product.up_sells);
+      await store.dispatch('product/fetchProductsBySlugs', product && product.up_sells && product.up_sells.length > 0 && product.up_sells.slice(0, 3));
 
       if (product) {
         return {
