@@ -8,14 +8,17 @@ export default {
     actions: {
         async fetchProductsBySlugs({ commit }, products) {
             try {
-                const ids = products.map(({ product_id }) => product_id);
-                const recommendedProducts = await Promise.all(
-                    ids.map(id => this.$swell.products.get({ where: { id } }))
-                );
+                if(products) {
+                    const ids = products.map(({product_id}) => product_id);
+                    const recommendedProducts = await Promise.all(
+                        ids.map(id => this.$swell.products.get({where: {id}}))
+                    );
 
-                const validProducts = recommendedProducts.filter(product => product && product.results && product.results.length > 0);
-                const recommendedProductsResults = validProducts.map(product => product.results[0]);
-                commit('SET_PRODUCTS_RECOMMENDED', recommendedProductsResults);
+                    const validProducts = recommendedProducts.filter(product => product && product.results && product.results.length > 0);
+                    const recommendedProductsResults = validProducts.map(product => product.results[0]);
+                    commit('SET_PRODUCTS_RECOMMENDED', recommendedProductsResults);
+                }
+                commit('SET_PRODUCTS_RECOMMENDED', null);
             } catch (error) {
                 console.error('Failed to fetch recommended products:', error);
                 commit('SET_ERROR', error);

@@ -5,7 +5,7 @@
           <div class="col-md-6 col-lg-5 col-xl-4 col-xxl-3 offset-lg-1 offset-xl-2 offset-xxl-3 product-slider">
             <VueSlickCarousel v-if="product.images && product.images.length > 0" v-bind="settings">
               <template v-for="(image, index) in product.images">
-                <img :key="index" :src="image.file.url" />
+                <img :src="image.file.url" />
               </template>
             </VueSlickCarousel>
           </div>
@@ -42,12 +42,11 @@
 
   export default {
     async asyncData({ app, error, store, params}) {
-      let recommendedProducts = [];
       let product = await app.$swell.products.get(params && params.slug, {
         expand: ['cross_sells', 'up_sells']
       });
 
-      await store.dispatch('product/fetchProductsBySlugs', product && product.up_sells && product.up_sells.length > 0 && product.up_sells.slice(0, 3));
+      await store.dispatch('product/fetchProductsBySlugs', product && product.up_sells && product.up_sells.length > 0 && product.up_sells.slice(0, 3) || null);
 
       if (product) {
         return {
