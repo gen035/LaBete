@@ -23,6 +23,12 @@
             <AddToCart v-if="product.stock_level > 0" :product="product" />
           </div>
         </div>
+        <div class="row" v-if="getProductRecommended && getProductRecommended.length > 0">
+          <div class="col-md-12"><h1>Vous aimerez aussi</h1></div>
+          <div class="row d-flex justify-content-center">
+            <ProductCard v-for="(upsell, index) in getProductRecommended" :product="upsell" :key="index"/>
+          </div>
+        </div>
       </section>
   </section>
 </template>
@@ -31,14 +37,18 @@
   import AddToCart from '~/components/AddToCart';
   import RecommendedProducts from '~/components/RecommendedProducts';
   import VueSlickCarousel from 'vue-slick-carousel';
+  import ProductCard from "@/components/ProductCard.vue";
+  import {mapGetters} from "vuex";
 
   export default {
     async asyncData({ app, error, store, params}) {
-      const locale = store.state.i18n.locale;
       let recommendedProducts = [];
       let product = await app.$swell.products.get(params && params.slug, {
-        expand: ['cross_sells']
+        expand: ['cross_sells', 'up_sells']
       });
+
+      recommendedProducts = [...product.up_sells, ...product.cross_sells];
+      await store.dispatch('product/fetchProductsBySlugs', recommendedProducts);
 
       if (product) {
         return {
@@ -83,9 +93,15 @@
       }
     },
     components: {
+      ProductCard,
       AddToCart,
       RecommendedProducts,
       VueSlickCarousel
+    },
+    computed: {
+      ...mapGetters('product', [
+        'getProductRecommended'
+      ])
     },
     nuxtI18n: {
       paths: {
