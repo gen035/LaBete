@@ -57,6 +57,7 @@
         app.$prismic.predicates.at('document.type', 'events'), {
            lang: `${locale}-ca`,
            orderings : '[my.events.start_date]',
+           pageSize: 100
         }
       ).then((response) => {
         response.results.forEach(result => {
@@ -66,7 +67,6 @@
 
       let seo = await app.$prismic.api.getByID(content.seo.id)
       seo = seo.data;
-
       return {
         content,
         events,
