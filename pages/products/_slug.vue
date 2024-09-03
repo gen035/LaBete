@@ -51,7 +51,8 @@
 
       const category =  params && params.category;
       let products = await app.$swell.products.list({
-        limit: 100,
+        limit: 25,
+        sort: "date_created desc",
         categories: category
       });
 
