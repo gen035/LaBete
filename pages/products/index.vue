@@ -107,8 +107,6 @@
           // Update the products object with the new pagination data
           this.products = newProducts;
         }
-
-        console.log(this.products);
       }
     },
     components: {
