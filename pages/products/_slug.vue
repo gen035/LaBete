@@ -86,7 +86,6 @@
     },
     methods: {
       async loadMore() {
-        console.log('LOAD', this.products)
         const newProducts = await this.$swell.products.list({
           limit: 25,
           sort: "date_created desc",
