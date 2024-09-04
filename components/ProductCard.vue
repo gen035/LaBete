@@ -1,29 +1,31 @@
 <template>
-  <div class="product-card col-xl-2 col-lg-3 col-md-4 col-6">
-    <div class="product-card-wrapper" @click="goTo">
-      <div v-if="product.sale && this.in_stock" class="product-card-sale">{{$t('product.sale')}}</div>
-      <div class="product-card-image">
-        <img
-          v-if="product.images && product.images.length > 0 && product.images[0].file.url"
-          :src="product.images[0].file.url"
-        />
-        <img
-          v-else
-          src="~/assets/images/product_placeholder.jpg"
-        />
+  <client-only>
+    <div class="product-card col-xl-2 col-lg-3 col-md-4 col-6">
+      <div class="product-card-wrapper" @click="goTo">
+        <div v-if="product.sale && this.in_stock" class="product-card-sale">{{$t('product.sale')}}</div>
+        <div class="product-card-image">
+          <img
+            v-if="product.images && product.images.length > 0 && product.images[0].file.url"
+            :src="product.images[0].file.url"
+          />
+          <img
+            v-else
+            src="~/assets/images/product_placeholder.jpg"
+          />
+        </div>
+        <div class="product-card-name">{{ product.name }}</div>
+        <div v-if="!product.sale && this.in_stock" class="product-card-price">{{product.price}}$</div>
+        <div v-if="product.sale && this.in_stock" class="product-card-price product-card-price--sale">
+          <span>{{product.price}}$</span>
+          <s>{{product.orig_price}}$</s>
+        </div>
+        <div v-if="product.stock_status !== 'in_stock'" class="product-card-price product-card-price--sold">
+          <span>{{$t('product.sold')}}</span>
+        </div>
       </div>
-      <div class="product-card-name">{{ product.name }}</div>
-      <div v-if="!product.sale && this.in_stock" class="product-card-price">{{product.price}}$</div>
-      <div v-if="product.sale && this.in_stock" class="product-card-price product-card-price--sale">
-        <span>{{product.price}}$</span>
-        <s>{{product.orig_price}}$</s>
-      </div>
-      <div v-if="product.stock_status !== 'in_stock'" class="product-card-price product-card-price--sold">
-        <span>{{$t('product.sold')}}</span>
-      </div>
+      <AddToCart :product="product" />
     </div>
-    <AddToCart :product="product" />
-  </div>
+  </client-only>
 </template>
 <script>
   import AddToCart from '~/components/AddToCart';
