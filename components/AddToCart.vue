@@ -1,9 +1,10 @@
 <template>
-    <CustomButton
-        v-on:click.native="addToCart"
-        :text="getCartUpdating && getCartUpdatingId === this.product.id ? $t('cart.addToCartPending') : $t('cart.addToCart')"
-        icon="fa-shopping-cart"
-    />
+  <CustomButton
+      v-on:click.native="addToCart"
+      :text="getCartUpdating && getCartUpdatingId === this.product.id ? $t('cart.addToCartPending') : $t('cart.addToCart')"
+      :disabled="this.product.stock_status !== 'in_stock'"
+      icon="fa-shopping-cart"
+  />
 </template>
 <script>
 import CustomButton from "@/components/CustomButton.vue";
