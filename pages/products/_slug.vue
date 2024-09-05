@@ -1,30 +1,30 @@
 <template>
   <section class="content products">
-      <section class="container-fluid">
-        <div class="row">
-          <div class="col-md-12">
-             <h2 class="title-h2">{{ categoryTitle }}</h2>
-          </div>
+    <section class="container-fluid">
+      <div class="row">
+        <div class="col-md-12">
+          <h2 class="title-h2">{{ categoryTitle }}</h2>
         </div>
-        <div class="row" v-if="categoryDesc">
-          <div
-            v-html="categoryDesc"
-            class="col-md-8 offset-md-2 text-center product-description"
-          />
+      </div>
+      <div class="row" v-if="categoryDesc">
+        <div
+          v-html="categoryDesc"
+          class="col-md-8 offset-md-2 text-center product-description"
+        />
+      </div>
+      <div class="row">
+        <div class="col-12 text-center">
+          <CategoriesDropdown />
         </div>
-        <div class="row">
-          <div class="col-12 text-center">
-            <CategoriesDropdown />
-          </div>
-        </div>
-        <div class="row">
-          <NoProducts v-if="productsResults && productsResults.length === 0" />
-          <ProductCard v-else v-for="(product, index) in productsResults" :product="product" :key="index"/>
-        </div>
-         <div v-if="products.page_count > 1" class="row">
-            <CustomButton :text="$t('products.more')" v-on:click.native="loadMore" icon="fa-plus" :disabled="products && products.page >= products.page_count"/>
-          </div>
-      </section>
+      </div>
+      <div class="row">
+        <NoProducts v-if="productsResults && productsResults.length === 0" />
+        <ProductCard v-else v-for="(product, index) in productsResults" :product="product" :key="index"/>
+      </div>
+      <div v-if="products.page_count > 1" class="row">
+        <CustomButton :text="$t('products.more')" v-on:click.native="loadMore" icon="fa-plus" :disabled="products && products.page >= products.page_count"/>
+      </div>
+    </section>
   </section>
 </template>
 
@@ -64,6 +64,7 @@
 
       if (content) {
         return {
+          category,
           content,
           products,
           productsResults,
@@ -75,7 +76,7 @@
     },
     head() {
       return {
-        title: this.$prismic.asText(this.seo.title),
+        title: `${this.$prismic.asText(this.seo.title)} - ${this.category}`,
         link: [
         //{ rel: 'canonical', href: `https://<DOMAIN>${this.$prismic.linkResolver(this.document)}` }
         ],
