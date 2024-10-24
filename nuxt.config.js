@@ -26,6 +26,9 @@ export default {
       { rel:'icon', type:'image/png', href:'/favicon-32x32.png', sizes:'32x32' },
       { rel:'icon', type:'image/png', href:'/favicon-16x16.png', sizes:'16x16' },
       { rel:'icon', type:'image/png', href:'/favicon-128.png', sizes:'128x128' },
+      { rel: 'stylesheet', href:'/font-awesome/css/fontawesome.css'},
+      { rel: 'stylesheet', href:'/font-awesome/css/brands.css'},
+      { rel: 'stylesheet', href:'/font-awesome/css/solid.css'},
       { name:'application-name', content:'La Bête'},
       { name:'msapplication-TileColor', content:'#343434' },
       { name:'msapplication-TileImage', content:'/mstile-144x144.png' },
@@ -33,7 +36,6 @@ export default {
       { name:'msapplication-square150x150logo', content:'/mstile-150x150.png' },
       { name:'msapplication-wide310x150logo', content:'/mstile-310x150.png' },
       { name:'msapplication-square310x310logo', content:'/mstile-310x310.png' },
-      { rel: 'stylesheet', type: 'text/css', href: '//use.fontawesome.com/releases/v5.4.2/css/all.css'},
       { rel: 'stylesheet', type: 'text/css', href: '//fonts.googleapis.com/css?family=Assistant:200,300,400,600,700,800|PT+Serif'},
     ],
     script: [

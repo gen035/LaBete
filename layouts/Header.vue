@@ -45,14 +45,15 @@
                   {{ link.text }}
                 </NuxtLink>
               </li>
-              <li v-b-toggle.sidebar-cart><i class="fa fa-shopping-bag" aria-hidden="true"></i><span :class="getCartProductsCount > 0 ? 'hasProducts' : ''"></span></li>
+              <li v-b-toggle.sidebar-cart><i class="fa-solid fa-cart-shopping" aria-hidden="true"></i><span :class="getCartProductsCount > 0 ? 'hasProducts' : ''"></span></li>
           </ul>
         </div>
         <div class="col-4 header-nav-mobile-trigger d-md-none" @click="toggleMobileNav">
           <span>Menu<i class="fa fa-chevron-down"></i></span>
         </div>
-        <div class="col-2 header-nav-mobile-cart d-md-none" v-b-toggle.sidebar-cart>
-          <i class="fa fa-shopping-bag" aria-hidden="true"></i>
+        <div class="col-2 header-nav-mobile-cart d-md-none" v-b-toggle.sidebar-cart>\
+          <i class="fa-solid fa-cart-shopping" aria-hidden="true"></i>
+          <i class="fa-solid fa-cart-shopping" aria-hidden="true"></i>
           <span :class="getCartProductsCount > 0 ? 'hasProducts' : ''"></span>
         </div>
       </div>
