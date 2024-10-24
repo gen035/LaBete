@@ -40,7 +40,7 @@ export default {
     script: [
       { src: 'https://www.googletagmanager.com/gtag/js?id=G-TBQWHYP39H', async: true },
       // This script will only be included in production
-      ...(process.env.NODE_ENV === 'production'
+      ...(process.env.NODE_ENV === 'PRODUCTION'
         ? [{ src: '/ga.js', async: true}]
         : [])
     ]
