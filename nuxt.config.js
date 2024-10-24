@@ -37,6 +37,7 @@ export default {
       { rel: 'stylesheet', type: 'text/css', href: '//fonts.googleapis.com/css?family=Assistant:200,300,400,600,700,800|PT+Serif'},
     ],
     script: [
+      { src: 'https://www.googletagmanager.com/gtag/js?id=G-TBQWHYP39H', async: true },
       { src: '/ga.js', async: true}
     ]
   },
