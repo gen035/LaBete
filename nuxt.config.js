@@ -36,7 +36,6 @@ export default {
       { name:'msapplication-square150x150logo', content:'/mstile-150x150.png' },
       { name:'msapplication-wide310x150logo', content:'/mstile-310x150.png' },
       { name:'msapplication-square310x310logo', content:'/mstile-310x310.png' },
-      { rel: 'stylesheet', type: 'text/css', href: '//fonts.googleapis.com/css?family=Assistant:200,300,400,600,700,800|PT+Serif'},
     ],
     script: [
       { src: 'https://www.googletagmanager.com/gtag/js?id=G-TBQWHYP39H', async: true },

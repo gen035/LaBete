@@ -25,6 +25,7 @@
     "nuxt-i18n": "^5.12.7",
     "prismic-nuxt": "^0.5.1",
     "sass": "^1.52.3",
+    "sass-google-fonts": "^1.0.1",
     "sass-loader": "^7.1.0",
     "stylelint": "^13.3.2",
     "stylelint-order": "^4.0.0",
