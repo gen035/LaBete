@@ -94,7 +94,6 @@ export default {
     ['bootstrap-vue/nuxt'],
     '@nuxtjs/axios',
     '@nuxtjs/dotenv',
-    '@nuxtjs/sitemap'
   ],
   /*
   ** Build configuration

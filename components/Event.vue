@@ -8,6 +8,7 @@
         v-if="event.event_link.url"
         :href="event.event_link.url"
         :title="event.name[0].text"
+        :alt="event.name[0].text"
         target="_blank"
       />
     </div>
@@ -22,11 +23,12 @@
             <a
               :href="event.google_maps_link.url"
               :title="event.name[0].text"
+              :alt="event.name[0].text"
               target="_blank"
               data-track=""
               data-track-category="events"
               data-track-action="click"
-              :data-track-label="`${event.name[0].text} Map`"
+              :data-track-label="`${event.name[0].text}`"
             >
               <i class="fas fa-map-marker-alt"></i>
                {{ $t('event.map') }}
@@ -35,7 +37,8 @@
           <div v-if="event.event_link.url" class="event-link">
             <a
               :href="event.event_link.url"
-              :title="event.name[0].text"
+              :title="`${event.name[0].text} Information`"
+              :alt="`${event.name[0].text} Information`"
               target="_blank"
               data-track=""
               data-track-category="events"
