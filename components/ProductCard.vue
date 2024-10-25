@@ -7,6 +7,8 @@
           <img
             v-if="product.images && product.images.length > 0 && product.images[0].file.url"
             :src="product.images[0].file.url"
+            :alt="product.name"
+            :title="product.name"
           />
           <img
             v-else

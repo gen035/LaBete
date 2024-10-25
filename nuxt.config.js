@@ -5,6 +5,7 @@ export default {
   /*
   ** Headers of the page
   */
+ 
   head: {
     title: process.env.npm_package_name || '',
     meta: [
@@ -35,6 +36,7 @@ export default {
       { name:'msapplication-wide310x150logo', content:'/mstile-310x150.png' },
       { name:'msapplication-square310x310logo', content:'/mstile-310x310.png' },
     ],
+    
     script: [
       { src: 'https://www.googletagmanager.com/gtag/js?id=G-TBQWHYP39H', async: true },
       // This script will only be included in production
@@ -93,8 +95,7 @@ export default {
     }],
     ['bootstrap-vue/nuxt'],
     '@nuxtjs/axios',
-    '@nuxtjs/dotenv',
-    '@nuxtjs/sitemap'
+    '@nuxtjs/dotenv'
   ],
   /*
   ** Build configuration

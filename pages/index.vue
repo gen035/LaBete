@@ -50,18 +50,15 @@
     <section class="container home-images p-5">
       <div class="row align-items-center">
         <div class="col-md-6 home-image text-center p-4">
-          <Media :image="content.image_1"
-          />
+          <Media :image="content.image_1" />
         </div>
         <div class="col-md-6 home-image text-center p-4">
-          <Media :image="content.image_2"
-          />
+          <Media :image="content.image_2" />
         </div>
       </div>
       <div class="row">
         <div class="col-md-12 home-image text-center p-4">
-          <Media :image="content.image_3"
-          />
+          <Media :image="content.image_3" />
         </div>
       </div>
     </section>
