@@ -3,6 +3,7 @@
     v-if="image.url"
     :src="src"
     :alt="alt"
+    :title="alt"
     :class="returnClasses"
   />
 </template>
