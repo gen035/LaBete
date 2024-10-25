@@ -5,6 +5,7 @@ export default {
   /*
   ** Headers of the page
   */
+ 
   head: {
     title: process.env.npm_package_name || '',
     meta: [
@@ -93,7 +94,7 @@ export default {
     }],
     ['bootstrap-vue/nuxt'],
     '@nuxtjs/axios',
-    '@nuxtjs/dotenv',
+    '@nuxtjs/dotenv'
   ],
   /*
   ** Build configuration

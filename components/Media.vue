@@ -10,6 +10,10 @@
 <script>
   export default {
     props: {
+      altProp: {
+        type: String,
+        require: false
+      },
       image: {
         type: Object,
         require: true,
@@ -24,7 +28,10 @@
       alt() {
         if (this.image.alt) {
           return this.image.alt;
-        }else{
+        }else if (this.altProp){
+          return this.altProp;
+          
+        } else {
           return 'labete';
         }
       },

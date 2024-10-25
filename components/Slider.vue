@@ -1,13 +1,13 @@
 <template>
   <VueSlickCarousel v-bind="settings">
     <template v-for="(item, index) in data.slides">
-      <img :key="index" :src="item.slide.url" :alt="item.slide.alt" />
+      <Media :key="index" :image="item.slide" :altProp="item.slide.alt" />
     </template>
   </VueSlickCarousel>
 </template>
 <script>
   import VueSlickCarousel from 'vue-slick-carousel';
-
+  import Media from '~/components/Media';
   export default {
     props: {
       data: {
@@ -49,6 +49,7 @@
       }
     },
     components: {
+      Media,
       VueSlickCarousel
     }
   }
