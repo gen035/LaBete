@@ -22,7 +22,7 @@
         <ProductCard v-else v-for="(product, index) in productsResults" :product="product" :key="index"/>
       </div>
       <div v-if="products.page_count > 1" class="row">
-        <CustomButton :text="$t('products.more')" v-on:click.native="loadMore" icon="fa-plus" :disabled="products && products.page >= products.page_count"/>
+        <CustomButton :text="$t('products.more', { number: products.count - (products.limit * products.page)})" v-on:click.native="loadMore" icon="fa-plus" :disabled="products && products.page >= products.page_count" size="large" />
       </div>
     </section>
   </section>

@@ -24,7 +24,7 @@
             <ProductCard v-else v-for="(product, index) in this.productsResults" :product="product" :key="index"/>
           </div>
           <div class="row">
-            <CustomButton :text="$t('products.more')" v-on:click.native="loadMore" icon="fa-plus" :disabled="this.products && this.products.page >= this.products.page_count"/>
+            <CustomButton :text="$t('products.more', { number: products.count - (products.limit * products.page)})" v-on:click.native="loadMore" icon="fa-plus" :disabled="this.products && this.products.page >= this.products.page_count" size="large" />
           </div>
         </template>
       </section>
