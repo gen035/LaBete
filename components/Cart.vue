@@ -25,11 +25,12 @@
           <div class="row">
             <div class="col-12 text-center">
               <CustomButton
-                  :url="getCart?.checkout_url"
-                  :disabled="isCheckoutDisabled"
-                  target="_self"
-                  :text="$t('cart.checkout')"
-                  icon="fa-credit-card"
+                :aria="$t('cart.checkout')"
+                :url="getCart?.checkout_url"
+                :disabled="isCheckoutDisabled"
+                target="_self"
+                :text="$t('cart.checkout')"
+                icon="fa-credit-card"
               />
             </div>
           </div>
@@ -39,13 +40,17 @@
           <div v-if="getCartProducts?.length > 0" class="cart-items">
             <div v-for="(item, index) in getCartProducts">
               <b-card
-                v-if="item.product"
+                role="button"
+                :aria-label="item?.product?.name"
+                v-if="item?.product"
                 :key="index"
                 no-body
                 class="overflow-hidden cart-item"
                 @click="goTo(item)"
               >
                 <div
+                  role="button"
+                  :aria-label="$('cart.delete')"
                   v-if="item.product.stock_level <= 0"
                   class="cart-unavailable"
                   @click="removeItem(item)"
@@ -67,7 +72,7 @@
                       </b-card-text>
                       <b-card-text class="row">
                         <div class="col-6 cart-item-qty">{{$t('cart.qty')}} {{item.quantity}}</div>
-                        <div class="col-6 cart-item-delete" @click.stop="removeItem(item)">{{$t('cart.delete')}}</div>
+                        <div role="button" :aria-label="$t('cart.delete')" class="col-6 cart-item-delete" @click.stop="removeItem(item)">{{$t('cart.delete')}}</div>
                       </b-card-text>
                     </b-card-body>
                   </b-col>

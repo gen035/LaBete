@@ -1,11 +1,11 @@
 <template>
   <client-only>
-    <div class="cookieModalWrapper" v-if="this.$store.state.cookieModalOpened && !this.$cookies.get('labete_cookie_seen')">
+    <div role="dialog" class="cookieModalWrapper" v-if="this.$store.state.cookieModalOpened && !this.$cookies.get('labete_cookie_seen')">
       <div class="cookieModal">
         <div class="cookieModal-content" v-html="this.$t('cookie.text')" />
         <div class="cookieModal-buttons">
-          <CustomButton v-on:click.native="accept" :text="$t('cookie.accept')" icon="fa-check"/>
-          <CustomButton v-on:click.native="openSettings" :text="$t('cookie.params')" icon="fa-cog"/>
+          <CustomButton v-on:click.native="accept" :aria-label="$t('cookie.accept')" :text="$t('cookie.accept')" icon="fa-check"/>
+          <CustomButton v-on:click.native="openSettings" :aria-label="$t('cookie.accept')" :text="$t('cookie.params')" icon="fa-cog"/>
         </div>
       </div>
     </div>

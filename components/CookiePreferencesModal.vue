@@ -1,6 +1,6 @@
 <template>
   <client-only>
-    <div class="cookiePreferencesModalWrapper" v-if="this.$store.state.cookiePreferencesModalOpened">
+    <div role="dialog" class="cookiePreferencesModalWrapper" v-if="this.$store.state.cookiePreferencesModalOpened">
       <div class="cookiePreferencesModal">
         <div class="cookiePreferencesModal-content">
           <h1>{{ $t('cookie.params') }}</h1>
@@ -26,7 +26,7 @@
           </div>
           <b-form-checkbox v-model="$cookies.get('LABETE_PRIVACY_PERSO')" name="check-button" size="md" @change="setCookieCategory('LABETE_PRIVACY_PERSO')" switch />
         </div>
-        <CustomButton v-on:click.native="save" :text="$t('cookie.save')" icon="fa-save"/>
+        <CustomButton v-on:click.native="save" :aria-label="$t('cookie.save')" :text="$t('cookie.save')" icon="fa-save"/>
       </div>
     </div>
   </client-only>

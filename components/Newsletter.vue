@@ -7,7 +7,7 @@
           <div class="newsletter-wrapper">
             <label for="ci_email" class="sr-only">Email</label>
             <input type="text" id="ci_email" name="ci_email" class="ci_email_footer" :placeholder="$t('newsletter.placeholder')" maxlength="255" v-model="email" />
-            <button type="submit" value="Send" id="ci_submit" :class="{isDisabled : disabled}"><i class="fa fa-arrow-right"></i></button>
+            <button type="submit" :aria-label="$t('newsletter.submit')" value="Send" id="ci_submit" :class="{isDisabled : disabled}"><i class="fa fa-arrow-right"></i></button>
         </div>
         <div style="display:block; visibility:hidden; height:1px;">
         <input style="display:none;" type="text" id="ci_verification" name="ci_verification" />

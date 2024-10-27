@@ -1,5 +1,6 @@
 <template>
   <CustomButton
+      :aria-label="$t('cart.addToCart')"
       v-on:click.native="addToCart"
       :text="getCartUpdating && getCartUpdatingId === this.product.id ? $t('cart.addToCartPending') : $t('cart.addToCart')"
       :disabled="this.product.stock_status !== 'in_stock'"

@@ -1,7 +1,7 @@
 <template>
-  <div class="newsletterModalWrapper" v-if="getNewsletter.isOpened">
+  <div role="dialog" class="newsletterModalWrapper" v-if="getNewsletter.isOpened">
     <div class="newsletterModal">
-      <i class="far fa-times-circle newsletterModal-close" v-on:click="close"></i>
+      <i role="button" :aria-label="$t('newsletter.close')" class="far fa-times-circle newsletterModal-close" v-on:click="close"></i>
       <div class="newsletterModal-img" v-bind:style="{ 'background-image': 'url(' + getNewsletter.data?.image?.url +')' }"></div>
       <div class="newsletterModal-content">
         <h1>{{ getNewsletter.data?.title }}</h1>

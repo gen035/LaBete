@@ -1,5 +1,7 @@
 <template>
   <li
+    role="button"
+    :aria-label="`Expand - ${year}`"
     v-if="events.length > 0"
     :class="`menu`"
     @click="toggle"

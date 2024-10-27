@@ -9,7 +9,7 @@
           <NuxtLink
             :to="localePath('contact')"
           >
-            <i class="fa fa-comment" aria-hidden="true"></i>
+            <i class="fa fa-comment" aria-hidden="true" :aria-label="$t('top.contact.text')"></i>
             {{ $t('top.contact.text') }}
           </NuxtLink>
         </li>
@@ -32,8 +32,9 @@
           </a>
         </div>
         <div class="col-lg-9 col-md-12 header-nav-wrapper">
-          <ul class="header-nav">
+          <ul role="navigation" class="header-nav">
              <li
+                role="menuitem"
                 v-for="(link, index) in  nav"
                 :key="index"
               >
@@ -45,7 +46,10 @@
                   {{ link.text }}
                 </NuxtLink>
               </li>
-              <li v-b-toggle.sidebar-cart><i class="fa-solid fa-cart-shopping" aria-hidden="true"></i><span :class="getCartProductsCount > 0 ? 'hasProducts' : ''"></span></li>
+              <li v-b-toggle.sidebar-cart role="button">
+                <i class="fa-solid fa-cart-shopping" aria-hidden="true"></i>
+                <span :class="getCartProductsCount > 0 ? 'hasProducts' : ''"></span>
+              </li>
           </ul>
         </div>
         <div class="col-4 header-nav-mobile-trigger d-md-none" @click="toggleMobileNav">
