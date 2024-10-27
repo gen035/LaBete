@@ -1,6 +1,7 @@
 <template>
-  <ul class="mobile-nav d-md-none">
+  <ul role="navigationn" class="mobile-nav d-md-none">
     <li
+      role="menuitem"
       v-for="(link, index) in  nav"
       :key="index"
     >
@@ -12,7 +13,7 @@
         {{ link.text }}
       </NuxtLink>
     </li>
-    <li>
+    <li role="menuitem">
       <NuxtLink
         @click.native="toggleMobileNav"
         :to="localePath('contact')"
@@ -21,10 +22,10 @@
         Contact
       </NuxtLink>
     </li>
-    <li>
+    <li role="menuitem">
       <Nuxt-link :to="switchLocalePath('fr')">Français</Nuxt-link>
     </li>
-    <li>
+    <li role="menuitem">
       <Nuxt-link :to="switchLocalePath('en')">English</Nuxt-link>
     </li>
   </ul>

@@ -34,6 +34,7 @@
         <div class="col-lg-9 col-md-12 header-nav-wrapper">
           <ul role="navigation" class="header-nav">
              <li
+                role="menuitem"
                 v-for="(link, index) in  nav"
                 :key="index"
               >
