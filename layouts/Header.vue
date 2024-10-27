@@ -32,7 +32,7 @@
           </a>
         </div>
         <div class="col-lg-9 col-md-12 header-nav-wrapper">
-          <ul role="navigation" class="header-nav">
+          <ul role="menu" class="header-nav">
              <li
                 role="menuitem"
                 v-for="(link, index) in  nav"
@@ -46,8 +46,8 @@
                   {{ link.text }}
                 </NuxtLink>
               </li>
-              <li v-b-toggle.sidebar-cart role="button">
-                <i class="fa-solid fa-cart-shopping" aria-hidden="true"></i>
+              <li v-b-toggle.sidebar-cart>
+                <i role="button" :aria-label="$t('header.cart')" class="fa-solid fa-cart-shopping" aria-hidden="true"></i>
                 <span :class="getCartProductsCount > 0 ? 'hasProducts' : ''"></span>
               </li>
           </ul>
@@ -56,7 +56,7 @@
           <span>Menu<i class="fa fa-chevron-down"></i></span>
         </div>
         <div class="col-2 header-nav-mobile-cart d-md-none" v-b-toggle.sidebar-cart>
-          <i class="fa-solid fa-cart-shopping" aria-hidden="true"></i>
+          <i role="button" :aria-label="$t('header.cart')" class="fa-solid fa-cart-shopping" aria-hidden="true"></i>
           <span :class="getCartProductsCount > 0 ? 'hasProducts' : ''"></span>
         </div>
       </div>

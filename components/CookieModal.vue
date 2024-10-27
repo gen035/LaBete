@@ -1,6 +1,6 @@
 <template>
   <client-only>
-    <div role="dialog" class="cookieModalWrapper" v-if="this.$store.state.cookieModalOpened && !this.$cookies.get('labete_cookie_seen')">
+    <div role="dialog" :aria-label="$t('cookie.text')" class="cookieModalWrapper" v-if="this.$store.state.cookieModalOpened && !this.$cookies.get('labete_cookie_seen')">
       <div class="cookieModal">
         <div class="cookieModal-content" v-html="this.$t('cookie.text')" />
         <div class="cookieModal-buttons">
