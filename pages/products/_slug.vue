@@ -55,7 +55,7 @@
 
       const category =  params && params.category;
       let products = await app.$swell.products.list({
-        limit: 25,
+        limit: 24,
         sort: "date_created desc",
         categories: category
       });
@@ -88,7 +88,7 @@
     methods: {
       async loadMore() {
         const newProducts = await this.$swell.products.list({
-          limit: 25,
+          limit: 24,
           sort: "date_created desc",
           categories: this.category,
           page: this.products.page + 1

@@ -85,7 +85,7 @@
     },
     async mounted() {
       this.products = await this.$swell.products.list({
-        limit: 25,
+        limit: 24,
         sort: "date_created desc"
       });
 
@@ -95,7 +95,7 @@
     methods: {
       async loadMore() {
         const newProducts = await this.$swell.products.list({
-          limit: 25,
+          limit: 24,
           sort: "date_created desc",
           page: this.products.page + 1
         });
