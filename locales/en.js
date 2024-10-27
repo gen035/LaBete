@@ -104,7 +104,8 @@ export default {
   newsletter: {
     title: 'Subscribe to our newsletter',
     placeholder: 'Email',
-    submit: 'Subscribe to our newsletter'
+    submit: 'Subscribe to our newsletter',
+    close: 'Close'
   },
   passed_events: [
     {

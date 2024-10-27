@@ -1,5 +1,5 @@
 <template>
-  <button :class="['button', {'button--disabled' : (this.disabled)}]" v-on:click="click">
+  <button :arial-label="aria" :class="['button', {'button--disabled' : (this.disabled)}]" v-on:click="click">
     <p class="button-text">
       {{this.text}}
     </p>
@@ -11,6 +11,10 @@
 <script>
 export default {
   props: {
+    aria: {
+      type: String,
+      require: false
+    },
     text: {
       type: String,
       require: false

@@ -104,7 +104,8 @@ export default {
   newsletter: {
     title: 'S\'abonner à l\'infolettre',
     placeholder: 'Courriel',
-    submit: 'S\'abonner à l\'infolettre'
+    submit: 'S\'abonner à l\'infolettre',
+    close: 'Fermer'
   },
   passed_events: [
     {
