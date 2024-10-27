@@ -103,7 +103,8 @@ export default {
   },
   newsletter: {
     title: 'S\'abonner à l\'infolettre',
-    placeholder: 'Courriel'
+    placeholder: 'Courriel',
+    submit: 'S\'abonner à l\'infolettre'
   },
   passed_events: [
     {

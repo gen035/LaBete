@@ -103,7 +103,8 @@ export default {
   },
   newsletter: {
     title: 'Subscribe to our newsletter',
-    placeholder: 'Email'
+    placeholder: 'Email',
+    submit: 'Subscribe to our newsletter'
   },
   passed_events: [
     {
