@@ -56,9 +56,6 @@ export default {
       rose: "Pink",
       argent: "Silver"
     },
-    header: {
-      cart: 'Cart'
-    },
     clear: 'Clear filters',
     material: {
       charbon: "Coal",
@@ -68,6 +65,9 @@ export default {
       fourrure: "Fur",
       bois: "Wood",
     }
+  },
+  header: {
+    cart: 'Cart'
   },
   home: {
     links: {
@@ -263,10 +263,15 @@ export default {
     orderSelection: 'Select',
     categories: {
       all: 'All',
-      text: 'Categories'
+      text: 'Categories',
+      collier: 'Necklace',
+      bracelet: 'Bracelet',
+      montre: 'Watch',
+      'boucles-doreille': 'Earring',
+      'la-bte-noire': 'La Bête Noire!'
     },
     none: 'No products available',
-    more: 'See More...'
+    more: 'See More... ({number})'
   },
   top: {
     contact:  {

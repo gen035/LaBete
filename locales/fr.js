@@ -263,10 +263,15 @@ export default {
     orderSelection: 'Choisir',
     categories: {
       all: 'Tout',
-      text: 'Categories'
+      text: 'Categories',
+      collier: 'Collier',
+      bracelet: 'Bracelet',
+      montre: 'Montre',
+      'boucles-doreille': 'Boucles d\'oreilles',
+      'la-bte-noire': 'La Bête Noire !'
     },
     none: 'Pas de produits disponibles',
-    more: 'Voir plus...'
+    more: 'Voir plus... ({number})'
   },
   top: {
     contact: {

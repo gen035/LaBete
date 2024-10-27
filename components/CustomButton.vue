@@ -1,5 +1,5 @@
 <template>
-  <button :arial-label="aria" :class="['button', {'button--disabled' : (this.disabled)}]" v-on:click="click">
+  <button :arial-label="aria" :class="['button', {'button--disabled' : (this.disabled)}, `button--${size}`]" v-on:click="click">
     <p class="button-text">
       {{this.text}}
     </p>
@@ -35,6 +35,11 @@ export default {
       type: String,
       require: true,
       default: 'fa-shopping-cart'
+    },
+    size: {
+      type: String,
+      require: false,
+      default: ''
     }
   },
   methods: {

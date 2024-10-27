@@ -10,6 +10,9 @@
   transition: .2s;
   width: 200px;
   border: none;
+  &--large {
+    width: 250px;
+  }
   &--disabled {
     opacity: 0.2;
     cursor: none;

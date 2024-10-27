@@ -24,7 +24,7 @@
             <ProductCard v-else v-for="(product, index) in this.productsResults" :product="product" :key="index"/>
           </div>
           <div class="row">
-            <CustomButton :text="$t('products.more')" v-on:click.native="loadMore" icon="fa-plus" :disabled="this.products && this.products.page >= this.products.page_count"/>
+            <CustomButton :text="$t('products.more', { number: products.count - (products.limit * products.page)})" v-on:click.native="loadMore" icon="fa-plus" :disabled="this.products && this.products.page >= this.products.page_count" size="large" />
           </div>
         </template>
       </section>
@@ -85,7 +85,7 @@
     },
     async mounted() {
       this.products = await this.$swell.products.list({
-        limit: 25,
+        limit: 24,
         sort: "date_created desc"
       });
 
@@ -95,7 +95,7 @@
     methods: {
       async loadMore() {
         const newProducts = await this.$swell.products.list({
-          limit: 25,
+          limit: 24,
           sort: "date_created desc",
           page: this.products.page + 1
         });
