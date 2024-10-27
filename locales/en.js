@@ -263,7 +263,12 @@ export default {
     orderSelection: 'Select',
     categories: {
       all: 'All',
-      text: 'Categories'
+      text: 'Categories',
+      collier: 'Necklace',
+      bracelet: 'Bracelet',
+      montre: 'Watch',
+      'boucles-doreille': 'Earring',
+      'la-bte-noire': 'La Bête Noire!'
     },
     none: 'No products available',
     more: 'See More...'
