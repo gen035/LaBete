@@ -32,7 +32,7 @@
           </a>
         </div>
         <div class="col-lg-9 col-md-12 header-nav-wrapper">
-          <ul role="menu" class="header-nav">
+          <ul role="menubar" class="header-nav">
              <li
                 role="menuitem"
                 v-for="(link, index) in  nav"
@@ -46,8 +46,8 @@
                   {{ link.text }}
                 </NuxtLink>
               </li>
-              <li v-b-toggle.sidebar-cart>
-                <i role="button" :aria-label="$t('header.cart')" class="fa-solid fa-cart-shopping" aria-hidden="true"></i>
+              <li :aria-label="$t('header.cart')" v-b-toggle.sidebar-cart>
+                <i class="fa-solid fa-cart-shopping" aria-hidden="true"></i>
                 <span :class="getCartProductsCount > 0 ? 'hasProducts' : ''"></span>
               </li>
           </ul>
@@ -55,8 +55,8 @@
         <div class="col-4 header-nav-mobile-trigger d-md-none" @click="toggleMobileNav">
           <span>Menu<i class="fa fa-chevron-down"></i></span>
         </div>
-        <div class="col-2 header-nav-mobile-cart d-md-none" v-b-toggle.sidebar-cart>
-          <i role="button" :aria-label="$t('header.cart')" class="fa-solid fa-cart-shopping" aria-hidden="true"></i>
+        <div :aria-label="$t('header.cart')"class="col-2 header-nav-mobile-cart d-md-none" v-b-toggle.sidebar-cart>
+          <i class="fa-solid fa-cart-shopping" aria-hidden="true"></i>
           <span :class="getCartProductsCount > 0 ? 'hasProducts' : ''"></span>
         </div>
       </div>
