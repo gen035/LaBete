@@ -66,6 +66,9 @@ export default {
     map: 'Voir sur la carte',
     info: 'Information'
   },
+  header: {
+    cart: 'Cart'
+  },
   home: {
     links: {
       store: 'En magasin',

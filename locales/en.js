@@ -56,6 +56,9 @@ export default {
       rose: "Pink",
       argent: "Silver"
     },
+    header: {
+      cart: 'Cart'
+    },
     clear: 'Clear filters',
     material: {
       charbon: "Coal",

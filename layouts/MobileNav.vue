@@ -1,5 +1,5 @@
 <template>
-  <ul role="navigationn" class="mobile-nav d-md-none">
+  <ul role="menu" class="mobile-nav d-md-none">
     <li
       role="menuitem"
       v-for="(link, index) in  nav"
