@@ -33,24 +33,24 @@
         </div>
         <div class="col-lg-9 col-md-12 header-nav-wrapper">
           <ul role="menubar" class="header-nav">
-             <li
-                role="menuitem"
-                v-for="(link, index) in  nav"
-                :key="index"
+            <li
+              role="menuitem"
+              v-for="(link, index) in  nav"
+              :key="index"
+            >
+              <NuxtLink
+                :to="localePath(link.name)"
+                active-class="active"
+                exact
               >
-                <NuxtLink
-                  :to="localePath(link.name)"
-                  active-class="active"
-                  exact
-                >
-                  {{ link.text }}
-                </NuxtLink>
-              </li>
-              <li :aria-label="$t('header.cart')" v-b-toggle.sidebar-cart>
-                <i class="fa-solid fa-cart-shopping" aria-hidden="true"></i>
-                <span :class="getCartProductsCount > 0 ? 'hasProducts' : ''"></span>
-              </li>
+                {{ link.text }}
+              </NuxtLink>
+            </li>
           </ul>
+          <span :aria-label="$t('header.cart')" v-b-toggle.sidebar-cart>
+            <i class="fa-solid fa-cart-shopping" aria-hidden="true"></i>
+            <span :class="getCartProductsCount > 0 ? 'hasProducts' : ''"></span>
+          </span>
         </div>
         <div class="col-4 header-nav-mobile-trigger d-md-none" @click="toggleMobileNav">
           <span>Menu<i class="fa fa-chevron-down"></i></span>

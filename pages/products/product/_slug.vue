@@ -5,7 +5,7 @@
           <div class="col-md-6 col-lg-5 col-xl-4 col-xxl-3 offset-lg-1 offset-xl-2 offset-xxl-3 product-slider">
             <VueSlickCarousel v-if="product.images && product.images.length > 0" v-bind="settings">
               <template v-for="(image, index) in product.images">
-                <img :key="index" :src="image.file.url" />
+                <img :key="index" :src="image.file.url" :alt="`${product.name} -  ${index}`" />
               </template>
             </VueSlickCarousel>
           </div>
