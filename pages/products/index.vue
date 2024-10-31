@@ -21,7 +21,7 @@
         <template v-if="this.hasFetched">
           <div class="row">
             <NoProducts v-if="this.productsResults && this.productsResults.length === 0" />
-            <ProductCard v-else v-for="(product, index) in this.productsResults" :product="product" :key="index"/>
+            <ProductCard v-else v-for="(product, index) in this.productsResults" :product="product" :key="product.id"/>
           </div>
           <div class="row">
             <CustomButton :text="$t('products.more', { number: products.count - (products.limit * products.page)})" v-on:click.native="loadMore" icon="fa-plus" :disabled="this.products && this.products.page >= this.products.page_count" size="large" />
