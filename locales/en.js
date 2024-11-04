@@ -288,8 +288,10 @@ export default {
   },
   footer: {
     cookies: 'Set cookies',
-    policy: 'Privacy policy',
-    'policy-cookie': 'Cookie policy',
-    'policy-return': 'Return policy'
+    policy: {
+      privacy: 'Privacy Policy',
+      cookie: 'Cookie Policy',
+      return: 'Return Policy'
+    }
   }
 }

@@ -31,7 +31,7 @@
       }).catch((error) => {
           console.error('Error fetching document:', error);
       });
-      console.log(content)
+
       let seo = await app.$prismic.api.getByID(content.seo.id)
       seo = seo.data;
 
