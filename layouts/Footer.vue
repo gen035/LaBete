@@ -87,7 +87,7 @@
             {{ this.getSettings.footer_copyright[0].text }} {{ date }}
           </div>
           <div class="footer-policy">
-            <NuxtLink :to="localePath('policy')" exact>
+            <NuxtLink :to="localePath('privacy-policy')" exact>
               {{ $t('footer.policy.privacy') }}
             </NuxtLink>
             <NuxtLink :to="localePath('cookie-policy')" exact>

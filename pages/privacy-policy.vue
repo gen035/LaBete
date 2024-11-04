@@ -1,5 +1,5 @@
 <template>
-  <section class="content policy">
+  <section class="content privacy_policy">
       <section class="container">
         <div class="row">
             <div
@@ -20,16 +20,18 @@
       const locale = store.state.i18n.locale;
       let content = []
 
-      await app.$prismic.api.query(
-        app.$prismic.predicates.at('document.type', 'policy'), {
-           lang: `${locale}-ca`
-        }
-      ).then((response) => {
-        response.results.forEach(result => {
-          content = result.data;
-        });
-      })
-
+      await app.$prismic.api.getByUID('page', 'privacy_policy', {
+          lang: `${locale}-ca`
+      }).then((response) => {
+          if (response) {
+              content = response.data;
+          } else {
+              console.error('Document not found');
+          }
+      }).catch((error) => {
+          console.error('Error fetching document:', error);
+      });
+  
       let seo = await app.$prismic.api.getByID(content.seo.id)
       seo = seo.data;
 
@@ -61,8 +63,8 @@
     },
     nuxtI18n: {
       paths: {
-        fr: '/politique',
-        en: '/policy'
+         fr: '/politique-confidentialite',
+        en: '/privacy-policy'
       }
     },
   }
