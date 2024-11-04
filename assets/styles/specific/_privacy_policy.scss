@@ -1,0 +1,18 @@
+.privacy_policy {
+  p {
+    &:first-of-type {
+      font-weight: bold;
+      display: block;
+      margin-bottom: 15px;
+    }
+    strong {
+      font-weight: bold;
+      margin-top: 15px;
+      display: block;
+    }
+    a {
+      color: $gold;
+      font-weight: bold;
+    }
+  }
+}

@@ -1,5 +1,5 @@
 <template>
-  <section class="content cookie_policy">
+  <section class="content privacy_policy">
       <section class="container">
         <div class="row">
             <div
@@ -20,7 +20,7 @@
       const locale = store.state.i18n.locale;
       let content = []
 
-      await app.$prismic.api.getByUID('page', 'cookie_policy', {
+      await app.$prismic.api.getByUID('page', 'privacy_policy', {
           lang: `${locale}-ca`
       }).then((response) => {
           if (response) {
@@ -31,7 +31,7 @@
       }).catch((error) => {
           console.error('Error fetching document:', error);
       });
-
+  
       let seo = await app.$prismic.api.getByID(content.seo.id)
       seo = seo.data;
 
@@ -63,8 +63,8 @@
     },
     nuxtI18n: {
       paths: {
-        fr: '/politique-cookie',
-        en: '/cookie-policy'
+         fr: '/politique-confidentialite',
+        en: '/privacy-policy'
       }
     },
   }

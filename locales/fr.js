@@ -288,7 +288,10 @@ export default {
   },
   footer: {
     cookies: 'Paramétrer les cookies',
-    policy: 'Politique de confidentialité',
-    'policy-cookie': 'Politique de cookie'
+    policy: {
+      privacy: 'Politique de confidentialité',
+      cookie: 'Politique de cookie',
+      return: 'Politique de remboursement'
+    }
   }
 }
