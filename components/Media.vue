@@ -5,6 +5,7 @@
     :alt="alt"
     :title="alt"
     :class="returnClasses"
+    :aria-hidden="ariaHidden"
   />
 </template>
 <script>
@@ -13,6 +14,11 @@
       altProp: {
         type: String,
         require: false
+      },
+      ariaHidden: {
+        type: Boolean,
+        require: false,
+        default: false
       },
       image: {
         type: Object,

@@ -1,7 +1,7 @@
 <template>
   <VueSlickCarousel v-bind="settings">
     <template v-for="(item, index) in data.slides">
-      <Media :key="index" :image="item.slide" :altProp="item.slide.alt" />
+      <Media :key="index" :image="item.slide" :altProp="item.slide.alt" :ariaHidden="true"/>
     </template>
   </VueSlickCarousel>
 </template>
@@ -36,15 +36,6 @@
               }
             }
           ]
-        }
-      }
-    },
-    computed: {
-      linkTarget() {
-        if (this.card.link.url.indexOf('etsy') === -1) {
-          return "_self"
-        } else {
-          return "_blank"
         }
       }
     },
