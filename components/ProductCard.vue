@@ -1,6 +1,6 @@
 <template>
   <client-only>
-    <div class="product-card col-xl-2 col-lg-3 col-md-4 col-6">
+    <div class="product-card col-xl-2 col-lg-3 col-md-4 col-6" :id="product.id">
       <div role="button" :aria-label="product?.name" class="product-card-wrapper" @click="goTo">
         <div v-if="product.sale && this.in_stock" class="product-card-sale">{{$t('product.sale')}}</div>
         <div class="product-card-image">

@@ -1,7 +1,7 @@
 <template>
   <section class="container">
     <div class="row">
-      <div class="offset-md-1 col-md-10">
+      <div class="offset-md-2 col-md-8">
         <h1>{{ content.title[0].text }}</h1>
         <div v-if="events.length === 0" class="events-empty text-center">{{ $t('events.empty') }}</div>
         <template
@@ -17,7 +17,7 @@
     </div>
     <div class="row">
       <div class="offset-md-3 col-md-6">
-        <h1>{{ content.title_passed[0].text }}</h1>
+        <h2 class="title-h1">{{ content.title_passed[0].text }}</h2>
         <ul class="accordion">
           <template
             v-for="(item, index) in passed">
