@@ -19,7 +19,7 @@ export default {
     alt: 'bijoux, cuir, fait a la main'
   },
   cookie: {
-    text: 'Ce site Web utilise des cookies pour vous garantir la meilleure expérience sur notre site. En continuant à utiliser ce site Web, vous consentez à l\'utilisation de cookies conformément à notre <a href="https://la-bete.com/politique" target="_blank">politique de confidentialité</a>.',
+    text: 'Ce site Web utilise des cookies pour vous garantir la meilleure expérience sur notre site. En continuant à utiliser ce site Web, vous consentez à l\'utilisation de cookies conformément à notre <a href="https://la-bete.com/politique-confidentialite" target="_blank">politique de confidentialité</a>.',
     accept: 'Accepter',
     params: 'Paramètres',
     save: 'Sauvegarder',
