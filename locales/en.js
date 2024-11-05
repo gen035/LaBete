@@ -19,7 +19,7 @@ export default {
     alt: 'jewelry, leather, hand made'
   },
   cookie: {
-    text: 'This website uses cookies to ensure you get the best experience on our site. By continuing to use this website, you consent to the use of cookies in accordance with our <a href="https://la-bete.com/en/policy">Privacy Policy.</a>',
+    text: 'This website uses cookies to ensure you get the best experience on our site. By continuing to use this website, you consent to the use of cookies in accordance with our <a href="https://la-bete.com/en/privacy-policy">Privacy Policy.</a>',
     accept: 'Accept',
     params: 'Settings',
     save: 'Save',
