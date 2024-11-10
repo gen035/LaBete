@@ -23,7 +23,7 @@
 }
 .event-image {
   background-position: center;
-  background-size: cover;
+  background-size: 100% auto;
   min-height: 200px;
   width: 100%;
   @media (min-width: 992px) {
