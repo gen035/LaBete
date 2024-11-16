@@ -1,8 +1,12 @@
 <template>
-  <section class="container">
+  <section class="container events">
     <div class="row">
       <div class="offset-md-2 col-md-8">
         <h1>{{ content.title[0].text }}</h1>
+        <p
+            v-html="$prismic.asHtml(content.content)"
+            class="col-md-12 events-content"
+          />
         <div v-if="events.length === 0" class="events-empty text-center">{{ $t('events.empty') }}</div>
         <template
             v-if="events.length > 0"
