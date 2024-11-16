@@ -7,7 +7,10 @@
             <Slider :data="slider" />
           </div>
           <div class="col-md-4 d-none d-md-block position-relative">
-            <h1 class="home-title">{{ content.hero_title[0].text }}</h1>
+            <div class="home-text-box">
+              <h1 class="home-title">{{ content.hero_title[0].text }}</h1>
+              <p class="home-subtitle">{{ content.hero_subtitle[0].text }}</p>
+            </div>
           </div>
         </div>
       </div>
@@ -15,9 +18,8 @@
     <section class="container d-md-none">
       <div class="row">
         <div class="col-12">
-          <div class="home-title--mobile">
-            {{ content.hero_title[0].text }}
-          </div>
+          <h1 class="home-title--mobile">{{ content.hero_title[0].text }}</h1>
+          <p class="home-subtitle--mobile">{{ content.hero_subtitle[0].text }}</p>
         </div>
       </div>
     </section>
