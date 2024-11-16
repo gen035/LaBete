@@ -83,8 +83,13 @@ export default {
         path: ''
       },
       {
+        name: 'brand',
+        text: 'La marque',
+        path: 'marque'
+      },
+      {
         name: 'artist',
-        text: 'Démarche artistique',
+        text: 'La créatrice',
         path: 'artiste'
       },
       {
