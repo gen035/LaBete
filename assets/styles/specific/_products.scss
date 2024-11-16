@@ -4,6 +4,14 @@
   }
   .product-description {
     padding-bottom: 50px;
+
+    p {
+      margin: 12px auto;
+
+      strong {
+        font-weight: 700;
+      }
+    }
   }
   .noProducts {
     h3 {
