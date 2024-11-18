@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="home">
     <section class="home-slider container-fluid">
       <div class="container">
         <div class="row">
@@ -10,6 +10,7 @@
             <div class="home-text-box">
               <h1 class="home-title">{{ content.hero_title[0].text }}</h1>
               <p class="home-subtitle">{{ content.hero_subtitle[0].text }}</p>
+              <a class="button--simple" :href="hero_button.url.url" v-if="hero_button">{{hero_button.text}}</a>
             </div>
           </div>
         </div>
@@ -20,6 +21,7 @@
         <div class="col-12">
           <h1 class="home-title--mobile">{{ content.hero_title[0].text }}</h1>
           <p class="home-subtitle--mobile">{{ content.hero_subtitle[0].text }}</p>
+          <a class="button--simple" :href="hero_button.url.url" v-if="hero_button">{{hero_button.text}}</a>
         </div>
       </div>
     </section>
@@ -44,7 +46,7 @@
     <template
       v-for="(block, index) in blocks"
     >
-      <HomePageBlock
+      <Block
         :block="block"
         :index="index"
       />
@@ -71,7 +73,7 @@
   import Media from '~/components/Media';
   import Card from '~/components/Card';
   import Slider from '~/components/Slider';
-  import HomePageBlock from '~/components/HomePageBlock';
+  import Block from '~/components/Block';
 
   export default {
     async asyncData({ app, error, store}) {
@@ -87,6 +89,9 @@
             content = result.data;
           });
         })
+
+      let hero_button = await app.$prismic.api.getByID(content.hero_button.id);
+      hero_button = hero_button.data;
 
       let seo = await app.$prismic.api.getByID(content.seo.id)
       seo = seo.data;
@@ -110,6 +115,7 @@
       if (content) {
         return {
           content,
+          hero_button,
           seo,
           blocks,
           cards,
@@ -131,8 +137,8 @@
       }
     },
     components: {
+      Block,
       Card,
-      HomePageBlock,
       Media,
       Slider
     },

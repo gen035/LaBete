@@ -1,6 +1,6 @@
 <template>
   <section
-    class="home-page-block container-fluid"
+    class="block container-fluid"
     :id="`block${index}`">
     <div
       :class="`row ${isOdd}`"
@@ -9,11 +9,11 @@
         block.image.url ? 'col-md-6' : 'col-md-12',
         'd-flex',
         'align-items-center',
-        'home-page-block-text'
+        'block-text'
       ]">
         <div v-html="$prismic.asHtml(block.description)" />
       </div>
-      <div v-if="block.image.url" class="col-md-6 home-page-block-img" :style="{backgroundImage: `url(${block.image.url})`}" />
+      <div v-if="block.image.url" class="col-md-6 block-img" :style="{backgroundImage: `url(${block.image.url})`}" />
     </div>
   </section>
 </template>
