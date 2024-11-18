@@ -10,7 +10,7 @@
             <div class="home-text-box">
               <h1 class="home-title">{{ content.hero_title[0].text }}</h1>
               <p class="home-subtitle">{{ content.hero_subtitle[0].text }}</p>
-              <a class="button--simple" :href="hero_button.url.url" v-if="hero_button">{{hero_button.text}}</a>
+              <a class="button-simple" :href="hero_button.url.url" v-if="hero_button">{{hero_button.text}}</a>
             </div>
           </div>
         </div>
@@ -25,6 +25,15 @@
         </div>
       </div>
     </section>
+    <template
+      v-for="(block, index) in top_blocks"
+    >
+      <Block
+        :block="block"
+        :index="index"
+        size="small"
+      />
+    </template>
     <section
       v-if="cards"
       class="py-5"
@@ -112,6 +121,22 @@
       const sliderData = await app.$prismic.api.getByID(content.slider.id);
       slider = sliderData.data;
 
+      let top_blocks = [];
+      for (const block of content.top_blocks) {
+        const item = await app.$prismic.api.getByID(block.top_block.id);
+        
+        let itemButton;
+        if(item.data?.button?.id) {
+          itemButton = await app.$prismic.api.getByID(item.data.button.id);
+        }
+
+        if(itemButton) {
+          item.data.button = itemButton;
+        }
+
+        top_blocks.push(item.data);
+      }
+
       if (content) {
         return {
           content,
@@ -119,7 +144,8 @@
           seo,
           blocks,
           cards,
-          slider
+          slider,
+          top_blocks
         }
       } else {
         error({ statusCode: 404, message: 'Page not found' })

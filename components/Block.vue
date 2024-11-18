@@ -1,6 +1,6 @@
 <template>
   <section
-    class="block container-fluid"
+    :class="`block block-${size} container-fluid`"
     :id="`block${index}`">
     <div
       :class="`row ${isOdd}`"
@@ -11,7 +11,10 @@
         'align-items-center',
         'block-text'
       ]">
-        <div v-html="$prismic.asHtml(block.description)" />
+        <div>
+          <div v-html="$prismic.asHtml(block.description)" />
+          <a class="button-simple" v-if="block.button?.data?.url" :href="block.button.data.url.url">{{block.button?.data?.text}}</a>
+        </div>
       </div>
       <div v-if="block.image.url && imageType === 'background'" class="col-md-6 block-img" :style="{backgroundImage: `url(${block.image.url})`}" />
       <div v-if="block.image.url && imageType === 'img'" class="col-md-6 block-img"><img :src="block.image.url" /></div>
@@ -27,6 +30,11 @@
         type: Object,
         require: true,
         default: () => ({})
+      },
+      size: {
+        type: String,
+        require: false,
+        default: "standard"
       },
       imageType: {
         type: String,
