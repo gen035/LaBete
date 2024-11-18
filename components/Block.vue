@@ -13,7 +13,8 @@
       ]">
         <div v-html="$prismic.asHtml(block.description)" />
       </div>
-      <div v-if="block.image.url" class="col-md-6 block-img" :style="{backgroundImage: `url(${block.image.url})`}" />
+      <div v-if="block.image.url && imageType === 'background'" class="col-md-6 block-img" :style="{backgroundImage: `url(${block.image.url})`}" />
+      <div v-if="block.image.url && imageType === 'img'" class="col-md-6 block-img"><img :src="block.image.url" /></div>
     </div>
   </section>
 </template>
@@ -26,6 +27,11 @@
         type: Object,
         require: true,
         default: () => ({})
+      },
+      imageType: {
+        type: String,
+        require: false,
+        default: "background"
       },
       index: {
         type: Number,

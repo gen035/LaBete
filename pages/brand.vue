@@ -1,5 +1,5 @@
 <template>
-  <section class="content artist">
+  <section class="content brand">
       <section class="container">
         <div class="row">
           <div
@@ -8,23 +8,29 @@
           />
         </div>
         <div class="row">
-            <div
-              v-html="$prismic.asHtml(content.content)"
-              class="offset-md-2 col-md-8"
-            />
+            <template
+      v-for="(block, index) in blocks"
+    >
+      <Block
+        :block="block"
+        imageType="img"
+        :index="index"
+      />
+    </template>
         </div>
       </section>
   </section>
 </template>
 
 <script>
+  import Block from '~/components/Block';
   export default {
     async asyncData({ app, error, store }) {
       const locale = store.state.i18n.locale;
       let content = [];
 
       await app.$prismic.api.query(
-        app.$prismic.predicates.at('document.type', 'about'), {
+        app.$prismic.predicates.at('document.type', 'brandpage'), {
            lang: `${locale}-ca`
         }
       ).then((response) => {
@@ -36,9 +42,16 @@
       let seo = await app.$prismic.api.getByID(content.seo.id)
       seo = seo.data;
 
+      let blocks = [];
+      for (const block of content.blocks) {
+        const item = await app.$prismic.api.getByID(block.block.id);
+        blocks.push(item.data);
+      }
+      console.log(blocks)
       if (content) {
         return {
           content,
+          blocks,
           seo
         }
       } else {
@@ -55,6 +68,9 @@
           { hid: 'description', name: 'description', content: this.$prismic.asText(this.seo.description) }
         ]
       }
+    },
+    components: {
+      Block
     },
     nuxtI18n: {
       paths: {
