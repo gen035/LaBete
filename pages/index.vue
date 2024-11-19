@@ -18,10 +18,10 @@
     </section>
     <section class="container d-md-none">
       <div class="row">
-        <div class="col-12">
+        <div class="col-12 text-center py-3">
           <h1 class="home-title--mobile">{{ content.hero_title[0].text }}</h1>
           <p class="home-subtitle--mobile">{{ content.hero_subtitle[0].text }}</p>
-          <a class="button--simple" :href="hero_button.url.url" v-if="hero_button">{{hero_button.text}}</a>
+          <a class="button-simple" :href="hero_button.url.url" v-if="hero_button">{{hero_button.text}}</a>
         </div>
       </div>
     </section>
