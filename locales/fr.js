@@ -94,7 +94,7 @@ export default {
       },
       {
         name: 'products',
-        text: 'Achetez nos bijoux',
+        text: 'Boutique',
         path: 'produits'
       },
       {
