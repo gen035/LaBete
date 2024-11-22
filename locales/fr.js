@@ -1,9 +1,4 @@
 export default {
-  home: {
-    products: {
-      title: "Produits en vedette"
-    }
-  },
   cart: {
     already: 'Ce produit est déja dans votre panier',
     addToCart: 'Ajouter',
@@ -78,6 +73,9 @@ export default {
     links: {
       store: 'En magasin',
       online: 'En ligne'
+    },
+    products: {
+      title: "Produits en vedette"
     }
   },
   nav: {

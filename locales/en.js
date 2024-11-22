@@ -1,9 +1,4 @@
 export default {
-  home: {
-    products: {
-      title: "Featured products"
-    }
-  },
   cart: {
     already: 'This product is already in your cart',
     addToCart: 'Add',
@@ -78,6 +73,9 @@ export default {
     links: {
       store: 'In store',
       online: 'Online'
+    },
+    products: {
+      title: "Featured products"
     }
   },
     nav: {

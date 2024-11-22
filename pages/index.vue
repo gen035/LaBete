@@ -26,10 +26,12 @@
       </div>
     </section>
     <client-only>
-      <section v-if="productsResults && productsResults.length > 0" class="container pb-4">
-        <h1>{{$t('home.products.title')}}</h1>
-        <div class="home-products">
-          <ProductCard v-for="(product, index) in productsResults" :product="product" :key="index"/>
+      <section v-if="productsResults && productsResults.length > 0" class="container py-4">
+        <div class="row">
+          <h1>{{$t('home.products.title')}}</h1>
+        </div>
+        <div class="row d-flex justify-content-center">
+          <ProductCard v-for="(product, index) in productsResults" :product="product" :key="`${product.id}`"/>
         </div>
       </section>
      </client-only>
@@ -145,7 +147,7 @@
       }
 
       let products = await app.$swell.products.list({
-        limit: 3,
+        limit: 4,
         sort: "date_created desc",
         categories: "featured"
       });
