@@ -73,6 +73,9 @@ export default {
     links: {
       store: 'En magasin',
       online: 'En ligne'
+    },
+    products: {
+      title: "Produits en vedette"
     }
   },
   nav: {

@@ -73,6 +73,9 @@ export default {
     links: {
       store: 'In store',
       online: 'Online'
+    },
+    products: {
+      title: "Featured products"
     }
   },
     nav: {

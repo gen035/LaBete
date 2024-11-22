@@ -25,6 +25,16 @@
         </div>
       </div>
     </section>
+    <client-only>
+      <section v-if="this.productsResults && this.productsResults.length > 0" class="container py-4">
+        <div class="row">
+          <h1>{{$t('home.products.title')}}</h1>
+        </div>
+        <div class="row d-flex justify-content-center">
+          <ProductCard v-for="(product, index) in this.productsResults" :product="product" :key="`${product.id}`"/>
+        </div>
+      </section>
+     </client-only>
     <template v-for="(block, index) in top_blocks">
       <Block
         :block="block"
@@ -81,6 +91,7 @@
   import Card from '~/components/Card';
   import Slider from '~/components/Slider';
   import Block from '~/components/Block';
+  import ProductCard from '~/components/ProductCard';
 
   export default {
     async asyncData({ app, error, store}) {
@@ -160,11 +171,26 @@
         ]
       }
     },
+    data() {
+      return {
+        productsResults: null
+      }
+    },
+    async mounted() {
+      this.products = await this.$swell.products.list({
+       limit: 4,
+        sort: "date_created desc",
+        categories: "featured"
+      });
+
+      this.productsResults = this.products && this.products.results && this.products.results.length > 0 ? this.products.results : [];
+    },
     components: {
       Block,
       Card,
       Media,
-      Slider
+      Slider,
+      ProductCard
     },
     nuxtI18n: {
       paths: {
