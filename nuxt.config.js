@@ -70,6 +70,7 @@ export default {
     'cookie-universal-nuxt',
     ['prismic-nuxt', {
       endpoint: 'https://labete.cdn.prismic.io/api/v2',
+      preview: true,
       linkResolver: function(doc, ctx) {
         return '/'
       }

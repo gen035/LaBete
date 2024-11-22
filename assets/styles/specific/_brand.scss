@@ -1,0 +1,18 @@
+.brand {
+  .block {
+    margin-bottom: 48px;
+    .row {
+      align-items: center;
+      display: flex;
+    }
+    &-text {
+      h2 {
+        font-family: 'PT Serif', serif;
+        font-size: 24px;
+      }
+      p {
+        margin: 16px auto;
+      }
+    }
+  }
+}

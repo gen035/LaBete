@@ -83,18 +83,23 @@ export default {
         path: ''
       },
       {
+        name: 'brand',
+        text: 'La marque',
+        path: 'marque'
+      },
+      {
         name: 'artist',
-        text: 'Démarche artistique',
+        text: 'La créatrice',
         path: 'artiste'
       },
       {
         name: 'products',
-        text: 'Achetez nos bijoux',
+        text: 'Boutique',
         path: 'produits'
       },
       {
         name: 'events',
-        text: 'Évenements',
+        text: 'Événements',
         path: 'evenements'
       },
       {

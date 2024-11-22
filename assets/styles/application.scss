@@ -21,6 +21,7 @@
 // Modules
 //
 @import "modules/accordion";
+@import "modules/block";
 @import "modules/button";
 @import "modules/cart";
 @import "modules/categories_dropdown";
@@ -47,11 +48,13 @@
 // Specifics
 //
 @import "specific/artist";
+@import "specific/brand";
 @import "specific/contact";
 @import "specific/creations";
 @import "specific/cookie_policy";
 @import "specific/home";
 @import "specific/error";
+@import "specific/events";
 @import "specific/stores";
 @import "specific/page";
 @import "specific/privacy_policy";

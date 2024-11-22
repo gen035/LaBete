@@ -59,12 +59,12 @@
     props: {
       event: {
         type: Object,
-        require: true,
+        required: true,
         default: () => ({})
       },
       index: {
         type: Number,
-        require: true,
+        required: true,
         default: 0
       }
     },

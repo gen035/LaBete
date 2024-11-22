@@ -27,7 +27,7 @@
     props: {
       isModal: {
         type: Boolean,
-        require: false,
+        required: false,
         default: false
       }
     },
