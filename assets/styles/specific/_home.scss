@@ -116,12 +116,8 @@
   
   .block {
     &-text {
-      background-color: $very-light-grey;
-      color: $dark-grey;
-      font-family: 'PT Serif', serif;
-      font-size: 16px;
-      padding: 16px;
       text-align: center;
+      background-color: $very-light-grey;     
       @media (min-width: 576px) {
         font-size: 24px;
         padding: 24px;
@@ -155,12 +151,8 @@
   .block-small {
     .block-text {
       background-color: $beige;
-      color: $dark-grey;
-      font-family: 'PT Serif', serif;
-      font-size: 16px;
-      text-align: center;
       @media (min-width: 576px) {
-        font-size: 18px;
+        font-size: 16px;
       }
 
       p {

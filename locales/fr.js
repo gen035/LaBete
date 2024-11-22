@@ -99,7 +99,7 @@ export default {
       },
       {
         name: 'events',
-        text: 'Évenements',
+        text: 'Événements',
         path: 'evenements'
       },
       {
