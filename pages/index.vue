@@ -26,12 +26,12 @@
       </div>
     </section>
     <client-only>
-      <section v-if="productsResults && productsResults.length > 0" class="container py-4">
+      <section v-if="this.productsResults && this.productsResults.length > 0" class="container py-4">
         <div class="row">
           <h1>{{$t('home.products.title')}}</h1>
         </div>
         <div class="row d-flex justify-content-center">
-          <ProductCard v-for="(product, index) in productsResults" :product="product" :key="`${product.id}`"/>
+          <ProductCard v-for="(product, index) in this.productsResults" :product="product" :key="`${product.id}`"/>
         </div>
       </section>
      </client-only>
@@ -146,14 +146,6 @@
         top_blocks.push(item.data);
       }
 
-      let products = await app.$swell.products.list({
-        limit: 4,
-        sort: "date_created desc",
-        categories: "featured"
-      });
-
-      const productsResults = products && products.results && products.results.length > 0 ? products.results : [];
-
       if (content) {
         return {
           content,
@@ -162,8 +154,7 @@
           blocks,
           cards,
           slider,
-          top_blocks,
-          productsResults
+          top_blocks
         }
       } else {
         error({ statusCode: 404, message: 'Page not found' })
@@ -179,6 +170,20 @@
           { hid: 'description', name: 'description', content: this.$prismic.asText(this.seo.description) }
         ]
       }
+    },
+    data() {
+      return {
+        productsResults: null
+      }
+    },
+    async mounted() {
+      this.products = await this.$swell.products.list({
+       limit: 4,
+        sort: "date_created desc",
+        categories: "featured"
+      });
+
+      this.productsResults = this.products && this.products.results && this.products.results.length > 0 ? this.products.results : [];
     },
     components: {
       Block,
