@@ -1,5 +1,5 @@
 .home {
-  .home-slider {
+  &-slider {
     background-color: $white;
     padding: 30px 0;
     @media (min-width: 768px) {
@@ -7,7 +7,7 @@
       padding: 30px 0;
     }
   }
-  .home-text-box {
+  &-text-box {
     background: rgba(255, 255, 255, 0.23);
     border-radius: 16px;
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
@@ -35,7 +35,7 @@
     }
   }
 
-  .home-title {
+  &-title {
     font-family: 'PT Serif', serif;
     margin: 0 0 24px 0;
     font-size: 24px;
@@ -56,7 +56,7 @@
     }
   }
 
-  .home-subtitle {
+  &-subtitle {
     font-size: 14px;
     text-align: center;
     @media (min-width: 768px) {
@@ -69,7 +69,7 @@
     }
   }
 
-  .home-link {
+  &-link {
     padding: 18px;
     transition: transform 250ms ease-in, opacity 250ms ease-in;
     cursor: pointer;
@@ -104,13 +104,13 @@
     }
   }
 
-  .home-image {
+  &-image {
     img {
       border-radius: 25px;
     }
   }
 
-  .home-bottom {
+  &-bottom {
     padding: 48px 0 0 0;
   }
   
@@ -177,5 +177,10 @@
         margin-top: 10px;
       }
     }
+  }
+
+  &-products {
+    display: flex;
+    justify-content: center;
   }
 }

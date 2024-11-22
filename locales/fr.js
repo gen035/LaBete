@@ -1,4 +1,9 @@
 export default {
+  home: {
+    products: {
+      title: "Produits en vedette"
+    }
+  },
   cart: {
     already: 'Ce produit est déja dans votre panier',
     addToCart: 'Ajouter',

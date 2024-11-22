@@ -1,4 +1,9 @@
 export default {
+  home: {
+    products: {
+      title: "Featured products"
+    }
+  },
   cart: {
     already: 'This product is already in your cart',
     addToCart: 'Add',

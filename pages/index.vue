@@ -25,6 +25,14 @@
         </div>
       </div>
     </section>
+    <client-only>
+      <section v-if="productsResults && productsResults.length > 0" class="container pb-4">
+        <h1>{{$t('home.products.title')}}</h1>
+        <div class="home-products">
+          <ProductCard v-for="(product, index) in productsResults" :product="product" :key="index"/>
+        </div>
+      </section>
+     </client-only>
     <template v-for="(block, index) in top_blocks">
       <Block
         :block="block"
@@ -81,6 +89,7 @@
   import Card from '~/components/Card';
   import Slider from '~/components/Slider';
   import Block from '~/components/Block';
+  import ProductCard from '~/components/ProductCard';
 
   export default {
     async asyncData({ app, error, store}) {
@@ -135,6 +144,14 @@
         top_blocks.push(item.data);
       }
 
+      let products = await app.$swell.products.list({
+        limit: 3,
+        sort: "date_created desc",
+        categories: "featured"
+      });
+
+      const productsResults = products && products.results && products.results.length > 0 ? products.results : [];
+
       if (content) {
         return {
           content,
@@ -143,7 +160,8 @@
           blocks,
           cards,
           slider,
-          top_blocks
+          top_blocks,
+          productsResults
         }
       } else {
         error({ statusCode: 404, message: 'Page not found' })
@@ -164,7 +182,8 @@
       Block,
       Card,
       Media,
-      Slider
+      Slider,
+      ProductCard
     },
     nuxtI18n: {
       paths: {
