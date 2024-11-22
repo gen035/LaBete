@@ -31,12 +31,12 @@
     props: {
       year: {
         type: String,
-        require: true,
+        required: true,
         default: '0'
       },
       events: {
         type: Array,
-        require: true,
+        required: true,
         default: () => ({})
       }
     },

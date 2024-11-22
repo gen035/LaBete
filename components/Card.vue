@@ -22,7 +22,7 @@
     props: {
       card: {
         type: Object,
-        require: true,
+        required: true,
         default: () => ({})
       }
     },

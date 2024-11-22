@@ -37,7 +37,7 @@
     props: {
       product: {
         type: Object,
-        require: true,
+        required: true,
         default: () => ({})
       }
     },

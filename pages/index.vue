@@ -18,20 +18,19 @@
     </section>
     <section class="container d-md-none">
       <div class="row">
-        <div class="col-12 text-center py-3">
+        <div class="col-12 text-align">
           <h1 class="home-title--mobile">{{ content.hero_title[0].text }}</h1>
           <p class="home-subtitle--mobile">{{ content.hero_subtitle[0].text }}</p>
           <a class="button-simple" :href="hero_button.url.url" v-if="hero_button">{{hero_button.text}}</a>
         </div>
       </div>
     </section>
-    <template
-      v-for="(block, index) in top_blocks"
-    >
+    <template v-for="(block, index) in top_blocks">
       <Block
         :block="block"
         :index="index"
         size="small"
+        :key="index"
       />
     </template>
     <section
@@ -52,12 +51,11 @@
         </div>
       </div>
     </section>
-    <template
-      v-for="(block, index) in blocks"
-    >
+    <template v-for="(block, index) in blocks">
       <Block
         :block="block"
         :index="index"
+        :key="index"
       />
     </template>
     <section class="container home-images p-5">
@@ -124,13 +122,13 @@
       let top_blocks = [];
       for (const block of content.top_blocks) {
         const item = await app.$prismic.api.getByID(block.top_block.id);
-        
+
         let itemButton;
-        if(item.data?.button?.id) {
+        if (item && item.data && item.data.button && item.data.button.id) {
           itemButton = await app.$prismic.api.getByID(item.data.button.id);
         }
 
-        if(itemButton) {
+        if (itemButton) {
           item.data.button = itemButton;
         }
 

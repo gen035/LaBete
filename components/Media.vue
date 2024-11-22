@@ -13,21 +13,21 @@
     props: {
       altProp: {
         type: String,
-        require: false
+        required: false
       },
       ariaHidden: {
         type: Boolean,
-        require: false,
+        required: false,
         default: false
       },
       image: {
         type: Object,
-        require: true,
+        required: true,
         default: () => ({})
       },
       classes: {
         type: String,
-        require: false
+        required: false
       }
     },
     computed: {

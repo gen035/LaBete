@@ -13,19 +13,19 @@ export default {
   props: {
     aria: {
       type: String,
-      require: false
+      required: false
     },
     text: {
       type: String,
-      require: false
+      required: false
     },
     url: {
       type: String,
-      require: false,
+      required: false,
     },
     target: {
       type: String,
-      require: false,
+      required: false,
     },
     disabled: {
       type: Boolean,
@@ -33,12 +33,12 @@ export default {
     },
     icon: {
       type: String,
-      require: true,
+      required: true,
       default: 'fa-shopping-cart'
     },
     size: {
       type: String,
-      require: false,
+      required: false,
       default: ''
     }
   },

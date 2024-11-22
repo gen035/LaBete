@@ -28,23 +28,23 @@
     props: {
       block: {
         type: Object,
-        require: true,
+        required: true,
         default: () => ({})
       },
       size: {
         type: String,
-        require: false,
+        required: false,
         default: "standard"
       },
       imageType: {
         type: String,
-        require: false,
+        required: false,
         default: "background"
       },
       index: {
         type: Number,
-        require: true,
-        default: 0
+        required: true,
+        default: "0"
       }
     },
     computed: {
