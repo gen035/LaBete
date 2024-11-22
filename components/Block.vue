@@ -6,7 +6,7 @@
       :class="`row ${isOdd}`"
     >
       <div :class="[
-        block.image.url ? 'col-md-6' : 'col-md-12',
+        block.image.url ? 'col-lg-6' : 'col-md-12',
         'd-flex',
         'align-items-center',
         'block-text'
@@ -16,8 +16,8 @@
           <a class="button-simple" v-if="block.button?.data?.url" :href="block.button.data.url.url">{{block.button?.data?.text}}</a>
         </div>
       </div>
-      <div v-if="block.image.url && imageType === 'background'" class="col-md-6 block-img" :style="{backgroundImage: `url(${block.image.url})`}" />
-      <div v-if="block.image.url && imageType === 'img'" class="col-md-6 block-img"><img :src="block.image.url" /></div>
+      <div v-if="block.image.url && imageType === 'background'" class="col-lg-6 block-img" :style="{backgroundImage: `url(${block.image.url})`}" />
+      <div v-if="block.image.url && imageType === 'img'" class="col-lg-6 block-img"><img :src="block.image.url" /></div>
     </div>
   </section>
 </template>
