@@ -10,6 +10,9 @@
   transition: .2s;
   width: 200px;
   border: none;
+  &--large {
+    width: 250px;
+  }
   &--disabled {
     opacity: 0.2;
     cursor: none;
@@ -18,7 +21,7 @@
 }
 .button-icon-container {
   background: $gold;
-  height: 100px;
+  height: 102px;
   left: -250px;
   margin-top: -89px;
   padding-top: 2px;
@@ -28,7 +31,7 @@
 }
 .button-text {
   color: white;
-  margin-top: 15px;
+  margin-top: 13px;
   transition: .3s;
   transform: translateY(-3px);
 }
@@ -38,6 +41,7 @@
   position: absolute;
   left: 155px;
 }
+
 .button {
   &:hover {
     .button-icon-container {
@@ -49,5 +53,23 @@
   }
   &:active {
     box-shadow: 0px 5px 6px rgba(0, 0, 0, .3);
+  }
+}
+
+.button-simple {
+  font-family: 'Assistant', sans-serif;
+  font-size: 16px;
+  color: $white;
+  background: $dark-grey;
+  border-radius: 3px;
+  box-shadow: 0px 1px 2px rgba(0, 0, 0, .2);
+  height: 50px;
+  padding: 10px 20px;
+  text-align: center;
+  transition: .2s;
+  display: inline-block;
+  line-height: 1.7;
+  &:hover {
+    color: $gold;
   }
 }

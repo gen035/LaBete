@@ -9,7 +9,7 @@
         </div>
         <div class="row">
           <div class="col-2 creations-img" v-for="(image, imageIndex) in images" :key="imageIndex" @click="index = imageIndex">
-              <img :src="image.url" />
+              <Media :image="image" />
           </div>
         </div>
         <LightGallery
@@ -88,6 +88,9 @@
           { hid: 'description', name: 'description', content: this.$prismic.asText(this.seo.description) }
         ]
       }
+    },
+    components: {
+      Media
     },
     nuxtI18n: {
       paths: {

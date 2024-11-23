@@ -20,7 +20,7 @@
           active-class="active"
           exact
       >
-        {{ category.name }}
+        {{$t(`products.categories.${category.slug}`)}}
       </NuxtLink>
     </template>
   </b-dropdown>

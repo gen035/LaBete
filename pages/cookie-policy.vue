@@ -1,5 +1,5 @@
 <template>
-  <section class="content cookiePolicy">
+  <section class="content cookie_policy">
       <section class="container">
         <div class="row">
             <div
@@ -20,15 +20,17 @@
       const locale = store.state.i18n.locale;
       let content = []
 
-      await app.$prismic.api.query(
-        app.$prismic.predicates.at('document.type', 'cookie_policy'), {
-           lang: `${locale}-ca`
-        }
-      ).then((response) => {
-        response.results.forEach(result => {
-          content = result.data;
-        });
-      })
+      await app.$prismic.api.getByUID('page', 'cookie_policy', {
+          lang: `${locale}-ca`
+      }).then((response) => {
+          if (response) {
+              content = response.data;
+          } else {
+              console.error('Document not found');
+          }
+      }).catch((error) => {
+          console.error('Error fetching document:', error);
+      });
 
       let seo = await app.$prismic.api.getByID(content.seo.id)
       seo = seo.data;

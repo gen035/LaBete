@@ -6,10 +6,12 @@
 //
 
 // Font variables
-
+@include google-font('PT Serif');
+@include google-font('Assistant', '200,300,400,600,700,800');
 //
 // Colors
 //
+
 $black: #000000;
 $white: #ffffff;
 $light-grey: #858484;
@@ -17,6 +19,7 @@ $very-light-grey: #eeeeee;
 $medium-grey: #494949;
 $dark-grey: #343434;
 $gold: #bb9842;
+$beige: rgb(244, 242, 239);
 //
 // Base Borders & Box Shadows
 //

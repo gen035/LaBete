@@ -81,17 +81,21 @@
             <Media
               classes="footer-logo"
               :image="this.getSettings.footer_logo"
+              :lazy="false"
             />
           </a>
           <div class="footer-copyright">
             {{ this.getSettings.footer_copyright[0].text }} {{ date }}
           </div>
           <div class="footer-policy">
-            <NuxtLink :to="localePath('policy')" exact>
-              {{ $t('footer.policy') }}
+            <NuxtLink :to="localePath('privacy-policy')" exact>
+              {{ $t('footer.policy.privacy') }}
             </NuxtLink>
             <NuxtLink :to="localePath('cookie-policy')" exact>
-              {{ $t('footer.policy-cookie') }}
+              {{ $t('footer.policy.cookie') }}
+            </NuxtLink>
+            <NuxtLink :to="localePath('return')" exact>
+              {{ $t('footer.policy.return') }}
             </NuxtLink>
             <span v-on:click="openPreferences">
               {{ $t('footer.cookies') }}

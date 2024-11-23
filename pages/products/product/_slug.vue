@@ -13,7 +13,7 @@
             <div v-if="product.stock_level <= 0" class="mb-2 product-price product-price--sold">
               <span>{{$t('product.sold')}}</span>
             </div>
-            <h2 class="product-title">{{product.name}}</h2>
+            <h1 class="product-title">{{product.name}}</h1>
             <div class="product-desc"v-html="product.description" />
             <div v-if="!product.sale && product.stock_level > 0" class="product-price">{{product.price}}$</div>
             <div v-if="product.sale && product.stock_level > 0" class="product-price product-price--sale">
@@ -36,6 +36,7 @@
 <script>
   import AddToCart from '~/components/AddToCart';
   import RecommendedProducts from '~/components/RecommendedProducts';
+  import VLazyImage from "v-lazy-image/v2";
   import VueSlickCarousel from 'vue-slick-carousel';
   import ProductCard from "@/components/ProductCard.vue";
   import {mapGetters} from "vuex";
@@ -94,6 +95,7 @@
       ProductCard,
       AddToCart,
       RecommendedProducts,
+      VLazyImage,
       VueSlickCarousel
     },
     computed: {

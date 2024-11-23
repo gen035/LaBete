@@ -19,7 +19,7 @@ export default {
     alt: 'bijoux, cuir, fait a la main'
   },
   cookie: {
-    text: 'Ce site Web utilise des cookies pour vous garantir la meilleure expérience sur notre site. En continuant à utiliser ce site Web, vous consentez à l\'utilisation de cookies conformément à notre <a href="https://la-bete.com/politique" target="_blank">politique de confidentialité</a>.',
+    text: 'Ce site Web utilise des cookies pour vous garantir la meilleure expérience sur notre site. En continuant à utiliser ce site Web, vous consentez à l\'utilisation de cookies conformément à notre <a href="https://la-bete.com/politique-confidentialite" target="_blank">politique de confidentialité</a>.',
     accept: 'Accepter',
     params: 'Paramètres',
     save: 'Sauvegarder',
@@ -31,6 +31,15 @@ export default {
       personalisation: 'Personalisation',
       personalisation_description: 'Les cookies de personnalisation personnalisent l\'expérience utilisateur en fonction des préférences, mais ne sont pas utilisés à des fins de marketing ou de partage de données.'
     }
+  },
+    blog: {
+    title: 'Blogue',
+    read: 'Lire plus...',
+    empty: {
+      title: 'Aucun article de blog disponible',
+      content: 'Nous travaillons actuellement sur de nouveaux contenus. Revenez bientôt pour des mises à jour !'
+    }
+
   },
   error: {
     title: 'Une erreur est survenue',
@@ -66,10 +75,16 @@ export default {
     map: 'Voir sur la carte',
     info: 'Information'
   },
+  header: {
+    cart: 'Cart'
+  },
   home: {
     links: {
       store: 'En magasin',
       online: 'En ligne'
+    },
+    products: {
+      title: "Produits en vedette"
     }
   },
   nav: {
@@ -80,19 +95,29 @@ export default {
         path: ''
       },
       {
+        name: 'brand',
+        text: 'La marque',
+        path: 'marque'
+      },
+      {
         name: 'artist',
-        text: 'Démarche artistique',
+        text: 'La créatrice',
         path: 'artiste'
       },
       {
         name: 'products',
-        text: 'Achetez nos bijoux',
+        text: 'Boutique',
         path: 'produits'
       },
       {
         name: 'events',
-        text: 'Évenements',
+        text: 'Événements',
         path: 'evenements'
+      },
+       {
+        name: 'blog',
+        text: 'Blogue',
+        path: '/blogue'
       },
       {
         name: 'creations',
@@ -103,7 +128,9 @@ export default {
   },
   newsletter: {
     title: 'S\'abonner à l\'infolettre',
-    placeholder: 'Courriel'
+    placeholder: 'Courriel',
+    submit: 'S\'abonner à l\'infolettre',
+    close: 'Fermer'
   },
   passed_events: [
     {
@@ -258,10 +285,15 @@ export default {
     orderSelection: 'Choisir',
     categories: {
       all: 'Tout',
-      text: 'Categories'
+      text: 'Categories',
+      collier: 'Collier',
+      bracelet: 'Bracelet',
+      montre: 'Montre',
+      'boucles-doreille': 'Boucles d\'oreilles',
+      'la-bte-noire': 'La Bête Noire !'
     },
     none: 'Pas de produits disponibles',
-    more: 'Voir plus...'
+    more: 'Voir plus... ({number})'
   },
   top: {
     contact: {
@@ -278,7 +310,10 @@ export default {
   },
   footer: {
     cookies: 'Paramétrer les cookies',
-    policy: 'Politique de confidentialité',
-    'policy-cookie': 'Politique de cookie'
+    policy: {
+      privacy: 'Politique de confidentialité',
+      cookie: 'Politique de cookie',
+      return: 'Politique de remboursement'
+    }
   }
 }

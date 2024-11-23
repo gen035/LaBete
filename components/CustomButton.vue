@@ -1,5 +1,5 @@
 <template>
-  <button :class="['button', {'button--disabled' : (this.disabled)}]" v-on:click="click">
+  <button :arial-label="aria" :class="['button', {'button--disabled' : (this.disabled)}, `button--${size}`]" v-on:click="click">
     <p class="button-text">
       {{this.text}}
     </p>
@@ -11,17 +11,21 @@
 <script>
 export default {
   props: {
+    aria: {
+      type: String,
+      required: false
+    },
     text: {
       type: String,
-      require: false
+      required: false
     },
     url: {
       type: String,
-      require: false,
+      required: false,
     },
     target: {
       type: String,
-      require: false,
+      required: false,
     },
     disabled: {
       type: Boolean,
@@ -29,8 +33,13 @@ export default {
     },
     icon: {
       type: String,
-      require: true,
+      required: true,
       default: 'fa-shopping-cart'
+    },
+    size: {
+      type: String,
+      required: false,
+      default: ''
     }
   },
   methods: {

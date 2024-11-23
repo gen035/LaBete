@@ -5,6 +5,8 @@
     @click="toggle"
   >
     <div
+      role="button"
+      :aria-label="`Expand - ${year}`"
       class="link"
       data-track=""
       data-track-category="events-previous"
@@ -29,12 +31,12 @@
     props: {
       year: {
         type: String,
-        require: true,
+        required: true,
         default: '0'
       },
       events: {
         type: Array,
-        require: true,
+        required: true,
         default: () => ({})
       }
     },

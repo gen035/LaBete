@@ -1,4 +1,5 @@
 @import "bootstrap/scss/bootstrap.scss";
+@import "node_modules/sass-google-fonts/src/GoogleFonts.scss";
 @import "slick/vue-slick-carousel.scss";
 @import "slick/vue-slick-carousel-theme.scss";
 //@import "vue-slick-carousel/dist/vue-slick-carousel.css";
@@ -20,6 +21,8 @@
 // Modules
 //
 @import "modules/accordion";
+@import "modules/block";
+@import "modules/blog_post";
 @import "modules/button";
 @import "modules/cart";
 @import "modules/categories_dropdown";
@@ -32,6 +35,7 @@
 @import "modules/newsletter";
 @import "modules/newsletter_modal";
 @import "modules/notification";
+@import "modules/media";
 @import "modules/message_modal";
 @import "modules/pages";
 @import "modules/promotion";
@@ -46,12 +50,16 @@
 // Specifics
 //
 @import "specific/artist";
+@import "specific/blog";
+@import "specific/brand";
 @import "specific/contact";
 @import "specific/creations";
 @import "specific/cookie_policy";
 @import "specific/home";
 @import "specific/error";
+@import "specific/events";
 @import "specific/stores";
-@import "specific/policy";
+@import "specific/page";
+@import "specific/privacy_policy";
 @import "specific/product";
 @import "specific/products";

@@ -1,18 +1,18 @@
 <template>
   <VueSlickCarousel v-bind="settings">
     <template v-for="(item, index) in data.slides">
-      <img :key="index" :src="item.slide.url" :alt="item.slide.alt" />
+      <Media :key="index" :image="item.slide" :altProp="item.slide.alt" :ariaHidden="true"/>
     </template>
   </VueSlickCarousel>
 </template>
 <script>
   import VueSlickCarousel from 'vue-slick-carousel';
-
+  import Media from '~/components/Media';
   export default {
     props: {
       data: {
         type: Object,
-        require: true,
+        required: true,
         default: () => ({})
       }
     },
@@ -39,16 +39,8 @@
         }
       }
     },
-    computed: {
-      linkTarget() {
-        if (this.card.link.url.indexOf('etsy') === -1) {
-          return "_self"
-        } else {
-          return "_blank"
-        }
-      }
-    },
     components: {
+      Media,
       VueSlickCarousel
     }
   }

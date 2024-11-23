@@ -5,6 +5,7 @@ export default {
   /*
   ** Headers of the page
   */
+ 
   head: {
     title: process.env.npm_package_name || '',
     meta: [
@@ -26,6 +27,7 @@ export default {
       { rel:'icon', type:'image/png', href:'/favicon-32x32.png', sizes:'32x32' },
       { rel:'icon', type:'image/png', href:'/favicon-16x16.png', sizes:'16x16' },
       { rel:'icon', type:'image/png', href:'/favicon-128.png', sizes:'128x128' },
+      { rel: 'stylesheet', href:'/font-awesome/css/all.min.css'},
       { name:'application-name', content:'La Bête'},
       { name:'msapplication-TileColor', content:'#343434' },
       { name:'msapplication-TileImage', content:'/mstile-144x144.png' },
@@ -33,11 +35,14 @@ export default {
       { name:'msapplication-square150x150logo', content:'/mstile-150x150.png' },
       { name:'msapplication-wide310x150logo', content:'/mstile-310x150.png' },
       { name:'msapplication-square310x310logo', content:'/mstile-310x310.png' },
-      { rel: 'stylesheet', type: 'text/css', href: '//use.fontawesome.com/releases/v5.4.2/css/all.css'},
-      { rel: 'stylesheet', type: 'text/css', href: '//fonts.googleapis.com/css?family=Assistant:200,300,400,600,700,800|PT+Serif'},
     ],
+    
     script: [
-      { src: '/ga.js', async: true}
+      { src: 'https://www.googletagmanager.com/gtag/js?id=G-TBQWHYP39H', async: true },
+      // This script will only be included in production
+      ...(process.env.NODE_ENV === 'PRODUCTION'
+        ? [{ src: '/ga.js', async: true}]
+        : [])
     ]
   },
   /*
@@ -65,6 +70,7 @@ export default {
     'cookie-universal-nuxt',
     ['prismic-nuxt', {
       endpoint: 'https://labete.cdn.prismic.io/api/v2',
+      preview: true,
       linkResolver: function(doc, ctx) {
         return '/'
       }
@@ -90,8 +96,7 @@ export default {
     }],
     ['bootstrap-vue/nuxt'],
     '@nuxtjs/axios',
-    '@nuxtjs/dotenv',
-    '@nuxtjs/sitemap'
+    '@nuxtjs/dotenv'
   ],
   /*
   ** Build configuration

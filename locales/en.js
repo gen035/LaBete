@@ -19,7 +19,7 @@ export default {
     alt: 'jewelry, leather, hand made'
   },
   cookie: {
-    text: 'This website uses cookies to ensure you get the best experience on our site. By continuing to use this website, you consent to the use of cookies in accordance with our <a href="https://la-bete.com/en/policy">Privacy Policy.</a>',
+    text: 'This website uses cookies to ensure you get the best experience on our site. By continuing to use this website, you consent to the use of cookies in accordance with our <a href="https://la-bete.com/en/privacy-policy">Privacy Policy.</a>',
     accept: 'Accept',
     params: 'Settings',
     save: 'Save',
@@ -30,6 +30,14 @@ export default {
       performance_description: 'Performance cookies collect data on website usage (e.g., page views) for analysis and site improvement.',
       personalisation: 'Personalisation cookies',
       personalisation_description: 'DEPersonalization cookies customize user experiences based on preferences but are not used for marketing or data sharing.SC'
+    }
+  },
+  blog: {
+    title: 'Blog',
+    read: 'Read more...',
+    empty: {
+      title: 'No Blog Posts Available',
+      content: 'We\'re currently working on new content. Check back soon for updates!'
     }
   },
   error: {
@@ -66,10 +74,16 @@ export default {
       bois: "Wood",
     }
   },
+  header: {
+    cart: 'Cart'
+  },
   home: {
     links: {
       store: 'In store',
       online: 'Online'
+    },
+    products: {
+      title: "Featured products"
     }
   },
     nav: {
@@ -80,8 +94,13 @@ export default {
         path: ''
       },
       {
+        name: 'brand',
+        text: 'The brand',
+        path: 'brand'
+      },
+      {
         name: 'artist',
-        text: 'Artistic approach',
+        text: 'The Creator',
         path: 'artist'
       },
       {
@@ -95,6 +114,11 @@ export default {
         path: 'events'
       },
       {
+        name: 'blog',
+        text: 'Blog',
+        path: '/blog'
+      },
+      {
         name: 'creations',
         text: 'Photos',
         path: 'our-creations'
@@ -103,7 +127,9 @@ export default {
   },
   newsletter: {
     title: 'Subscribe to our newsletter',
-    placeholder: 'Email'
+    placeholder: 'Email',
+    submit: 'Subscribe to our newsletter',
+    close: 'Close'
   },
   passed_events: [
     {
@@ -258,10 +284,15 @@ export default {
     orderSelection: 'Select',
     categories: {
       all: 'All',
-      text: 'Categories'
+      text: 'Categories',
+      collier: 'Necklace',
+      bracelet: 'Bracelet',
+      montre: 'Watch',
+      'boucles-doreille': 'Earring',
+      'la-bte-noire': 'La Bête Noire!'
     },
     none: 'No products available',
-    more: 'See More...'
+    more: 'See More... ({number})'
   },
   top: {
     contact:  {
@@ -278,7 +309,10 @@ export default {
   },
   footer: {
     cookies: 'Set cookies',
-    policy: 'Privacy policy',
-    'policy-cookie': 'Cookie policy'
+    policy: {
+      privacy: 'Privacy Policy',
+      cookie: 'Cookie Policy',
+      return: 'Return Policy'
+    }
   }
 }

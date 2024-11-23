@@ -1,7 +1,7 @@
 <template>
-  <div class="messageModalWrapper" v-if="this.$store.state.messageOpened">
+  <div role="dialog" class="messageModalWrapper" v-if="this.$store.state.messageOpened">
     <div class="messageModal">
-      <i class="far fa-times-circle messageModal-close" v-on:click="close"></i>
+      <i role="button" :aria-label="$t('newsletter.close')" class="far fa-times-circle messageModal-close" v-on:click="close"></i>
       <div v-if="image && image.url" class="messageModal-img" v-bind:style="{ 'background-image': 'url(' + image.url +')' }"></div>
       <div class="messageModal-content">
         <h1 v-if="title && title.length > 0">{{ title[0].text }}</h1>

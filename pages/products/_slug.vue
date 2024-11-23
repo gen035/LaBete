@@ -1,27 +1,30 @@
 <template>
   <section class="content products">
-      <section class="container-fluid">
-        <div class="row">
-          <div class="col-md-12">
-             <h2 class="title-h2">{{ categoryTitle }}</h2>
-          </div>
+    <section class="container-fluid">
+      <div class="row">
+        <div class="col-md-12">
+          <h2 class="title-h2">{{ categoryTitle }}</h2>
         </div>
-        <div class="row" v-if="categoryDesc">
-          <div
-            v-html="categoryDesc"
-            class="col-md-8 offset-md-2 text-center product-description"
-          />
+      </div>
+      <div class="row" v-if="categoryDesc">
+        <div
+          v-html="categoryDesc"
+          class="col-md-8 offset-md-2 text-center product-description"
+        />
+      </div>
+      <div class="row">
+        <div class="col-12 text-center">
+          <CategoriesDropdown />
         </div>
-        <div class="row">
-          <div class="col-12 text-center">
-            <CategoriesDropdown />
-          </div>
-        </div>
-        <div class="row">
-          <NoProducts v-if="products.length === 0" />
-          <ProductCard v-if="products.length > 0" v-for="(product, index) in products" :product="product" :key="index"/>
-        </div>
-      </section>
+      </div>
+      <div class="row">
+        <NoProducts v-if="productsResults && productsResults.length === 0" />
+        <ProductCard v-else v-for="(product, index) in productsResults" :product="product" :key="index"/>
+      </div>
+      <div v-if="products.page_count > 1" class="row">
+        <CustomButton :text="$t('products.more', { number: products.count - (products.limit * products.page)})" v-on:click.native="loadMore" icon="fa-plus" :disabled="products && products.page >= products.page_count" size="large" />
+      </div>
+    </section>
   </section>
 </template>
 
@@ -30,6 +33,7 @@
   import Filters from '~/components/Filters';
   import NoProducts from '~/components/NoProducts';
   import ProductCard from '~/components/ProductCard';
+  import CustomButton from '~/components/CustomButton.vue';
 
   export default {
     async asyncData({ app, error, store, params }) {
@@ -51,17 +55,19 @@
 
       const category =  params && params.category;
       let products = await app.$swell.products.list({
-        limit: 100,
+        limit: 24,
+        sort: "date_created desc",
         categories: category
       });
 
-      products = products && products.results && products.results.length > 0 ? products.results : [];
-      products.filter(product => product.stock_status === 'in_stock');
+      const productsResults = products && products.results && products.results.length > 0 ? products.results : [];
 
       if (content) {
         return {
+          category,
           content,
           products,
+          productsResults,
           seo
         }
       } else {
@@ -70,7 +76,7 @@
     },
     head() {
       return {
-        title: this.$prismic.asText(this.seo.title),
+        title: `${this.$prismic.asText(this.seo.title)} - ${this.category}`,
         link: [
         //{ rel: 'canonical', href: `https://<DOMAIN>${this.$prismic.linkResolver(this.document)}` }
         ],
@@ -79,52 +85,22 @@
         ]
       }
     },
-    data() {
-      return {
-        order: 'date',
-        orderOptions: [
-          { value: 'date', text: this.$t('products.orderSelection') },
-          { value: 'asc', text: this.$t('products.asc') },
-          { value: 'desc', text: this.$t('products.desc') }
-        ],
-        filters: {}
-      }
-    },
-    watch: {
-      order() {
-        this.products = this.sortProducts(this.order);
-      },
-      filters() {
-        this.getNewProducts();
-      }
-    },
     methods: {
-      handleFilters(filters) {
-        this.filters = JSON.parse(filters);
-      },
-      sortProducts(order, newProducts) {
-        const productsToOrder = newProducts || this.products;
-
-        switch (order) {
-          case 'asc':
-            return productsToOrder.sort((a, b) => a.price - b.price);
-            break;
-          case 'desc':
-            return productsToOrder.sort((a, b) => b.price - a.price);
-            break;
-          default:
-            console.log('def')
-            return productsToOrder.sort((a, b) => new Date(b.date_created) - new Date(a.date_created));
-        }
-      },
-      async getNewProducts() {
+      async loadMore() {
         const newProducts = await this.$swell.products.list({
+          limit: 24,
+          sort: "date_created desc",
           categories: this.category,
-          $filters: this.filters
+          page: this.products.page + 1
         });
 
-        const newProductsResults = newProducts && newProducts.results;
-        this.products = this.sortProducts(this.order, newProductsResults);
+         // Check if newProducts is defined and has results
+        if (newProducts && newProducts.results) {
+          // Append new products to the existing products array
+          this.productsResults = [...this.productsResults, ...newProducts.results];
+          // Update the products object with the new pagination data
+          this.products = newProducts;
+        }
       }
     },
     computed: {
@@ -139,7 +115,7 @@
     },
     components: {
       CategoriesDropdown,
-      Filters,
+      CustomButton,
       NoProducts,
       ProductCard
     },

@@ -3,11 +3,15 @@
   @media (min-width: 576px) {
     padding-top: 50px;
   }
+  &-slider{
+    img {
+      border-radius: 10px;
+    }
+  }
   &-title {
-    font-family: 'PT Serif', serif;
-    font-size: 28px;
     margin: 18px auto;
     line-height: 1.1;
+    text-align: left;
     @media (min-width: 576px) {
       font-size: 32px;
       margin: 0 0 28px 0;
@@ -39,6 +43,7 @@
   }
   &-price {
     font-weight: 600;
+    font-size: 24px;
     &--sale {
       font-size: 22px;
       @media (min-width: 576px) {

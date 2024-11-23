@@ -25,7 +25,7 @@
     props: {
       store: {
         type: Object,
-        require: true,
+        required: true,
         default: () => ({})
       }
     }

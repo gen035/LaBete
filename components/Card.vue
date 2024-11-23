@@ -1,5 +1,6 @@
 <template>
   <a
+    :href="computedHref"
     @click="goTo()"
     :title="card.title[0].text"
   >
@@ -21,8 +22,19 @@
     props: {
       card: {
         type: Object,
-        require: true,
+        required: true,
         default: () => ({})
+      }
+    },
+    computed: {
+      computedHref() {
+        if (!this.card.open_modal) {
+          const locale = this.$store.state.i18n.locale;
+          const url = this.card?.link?.url || '#';
+          const page = url.split('/').pop();
+          return `${locale === 'en' ? '/' + locale : ''}/${page}`;
+        }
+        return 'javascript:void(0);';  // Avoid page navigation when modal is true
       }
     },
     methods: {
@@ -30,11 +42,6 @@
         const openModal = this.card.open_modal;
         if(openModal) {
           this.$store.commit('SET_MESSAGE', true);
-        }else{
-          const locale = this.$store.state.i18n.locale;
-          const url = this.card && this.card.link && this.card.link.url;
-          const page = url.split("/").pop();
-          this.$router.push(`${locale === 'en' ? '/' + locale : ''}/${page}`)
         }
       }
     },

@@ -18,8 +18,8 @@
               </div>
           </div>
           <div class="col-md-4">
-            <img :src="content.image.url" :alt="$t('contact.alt')" class="contact-img-1" />
-            <img :src="content.image_mobile.url" :alt="$t('contact.alt')" class="contact-img-2" />
+            <Media :image="content.image" :altProp="$t('contact.alt')" classes="contact-img-1"/>
+            <Media :image="content.image_mobile" :altProp="$t('contact.alt')" classes="contact-img-2"/>
           </div>
         </div>
       </section>
@@ -27,6 +27,7 @@
 </template>
 
 <script>
+  import Media from '~/components/Media';
   export default {
     async asyncData({ app, error, store }) {
       const locale = store.state.i18n.locale;
@@ -70,6 +71,9 @@
           { hid: 'description', name: 'description', content: this.$prismic.asText(this.seo.description) }
         ]
       }
+    },
+    components: {
+      Media
     },
     nuxtI18n: {
       paths: {

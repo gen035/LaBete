@@ -21,10 +21,10 @@
         <template v-if="this.hasFetched">
           <div class="row">
             <NoProducts v-if="this.productsResults && this.productsResults.length === 0" />
-            <ProductCard v-else v-for="(product, index) in this.productsResults" :product="product" :key="index"/>
+            <ProductCard v-else v-for="(product, index) in this.productsResults" :product="product" :key="product.id"/>
           </div>
           <div class="row">
-            <CustomButton :text="$t('products.more')" v-on:click.native="loadMore" icon="fa-plus" :disabled="this.products && this.products.page >= this.products.page_count"/>
+            <CustomButton :text="$t('products.more', { number: products.count - (products.limit * products.page)})" v-on:click.native="loadMore" icon="fa-plus" :disabled="this.products && this.products.page >= this.products.page_count" size="large" />
           </div>
         </template>
       </section>
@@ -82,67 +82,32 @@
         productsResults: null,
         hasFetched: false,
       }
-      // return {
-      //   order: 'date',
-      //   orderOptions: [
-      //     { value: 'date', text: this.$t('products.orderSelection') },
-      //     { value: 'asc', text: this.$t('products.asc') },
-      //     { value: 'desc', text: this.$t('products.desc') }
-      //   ],
-      //   categories: [],
-      //   filters: {}
-      // }
-    },
-    watch: {
-      // order() {
-      //   this.products = this.sortProducts(this.order);
-      // },
-      // filters() {
-      //   this.getNewProducts();
-      // },
-      // categories() {
-      //   this.getNewProducts();
-      // }
     },
     async mounted() {
       this.products = await this.$swell.products.list({
-        limit: 25
+        limit: 24,
+        sort: "date_created desc"
       });
 
       this.productsResults = this.products && this.products.results && this.products.results.length > 0 ? this.products.results : [];
       this.hasFetched = true;
     },
     methods: {
-      // handleCategories(categories) {
-      //   this.categories = JSON.parse(categories);
-      // },
-      // handleFilters(filters) {
-      //   this.filters = JSON.parse(filters);
-      // },
-      // sortProducts(order, newProducts) {
-      //   const productsToOrder = newProducts || this.products;
+      async loadMore() {
+        const newProducts = await this.$swell.products.list({
+          limit: 24,
+          sort: "date_created desc",
+          page: this.products.page + 1
+        });
 
-      //   switch (order) {
-      //     case 'asc':
-      //       return productsToOrder.sort((a, b) => a.price - b.price);
-      //       break;
-      //     case 'desc':
-      //       return productsToOrder.sort((a, b) => b.price - a.price);
-      //       break;
-      //     default:
-      //       console.log('def')
-      //       return productsToOrder.sort((a, b) => new Date(b.date_created) - new Date(a.date_created));
-      //   }
-      // },
-      // async getNewProducts() {
-      //   const newProducts = await this.$swell.products.list({
-      //     categories: this.categories,
-      //     $filters: this.filters
-      //   });
-
-      //   const newProductsResults = newProducts && newProducts.results;
-      //   this.products = this.sortProducts(this.order, newProductsResults);
-      // }
+        // Check if newProducts is defined and has results
+        if (newProducts && newProducts.results) {
+          // Append new products to the existing products array
+          this.productsResults = [...this.productsResults, ...newProducts.results];
+          // Update the products object with the new pagination data
+          this.products = newProducts;
+        }
+      }
     },
     components: {
       CategoriesDropdown,

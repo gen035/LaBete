@@ -1,0 +1,11 @@
+.block {
+  &-text {
+    color: $dark-grey;
+    font-family: 'PT Serif', serif;
+    padding: 16px;
+  }
+
+  img {
+    border-radius: 10px;
+  }
+}
