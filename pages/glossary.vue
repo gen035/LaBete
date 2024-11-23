@@ -53,7 +53,7 @@
         });
       })
   
-      let seo = await app.$prismic.api.getByID(content?.seo?.id);
+      let seo = await app.$prismic.api.getByID(content.seo.id);
       seo = seo.data;
 
       if (content) {
