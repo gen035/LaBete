@@ -81,6 +81,7 @@
             <Media
               classes="footer-logo"
               :image="this.getSettings.footer_logo"
+              :lazy="false"
             />
           </a>
           <div class="footer-copyright">

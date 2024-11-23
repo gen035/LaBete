@@ -4,16 +4,7 @@
       <div role="button" :aria-label="product?.name" class="product-card-wrapper" @click="goTo">
         <div v-if="product.sale && this.in_stock" class="product-card-sale">{{$t('product.sale')}}</div>
         <div class="product-card-image">
-          <img
-            v-if="product.images && product.images.length > 0 && product.images[0].file.url"
-            :src="product.images[0].file.url"
-            :alt="product.name"
-            :title="product.name"
-          />
-          <img
-            v-else
-            src="~/assets/images/product_placeholder.jpg"
-          />
+          <v-lazy-image :src="product.images[0].file.url" src-placeholder="/product_placeholder.jpg"/>
         </div>
         <div class="product-card-name">{{ product.name }}</div>
         <div v-if="!product.sale && this.in_stock" class="product-card-price">{{product.price}}$</div>
@@ -32,6 +23,7 @@
 <script>
   import AddToCart from '~/components/AddToCart';
   import Media from '~/components/Media';
+  import VLazyImage from "v-lazy-image/v2";
 
   export default {
     props: {
@@ -55,7 +47,8 @@
     },
     components: {
       AddToCart,
-      Media
+      Media,
+      VLazyImage
     }
   }
 </script>

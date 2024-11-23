@@ -92,7 +92,6 @@
   import Slider from '~/components/Slider';
   import Block from '~/components/Block';
   import ProductCard from '~/components/ProductCard';
-
   export default {
     async asyncData({ app, error, store}) {
       const locale = store.state.i18n.locale;
