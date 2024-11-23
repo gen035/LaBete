@@ -1,7 +1,17 @@
 <template>
-  <div class="container">
-    <div class="row">
-      <BlogPost v-for="(post, index) in this.posts" :key="index" :data="post" />
+  <div class="blog">
+    <div class="container-full">
+      <div class="row justify-content-center mx-auto">
+        <div class="blog-header align-items-center justify-content-center mt-3 mb-5">
+          <img src="https://placehold.co/600x400/EEE/31343C" />
+          <h1>Blogue</h1>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="row">
+        <BlogPost v-for="(post, index) in this.posts" :key="index" :data="post" />
+      </div>
     </div>
   </div>
 </template>
