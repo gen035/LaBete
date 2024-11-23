@@ -14,5 +14,30 @@
         margin: 16px auto;
       }
     }
+
+    &-img {
+      border-radius: 10px;
+      max-height: 200px;
+      overflow: hidden;
+      @media (min-width: 576px) {
+        max-height: 300px;
+      }
+
+      @media (min-width: 992px) {
+        max-height: none;
+        overflow: inherit;
+      }
+
+      img {
+        margin-top: -140px;
+        @media (min-width: 576) {
+          margin-top: -180px;
+        }
+
+        @media (min-width: 992px) {
+          margin: 0;
+        }
+      }
+    }
   }
 }

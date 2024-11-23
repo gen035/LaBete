@@ -32,6 +32,14 @@ export default {
       personalisation_description: 'DEPersonalization cookies customize user experiences based on preferences but are not used for marketing or data sharing.SC'
     }
   },
+  blog: {
+    title: 'Blog',
+    read: 'Read more...',
+    empty: {
+      title: 'No Blog Posts Available',
+      content: 'We\'re currently working on new content. Check back soon for updates!'
+    }
+  },
   error: {
     title: 'An Error Occured',
     home: 'Back home',
@@ -104,6 +112,11 @@ export default {
         name: 'events',
         text: 'Events',
         path: 'events'
+      },
+      {
+        name: 'blog',
+        text: 'Blog',
+        path: '/blog'
       },
       {
         name: 'creations',
