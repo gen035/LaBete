@@ -3,6 +3,11 @@
   @media (min-width: 576px) {
     padding-top: 50px;
   }
+  &-slider{
+    img {
+      border-radius: 10px;
+    }
+  }
   &-title {
     margin: 18px auto;
     line-height: 1.1;

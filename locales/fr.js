@@ -32,6 +32,15 @@ export default {
       personalisation_description: 'Les cookies de personnalisation personnalisent l\'expérience utilisateur en fonction des préférences, mais ne sont pas utilisés à des fins de marketing ou de partage de données.'
     }
   },
+    blog: {
+    title: 'Blogue',
+    read: 'Lire plus...',
+    empty: {
+      title: 'Aucun article de blogue disponible',
+      content: 'Nous travaillons actuellement sur de nouveaux contenus. Revenez bientôt pour des mises à jour !'
+    }
+
+  },
   error: {
     title: 'Une erreur est survenue',
     home: 'Retour à l\'acceuil',
@@ -104,6 +113,11 @@ export default {
         name: 'events',
         text: 'Événements',
         path: 'evenements'
+      },
+       {
+        name: 'blog',
+        text: 'Blogue',
+        path: '/blogue'
       },
       {
         name: 'glossary',
