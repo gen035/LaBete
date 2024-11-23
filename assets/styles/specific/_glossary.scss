@@ -1,0 +1,16 @@
+.glossary {
+  p {
+    margin: 12px auto;
+  }
+
+  &-card {
+    background-color: $very-light-grey;
+    box-shadow: 0px 0px 18px -15px rgba(0,0,0,0.75);
+    border-radius: 10px;
+
+    h2 {
+      font-family: 'PT Serif', serif;
+      font-size: 18px;
+    }
+  }
+}

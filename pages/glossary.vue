@@ -8,13 +8,21 @@
             />
         </div>
         <div class="row align-items-center justify-content-center">
-          <div class="col-md-8" v-html="$prismic.asHtml(content.content)" />
+          <div class="col-md-10" v-html="$prismic.asHtml(content.content)" />
+        </div>
+        <div class="row align-items-center justify-content-center">
+          <div class="col-md-10">
+            <div class="row">
+              <GlossaryCard v-for="index in 9" :key="index"/>
+            </div>
+          </div>
         </div>
       </section>
   </section>
 </template>
 
 <script>
+  import GlossaryCard from '~/components/GlossaryCard';
   export default {
     async asyncData({ app, error, store }) {
       const locale = store.state.i18n.locale;
@@ -60,6 +68,9 @@
           { hid: 'description', name: 'description', content: this.$prismic.asText(this.seo.description) }
         ]
       }
+    },
+    components : {
+      GlossaryCard
     },
     nuxtI18n: {
       paths: {
