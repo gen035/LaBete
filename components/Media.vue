@@ -1,5 +1,5 @@
 <template>
-  <v-lazy-image v-if="lazy && image?.url" :src="image.url" src-placeholder="/product_placeholder.jpg" :alt="alt" :title="alt" :class="returnClasses" :aria-hidden="ariaHidden"/>
+  <v-lazy-image v-if="lazy && image?.url" :src="image.url" :src-placeholder="placeholder === 'horizontal' ? '/product_placeholder_horizontal.jpg' : '/product_placeholder.jpg'" :alt="alt" :title="alt" :class="returnClasses" :aria-hidden="ariaHidden"/>
   <img
     v-else-if="!lazy && image?.url"
     :src="src"
@@ -35,6 +35,11 @@
         type: Boolean,
         required: false,
         default: true
+      },
+      placeholder: {
+        type: String,
+        required: false,
+        default: "vertical"
       }
     },
     computed: {

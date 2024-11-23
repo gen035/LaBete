@@ -13,7 +13,9 @@
         <div class="row align-items-center justify-content-center">
           <div class="col-md-10">
             <div class="row">
-              <GlossaryCard v-for="index in 9" :key="index"/>
+              <GlossaryCard v-for="card in glossaryCards" :key="index" :data="card"/>
+              <GlossaryCard v-for="card in glossaryCards" :key="index" :data="card"/>
+              <GlossaryCard v-for="card in glossaryCards" :key="index" :data="card"/>
             </div>
           </div>
         </div>
@@ -39,6 +41,17 @@
       }).catch((error) => {
           console.error('Error fetching document:', error);
       });
+
+      let glossaryCards = [];
+      await app.$prismic.api.query(
+        app.$prismic.predicates.at('document.type', 'glossarycard'), {
+           lang: `${locale}-ca`,
+        }
+      ).then((response) => {
+        response.results.forEach(result => {
+          glossaryCards.push(result.data);
+        });
+      })
   
       let seo = await app.$prismic.api.getByID(content?.seo?.id);
       seo = seo.data;
@@ -46,6 +59,7 @@
       if (content) {
         return {
           content,
+          glossaryCards,
           seo
         }
       } else {

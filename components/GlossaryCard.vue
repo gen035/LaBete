@@ -1,14 +1,16 @@
 <template>
-  <div class="col-md-4 my-2">
+  <div class="col-lg-4 col-sm-6 my-2">
     <div class="glossary-card py-2 px-3">
       <figure>
-        <img src="https://placehold.co/600x400/EEE/31343C" />
+        <Media :image="data.image" placeholder="horizontal" />
       </figure>
       <div class="glossary-card-body">
-        <h2>Title</h2>
-        <p>
-          Bacon ipsum dolor amet landjaeger venison flank andouille cupim chislic meatball fatback shankle tongue buffalo ham leberkas jowl. Chicken burgdoggen cow porchetta short ribs short loin tenderloin turkey pastrami. 
-        </p>
+        <div
+          v-html="$prismic.asHtml(data.title)"
+        />
+        <div
+          v-html="$prismic.asHtml(data.content)"
+        />
       </div>
     </div>
   </div>
