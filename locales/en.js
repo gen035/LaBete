@@ -86,6 +86,11 @@ export default {
         path: ''
       },
       {
+        name: 'blog',
+        text: 'Blog',
+        path: '/blog'
+      },
+      {
         name: 'brand',
         text: 'The brand',
         path: 'brand'

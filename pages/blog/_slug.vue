@@ -38,10 +38,12 @@
       }).catch((error) => {
           console.error('Error fetching document:', error);
       });
-
+      
       if (content) {
+        const excerpt = content.content[0].text.split(' ').slice(0, 20).join(' ') || "";
         return {
-          content
+          content,
+          excerpt
         }
       } else {
         error({ statusCode: 404, message: 'Page not found' })
@@ -54,7 +56,7 @@
         //{ rel: 'canonical', href: `https://<DOMAIN>${this.$prismic.linkResolver(this.document)}` }
         ],
         meta: [
-          { hid: 'description', name: 'description', content: "" }
+          { hid: 'description', name: 'description', content: this.excerpt }
         ]
       }
     },
