@@ -1,6 +1,7 @@
 <template>
+  <v-lazy-image v-if="lazy && image?.url" :src="image.url" src-placeholder="/product_placeholder.jpg" :alt="alt" :title="alt" :class="returnClasses" :aria-hidden="ariaHidden"/>
   <img
-    v-if="image.url"
+    v-else-if="!lazy && image?.url"
     :src="src"
     :alt="alt"
     :title="alt"
@@ -9,6 +10,7 @@
   />
 </template>
 <script>
+  import VLazyImage from "v-lazy-image/v2";
   export default {
     props: {
       altProp: {
@@ -28,6 +30,11 @@
       classes: {
         type: String,
         required: false
+      },
+      lazy: {
+        type: Boolean,
+        required: false,
+        default: true
       }
     },
     computed: {
@@ -49,6 +56,9 @@
       returnClasses() {
         return this.classes;
       }
-    }
+    },
+    components: {
+      VLazyImage
+    },
   }
 </script>

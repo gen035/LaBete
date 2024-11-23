@@ -28,6 +28,7 @@
             <Media
               classes="header-logo"
               :image="getSettings.header_logo"
+              :lazy="false"
             />
           </a>
         </div>

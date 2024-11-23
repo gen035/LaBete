@@ -5,7 +5,7 @@
           <div class="col-md-6 col-lg-5 col-xl-4 col-xxl-3 offset-lg-1 offset-xl-2 offset-xxl-3 product-slider">
             <VueSlickCarousel v-if="product.images && product.images.length > 0" v-bind="settings">
               <template v-for="(image, index) in product.images">
-                <img :key="index" :src="image.file.url" :alt="`${product.name} -  ${index}`" />
+                <v-lazy-image :src="image.file.url" :alt="`${product.name} -  ${index}`" src-placeholder="/product_placeholder.jpg"/>
               </template>
             </VueSlickCarousel>
           </div>
@@ -30,6 +30,7 @@
 <script>
   import AddToCart from '~/components/AddToCart';
   import RecommendedProducts from '~/components/RecommendedProducts';
+  import VLazyImage from "v-lazy-image/v2";
   import VueSlickCarousel from 'vue-slick-carousel';
 
   export default {
@@ -85,6 +86,7 @@
     components: {
       AddToCart,
       RecommendedProducts,
+      VLazyImage,
       VueSlickCarousel
     },
     nuxtI18n: {

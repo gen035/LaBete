@@ -47,7 +47,7 @@
         const item = await app.$prismic.api.getByID(block.block.id);
         blocks.push(item.data);
       }
-      console.log(blocks)
+
       if (content) {
         return {
           content,
