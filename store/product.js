@@ -17,10 +17,12 @@ export default {
                     const validProducts = recommendedProducts.filter(product => product && product.results && product.results.length > 0);
                     const recommendedProductsResults = validProducts.map(product => product.results[0]);
                     commit('SET_PRODUCTS_RECOMMENDED', recommendedProductsResults);
+                } else {
+                    commit('SET_PRODUCTS_RECOMMENDED', null);
                 }
-                commit('SET_PRODUCTS_RECOMMENDED', null);
             } catch (error) {
                 console.error('Failed to fetch recommended products:', error);
+                commit('SET_PRODUCTS_RECOMMENDED', null);
                 commit('SET_ERROR', error);
             }
         }
