@@ -1,17 +1,17 @@
 <template>
   <div class="blog-post container">
     <div class="row">
-      <div class="col-md-8 col-md-push-2">
+      <div class="col-md-8 col-12 offset-md-2">
         <div
           v-html="$prismic.asHtml(content.title)"
         />
         <Media :image="content.image" placeholder="horizontal"/>
-        <div class="blog-post-date">{{content.date}}</div>
         <ul class="blog-post-tags" v-if="content.tags?.length > 0">
           <li v-for="tag in content.tags">{{tag.tag}}</li>
         </ul>
         <div
           v-html="$prismic.asHtml(content.content)"
+          class="blog-post-body"
         />
       </div>
     </div>
@@ -33,7 +33,7 @@
           if (response) {
               content = response.data;
           } else {
-              console.error('Document not found');
+              content = null;
           }
       }).catch((error) => {
           console.error('Error fetching document:', error);

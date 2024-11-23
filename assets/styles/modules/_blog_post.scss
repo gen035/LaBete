@@ -1,0 +1,22 @@
+.blog-post {
+  &-tags {
+    margin: 10px auto;
+    li {
+      display: inline-block;
+      margin: 0 5px;
+      background-color: $very-light-grey;
+      padding: 5px 10px;
+      height: 30px;
+      border-radius: 35px;
+      &:first-of-type {
+        margin-left: 0;
+      }
+    }
+  }
+
+  &-body {
+    p {
+      margin: 12px auto;
+    }
+  }
+}
