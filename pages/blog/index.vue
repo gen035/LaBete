@@ -26,7 +26,8 @@
 
       await app.$prismic.api.query(
         app.$prismic.predicates.at('document.type', 'blog_post'), {
-          lang: `${locale}-ca`
+          lang: `${locale}-ca`,
+          orderings : '[document.first_publication_date]',
         }
       ).then((response) => {
          response.results.forEach(result => {

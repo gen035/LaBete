@@ -6,9 +6,10 @@
       </div>
       <div class="blog-post-item-body col-lg-6 col-12">
         <div v-html="$prismic.asHtml(post.data.title)" />
-        <div>{{new Date(post.first_publication_date).toLocaleString()}}</div>
+        <div class="blog-post-item-date my-2">{{new Date(post.first_publication_date).toLocaleString()}}</div>
         <div>
           <p>{{createExcerpt}}</p>
+          <a class="blog-post-item-link my-2 d-block" :title="$t('blog.read')">{{$t('blog.read')}}</a>
           <ul class="blog-post-tags" v-if="post.data.tags?.length > 0">
             <li v-for="tag in post.data.tags">{{tag.tag}}</li>
           </ul>

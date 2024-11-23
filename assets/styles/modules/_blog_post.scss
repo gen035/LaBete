@@ -25,6 +25,14 @@
     cursor: pointer;
     display: flex;
     transition: all 125ms linear;
+    &-date {
+      color: $gold;
+    }
+
+    &-link {
+      color: $gold;
+    }
+
     h1 {
       font-size: 24px;
       margin: 0 auto 12px auto;
