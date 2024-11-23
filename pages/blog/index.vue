@@ -10,7 +10,11 @@
     </div>
     <div class="container">
       <div class="row">
-        <BlogPost v-for="(post, index) in this.posts" :key="index" :post="post" />
+        <div v-if="this.posts?.length === 0" class="blog-empty">
+          <h2 class="title-h1">{{$t('blog.empty.title')}}</h2>
+          <p class="text-center">{{$t('blog.empty.content')}}</p>
+        </div>
+        <BlogPost v-else-if v-for="(post, index) in this.posts" :key="index" :post="post" />
       </div>
     </div>
   </div>

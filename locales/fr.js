@@ -34,7 +34,11 @@ export default {
   },
     blog: {
     title: 'Blogue',
-    read: 'Lire plus...'
+    read: 'Lire plus...',
+    empty: {
+      title: 'Aucun article de blog disponible',
+      content: 'Nous travaillons actuellement sur de nouveaux contenus. Revenez bientôt pour des mises à jour !'
+    }
 
   },
   error: {

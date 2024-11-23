@@ -34,8 +34,11 @@ export default {
   },
   blog: {
     title: 'Blog',
-    read: 'Read more...'
-
+    read: 'Read more...',
+    empty: {
+      title: 'No Blog Posts Available',
+      content: 'We\'re currently working on new content. Check back soon for updates!'
+    }
   },
   error: {
     title: 'An Error Occured',
