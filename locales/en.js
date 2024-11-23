@@ -94,11 +94,6 @@ export default {
         path: ''
       },
       {
-        name: 'blog',
-        text: 'Blog',
-        path: '/blog'
-      },
-      {
         name: 'brand',
         text: 'The brand',
         path: 'brand'
@@ -117,6 +112,11 @@ export default {
         name: 'events',
         text: 'Events',
         path: 'events'
+      },
+      {
+        name: 'blog',
+        text: 'Blog',
+        path: '/blog'
       },
       {
         name: 'creations',
