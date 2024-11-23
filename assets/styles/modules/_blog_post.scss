@@ -1,6 +1,5 @@
 .blog-post {
   &-tags {
-    margin: 10px auto;
     li {
       display: inline-block;
       margin: 0 5px;
@@ -11,6 +10,28 @@
       &:first-of-type {
         margin-left: 0;
       }
+    }
+  }
+
+  img {
+    border-radius: 10px;
+  }
+  
+  time {
+    color: $gold;
+    line-height: 1.8;
+    padding-right: 15px;
+    position: relative;
+
+    &::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      height: 2px;
+      width: 5px;
+      right: 3px;
+      background-color: $gold;
     }
   }
 

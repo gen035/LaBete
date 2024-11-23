@@ -3,14 +3,17 @@
     <div class="row">
       <div class="col-md-8 col-12 offset-md-2">
         <div
-          v-html="$prismic.asHtml(content.title)"
+          v-html="$prismic.asHtml(content.data.title)"
         />
-        <Media :image="content.image" placeholder="horizontal"/>
-        <ul class="blog-post-tags" v-if="content.tags?.length > 0">
-          <li v-for="tag in content.tags">{{tag.tag}}</li>
-        </ul>
+        <Media :image="content.data.image" placeholder="horizontal"/>
+        <div class="d-flex my-3">
+          <time :datetime="content.first_publication_date">{{formattedDate}}</time>
+          <ul class="blog-post-tags" v-if="content.data.tags?.length > 0">
+            <li v-for="tag in content.data.tags">{{tag.tag}}</li>
+          </ul>
+        </div>
         <div
-          v-html="$prismic.asHtml(content.content)"
+          v-html="$prismic.asHtml(content.data.content)"
           class="blog-post-body"
         />
       </div>
@@ -31,7 +34,7 @@
           lang: `${locale}-ca`
       }).then((response) => {
           if (response) {
-              content = response.data;
+              content = response;
           } else {
               content = null;
           }
@@ -40,7 +43,7 @@
       });
       
       if (content) {
-        const excerpt = content.content[0].text.split(' ').slice(0, 20).join(' ') || "";
+        const excerpt = content.data.content[0].text.split(' ').slice(0, 20).join(' ') || "";
         return {
           content,
           excerpt
@@ -58,6 +61,18 @@
         meta: [
           { hid: 'description', name: 'description', content: this.excerpt }
         ]
+      }
+    },
+    computed: {
+      formattedDate() {
+        const dateObj = new Date(this.content.first_publication_date);
+        // Extract day, month, and year
+        const day = String(dateObj.getUTCDate()).padStart(2, '0');
+        const month = String(dateObj.getUTCMonth() + 1).padStart(2, '0');
+        const year = dateObj.getUTCFullYear();
+
+        const formattedDate = `${day}-${month}-${year}`;
+        return formattedDate;
       }
     },
     components: {
