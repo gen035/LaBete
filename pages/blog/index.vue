@@ -3,7 +3,7 @@
     <div class="container-full">
       <div class="row justify-content-center mx-auto">
         <div class="blog-header align-items-center justify-content-center mt-3 mb-5">
-          <img src="https://placehold.co/600x400/EEE/31343C" />
+          <img src="~/assets/images/blog_header.jpg" />
           <h1>{{$t('blog.title')}}</h1>
         </div>
       </div>
