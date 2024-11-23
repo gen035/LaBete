@@ -18,6 +18,7 @@
       <NuxtLink
           :to="localePath({name: 'products-slug', params: { category: category.slug }})"
           active-class="active"
+          v-if="category.slug !== 'featured'"
           exact
       >
         {{$t(`products.categories.${category.slug}`)}}
