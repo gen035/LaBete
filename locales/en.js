@@ -32,6 +32,11 @@ export default {
       personalisation_description: 'DEPersonalization cookies customize user experiences based on preferences but are not used for marketing or data sharing.SC'
     }
   },
+  blog: {
+    title: 'Blog',
+    read: 'Read more...'
+
+  },
   error: {
     title: 'An Error Occured',
     home: 'Back home',

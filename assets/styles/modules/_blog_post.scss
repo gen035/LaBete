@@ -22,8 +22,9 @@
 
   //Card
   &-item {
+    cursor: pointer;
     display: flex;
-    
+    transition: all 125ms linear;
     h1 {
       font-size: 24px;
       margin: 0 auto 12px auto;
@@ -38,6 +39,14 @@
       &:first-of-type {
         display: block;
       }
+    }
+
+    img {
+      border-radius: 10px;
+    }
+
+    &:hover {
+      opacity: 0.75;
     }
   }
 }

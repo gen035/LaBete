@@ -1,15 +1,16 @@
 <template>
-  <div class="blog-post-item col-md-8 offset-md-2 col-12">
+  <div class="blog-post-item col-md-8 offset-md-2 col-12 mb-5" @click="goTo">
     <div class="row">
       <div class="blog-post-item-img col-lg-6 col-12">
-        <Media :image="data.image" placeholder="horizontal" />
+        <Media :image="post.data.image" placeholder="horizontal" />
       </div>
       <div class="blog-post-item-body col-lg-6 col-12">
-        <div v-html="$prismic.asHtml(data.title)" />
+        <div v-html="$prismic.asHtml(post.data.title)" />
+        <div>{{new Date(post.first_publication_date).toLocaleString()}}</div>
         <div>
           <p>{{createExcerpt}}</p>
-          <ul class="blog-post-tags" v-if="data.tags?.length > 0">
-            <li v-for="tag in data.tags">{{tag.tag}}</li>
+          <ul class="blog-post-tags" v-if="post.data.tags?.length > 0">
+            <li v-for="tag in post.data.tags">{{tag.tag}}</li>
           </ul>
         </div>
       </div>
@@ -20,15 +21,26 @@
   import Media from '~/components/Media';
   export default {
     props: {
-      data: {
+      post: {
         type: Object,
         required: true,
         default: () => ({})
       }
     },
+    methods: {
+      goTo() {
+        const locale = this.$store.state.i18n.locale;
+        const pathPrefix = locale === 'en' ? `/${locale}/blog/` : '/blogue/';
+        this.$router.push(`${pathPrefix}${this.post.uid}`);
+      }
+    },
     computed: {
       createExcerpt() {
-        const words = this.data.content[0].text.split(' ').slice(0, 50).join(' ');
+        let words = "";
+
+        if (this.post && this.post.data && Array.isArray(this.post.data.content) && this.post.data.content[0] && this.post.data.content[0].text) {
+          words = this.post.data.content[0].text.split(' ').slice(0, 50).join(' ');
+        }
         return `${words}...`; // Add ellipsis to indicate an excerpt
       }
     },

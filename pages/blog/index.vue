@@ -4,13 +4,13 @@
       <div class="row justify-content-center mx-auto">
         <div class="blog-header align-items-center justify-content-center mt-3 mb-5">
           <img src="https://placehold.co/600x400/EEE/31343C" />
-          <h1>Blogue</h1>
+          <h1>{{$t('blog.title')}}</h1>
         </div>
       </div>
     </div>
     <div class="container">
       <div class="row">
-        <BlogPost v-for="(post, index) in this.posts" :key="index" :data="post" />
+        <BlogPost v-for="(post, index) in this.posts" :key="index" :post="post" />
       </div>
     </div>
   </div>
@@ -30,7 +30,7 @@
         }
       ).then((response) => {
          response.results.forEach(result => {
-          posts.push(result.data);
+          posts.push(result);
         });
       })
 
