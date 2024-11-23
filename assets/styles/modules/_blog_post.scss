@@ -19,4 +19,25 @@
       margin: 12px auto;
     }
   }
+
+  //Card
+  &-item {
+    display: flex;
+    
+    h1 {
+      font-size: 24px;
+      margin: 0 auto 12px auto;
+      text-align: left;
+      &::after {
+        display: none;
+      }
+    }
+    p {
+      display: none;
+
+      &:first-of-type {
+        display: block;
+      }
+    }
+  }
 }

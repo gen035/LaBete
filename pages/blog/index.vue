@@ -1,19 +1,34 @@
 <template>
-  <h1>blog</h1>
+  <div class="container">
+    <div class="row">
+      <BlogPost v-for="(post, index) in this.posts" :key="index" :data="post" />
+    </div>
+  </div>
 </template>
 
 <script>
-  import VLazyImage from "v-lazy-image/v2";
+  import BlogPost from '~/components/BlogPost';
 
   export default {
     async asyncData({ app, error, store, params}) {
       const locale = store.state.i18n.locale;
+      let posts = []
+
+      await app.$prismic.api.query(
+        app.$prismic.predicates.at('document.type', 'blog_post'), {
+          lang: `${locale}-ca`
+        }
+      ).then((response) => {
+         response.results.forEach(result => {
+          posts.push(result.data);
+        });
+      })
 
       let seo = await app.$prismic.api.getByID(locale === 'en' ? 'Z0E07xMAACQA3yRe' : 'Z0E1IBMAACIA3ySl');
-      console.log(seo)
       seo = seo.data;
 
       return {
+        posts,
         seo
       }
     },
@@ -29,7 +44,7 @@
       }
     },
     components: {
-      VLazyImage
+      BlogPost
     },
     nuxtI18n: {
       paths: {
