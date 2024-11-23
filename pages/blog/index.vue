@@ -36,8 +36,6 @@
       ).then((response) => {
          response.results.forEach(result => {
           posts.push(result);
-          posts.push(result);
-          posts.push(result);
         });
       })
 
