@@ -106,9 +106,9 @@ export default {
         path: 'evenements'
       },
       {
-        name: 'creations',
-        text: 'Photos',
-        path: 'nos-creations'
+        name: 'glossary',
+        text: 'Glossaire',
+        path: 'glossaire'
       }
     ]
   },
