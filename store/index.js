@@ -1,6 +1,9 @@
 import cart from './cart';
+import product from './product';
+
 export const modules = {
-    cart
+    cart,
+    product
 };
 
 export const state = () => ({
