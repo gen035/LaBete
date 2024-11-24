@@ -122,7 +122,12 @@
             });
           }
         });
-        this.events = this.events.filter(event => this.today < new Date(event.end_date).setHours(23, 59, 59, 999));
+        this.events = this.events.filter(event => {
+          // Create a Date object for the event's end_date and set to the end of that day
+          const eventEndDate = new Date(event.end_date + 'T23:59:59.999'); // Ensures the correct day is set
+          // Compare today's date with the event's end_date
+          return this.today <= eventEndDate;
+        });
         this.passed = passed;
       }
     },
