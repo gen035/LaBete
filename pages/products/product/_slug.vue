@@ -47,7 +47,7 @@
         expand: ['cross_sells', 'up_sells']
       });
 
-      await store.dispatch('product/fetchProductsBySlugs', product && product.up_sells && product.up_sells.length > 0 && product.up_sells.slice(0, 3) || null);
+      await store.dispatch('product/fetchProductsBySlugs', product && product.up_sells && product.up_sells.length > 0 && product.up_sells || null);
 
       if (product) {
         return {

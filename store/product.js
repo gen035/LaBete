@@ -7,23 +7,37 @@ export default {
     }),
     actions: {
         async fetchProductsBySlugs({ commit }, products) {
-            try {
-                if(products) {
-                    const ids = products.map(({product_id}) => product_id);
+            if (Array.isArray(products) && products.length > 0) {
+                try {
+                    // Extract product IDs
+                    const ids = products.map(({ product_id }) => product_id).filter(Boolean);
+
+                    // Fetch recommended products concurrently
                     const recommendedProducts = await Promise.all(
-                        ids.map(id => this.$swell.products.get({where: {id}}))
+                    ids.map(async (id) => {
+                        try {
+                            return await this.$swell.products.get({ where: { id } });
+                        } catch (error) {
+                            console.error(`Failed to fetch product with ID: ${id}`, error);
+                            return null; // Skip invalid/failing products
+                        }
+                    })
                     );
 
-                    const validProducts = recommendedProducts.filter(product => product && product.results && product.results.length > 0);
-                    const recommendedProductsResults = validProducts.map(product => product.results[0]);
-                    commit('SET_PRODUCTS_RECOMMENDED', recommendedProductsResults);
-                } else {
-                    commit('SET_PRODUCTS_RECOMMENDED', null);
+                    // Filter valid products with results and stock availability
+                    const validProducts = recommendedProducts
+                        .filter(product => product && product.results && product.results.length > 0)
+                        .map(product => product.results[0])
+                        .filter(product => product.stock_level > 0);
+
+                    // Limit to top 3 results and commit
+                    commit('SET_PRODUCTS_RECOMMENDED', validProducts.slice(0, 3));
+                } catch (error) {
+                    console.error('Error fetching recommended products:', error);
+                    commit('SET_PRODUCTS_RECOMMENDED', null); // Fallback if overall process fails
                 }
-            } catch (error) {
-                console.error('Failed to fetch recommended products:', error);
+            } else {
                 commit('SET_PRODUCTS_RECOMMENDED', null);
-                commit('SET_ERROR', error);
             }
         }
     },
