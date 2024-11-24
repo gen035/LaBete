@@ -5,7 +5,7 @@
           <div class="col-md-6 col-lg-5 col-xl-4 col-xxl-3 offset-lg-1 offset-xl-2 offset-xxl-3 product-slider">
             <VueSlickCarousel v-if="product.images && product.images.length > 0" v-bind="settings">
               <template v-for="(image, index) in product.images">
-                <v-lazy-image :src="image.file.url" :alt="`${product.name} -  ${index}`" src-placeholder="/product_placeholder.jpg"/>
+                <v-lazy-image :src="image.file.url" :alt="`${product.name} - ${index}`" src-placeholder="/product_placeholder.jpg"/>
               </template>
             </VueSlickCarousel>
           </div>
@@ -23,6 +23,12 @@
             <AddToCart v-if="product.stock_level > 0" :product="product" />
           </div>
         </div>
+        <div class="row" v-if="getProductRecommended && getProductRecommended.length > 0">
+          <div class="col-md-12"><h1>{{ $t('product.recommended') }}</h1></div>
+          <div class="row d-flex justify-content-center">
+            <ProductCard v-for="(upsell, index) in getProductRecommended" :product="upsell" :key="index"/>
+          </div>
+        </div>
       </section>
   </section>
 </template>
@@ -30,16 +36,18 @@
 <script>
   import AddToCart from '~/components/AddToCart';
   import RecommendedProducts from '~/components/RecommendedProducts';
+  import ProductCard from "@/components/ProductCard.vue";
   import VLazyImage from "v-lazy-image/v2";
   import VueSlickCarousel from 'vue-slick-carousel';
+  import {mapGetters} from "vuex";
 
   export default {
     async asyncData({ app, error, store, params}) {
-      const locale = store.state.i18n.locale;
-      let recommendedProducts = [];
       let product = await app.$swell.products.get(params && params.slug, {
-        expand: ['cross_sells']
+        expand: ['cross_sells', 'up_sells']
       });
+
+      await store.dispatch('product/fetchProductsBySlugs', product && product.up_sells && product.up_sells.length > 0 && product.up_sells || null);
 
       if (product) {
         return {
@@ -84,10 +92,16 @@
       }
     },
     components: {
+      ProductCard,
       AddToCart,
       RecommendedProducts,
       VLazyImage,
       VueSlickCarousel
+    },
+    computed: {
+      ...mapGetters('product', [
+        'getProductRecommended'
+      ])
     },
     nuxtI18n: {
       paths: {
