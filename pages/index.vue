@@ -25,26 +25,17 @@
         </div>
       </div>
     </section>
-    <client-only>
-      <section v-if="this.productsResults && this.productsResults.length > 0" class="container py-4">
-        <div class="row">
-          <h1>{{$t('home.products.title')}}</h1>
-        </div>
-        <div class="row d-flex justify-content-center">
-          <ProductCard v-for="(product, index) in this.productsResults" :product="product" :key="`${product.id}`"/>
-        </div>
-      </section>
-     </client-only>
     <template v-for="(block, index) in top_blocks">
       <Block
         :block="block"
         :index="index"
         size="small"
         :key="index"
+        :imageType="index === 0 ? 'img' : 'background'"
       />
     </template>
     <section
-      v-if="cards"
+      v-if="cards && cards.length > 0"
       class="py-5"
     >
       <div class="container">
@@ -66,9 +57,10 @@
         :block="block"
         :index="index"
         :key="index"
+        :imageType="index === 0 ? 'img' : 'background'"
       />
     </template>
-    <section class="container home-images p-5">
+    <!--<section class="container home-images p-5">
       <div class="row align-items-center">
         <div class="col-md-6 home-image text-center p-4">
           <Media :image="content.image_1" />
@@ -82,7 +74,17 @@
           <Media :image="content.image_3" />
         </div>
       </div>
-    </section>
+    </section>-->
+    <client-only>
+      <section v-if="this.productsResults && this.productsResults.length > 0" class="container py-4">
+        <div class="row">
+          <h1>{{$t('home.products.title')}}</h1>
+        </div>
+        <div class="row d-flex justify-content-center">
+          <ProductCard v-for="(product, index) in this.productsResults" :product="product" :key="`${product.id}`"/>
+        </div>
+      </section>
+    </client-only>
   </div>
 </template>
 

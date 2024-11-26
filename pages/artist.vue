@@ -6,11 +6,23 @@
             v-html="$prismic.asHtml(content.title)"
             class="col-md-12"
           />
+          <div
+            v-html="$prismic.asHtml(content.subtitle)"
+            class="col-md-12 text-center m-0"
+          />
         </div>
         <div class="row">
+            <div class="col-md-6 col-lg-4 offset-lg-1 text-center">
+              <Media 
+                v-if="content.image" 
+                :image="content.image" 
+                :class="{ 'd-none d-md-block': hasMobileImage }" 
+              />
+              <Media v-if="content.mobile_image" :image="content.mobile_image" class="d-md-none" />
+            </div>
             <div
               v-html="$prismic.asHtml(content.content)"
-              class="offset-md-2 col-md-8"
+              class="col-md-6 col-lg-6"
             />
         </div>
       </section>
@@ -18,6 +30,7 @@
 </template>
 
 <script>
+  import Media from '~/components/Media';
   export default {
     async asyncData({ app, error, store }) {
       const locale = store.state.i18n.locale;
@@ -55,6 +68,14 @@
           { hid: 'description', name: 'description', content: this.$prismic.asText(this.seo.description) }
         ]
       }
+    },
+    computed: {
+      hasMobileImage() {
+        return this.content.mobile_image;
+      }
+    },
+    components: {
+      Media
     },
     nuxtI18n: {
       paths: {

@@ -1,8 +1,32 @@
 .block {
   &-text {
     color: $dark-grey;
-    font-family: 'PT Serif', serif;
     padding: 16px;
+  }
+
+  h2 {
+    font-family: 'PT Serif', serif;
+    font-size: 24px;
+    margin-bottom: 16px;
+
+    @media (min-width: 992px) {
+      font-size: 36px;
+    }
+  }
+
+  p {
+    font-family: 'Assistant', sans-serif;
+    margin: 12px auto;
+    &:first-of-type {
+      margin: 0 auto 12px auto;
+    }
+    &:last-of-type {
+      margin: 12px auto 0px auto;
+    }
+
+    strong {
+      font-weight: 700;
+    }
   }
 
   img {
