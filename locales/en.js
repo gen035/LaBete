@@ -94,6 +94,11 @@ export default {
         path: ''
       },
       {
+        name: 'products',
+        text: 'Buy',
+        path: 'products'
+      },
+      {
         name: 'brand',
         text: 'The brand',
         path: 'brand'
@@ -102,11 +107,6 @@ export default {
         name: 'artist',
         text: 'The Creator',
         path: 'artist'
-      },
-      {
-        name: 'products',
-        text: 'Buy',
-        path: 'products'
       },
       {
         name: 'events',
