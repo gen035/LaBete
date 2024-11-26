@@ -1,22 +1,20 @@
 <template>
   <section class="content brand">
       <section class="container">
-        <div class="row">
+        <div v-if="content?.title?.length > 0" class="row">
           <div
             v-html="$prismic.asHtml(content.title)"
             class="col-md-12"
           />
         </div>
-        <div class="row">
-            <template
-      v-for="(block, index) in blocks"
-    >
-      <Block
-        :block="block"
-        imageType="img"
-        :index="index"
-      />
-    </template>
+        <div class="row pt-5">
+          <template v-for="(block, index) in blocks">
+            <Block
+              :block="block"
+              imageType="img"
+              :index="index"
+            />
+          </template>
         </div>
       </section>
   </section>

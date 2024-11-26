@@ -17,7 +17,7 @@
         </div>
       </div>
       <div v-if="block.image.url && imageType === 'background'" class="col-lg-6 block-img" :style="{backgroundImage: `url(${block.image.url})`}" />
-      <div v-if="block.image.url && imageType === 'img'" class="col-lg-6 block-img"><Media :image="block.image" placeholder="horizontal"/></div>
+      <div v-if="block.image.url && imageType === 'img'" class="col-lg-6 block-img"><Media :image="block.image" :placeholder="placeholder"/></div>
     </div>
   </section>
 </template>
@@ -45,6 +45,11 @@
         type: Number,
         required: true,
         default: "0"
+      },
+      placeholder: {
+        type: String,
+        required: false,
+        default: "horizontal"
       }
     },
     computed: {
