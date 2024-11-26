@@ -16,8 +16,8 @@
           <a class="button-simple" v-if="block.button?.data?.url" :href="block.button.data.url.url">{{block.button?.data?.text}}</a>
         </div>
       </div>
-      <div v-if="block.image.url && imageType === 'background'" class="col-lg-6 block-img" :style="{backgroundImage: `url(${block.image.url})`}" />
-      <div v-if="block.image.url && imageType === 'img'" class="col-lg-6 block-img"><Media :image="block.image" :placeholder="placeholder"/></div>
+      <div v-if="block.image.url && imageType === 'background'" class="col-lg-6 block-img" :style="{backgroundImage: `url(${block.image.url})`, backgroundSize: 'cover', backgroundRepeat: 'no-repeat', backgroundPosition: 'center right'}" />
+      <div v-if="block.image.url && imageType === 'img'" class="col-lg-6 block-img d-flex align-items-center"><Media :image="block.image" :placeholder="placeholder"/></div>
     </div>
   </section>
 </template>

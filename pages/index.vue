@@ -31,6 +31,7 @@
         :index="index"
         size="small"
         :key="index"
+        :imageType="index === 0 ? 'img' : 'background'"
       />
     </template>
     <section
@@ -56,6 +57,7 @@
         :block="block"
         :index="index"
         :key="index"
+        :imageType="index === 0 ? 'img' : 'background'"
       />
     </template>
     <!--<section class="container home-images p-5">
