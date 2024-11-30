@@ -119,11 +119,11 @@ export default {
         text: 'Blogue',
         path: '/blogue'
       },
-      {
-        name: 'glossary',
-        text: 'Glossaire',
-        path: 'glossaire'
-      }
+      // {
+      //   name: 'glossary',
+      //   text: 'Glossaire',
+      //   path: 'glossaire'
+      // }
     ]
   },
   newsletter: {

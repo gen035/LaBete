@@ -25,6 +25,7 @@
   import GlossaryCard from '~/components/GlossaryCard';
   export default {
     async asyncData({ app, error, store }) {
+      error({ statusCode: 404, message: 'Page not found' })
       const locale = store.state.i18n.locale;
       let content = []
 

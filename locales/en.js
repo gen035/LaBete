@@ -113,11 +113,11 @@ export default {
         text: 'Events',
         path: 'events'
       },
-      {
-        name: 'glossary',
-        text: 'Glossary',
-        path: 'glossary'
-      },
+      // {
+      //   name: 'glossary',
+      //   text: 'Glossary',
+      //   path: 'glossary'
+      // },
       {
         name: 'blog',
         text: 'Blog',
