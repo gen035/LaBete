@@ -95,6 +95,11 @@ export default {
         path: ''
       },
       {
+        name: 'products',
+        text: 'Boutique',
+        path: 'produits'
+      },
+      {
         name: 'brand',
         text: 'La marque',
         path: 'marque'
@@ -103,11 +108,6 @@ export default {
         name: 'artist',
         text: 'La créatrice',
         path: 'artiste'
-      },
-      {
-        name: 'products',
-        text: 'Boutique',
-        path: 'produits'
       },
       {
         name: 'events',

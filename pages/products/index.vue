@@ -4,13 +4,13 @@
         <div class="row">
           <div
             v-html="$prismic.asHtml(content.title)"
-            class="col-md-12"
+            class="col-md-8 offset-md-2 col-xl-6 offset-xl-3"
           />
         </div>
         <div class="row" v-if="content.content">
           <div
             v-html="$prismic.asHtml(content.content)"
-            class="col-md-8 offset-md-2 text-center product-description"
+            class="col-md-8 offset-md-2 col-xl-6 offset-xl-3 text-center product-description"
           />
         </div>
         <div class="row">
