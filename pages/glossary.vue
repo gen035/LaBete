@@ -12,9 +12,7 @@
         </div>
         <div class="row align-items-center justify-content-center">
           <div class="col-md-10">
-            <div class="row">
-              <GlossaryCard v-for="card in glossaryCards" :key="index" :data="card"/>
-              <GlossaryCard v-for="card in glossaryCards" :key="index" :data="card"/>
+            <div class="row flex-row d-flex align-items-stretch">
               <GlossaryCard v-for="card in glossaryCards" :key="index" :data="card"/>
             </div>
           </div>

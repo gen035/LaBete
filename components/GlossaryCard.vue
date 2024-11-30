@@ -1,6 +1,6 @@
 <template>
   <div class="col-lg-4 col-sm-6 my-2">
-    <div class="glossary-card py-2 px-3">
+    <div class="glossary-card p-3 d-flex flex-column">
       <figure>
         <Media :image="data.image" placeholder="horizontal" />
       </figure>
