@@ -36,7 +36,7 @@ export default {
     title: 'Blogue',
     read: 'Lire plus...',
     empty: {
-      title: 'Aucun article de blog disponible',
+      title: 'Aucun article de blogue disponible',
       content: 'Nous travaillons actuellement sur de nouveaux contenus. Revenez bientôt pour des mises à jour !'
     }
 
@@ -119,11 +119,11 @@ export default {
         text: 'Blogue',
         path: '/blogue'
       },
-      {
-        name: 'creations',
-        text: 'Photos',
-        path: 'nos-creations'
-      }
+      // {
+      //   name: 'glossary',
+      //   text: 'Glossaire',
+      //   path: 'glossaire'
+      // }
     ]
   },
   newsletter: {

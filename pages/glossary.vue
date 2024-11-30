@@ -1,5 +1,5 @@
 <template>
-  <section class="content creations">
+  <section class="content glossary">
       <section class="container">
         <div class="row">
             <div
@@ -7,69 +7,62 @@
               class="col-md-12"
             />
         </div>
-        <div class="row">
-          <div class="col-2 creations-img" v-for="(image, imageIndex) in images" :key="imageIndex" @click="index = imageIndex">
-              <Media :image="image" />
+        <div class="row align-items-center justify-content-center">
+          <div class="col-md-10" v-html="$prismic.asHtml(content.content)" />
+        </div>
+        <div class="row align-items-center justify-content-center">
+          <div class="col-md-10">
+            <div class="row flex-row d-flex align-items-stretch">
+              <GlossaryCard v-for="card in glossaryCards" :key="index" :data="card"/>
+            </div>
           </div>
         </div>
-        <LightGallery
-          :images="images"
-          :index="index"
-          :disable-scroll="false"
-          @close="index = null"
-        />
       </section>
   </section>
 </template>
 
 <script>
-  import Media from '~/components/Media';
+  import GlossaryCard from '~/components/GlossaryCard';
   export default {
     async asyncData({ app, error, store }) {
+      error({ statusCode: 404, message: 'Page not found' })
       const locale = store.state.i18n.locale;
       let content = []
 
+      await app.$prismic.api.getByUID('page', 'glossary', {
+          lang: `${locale}-ca`
+      }).then((response) => {
+          if (response) {
+              content = response.data;
+          } else {
+              console.error('Document not found');
+          }
+      }).catch((error) => {
+          console.error('Error fetching document:', error);
+      });
+
+      let glossaryCards = [];
       await app.$prismic.api.query(
-        app.$prismic.predicates.at('document.type', 'creations'), {
-           lang: `${locale}-ca`
+        app.$prismic.predicates.at('document.type', 'glossarycard'), {
+           lang: `${locale}-ca`,
         }
       ).then((response) => {
         response.results.forEach(result => {
-          content = result.data;
+          glossaryCards.push(result.data);
         });
       })
-
-      let seo = await app.$prismic.api.getByID(content.seo.id)
-      seo = seo.data;
   
+      let seo = await app.$prismic.api.getByID(content.seo.id);
+      seo = seo.data;
+
       if (content) {
         return {
           content,
+          glossaryCards,
           seo
         }
       } else {
         error({ statusCode: 404, message: 'Page not found' })
-      }
-    },
-    data() {
-      return {
-        images: [],
-        index: null
-      }
-    },
-    created() {
-      if(this.content) {
-        const images = this.content.images;
-        const imageArr = [];
-
-        images.map((item, index) => {
-          imageArr.push({
-            title: item.image.alt || null,
-            url: item.image.url
-          })
-        });
-
-        this.images =  imageArr;
       }
     },
     methods: {
@@ -89,13 +82,13 @@
         ]
       }
     },
-    components: {
-      Media
+    components : {
+      GlossaryCard
     },
     nuxtI18n: {
       paths: {
-        fr: '/nos-creations',
-        en: '/our-creations'
+         fr: '/glossaire',
+        en: '/glossary'
       }
     },
   }
