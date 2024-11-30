@@ -27,7 +27,7 @@
           <a href="/" title="La Bete" data-track="" data-track-category="nav" data-track-action="click" data-track-label="Logo">
             <Media
               classes="header-logo"
-              :image="getSettings.header_logo"
+              :image="this.getSettings.header_logo"
               :lazy="false"
             />
           </a>
