@@ -21,10 +21,18 @@
         <template v-if="this.hasFetched">
           <div class="row">
             <NoProducts v-if="this.productsResults && this.productsResults.length === 0" />
-            <ProductCard v-else v-for="(product, index) in this.productsResults" :product="product" :key="product.id"/>
+            <ProductCard v-else v-for="product in this.productsResults" :product="product" :key="product.id"/>
           </div>
-          <div class="row">
-            <CustomButton :text="$t('products.more', { number: products.count - (products.limit * products.page)})" v-on:click.native="loadMore" icon="fa-plus" :disabled="this.products && this.products.page >= this.products.page_count" size="large" />
+          <div v-if="this.count > 24" class="row">
+            <div class="progress my-3 mx-auto">
+              <div class="progress-bar" :style="{width: this.progress + '%'}"></div>
+            </div>
+            <div class="progress-text text-center my-2">
+              {{ $t('products.progress', { current: this.productsResults.length, count: this.count }) }}
+            </div>
+          </div>
+          <div v-if="this.products && (this.products.page < this.products.page_count)" class="row">
+            <CustomButton :text="$t('products.more')" v-on:click.native="fetchProducts" icon="fa-plus" size="large" />
           </div>
         </template>
       </section>
@@ -78,35 +86,43 @@
     },
     data() {
       return {
+        count: 0,
         products: null,
-        productsResults: null,
-        hasFetched: false,
+        productsResults: [],
+        progress: 0,
+        hasFetched: false
       }
     },
     async mounted() {
-      this.products = await this.$swell.products.list({
-        limit: 24,
-        sort: "date_created desc"
-      });
-
-      this.productsResults = this.products && this.products.results && this.products.results.length > 0 ? this.products.results : [];
-      this.hasFetched = true;
+      await this.fetchProducts();
     },
     methods: {
-      async loadMore() {
-        const newProducts = await this.$swell.products.list({
+      async fetchProducts() {
+        this.products = await this.$swell.products.list({
           limit: 24,
           sort: "date_created desc",
-          page: this.products.page + 1
+          page: this.products && this.products.page + 1 || 1
         });
 
-        // Check if newProducts is defined and has results
-        if (newProducts && newProducts.results) {
-          // Append new products to the existing products array
-          this.productsResults = [...this.productsResults, ...newProducts.results];
-          // Update the products object with the new pagination data
-          this.products = newProducts;
+        if (this.products && this.products.results && this.products.results.length > 0) {
+          const newProducts = this.products.results;
+
+          // Remove duplicates
+          const uniqueProducts = [
+            ...this.productsResults,
+            ...newProducts.filter(product =>
+                !this.productsResults.some(existingProduct => existingProduct.id === product.id)
+            )
+          ];
+
+          this.productsResults = uniqueProducts;
         }
+        this.count = this.products.count;
+        this.setProgress(this.productsResults.length, this.count);
+        this.hasFetched = true;
+      },
+      setProgress(amount, count) {
+        this.progress = (amount / count) * 100;
       }
     },
     components: {

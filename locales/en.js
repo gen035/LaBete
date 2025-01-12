@@ -297,7 +297,8 @@ export default {
       'la-bte-noire': 'La Bête Noire!'
     },
     none: 'No products available',
-    more: 'See More... ({number})'
+    more: 'See More...',
+    progress: 'Showing {current} of {count} products',
   },
   top: {
     contact:  {

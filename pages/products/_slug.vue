@@ -17,13 +17,23 @@
           <CategoriesDropdown />
         </div>
       </div>
-      <div class="row">
-        <NoProducts v-if="productsResults && productsResults.length === 0" />
-        <ProductCard v-else v-for="(product, index) in productsResults" :product="product" :key="index"/>
-      </div>
-      <div v-if="products.page_count > 1" class="row">
-        <CustomButton :text="$t('products.more', { number: products.count - (products.limit * products.page)})" v-on:click.native="loadMore" icon="fa-plus" :disabled="products && products.page >= products.page_count" size="large" />
-      </div>
+      <template v-if="this.hasFetched">
+        <div class="row">
+          <NoProducts v-if="this.productsResults && this.productsResults.length === 0" />
+          <ProductCard v-else v-for="(product, index) in this.productsResults" :product="product" :key="index"/>
+        </div>
+        <div v-if="this.count > 24" class="row">
+          <div class="progress my-3 mx-auto">
+            <div class="progress-bar" :style="{width: this.progress + '%'}"></div>
+          </div>
+          <div class="progress-text text-center my-2">
+            {{ $t('products.progress', { current: this.productsResults.length, count: this.count }) }}
+          </div>
+        </div>
+        <div v-if="this.products && (this.products.page < this.products.page_count)" class="row">
+          <CustomButton :text="$t('products.more')" v-on:click.native="fetchProducts" icon="fa-plus" size="large" />
+        </div>
+      </template>
     </section>
   </section>
 </template>
@@ -54,20 +64,11 @@
       seo = seo.data;
 
       const category =  params && params.category;
-      let products = await app.$swell.products.list({
-        limit: 24,
-        sort: "date_created desc",
-        categories: category
-      });
-
-      const productsResults = products && products.results && products.results.length > 0 ? products.results : [];
 
       if (content) {
         return {
           category,
           content,
-          products,
-          productsResults,
           seo
         }
       } else {
@@ -85,32 +86,57 @@
         ]
       }
     },
+    data() {
+      return {
+        count: 0,
+        products: null,
+        productsResults: [],
+        progress: 0,
+        hasFetched: false
+      }
+    },
+    async mounted() {
+      await this.fetchProducts()
+    },
     methods: {
-      async loadMore() {
-        const newProducts = await this.$swell.products.list({
+      async fetchProducts() {
+        this.products = await this.$swell.products.list({
           limit: 24,
           sort: "date_created desc",
           categories: this.category,
-          page: this.products.page + 1
+          page: this.products && this.products.page + 1 || 1
         });
 
-         // Check if newProducts is defined and has results
-        if (newProducts && newProducts.results) {
-          // Append new products to the existing products array
-          this.productsResults = [...this.productsResults, ...newProducts.results];
-          // Update the products object with the new pagination data
-          this.products = newProducts;
+        if (this.products && this.products.results && this.products.results.length > 0) {
+          const newProducts = this.products.results;
+          // Remove duplicates
+          const uniqueProducts = [
+            ...this.productsResults,
+            ...newProducts.filter(product =>
+                !this.productsResults.some(existingProduct => existingProduct.id === product.id)
+            )
+          ];
+
+          this.productsResults = uniqueProducts;
         }
+        this.count = this.products.count;
+        this.setProgress(this.productsResults.length, this.count);
+        this.hasFetched = true;
+      },
+      setProgress(amount, count) {
+        this.progress = (amount / count) * 100;
       }
     },
     computed: {
       categoryTitle() {
-        const category = this.$store.state.categories.find(category => category.slug === this.$route.params.category);
-        return category ? category.name : null;
+        const categories = this.$store.state.categories || [];
+        const category = categories.find(category => category.slug === this.$route.params.category);
+        return category ? category.name : '';
       },
       categoryDesc() {
-        const category = this.$store.state.categories.find(category => category.slug === this.$route.params.category);
-        return category ? category.description : null;
+        const categories = this.$store.state.categories || [];
+        const category = categories.find(category => category.slug === this.$route.params.category);
+        return category ? category.description : '';
       }
     },
     components: {

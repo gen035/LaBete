@@ -1,0 +1,11 @@
+.progress {
+  border-radius: 50px;
+  height: 15px;
+  padding: 0;
+  max-width: 300px;
+
+  &-bar {
+    background-color: $gold;
+    border-radius: 50px;
+  }
+}
