@@ -23,7 +23,7 @@
             <NoProducts v-if="this.productsResults && this.productsResults.length === 0" />
             <ProductCard v-else v-for="product in this.productsResults" :product="product" :key="product.id"/>
           </div>
-          <div class="row">
+          <div v-if="this.count > 24" class="row">
             <div class="progress my-3 mx-auto">
               <div class="progress-bar" :style="{width: this.progress + '%'}"></div>
             </div>
