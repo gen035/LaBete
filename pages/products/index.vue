@@ -107,7 +107,7 @@
         if (this.products && this.products.results && this.products.results.length > 0) {
           const newProducts = this.products.results;
 
-          // Remove duplicates by 'id' (assuming products have an 'id' field)
+          // Remove duplicates
           const uniqueProducts = [
             ...this.productsResults,
             ...newProducts.filter(product =>
