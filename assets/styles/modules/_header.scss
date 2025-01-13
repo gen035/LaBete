@@ -56,9 +56,6 @@ header {
       }
       &:last-child {
         cursor: pointer;
-        @media (min-width: 992px) {
-          margin-left: auto;
-        }
         .fa {
           font-size: 18px;
         }

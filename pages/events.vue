@@ -6,7 +6,8 @@
         <p
             v-html="$prismic.asHtml(content.content)"
             class="col-md-12 events-content"
-          />
+        />
+        <h2 class="title-h1">{{ content.title_upcoming[0].text }}</h2>
         <div v-if="events.length === 0" class="events-empty text-center">{{ $t('events.empty') }}</div>
         <template
             v-if="events.length > 0"
