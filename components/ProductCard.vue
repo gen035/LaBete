@@ -5,6 +5,8 @@
         <div v-if="product.sale && this.in_stock" class="product-card-sale">{{$t('product.sale')}}</div>
         <div class="product-card-image">
           <v-lazy-image :src="product.images[0].file.url" src-placeholder="/product_placeholder.jpg"/>
+          <img v-if="$i18n.locale === 'fr'" src="~/assets/images/quebec_fr.png" class="product-card-quebec" />
+          <img v-if="$i18n.locale === 'en'" src="~/assets/images/quebec_en.png" class="product-card-quebec" />
         </div>
         <div class="product-card-name">{{ product.name }}</div>
         <div v-if="!product.sale && this.in_stock" class="product-card-price">{{product.price}}$</div>

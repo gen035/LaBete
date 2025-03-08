@@ -8,6 +8,8 @@
                 <v-lazy-image :src="image.file.url" :alt="`${product.name} - ${index}`" src-placeholder="/product_placeholder.jpg"/>
               </template>
             </VueSlickCarousel>
+            <img v-if="$i18n.locale === 'fr'" src="~/assets/images/quebec_fr.png" class="product-card-quebec" />
+            <img v-if="$i18n.locale === 'en'" src="~/assets/images/quebec_en.png" class="product-card-quebec" />
           </div>
           <div class="col-md-6 col-lg-5 col-xl-4 col-xxl-3 product-detail">
             <div v-if="product.stock_level <= 0" class="mb-2 product-price product-price--sold">
