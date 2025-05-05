@@ -14,6 +14,10 @@
       footer-class="cart-footer container"
     >
         <template #footer="{ hide }">
+          <div v-if="getCart?.discount_total" class="row">
+            <div class="col-6">{{$t('cart.promo')}}</div>
+            <div class="col-6 text-right">-{{getCart?.discount_total || 0}}$</div>
+          </div>
           <div class="row">
             <div class="col-6">{{$t('cart.subtotal')}}</div>
             <div class="col-6 text-right">{{getCart?.grand_total || 0}}$</div>

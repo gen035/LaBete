@@ -7,6 +7,7 @@ export default {
     delete: 'Remove',
     empty: 'No product in your cart',
     qty: 'Qty:',
+    promo: 'Rebate',
     shipping: 'Shipping',
     shipping_amount: 'Calculated at checkout',
     subtotal: 'Subtotal',
