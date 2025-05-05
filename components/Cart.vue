@@ -71,8 +71,14 @@
                   />
                   <b-col cols="8">
                     <b-card-body class="d-flex flex-column justify-content-between" :title="item.product.name && item.product.name.substring(0, 20) + '...'">
-                      <b-card-text class="row">
+                      <b-card-text v-if="!item.discount_each" class="row">
                         <div class="col-12 cart-item-price">{{item.price}}$</div>
+                      </b-card-text>
+                      <b-card-text v-if="item.discount_each" class="row">
+                        <div class="col-6 cart-item-price">
+                          {{item.price-item.discount_each}}$
+                          <s class="col-8">{{item.price}}$</s>
+                        </div>
                       </b-card-text>
                       <b-card-text class="row">
                         <div class="col-6 cart-item-qty">{{$t('cart.qty')}} {{item.quantity}}</div>
