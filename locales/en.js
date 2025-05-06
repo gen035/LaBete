@@ -254,7 +254,11 @@ export default {
     {
       year: '2024',
       events: [],
-    }
+    },
+    {
+      year: '2025',
+      events: [],
+    },
   ],
   events: {
     empty: "Currently, there are no upcoming events scheduled."

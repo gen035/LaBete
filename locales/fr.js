@@ -251,6 +251,10 @@ export default {
       year: '2024',
       events: [],
     },
+    {
+      year: '2025',
+      events: [],
+    },
   ],
   events: {
     empty: "Actuellement, aucun événement n'est prévu."
