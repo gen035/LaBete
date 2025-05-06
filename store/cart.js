@@ -7,6 +7,7 @@ export default {
         isUpdating: false,
         isUpdatingId: null,
         isOpened: false,
+        notification: {},
     }),
     mutations: {
         SET_CART(state, cart) {
@@ -23,6 +24,9 @@ export default {
         },
         SET_CART_UPDATING_ID(state, isUpdatingId) {
             state.isUpdatingId = isUpdatingId;
+        },
+        SET_NOTIFICATION(state, notification) {
+            state.notification = notification;
         },
     },
     actions: {
@@ -209,6 +213,9 @@ export default {
         },
         getCartUpdatingId(state) {
             return state.isUpdatingId
+        },
+        getNotification(state) {
+            return state.notification;
         }
     }
 };
