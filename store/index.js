@@ -16,7 +16,6 @@ export const state = () => ({
         data: null,
         isOpened: false,
     },
-    notification: {},
     messageOpened: false,
     message: [],
     settings: null,
@@ -49,9 +48,6 @@ export const mutations = {
     },
     SET_NEWSLETTER_MODAL_DATA(state, modal) {
         state.newsletter.data = modal;
-    },
-    SET_NOTIFICATION(state, notification) {
-        state.notification = notification;
     },
     SET_SETTINGS(state, settings) {
         state.settings = settings;
