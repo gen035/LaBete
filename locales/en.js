@@ -7,6 +7,7 @@ export default {
     delete: 'Remove',
     empty: 'No product in your cart',
     qty: 'Qty:',
+    promo: 'Rebate',
     shipping: 'Shipping',
     shipping_amount: 'Calculated at checkout',
     subtotal: 'Subtotal',
@@ -253,7 +254,11 @@ export default {
     {
       year: '2024',
       events: [],
-    }
+    },
+    {
+      year: '2025',
+      events: [],
+    },
   ],
   events: {
     empty: "Currently, there are no upcoming events scheduled."

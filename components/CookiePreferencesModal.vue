@@ -1,36 +1,64 @@
 <template>
   <client-only>
-    <div role="dialog" class="cookiePreferencesModalWrapper" v-if="this.$store.state.cookiePreferencesModalOpened">
-      <div class="cookiePreferencesModal">
-        <div class="cookiePreferencesModal-content">
-          <h1>{{ $t('cookie.params') }}</h1>
-        </div>
-        <div class="cookiePreferencesModal-cookie">
-          <div class="cookiePreferencesModal--text">
-            <h3>{{ $t('cookie.list.essential') }}</h3>
-            <p>{{ $t('cookie.list.essential_description') }}</p>
+    <div>
+      <div
+          role="dialog"
+          class="cookiePreferencesModalWrapper"
+          v-if="$store.state.cookiePreferencesModalOpened"
+      >
+        <div class="cookiePreferencesModal">
+          <div class="cookiePreferencesModal-content">
+            <h1>{{ $t('cookie.params') }}</h1>
           </div>
-          <b-form-checkbox checked="true" name="check-button" size="md" switch disabled/>
-        </div>
-        <div class="cookiePreferencesModal-cookie">
-          <div class="cookiePreferencesModal--text">
-            <h3>{{ $t('cookie.list.performance') }}</h3>
-            <p>{{ $t('cookie.list.performance_description') }}</p>
+
+          <div class="cookiePreferencesModal-cookie">
+            <div class="cookiePreferencesModal--text">
+              <h3>{{ $t('cookie.list.essential') }}</h3>
+              <p>{{ $t('cookie.list.essential_description') }}</p>
+            </div>
+            <b-form-checkbox checked="true" name="check-button" size="md" switch disabled/>
           </div>
-          <b-form-checkbox v-model="$cookies.get('LABETE_PRIVACY_PERF')" name="check-button" size="md" @change="setCookieCategory('LABETE_PRIVACY_PERF')" switch />
-        </div>
-        <div class="cookiePreferencesModal-cookie">
-          <div class="cookiePreferencesModal--text">
-            <h3>{{ $t('cookie.list.personalisation') }}</h3>
-            <p>{{ $t('cookie.list.personalisation_description') }}</p>
+
+          <div class="cookiePreferencesModal-cookie">
+            <div class="cookiePreferencesModal--text">
+              <h3>{{ $t('cookie.list.performance') }}</h3>
+              <p>{{ $t('cookie.list.performance_description') }}</p>
+            </div>
+            <b-form-checkbox
+                v-model="$cookies.get('LABETE_PRIVACY_PERF')"
+                name="check-button"
+                size="md"
+                @change="setCookieCategory('LABETE_PRIVACY_PERF')"
+                switch
+            />
           </div>
-          <b-form-checkbox v-model="$cookies.get('LABETE_PRIVACY_PERSO')" name="check-button" size="md" @change="setCookieCategory('LABETE_PRIVACY_PERSO')" switch />
+
+          <div class="cookiePreferencesModal-cookie">
+            <div class="cookiePreferencesModal--text">
+              <h3>{{ $t('cookie.list.personalisation') }}</h3>
+              <p>{{ $t('cookie.list.personalisation_description') }}</p>
+            </div>
+            <b-form-checkbox
+                v-model="$cookies.get('LABETE_PRIVACY_PERSO')"
+                name="check-button"
+                size="md"
+                @change="setCookieCategory('LABETE_PRIVACY_PERSO')"
+                switch
+            />
+          </div>
+
+          <CustomButton
+              v-on:click.native="save"
+              :aria-label="$t('cookie.save')"
+              :text="$t('cookie.save')"
+              icon="fa-save"
+          />
         </div>
-        <CustomButton v-on:click.native="save" :aria-label="$t('cookie.save')" :text="$t('cookie.save')" icon="fa-save"/>
       </div>
     </div>
   </client-only>
 </template>
+
 <script>
   import CustomButton from "@/components/CustomButton.vue";
   export default {

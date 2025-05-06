@@ -7,6 +7,7 @@ export default {
     delete: 'Enlever',
     empty: 'Aucun produits dans votre panier',
     qty: 'Qte:',
+    promo: 'Promotion',
     shipping: 'Livraison',
     shipping_amount: 'Calculé au paiement',
     subtotal: 'Sous-total',
@@ -248,6 +249,10 @@ export default {
     },
     {
       year: '2024',
+      events: [],
+    },
+    {
+      year: '2025',
       events: [],
     },
   ],

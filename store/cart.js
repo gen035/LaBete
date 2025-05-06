@@ -182,6 +182,7 @@ export default {
                     // Get cart from session (returns null if nothing in cart)
                     cart = await this.$swell.cart.get();
                 }
+
                 // Update cart state
                 commit('SET_CART', cart);
             } catch (err) {
