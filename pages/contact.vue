@@ -12,7 +12,7 @@
               <div v-for="(item, index) in content.contact_items" class="contact-item">
                 <a :href="`${item.link && item.link.url}`" :title="formattedTitle(item)" data-track="" data-track-category="contact" data-track-action="click" :data-track-label="formattedTitle(item)" target="_blank">
                   <h2 v-if="item && item.label && item.label.length > 0">{{item.label[0].text}}<i v-if="item.fa_icon && item.fa_icon.length > 0" :class="item.fa_icon[0].text"></i></h2>
-                  <p v-if="item && item.display_text && item.display_text.length > 0">{{item.display_text[0].text}}</h2>
+                  <p v-if="item && item.display_text && item.display_text.length > 0">{{item.display_text[0].text}}</p>
                   <p v-if="item && item.label && item.handle.length > 0 && item.handle[0].text">{{ item.handle[0].text }}</p>
                 </a>
               </div>
