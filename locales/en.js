@@ -42,7 +42,7 @@ export default {
     }
   },
   error: {
-    title: 'An Error Occured',
+    title: 'An Error Occurred',
     home: 'Back home',
     notFound: {
       text: 'Page not found'
