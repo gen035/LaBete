@@ -96,6 +96,11 @@ export default {
         path: ''
       },
       {
+        name: 'creations',
+        text: 'Photos',
+        path: 'nos-creations'
+      },
+      {
         name: 'products',
         text: 'Boutique',
         path: 'produits'
