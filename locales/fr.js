@@ -120,6 +120,11 @@ export default {
         text: 'Événements',
         path: 'evenements'
       },
+      {
+        name: 'videos',
+        text: 'Vidéos',
+        path: 'videos'
+      },
        {
         name: 'blog',
         text: 'Blogue',
