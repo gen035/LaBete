@@ -133,11 +133,6 @@ export default {
         name: 'blog',
         text: 'Blog',
         path: '/blog'
-      },
-      {
-        name: 'creations',
-        text: 'Photos',
-        path: 'our-creations'
       }
     ]
   },

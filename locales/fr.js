@@ -125,16 +125,16 @@ export default {
         text: 'Vidéos',
         path: 'videos'
       },
-       {
-        name: 'blog',
-        text: 'Blogue',
-        path: '/blogue'
-      },
       // {
       //   name: 'glossary',
       //   text: 'Glossaire',
       //   path: 'glossaire'
       // }
+       {
+        name: 'blog',
+        text: 'Blogue',
+        path: '/blogue'
+      }
     ]
   },
   newsletter: {
