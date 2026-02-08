@@ -12,20 +12,25 @@
       <div class="row">
         <div
           v-for="(video, index) in content.videos"
-          :key="video.video_link?.embed_url || index"
+          :key="(video.video_link && video.video_link.embed_url) || index"
           class="col-md-6 offset-md-3 video"
         >
           <h2>{{ $prismic.asText(video.video_title) }}</h2>
+
           <time v-if="video.date">
             {{ formatDate(video.date) }}
           </time>
 
-          <div class="video-wrapper" v-if="video.video_link?.html">
+          <div
+            class="video-wrapper"
+            v-if="video.video_link && video.video_link.html"
+          >
             <div
               class="video-embed"
               v-html="responsiveEmbed(video.video_link.html)"
             />
           </div>
+
         </div>
       </div>
     </section>
@@ -42,11 +47,13 @@ export default {
 
     await app.$prismic.api
       .query(app.$prismic.predicates.at('document.type', 'videos_page'), {
-        lang: `${locale}-ca`,
+        lang: locale + '-ca',
       })
       .then((response) => {
-        const doc = response.results?.[0]
-        if (doc) content = doc.data
+        if (response && response.results && response.results.length > 0) {
+          const doc = response.results[0]
+          content = doc.data
+        }
       })
 
     if (!content) {
@@ -54,13 +61,19 @@ export default {
       return
     }
 
-    let seo = await app.$prismic.api.getByID(content.seo.id)
-    seo = seo.data
+    let seo = null
+
+    if (content.seo && content.seo.id) {
+      seo = await app.$prismic.api.getByID(content.seo.id)
+      seo = seo.data
+    }
 
     return { content, seo }
   },
 
   head() {
+    if (!this.seo) return {}
+
     return {
       title: this.$prismic.asText(this.seo.title),
       meta: [
@@ -75,7 +88,6 @@ export default {
 
   methods: {
     responsiveEmbed(html) {
-      // Make Prismic oEmbed iframe responsive by removing fixed w/h
       return (html || '')
         .replace(/width="[^"]*"/i, 'width="100%"')
         .replace(/height="[^"]*"/i, 'height="100%"')
@@ -96,7 +108,7 @@ export default {
 
   computed: {
     hasMobileImage() {
-      return this.content.mobile_image
+      return this.content && this.content.mobile_image
     },
   },
 
