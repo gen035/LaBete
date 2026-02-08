@@ -119,6 +119,11 @@ export default {
         text: 'Events',
         path: 'events'
       },
+      {
+        name: 'videos',
+        text: 'Videos',
+        path: 'videos'
+      },
       // {
       //   name: 'glossary',
       //   text: 'Glossary',
