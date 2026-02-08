@@ -13,7 +13,7 @@
         <div
           v-for="(video, index) in content.videos"
           :key="(video.video_link && video.video_link.embed_url) || index"
-          class="col-md-6 offset-md-3 video"
+          class="col-md-6 offset-md-3 mb-5 video"
         >
           <h2>{{ $prismic.asText(video.video_title) }}</h2>
 
