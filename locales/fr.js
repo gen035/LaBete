@@ -145,127 +145,434 @@ export default {
   },
   passed_events: [
     {
-      year: '2014',
-      events: [
-        {name: 'Salon Vivre en Solo'},
-        {name: 'Braderie de la mode Québécoise à Québec'},
-        {name: 'Salon de la Femme de Montréal'},
-        {name: 'Salon de Mai, Beauport Québec'},
-        {name: 'SIDIM (Salon international design intérieur de Montréal)'},
-        {name: 'Salon des artisans de Verchères'},
-        {name: 'Bijoux bijou Marché Bonsecours de Montréal'},
-        {name: 'Salon des artisans de Deux-Montagnes'},
-        {name: 'Salon des artisans de Verchères'},
-        {name: 'Braderie de la mode Québécoise à Québec'},
-        {name: 'Salon des artisans de Longueuil'},
-        {name: 'Salon des artisans de l’Assomption'},
-        {name: 'Marché de Noël de St-Vincent de Paul, Laval'}
-      ]
+        "year": "2014",
+        "events": [
+            {
+                "name": "Salon Vivre en Solo"
+            },
+            {
+                "name": "Braderie de la mode Québécoise à Québec"
+            },
+            {
+                "name": "Salon de la Femme de Montréal"
+            },
+            {
+                "name": "Salon de Mai, Beauport Québec"
+            },
+            {
+                "name": "SIDIM (Salon international design intérieur de Montréal)"
+            },
+            {
+                "name": "Salon des artisans de Verchères"
+            },
+            {
+                "name": "Bijoux bijou Marché Bonsecours de Montréal"
+            },
+            {
+                "name": "Salon des artisans de Deux-Montagnes"
+            },
+            {
+                "name": "Salon des artisans de Verchères"
+            },
+            {
+                "name": "Braderie de la mode Québécoise à Québec"
+            },
+            {
+                "name": "Salon des artisans de Longueuil"
+            },
+            {
+                "name": "Salon des artisans de l\'Assomption"
+            },
+            {
+                "name": "Marché de Noël de St-Vincent de Paul, Laval"
+            }
+        ]
     },
     {
-      year: '2015',
-      events: [
-        {name: 'Holt Renfew'},
-        {name: 'Marché de Noel de Laval'},
-        {name: 'Salon des artistes récuperateur'},
-        {name: 'Festival Mode et Design de Montréal'},
-        {name: 'Festival des Artisans de Saint-Marcelline'},
-        {name: 'Grande Braderie de la mode Québécoise'},
-        {name: 'Expo Art et Artisanat de l\'Assomption'},
-        {name: 'Salon des métiers d\'art de Brossard'},
-        {name: 'Bike &amp; Tattoo Show'},
-        {name: 'Salon de la moto'}
-      ]
+        "year": "2015",
+        "events": [
+            {
+                "name": "Holt Renfew"
+            },
+            {
+                "name": "Marché de Noel de Laval"
+            },
+            {
+                "name": "Salon des artistes récuperateur"
+            },
+            {
+                "name": "Festival Mode et Design de Montréal"
+            },
+            {
+                "name": "Festival des Artisans de Saint-Marcelline"
+            },
+            {
+                "name": "Grande Braderie de la mode Québécoise"
+            },
+            {
+                "name": "Expo Art et Artisanat de l'Assomption"
+            },
+            {
+                "name": "Salon des métiers d'art de Brossard"
+            },
+            {
+                "name": "Bike &amp; Tattoo Show"
+            },
+            {
+                "name": "Salon de la moto"
+            }
+        ]
     },
     {
-      year: '2016',
-      events: [
-        {name: 'Salon des artisans de Québec'},
-        {name: 'Expo Art et Artisanat de L\'Assomption'},
-        {name: 'Signatures Show'},
-        {name: 'Festival des Artisans de Sainte-Marcelline'},
-        {name: 'Grande Braderie de Mode Québécoise à Québec'},
-        {name: 'Beaches Arts and Craft Show'},
-        {name: 'Semaine des Artisans de Laval'},
-        {name: 'Foire Artisanale estivale Mascara &amp; Popcorn'},
-        {name: 'Bike &amp; Tattoo Show'},
-        {name: 'Braderie de la mode québécoise'},
-        {name: 'Show Harley Montréal'},
-        {name: 'Salon de la moto de Montréal'}
-      ]
+        "year": "2016",
+        "events": [
+            {
+                "name": "Salon des artisans de Québec"
+            },
+            {
+                "name": "Expo Art et Artisanat de L'Assomption"
+            },
+            {
+                "name": "Signatures Show"
+            },
+            {
+                "name": "Festival des Artisans de Sainte-Marcelline"
+            },
+            {
+                "name": "Grande Braderie de Mode Québécoise à Québec"
+            },
+            {
+                "name": "Beaches Arts and Craft Show"
+            },
+            {
+                "name": "Semaine des Artisans de Laval"
+            },
+            {
+                "name": "Foire Artisanale estivale Mascara &amp; Popcorn"
+            },
+            {
+                "name": "Bike &amp; Tattoo Show"
+            },
+            {
+                "name": "Braderie de la mode québécoise"
+            },
+            {
+                "name": "Show Harley Montréal"
+            },
+            {
+                "name": "Salon de la moto de Montréal"
+            }
+        ]
     },
     {
-      year: '2017',
-      events: [
-        {name: 'Festival Mode et Design à Montréal'},
-        {name: 'Festival des artisans de Sainte-Marcelline'},
-        {name: 'Grande Braderie de la mode Québécoise'},
-        {name: 'Salon Signatures'},
-        {name: 'Salon des artisans de Québec'},
-        {name: 'Plein Art Le Salon des métiers d\'art de Québec'},
-        {name: 'Grande Braderie de la mode Québécoise'},
-        {name: 'Défilé de mode Éco Design Des Décousus'},
-        {name: 'Show Harley'},
-        {name: 'Salon de la moto'},
-        {name: 'Show Harley'}
-      ]
+        "year": "2017",
+        "events": [
+            {
+                "name": "Festival Mode et Design à Montréal"
+            },
+            {
+                "name": "Festival des artisans de Sainte-Marcelline"
+            },
+            {
+                "name": "Grande Braderie de la mode Québécoise"
+            },
+            {
+                "name": "Salon Signatures"
+            },
+            {
+                "name": "Salon des artisans de Québec"
+            },
+            {
+                "name": "Plein Art Le Salon des métiers d'art de Québec"
+            },
+            {
+                "name": "Grande Braderie de la mode Québécoise"
+            },
+            {
+                "name": "Défilé de mode Éco Design Des Décousus"
+            },
+            {
+                "name": "Show Harley"
+            },
+            {
+                "name": "Salon de la moto"
+            },
+            {
+                "name": "Show Harley"
+            }
+        ]
     },
     {
-      year: '2018',
-      events: [
-        {name: 'Braderie de la mode Québécoise'},
-        {name: 'Salon des métiers d\'art - Bas-Saint-Laurent'},
-        {name: 'Salon des métiers d\'art de Montreal'},
-        {name: 'La Fête des Vendanges de Magog'},
-        {name: 'Plein Art Québec'},
-        {name: 'La Braderie de Toronto'},
-        {name: 'La Braderie de Mode Québécoise à Montréal'},
-        {name: 'Braderie de la mode Québécoise à Gatineau'},
-        {name: 'Salon de la moto de Montréal'},
-        {name: 'Show Harley'}
-      ]
+        "year": "2018",
+        "events": [
+            {
+                "name": "Braderie de la mode Québécoise"
+            },
+            {
+                "name": "Salon des métiers d'art - Bas-Saint-Laurent"
+            },
+            {
+                "name": "Salon des métiers d'art de Montreal"
+            },
+            {
+                "name": "La Fête des Vendanges de Magog"
+            },
+            {
+                "name": "Plein Art Québec"
+            },
+            {
+                "name": "La Braderie de Toronto"
+            },
+            {
+                "name": "La Braderie de Mode Québécoise à Montréal"
+            },
+            {
+                "name": "Braderie de la mode Québécoise à Gatineau"
+            },
+            {
+                "name": "Salon de la moto de Montréal"
+            },
+            {
+                "name": "Show Harley"
+            }
+        ]
     },
     {
-      year: '2019',
-      events: [
-        {name: 'Festival Western de St-Tite'},
-        {name: 'Festival des artisans de Sainte-Marcelline-de-Kildare'},
-        {name: 'Braderie de Gatineau'},
-        {name: 'Popup boutique Place Rosemère'},
-        {name: 'Salon des métiers d\'art de Sorel-Tracy'},
-        {name: 'Signature show Ottawa'},
-        {name: 'Popup boutique Place Rosemère'},
-        {name: 'Salon des Métiers D\'art du Québec'},
-        {name: 'BY HAND CANADA’S ARTISAN GIFT SHOW'},
-        {name: 'Défilé les Décousus - 4ième édition'},
-        {name: 'La grande braderie de mode Québécoise'}
-      ]
+        "year": "2019",
+        "events": [
+            {
+                "name": "Salon des Métiers D'art du Québec",
+                "city": false
+            },
+            {
+                "name": "Plein Art - Salon des métiers d'art de Québec",
+                "city": false
+            },
+            {
+                "name": "Festival Western de St-Tite"
+            },
+            {
+                "name": "Festival des artisans de Sainte-Marcelline-de-Kildare"
+            },
+            {
+                "name": "Braderie de Gatineau"
+            },
+            {
+                "name": "Popup boutique Place Rosemère"
+            },
+            {
+                "name": "Salon des métiers d'art de Sorel-Tracy"
+            },
+            {
+                "name": "Signature show Ottawa"
+            },
+            {
+                "name": "Popup boutique Place Rosemère"
+            },
+            {
+                "name": "Salon des Métiers D'art du Québec"
+            },
+            {
+                "name": "BY HAND CANADA\'S ARTISAN GIFT SHOW"
+            },
+            {
+                "name": "Défilé les Décousus - 4ième édition"
+            },
+            {
+                "name": "La grande braderie de mode Québécoise"
+            }
+        ]
     },
     {
-      year: '2020',
-      events: [],
+        "year": "2020",
+        "events": [
+            {
+                "name": "Symposium Artistique de St-Jean",
+                "city": "Saint-Jean"
+            },
+            {
+                "name": "Plein Art, le Salon des métiers d\'art de Québec",
+                "city": "Québec, Québec"
+            },
+            {
+                "name": "La Grande Braderie de Gatineau",
+                "city": "Gatineau, Quebec"
+            },
+            {
+                "name": "One of a Kind",
+                "city": "Toronto, Ontario"
+            }
+        ]
     },
     {
-      year: '2021',
-      events: [],
+        "year": "2021",
+        "events": []
     },
     {
-      year: '2022',
-      events: [],
+        "year": "2022",
+        "events": [
+            {
+                "name": "Le Salon des métiers d'art du Québec - SMAQ",
+                "city": "Montreal"
+            },
+            {
+                "name": "OB'ART PARIS",
+                "city": "Paris"
+            },
+            {
+                "name": "Signature Handmade Market",
+                "city": "Ottawa"
+            },
+            {
+                "name": "Braderie de la mode Québécoise",
+                "city": "Gatineau"
+            },
+            {
+                "name": "Marché place aux artistes SJIO",
+                "city": "Saint-Jean-de-l'Île-d'Orléans"
+            }
+        ]
     },
     {
-      year: '2023',
-      events: [],
+        "year": "2023",
+        "events": [
+            {
+                "name": "Salon des métiers d\'art du Québec à Montréal",
+                "city": "Montréal"
+            },
+            {
+                "name": "One Of A Kind",
+                "city": "Toronto"
+            },
+            {
+                "name": "Salon des Métier d'Art Lanaudiere",
+                "city": "Saint-Charles Borromée"
+            },
+            {
+                "name": "Salon des métiers d'arts du Saguenay-Lac-Saint-Jean",
+                "city": "Chicoutimi"
+            },
+            {
+                "name": "La Frambée des arts / Salon des artisans",
+                "city": "Orford"
+            },
+            {
+                "name": "Plein Art Quebec",
+                "city": "Québec"
+            },
+            {
+                "name": "Braderie de la mode Québécoise",
+                "city": "Gatineau"
+            }
+        ]
     },
     {
-      year: '2024',
-      events: [],
+        "year": "2024",
+        "events": [
+            {
+                "name": "Salon des métiers d'art de Montréal",
+                "city": "Montréal"
+            },
+            {
+                "name": "Salon des métiers d\'art de Blainville",
+                "city": "Blainville"
+            },
+            {
+                "name": "Salon des métiers d\'art de Charlevoix",
+                "city": "La Malbaie"
+            },
+            {
+                "name": "Salon des métiers d'art de Ville de Lorraine",
+                "city": "Lorraine"
+            },
+            {
+                "name": "Marché 100% artisans",
+                "city": "Joliette"
+            },
+            {
+                "name": "Place des Artisans",
+                "city": "Verchères"
+            },
+            {
+                "name": "Grande Braderie de la mode québécoise ",
+                "city": "Gatineau"
+            },
+            {
+                "name": "Feuillage & Plaisir",
+                "city": "Mirabel"
+            },
+            {
+                "name": "Salon des artisans de Sainte-Marcelline-de-Kildare",
+                "city": "Sainte-Marcelline-de-Kildare"
+            },
+            {
+                "name": "Marché 100% artisans",
+                "city": "Joliette"
+            },
+            {
+                "name": "Marché du printemps",
+                "city": "Laval"
+            },
+            {
+                "name": "La Grande Braderie de la mode Québécoise",
+                "city": "Gatineau"
+            }
+        ]
     },
     {
-      year: '2025',
-      events: [],
+        "year": "2025",
+        "events": [
+            {
+                "name": "Le Salon des métiers d'art du Québec à Montréal",
+                "city": "Montréal"
+            },
+            {
+                "name": "Salon des artisans de Québec",
+                "city": "Québec"
+            },
+            {
+                "name": "Salon des métiers d\'art de Charlevoix",
+                "city": false
+            },
+            {
+                "name": "Salon des métiers d'art de Lorraine ",
+                "city": "Lorraine"
+            },
+            {
+                "name": "Salon des métiers d\'art de Boucherville",
+                "city": "Boucherville"
+            },
+            {
+                "name": "Braderie de la mode Québécoise",
+                "city": "Gatineau"
+            },
+            {
+                "name": "Festival de la galette",
+                "city": "St-Eustache"
+            },
+            {
+                "name": "Marché Culturel de Signé Laval",
+                "city": "Laval"
+            },
+            {
+                "name": "Plein Art Quebec",
+                "city": "Québec"
+            },
+            {
+                "name": "La Grande Fabrique 2025",
+                "city": "Montréal"
+            },
+            {
+                "name": "Braderie de la mode Québécoise",
+                "city": "Gatineau"
+            }
+        ]
     },
-  ],
+    {
+        "year": "2026",
+        "events": []
+    }
+],
   events: {
     empty: "Actuellement, aucun événement n'est prévu."
   },
