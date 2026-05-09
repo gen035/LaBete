@@ -38,9 +38,8 @@
 
         this.timeoutId = setTimeout(() => {
           const hasNewsletterCookie = !!this.$cookies.get('labete_newsletter');
-          const hasCookieConsent = !!this.$cookies.get('labete_cookie_seen');
 
-          if (!hasNewsletterCookie && hasCookieConsent) {
+          if (!hasNewsletterCookie) {
             this.$store.commit('SET_NEWSLETTER_OPENED', true);
           }
           this.resetTimeout();
