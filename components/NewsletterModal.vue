@@ -19,6 +19,9 @@
     created() {
       this.resetTimeout(); // Start the initial timeout
     },
+    beforeDestroy() {
+      clearTimeout(this.timeoutId);
+    },
     methods: {
       close() {
         this.$store.commit('SET_NEWSLETTER_OPENED', false);
@@ -34,7 +37,9 @@
         clearTimeout(this.timeoutId); // Clear the previous timeout (if any)
 
         this.timeoutId = setTimeout(() => {
-          if(!this.$cookies.get('labete_newsletter')) {
+          const hasNewsletterCookie = !!this.$cookies.get('labete_newsletter');
+
+          if (!hasNewsletterCookie) {
             this.$store.commit('SET_NEWSLETTER_OPENED', true);
           }
           this.resetTimeout();
