@@ -5,10 +5,10 @@
   "author": "Genevieve Perron-Migneron",
   "private": true,
   "scripts": {
-    "dev": "nuxt",
-    "build": "nuxt build",
-    "start": "nuxt start",
-    "generate": "nuxt generate",
+    "dev": "nuxi dev",
+    "build": "nuxi build",
+    "start": "nuxi preview",
+    "generate": "nuxi generate",
     "lint:sass": "stylelint '**/*.sass'"
   },
   "engines": {
@@ -20,7 +20,7 @@
     "bootstrap": "^5.3.3",
     "bootstrap-vue": "^2.23.1",
     "cookie-universal-nuxt": "^2.1.4",
-    "nuxt": "^2.0.0",
+    "nuxt": "^3.10.0",
     "nuxt-i18n": "^5.12.7",
     "prismic-nuxt": "^0.5.1",
     "sass": "^1.52.3",
