@@ -1,18 +1,75 @@
-# La Bete Website
+# Nuxt Minimal Starter
 
-This website is dedicated to showcasing the exquisite jewelry crafted by a local artist. Leveraging the power of [Prismic CMS](https://prismic.io/), [Nuxt.js](https://nuxtjs.org/), and [Swell](https://www.swell.is/), this project allows the artist to manage and display their jewelry collection effortlessly. The website is hosted on Vercel for seamless deployment.
+Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
 
-## Features
+## Setup
 
-- **Responsive Design**
-- **E-commerce Integration:** Swell.js integration for a smooth shopping experience product management.
-- **Easy Content Management:** Prismic CMS enables the artist to update and add new jewelry pieces without technical knowledge.
+Make sure to install dependencies:
 
-## Project Structure
+```bash
+# npm
+npm install
 
-- **components:** Reusable Vue.js components.
-- **layouts:** Nuxt.js layout components.
-- **pages:** Individual pages of the website.
-- **plugins:** Nuxt.js plugins for Axios and Swell integration.
-- **static:** Static assets like images.
-- **store:** Vuex store for managing state.
+# pnpm
+pnpm install
+
+# yarn
+yarn install
+
+# bun
+bun install
+```
+
+## Development Server
+
+Start the development server on `http://localhost:3000`:
+
+```bash
+# npm
+npm run dev
+
+# pnpm
+pnpm dev
+
+# yarn
+yarn dev
+
+# bun
+bun run dev
+```
+
+## Production
+
+Build the application for production:
+
+```bash
+# npm
+npm run build
+
+# pnpm
+pnpm build
+
+# yarn
+yarn build
+
+# bun
+bun run build
+```
+
+Locally preview production build:
+
+```bash
+# npm
+npm run preview
+
+# pnpm
+pnpm preview
+
+# yarn
+yarn preview
+
+# bun
+bun run preview
+```
+
+Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
