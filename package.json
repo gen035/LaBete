@@ -1,17 +1,43 @@
 {
-  "name": "nuxt-app",
+  "name": "labete",
+  "version": "1.0.0",
+  "description": "La Bête",
+  "author": "Genevieve Perron-Migneron",
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "nuxt build",
     "dev": "nuxt dev",
+    "build": "nuxt build",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "postinstall": "nuxt prepare",
+    "lint:sass": "stylelint '**/*.sass'",
+    "test": "vitest"
+  },
+  "engines": {
+    "node": "20.x"
   },
   "dependencies": {
-    "nuxt": "^3.21.5",
+    "@nuxtjs/i18n": "^10.0.0",
+    "@nuxtjs/prismic": "^5.3.0",
+    "@pinia/nuxt": "^0.11.0",
+    "@prismicio/client": "^7.21.8",
+    "bootstrap": "^5.3.3",
+    "glightbox": "^3.3.0",
+    "nuxt": "^4.0.0",
+    "pinia": "^3.0.0",
+    "sass": "^1.52.3",
+    "swell-js": "^3.22.1",
+    "v-lazy-image": "^2.1.1",
     "vue": "^3.5.34",
-    "vue-router": "^5.0.6"
+    "vue-router": "^5.0.6",
+    "vue3-carousel": "^0.9.0"
+  },
+  "devDependencies": {
+    "@nuxt/test-utils": "^3.0.0",
+    "stylelint": "^13.3.2",
+    "stylelint-order": "^4.0.0",
+    "stylelint-scss": "^3.16.1",
+    "vitest": "^3.0.0"
   }
 }

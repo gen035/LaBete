@@ -35,7 +35,7 @@ export default defineNuxtConfig({
   },
 
   modules: [
-    '@prismicio/nuxt',
+    '@nuxtjs/prismic',
     '@nuxtjs/i18n',
     '@pinia/nuxt',
   ],
@@ -51,6 +51,7 @@ export default defineNuxtConfig({
   },
 
   i18n: {
+    restructureDir: false,
     locales: [
       { name: 'English',  code: 'en', language: 'en-CA', file: 'en.js' },
       { name: 'Francais', code: 'fr', language: 'fr-CA', file: 'fr.js' },
