@@ -2,9 +2,9 @@
   <section class="content videos">
     <section class="container">
       <div class="row">
-        <div v-html="$prismic.asHtml(content.title)" class="col-md-12" />
+        <div v-html="asHTML(content.title)" class="col-md-12" />
         <div
-          v-html="$prismic.asHtml(content.content)"
+          v-html="asHTML(content.content)"
           class="col-md-8 offset-md-2 text-center mb-5"
         />
       </div>
@@ -15,7 +15,7 @@
           :key="(video.video_link && video.video_link.embed_url) || index"
           class="col-md-6 offset-md-3 mb-5 video"
         >
-          <h2>{{ $prismic.asText(video.video_title) }}</h2>
+          <h2>{{ asText(video.video_title) }}</h2>
 
           <time v-if="video.date">
             {{ formatDate(video.date) }}
@@ -38,54 +38,42 @@
 </template>
 
 <script>
-import Media from '~/components/Media'
+import { asText, asHTML } from '@prismicio/client'
+
+definePageMeta({
+  i18n: {
+    paths: {
+      fr: '/videos',
+      en: '/videos'
+    }
+  }
+})
 
 export default {
-  async asyncData({ app, error, store }) {
-    const locale = store.state.i18n.locale
-    let content = null
+  setup() {
+    const { $prismic } = useNuxtApp()
+    const { locale } = useI18n()
 
-    await app.$prismic.api
-      .query(app.$prismic.predicates.at('document.type', 'videos_page'), {
-        lang: locale + '-ca',
-      })
-      .then((response) => {
-        if (response && response.results && response.results.length > 0) {
-          const doc = response.results[0]
-          content = doc.data
-        }
-      })
+    const { data: content } = useAsyncData('videos', async () => {
+      const docs = await $prismic.client.getAllByType('videos_page', { lang: `${locale.value}-ca` })
+      if (!docs.length) return null
+      const doc = docs[0].data
+      if (doc.seo && doc.seo.id) {
+        const seoDoc = await $prismic.client.getByID(doc.seo.id)
+        doc._seo = seoDoc.data
+      }
+      return doc
+    })
 
-    if (!content) {
-      error({ statusCode: 404, message: 'Page not found' })
-      return
-    }
-
-    let seo = null
-
-    if (content.seo && content.seo.id) {
-      seo = await app.$prismic.api.getByID(content.seo.id)
-      seo = seo.data
-    }
-
-    return { content, seo }
-  },
-
-  head() {
-    if (!this.seo) return {}
-
-    return {
-      title: this.$prismic.asText(this.seo.title),
+    useHead(computed(() => ({
+      title: content.value?._seo?.title ? asText(content.value._seo.title) : 'La Bête',
       meta: [
-        {
-          hid: 'description',
-          name: 'description',
-          content: this.$prismic.asText(this.seo.description),
-        },
-      ],
-    }
-  },
+        { name: 'description', content: content.value?._seo?.description ? asText(content.value._seo.description) : '' }
+      ]
+    })))
 
+    return { content, asText, asHTML }
+  },
   methods: {
     responsiveEmbed(html) {
       return (html || '')
@@ -103,24 +91,7 @@ export default {
       } catch (e) {
         return dateStr
       }
-    },
-  },
-
-  computed: {
-    hasMobileImage() {
-      return this.content && this.content.mobile_image
-    },
-  },
-
-  components: {
-    Media,
-  },
-
-  nuxtI18n: {
-    paths: {
-      fr: '/videos',
-      en: '/videos',
-    },
-  },
+    }
+  }
 }
 </script>

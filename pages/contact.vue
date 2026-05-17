@@ -3,7 +3,7 @@
       <section class="container">
         <div class="row">
             <div
-              v-html="$prismic.asHtml(content.title)"
+              v-html="asHTML(content.title)"
               class="col-md-12"
             />
         </div>
@@ -19,7 +19,7 @@
           </div>
           <div class="col-md-4">
             <Media :image="content.image" :altProp="$t('contact.alt')" classes="contact-img-1"/>
-            <Media :image="content.image_mobile" :altProp="$t('contact.alt')" classes="contact-img-2"/>
+            <Media :image="content.mobile_image" :altProp="$t('contact.alt')" classes="contact-img-2"/>
           </div>
         </div>
       </section>
@@ -27,59 +27,47 @@
 </template>
 
 <script>
-  import Media from '~/components/Media';
-  export default {
-    async asyncData({ app, error, store }) {
-      const locale = store.state.i18n.locale;
-      let content = []
+import { asText, asHTML } from '@prismicio/client'
 
-      await app.$prismic.api.query(
-        app.$prismic.predicates.at('document.type', 'contact'), {
-           lang: `${locale}-ca`
-        }
-      ).then((response) => {
-        response.results.forEach(result => {
-          content = result.data;
-        });
-      })
-
-      let seo = await app.$prismic.api.getByID(content.seo.id)
-      seo = seo.data;
-
-      if (content) {
-        return {
-          content,
-          seo
-        }
-      } else {
-        error({ statusCode: 404, message: 'Page not found' })
-      }
-    },
-    methods: {
-      formattedTitle(item) {
-        const title = item && item.label && item.label.length > 0 && item.label[0].text.toLowerCase();
-        return title;
-      }
-    },
-    head() {
-      return {
-        title: this.$prismic.asText(this.seo.title),
-        link: [
-        //{ rel: 'canonical', href: `https://<DOMAIN>${this.$prismic.linkResolver(this.document)}` }
-        ],
-        meta: [
-          { hid: 'description', name: 'description', content: this.$prismic.asText(this.seo.description) }
-        ]
-      }
-    },
-    components: {
-      Media
-    },
-    nuxtI18n: {
-      paths: {
-        fr: '/contact',
-        en: '/contact'
-      }
-    },
+definePageMeta({
+  i18n: {
+    paths: {
+      fr: '/contact',
+      en: '/contact'
+    }
   }
+})
+
+export default {
+  setup() {
+    const { $prismic } = useNuxtApp()
+    const { locale } = useI18n()
+
+    const { data: content } = useAsyncData('contact', async () => {
+      const docs = await $prismic.client.getAllByType('contact', { lang: `${locale.value}-ca` })
+      if (!docs.length) return null
+      const doc = docs[0].data
+      if (doc.seo && doc.seo.id) {
+        const seoDoc = await $prismic.client.getByID(doc.seo.id)
+        doc._seo = seoDoc.data
+      }
+      return doc
+    })
+
+    useHead(computed(() => ({
+      title: content.value?._seo?.title ? asText(content.value._seo.title) : 'La Bête',
+      meta: [
+        { name: 'description', content: content.value?._seo?.description ? asText(content.value._seo.description) : '' }
+      ]
+    })))
+
+    return { content, asHTML }
+  },
+  methods: {
+    formattedTitle(item) {
+      const title = item && item.label && item.label.length > 0 && item.label[0].text.toLowerCase()
+      return title
+    }
+  }
+}
 </script>
