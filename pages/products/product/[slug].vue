@@ -1,0 +1,111 @@
+<template>
+  <section class="content product">
+      <section class="container-fluid">
+        <div class="row">
+          <div class="col-md-6 col-lg-5 col-xl-4 col-xxl-3 offset-lg-1 offset-xl-2 offset-xxl-3 product-slider">
+            <VueSlickCarousel v-if="product && product.images && product.images.length > 0" v-bind="settings">
+              <template v-for="(image, index) in product.images">
+                <v-lazy-image :src="image.file.url" :alt="`${product.name} - ${index}`" src-placeholder="/product_placeholder.jpg"/>
+              </template>
+            </VueSlickCarousel>
+            <img v-if="$i18n.locale === 'fr'" src="~/assets/images/quebec_fr.png" class="product-card-quebec" />
+            <img v-if="$i18n.locale === 'en'" src="~/assets/images/quebec_en.png" class="product-card-quebec" />
+          </div>
+          <div class="col-md-6 col-lg-5 col-xl-4 col-xxl-3 product-detail">
+            <div v-if="product && product.stock_level <= 0" class="mb-2 product-price product-price--sold">
+              <span>{{$t('product.sold')}}</span>
+            </div>
+            <h1 class="product-title">{{product?.name}}</h1>
+            <div class="product-desc" v-html="product?.description" />
+            <div v-if="product && !product.sale && product.stock_level > 0" class="product-price">{{product.price}}$</div>
+            <div v-if="product && product.sale && product.stock_level > 0" class="product-price product-price--sale">
+              <span>{{product.price}}$</span>
+              <s>{{product.orig_price}}$</s>
+            </div>
+            <AddToCart v-if="product && product.stock_level > 0" :product="product" />
+          </div>
+        </div>
+        <div class="row" v-if="getProductRecommended && getProductRecommended.length > 0">
+          <div class="col-md-12"><h1>{{ $t('product.recommended') }}</h1></div>
+          <div class="row d-flex justify-content-center">
+            <ProductCard v-for="(upsell, index) in getProductRecommended" :product="upsell" :key="index"/>
+          </div>
+        </div>
+      </section>
+  </section>
+</template>
+
+<script>
+import VLazyImage from 'v-lazy-image/v2'
+import VueSlickCarousel from 'vue-slick-carousel'
+
+definePageMeta({
+  nuxtI18n: {
+    paths: {
+      fr: '/produits/produit/:slug',
+      en: '/products/product/:slug'
+    }
+  }
+})
+
+export default {
+  components: {
+    VLazyImage,
+    VueSlickCarousel
+  },
+
+  setup() {
+    const route = useRoute()
+    const { $swell } = useNuxtApp()
+    const productStore = useProductStore()
+
+    const { data: product } = useAsyncData(`product-${route.params.slug}`, async () => {
+      const p = await $swell.products.get(route.params.slug, {
+        expand: ['cross_sells', 'up_sells']
+      })
+
+      if (p) {
+        const upSells = p.up_sells && p.up_sells.length > 0 ? p.up_sells : null
+        await productStore.fetchProductsBySlugs(upSells)
+      }
+
+      return p || null
+    })
+
+    useHead(computed(() => ({
+      title: product.value ? `La Bête | ${product.value.meta_title || product.value.name}` : 'La Bête',
+      meta: [
+        { hid: 'description', name: 'description', content: product.value ? `${product.value.meta_description || product.value.description}` : '' }
+      ]
+    })))
+
+    const getProductRecommended = computed(() => productStore.getProductRecommended)
+
+    const settings = {
+      adaptiveHeight: true,
+      arrows: false,
+      autoplay: true,
+      autoplaySpeed: 2000,
+      dots: true,
+      fade: true,
+      infinite: true,
+      pauseOnHover: true,
+      slidesToShow: 1,
+      responsive: [
+        {
+          breakpoint: 768,
+          settings: {
+            dots: true
+          }
+        }
+      ]
+    }
+
+    return {
+      product,
+      getProductRecommended,
+      settings
+    }
+  }
+}
+</script>
