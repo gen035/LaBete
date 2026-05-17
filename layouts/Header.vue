@@ -14,10 +14,10 @@
           </NuxtLink>
         </li>
         <li>
-          <Nuxt-link :to="switchLocalePath('fr')">Français</Nuxt-link>
+          <NuxtLink :to="switchLocalePath('fr')">Français</NuxtLink>
         </li>
         <li>
-          <Nuxt-link :to="switchLocalePath('en')">English</Nuxt-link>
+          <NuxtLink :to="switchLocalePath('en')">English</NuxtLink>
         </li>
       </ul>
     </div>
@@ -27,7 +27,7 @@
           <a href="/" title="La Bete" data-track="" data-track-category="nav" data-track-action="click" data-track-label="Logo">
             <Media
               classes="header-logo"
-              :image="this.getSettings.header_logo"
+              :image="mainStore.settings && mainStore.settings.header_logo"
               :lazy="false"
             />
           </a>
@@ -36,7 +36,7 @@
           <ul role="menubar" class="header-nav">
             <li
               role="menuitem"
-              v-for="(link, index) in  nav"
+              v-for="(link, index) in nav"
               :key="index"
             >
               <NuxtLink
@@ -48,17 +48,17 @@
               </NuxtLink>
             </li>
           </ul>
-          <span :aria-label="$t('header.cart')" v-b-toggle.sidebar-cart>
+          <span :aria-label="$t('header.cart')" @click="cartStore.setCartOpened(true)" style="cursor:pointer">
             <i class="fa-solid fa-cart-shopping" aria-hidden="true"></i>
-            <span :class="getCartProductsCount > 0 ? 'hasProducts' : ''"></span>
+            <span :class="cartStore.getCartProductsCount > 0 ? 'hasProducts' : ''"></span>
           </span>
         </div>
         <div class="col-4 header-nav-mobile-trigger d-md-none" @click="toggleMobileNav">
           <span>Menu<i class="fa fa-chevron-down"></i></span>
         </div>
-        <div :aria-label="$t('header.cart')"class="col-2 header-nav-mobile-cart d-md-none" v-b-toggle.sidebar-cart>
+        <div :aria-label="$t('header.cart')" class="col-2 header-nav-mobile-cart d-md-none" @click="cartStore.setCartOpened(true)" style="cursor:pointer">
           <i class="fa-solid fa-cart-shopping" aria-hidden="true"></i>
-          <span :class="getCartProductsCount > 0 ? 'hasProducts' : ''"></span>
+          <span :class="cartStore.getCartProductsCount > 0 ? 'hasProducts' : ''"></span>
         </div>
       </div>
     </header>
@@ -66,21 +66,17 @@
   </div>
 </template>
 <script>
-  import Media from '~/components/Media';
-  import { mapGetters } from 'vuex';
-
   export default {
+    setup() {
+      const { locale } = useI18n()
+      const mainStore = useMainStore()
+      const cartStore = useCartStore()
+      return { locale, mainStore, cartStore }
+    },
     computed: {
-      locale() {
-        return this.$store.state.i18n.locale;
-      },
       promo() {
-        return this.getSettings.promo;
+        return this.mainStore.settings && this.mainStore.settings.promo;
       },
-      ...mapGetters('cart', [
-        'getCartProductsCount',
-      ]),
-      ...mapGetters(['getSettings'])
     },
     data() {
       return {
@@ -109,11 +105,8 @@
         });
       },
       openModal() {
-        this.$store.commit('SET_MESSAGE', true);
+        this.mainStore.setMessageOpened(true);
       }
-    },
-    components: {
-      Media
     }
   }
 </script>

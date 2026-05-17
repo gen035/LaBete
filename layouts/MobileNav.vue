@@ -2,11 +2,11 @@
   <ul role="menu" class="mobile-nav d-md-none">
     <li
       role="menuitem"
-      v-for="(link, index) in  nav"
+      v-for="(link, index) in nav"
       :key="index"
     >
       <NuxtLink
-        @click.native="toggleMobileNav"
+        @click="toggleMobileNav"
         :to="localePath(link.name)"
         exact
       >
@@ -15,7 +15,7 @@
     </li>
     <li role="menuitem">
       <NuxtLink
-        @click.native="toggleMobileNav"
+        @click="toggleMobileNav"
         :to="localePath('contact')"
         exact
       >
@@ -23,22 +23,26 @@
       </NuxtLink>
     </li>
     <li role="menuitem">
-      <Nuxt-link :to="switchLocalePath('fr')">Français</Nuxt-link>
+      <NuxtLink :to="switchLocalePath('fr')">Français</NuxtLink>
     </li>
     <li role="menuitem">
-      <Nuxt-link :to="switchLocalePath('en')">English</Nuxt-link>
+      <NuxtLink :to="switchLocalePath('en')">English</NuxtLink>
     </li>
   </ul>
 </template>
 <script>
   export default {
+    setup() {
+      const { t } = useI18n()
+      return { t }
+    },
     data() {
       return {
         nav: []
       }
     },
     created() {
-      const links = this.$t('nav.links');
+      const links = this.t('nav.links');
 
       links.map((item) => {
         this.nav.push(item);
@@ -47,7 +51,7 @@
     mounted() {
       window.addEventListener('resize', this.handleResize);
     },
-    beforeDestroy() {
+    beforeUnmount() {
       window.removeEventListener('resize', this.handleResize);
     },
     methods: {

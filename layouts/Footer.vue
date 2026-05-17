@@ -80,12 +80,12 @@
           <a href="" title="La Bete" data-track="" data-track-category="footer" data-track-action="click" data-track-label="Logo">
             <Media
               classes="footer-logo"
-              :image="this.getSettings.footer_logo"
+              :image="mainStore.settings && mainStore.settings.footer_logo"
               :lazy="false"
             />
           </a>
           <div class="footer-copyright">
-            {{ this.getSettings.footer_copyright[0].text }} {{ date }}
+            {{ mainStore.settings && mainStore.settings.footer_copyright && mainStore.settings.footer_copyright[0].text }} {{ date }}
           </div>
           <div class="footer-policy">
             <NuxtLink :to="localePath('privacy-policy')" exact>
@@ -107,30 +107,27 @@
   </footer>
 </template>
 <script>
-  import Newsletter from '~/components/Newsletter';
-  import Media from '~/components/Media';
-  import { mapGetters } from 'vuex';
-
   export default {
+    setup() {
+      const mainStore = useMainStore()
+      return { mainStore }
+    },
     computed: {
       facebook() {
-        return this.getSettings.facebook_link.url;
+        return this.mainStore.settings && this.mainStore.settings.facebook_link && this.mainStore.settings.facebook_link.url;
       },
       facebookMessenger() {
-        return this.getSettings.facebook_messenger_link.url;
+        return this.mainStore.settings && this.mainStore.settings.facebook_messenger_link && this.mainStore.settings.facebook_messenger_link.url;
       },
       store() {
-        return this.getSettings.store_link.url;
+        return this.mainStore.settings && this.mainStore.settings.store_link && this.mainStore.settings.store_link.url;
       },
       instagram() {
-        return this.getSettings.instagram_link.url;
+        return this.mainStore.settings && this.mainStore.settings.instagram_link && this.mainStore.settings.instagram_link.url;
       },
       linkedin() {
-        return this.getSettings.linkedin_link.url;
+        return this.mainStore.settings && this.mainStore.settings.linkedin_link && this.mainStore.settings.linkedin_link.url;
       },
-      ...mapGetters([
-        "getSettings"
-      ])
     },
     data() {
       return {
@@ -139,12 +136,8 @@
     },
     methods: {
       openPreferences() {
-        this.$store.commit('SET_COOKIE_PREFERENCES_MODAL', true);
+        this.mainStore.setCookiePreferencesModal(true);
       }
     },
-    components: {
-      Newsletter,
-      Media
-    }
   }
 </script>

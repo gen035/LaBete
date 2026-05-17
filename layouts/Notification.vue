@@ -1,33 +1,34 @@
 <template>
   <div class="notification">
-    <b-alert :variant="type" :show="show" :dismissible="dismissible" fade @dismissed="clear">
+    <div v-if="show" :class="`alert alert-${type} alert-dismissible fade show`" role="alert">
       {{$t(`${text}`)}}
-    </b-alert>
+      <button v-if="dismissible" type="button" class="btn-close" @click="clear" aria-label="Close"></button>
+    </div>
   </div>
 </template>
 <script>
-  import { mapGetters } from 'vuex';
   export default {
+    setup() {
+      const cartStore = useCartStore()
+      return { cartStore }
+    },
     methods: {
       clear() {
-        this.$store.commit('cart/SET_NOTIFICATION', null);
+        this.cartStore.setNotification(null);
       }
     },
     computed: {
-      ...mapGetters('cart', [
-          'getNotification',
-      ]),
       show() {
-        return this.getNotification && this.getNotification.show;
+        return this.cartStore.getNotification && this.cartStore.getNotification.show;
       },
       type() {
-        return this.getNotification && this.getNotification.type || 'success';
+        return this.cartStore.getNotification && this.cartStore.getNotification.type || 'success';
       },
       dismissible() {
-        return this.getNotification && this.getNotification.dismissible;
+        return this.cartStore.getNotification && this.cartStore.getNotification.dismissible;
       },
       text() {
-        return this.getNotification && this.getNotification.text;
+        return this.cartStore.getNotification && this.cartStore.getNotification.text;
       },
     },
   }
