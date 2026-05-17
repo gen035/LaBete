@@ -1,58 +1,49 @@
 <template>
-  <div role="dialog" class="newsletterModalWrapper" v-if="getNewsletter.isOpened">
+  <div role="dialog" class="newsletterModalWrapper" v-if="mainStore.newsletter.isOpened">
     <div class="newsletterModal">
-      <i role="button" :aria-label="$t('newsletter.close')" class="far fa-times-circle newsletterModal-close" v-on:click="close"></i>
-      <div class="newsletterModal-img" v-bind:style="{ 'background-image': 'url(' + getNewsletter.data?.image?.url +')' }"></div>
+      <i role="button" :aria-label="$t('newsletter.close')" class="far fa-times-circle newsletterModal-close" @click="close"></i>
+      <div class="newsletterModal-img" v-bind:style="{ 'background-image': 'url(' + mainStore.newsletter.data?.image?.url +')' }"></div>
       <div class="newsletterModal-content">
-        <h1>{{ getNewsletter.data?.title }}</h1>
-        <p>{{ getNewsletter.data?.description }}</p>
+        <h1>{{ mainStore.newsletter.data?.title }}</h1>
+        <p>{{ mainStore.newsletter.data?.description }}</p>
         <Newsletter :isModal="true" />
       </div>
     </div>
   </div>
 </template>
 <script>
-  import Media from '~/components/Media';
   import Newsletter from '~/components/Newsletter';
-  import {mapGetters} from "vuex";
   export default {
-    created() {
-      this.resetTimeout(); // Start the initial timeout
+    setup() {
+      const mainStore = useMainStore();
+      const labeteNewsletter = useCookie('labete_newsletter', { maxAge: 1 * 24 * 60 * 60 });
+      return { mainStore, labeteNewsletter };
     },
-    beforeDestroy() {
+    created() {
+      this.resetTimeout();
+    },
+    beforeUnmount() {
       clearTimeout(this.timeoutId);
     },
     methods: {
       close() {
-        this.$store.commit('SET_NEWSLETTER_OPENED', false);
-        this.$cookies.set(
-          'labete_newsletter',
-          true,
-          {
-            maxAge: 1 * 24 * 60 * 60
-          }
-        );
+        this.mainStore.setNewsletterOpened(false);
+        this.labeteNewsletter.value = true;
       },
       resetTimeout() {
-        clearTimeout(this.timeoutId); // Clear the previous timeout (if any)
+        clearTimeout(this.timeoutId);
 
         this.timeoutId = setTimeout(() => {
-          const hasNewsletterCookie = !!this.$cookies.get('labete_newsletter');
+          const hasNewsletterCookie = !!this.labeteNewsletter.value;
 
           if (!hasNewsletterCookie) {
-            this.$store.commit('SET_NEWSLETTER_OPENED', true);
+            this.mainStore.setNewsletterOpened(true);
           }
           this.resetTimeout();
-        }, 10000); // Set the timeout duration (e.g., 10 seconds)
+        }, 10000);
       },
     },
-    computed: {
-      ...mapGetters([
-        "getNewsletter"
-      ])
-    },
     components: {
-      Media,
       Newsletter
     }
   }
