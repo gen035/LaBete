@@ -3,69 +3,61 @@
       <section class="container">
         <div class="row">
             <div
-              v-html="$prismic.asHtml(content.title)"
+              v-html="content ? asHTML(content.title) : ''"
               class="col-md-12"
             />
         </div>
         <div class="row align-items-center justify-content-center">
-          <div class="col-md-8" v-html="$prismic.asHtml(content.content)" />
+          <div class="col-md-8" v-html="content ? asHTML(content.content) : ''" />
         </div>
       </section>
   </section>
 </template>
 
 <script>
-  export default {
-    async asyncData({ app, error, store }) {
-      const locale = store.state.i18n.locale;
-      let content = []
-      
-      await app.$prismic.api.getByUID('page', 'return_policy', {
-          lang: `${locale}-ca`
-      }).then((response) => {
-          if (response) {
-              content = response.data;
-          } else {
-              console.error('Document not found');
-          }
-      }).catch((error) => {
-          console.error('Error fetching document:', error);
-      });
+import { asText, asHTML } from '@prismicio/client'
 
-      let seo = await app.$prismic.api.getByID(content.seo.id)
-      seo = seo.data;
-
-      if (content) {
-        return {
-          content,
-          seo
-        }
-      } else {
-        error({ statusCode: 404, message: 'Page not found' })
-      }
-    },
-    methods: {
-      formattedTitle(item) {
-        const title = item && item.label && item.label.length > 0 && item.label[0].text.toLowerCase();
-        return title;
-      }
-    },
-    head() {
-      return {
-        title: this.$prismic.asText(this.seo.title),
-        link: [
-        //{ rel: 'canonical', href: `https://<DOMAIN>${this.$prismic.linkResolver(this.document)}` }
-        ],
-        meta: [
-          { hid: 'description', name: 'description', content: this.$prismic.asText(this.seo.description) }
-        ]
-      }
-    },
-    nuxtI18n: {
-      paths: {
-        fr: '/politique-retour',
-        en: '/return-policy'
-      }
-    },
+definePageMeta({
+  i18n: {
+    paths: {
+      fr: '/politique-retour',
+      en: '/return-policy'
+    }
   }
+})
+
+export default {
+  setup() {
+    const { $prismic } = useNuxtApp()
+    const { locale } = useI18n()
+
+    const { data: content } = useAsyncData('return-policy', async () => {
+      try {
+        const doc = await $prismic.client.getByUID('page', 'return_policy', {
+          lang: `${locale.value}-ca`
+        })
+        if (!doc) return null
+        const contentData = doc.data
+        if (contentData.seo && contentData.seo.id) {
+          const seoDoc = await $prismic.client.getByID(contentData.seo.id)
+          contentData._seo = seoDoc ? seoDoc.data : null
+        }
+        return contentData
+      } catch (err) {
+        console.error('Error fetching document:', err)
+        return null
+      }
+    })
+
+    useHead(computed(() => ({
+      title: content.value?._seo?.title ? asText(content.value._seo.title) : 'La Bête',
+    })))
+
+    useSeoMeta(computed(() => ({
+      description: content.value?._seo?.description ? asText(content.value._seo.description) : '',
+    })))
+
+    return { content, asHTML }
+  },
+}
 </script>
