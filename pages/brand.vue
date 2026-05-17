@@ -3,7 +3,7 @@
       <section class="container">
         <div v-if="content?.title?.length > 0" class="row">
           <div
-            v-html="$prismic.asHtml(content.title)"
+            v-html="asHTML(content.title)"
             class="col-md-12"
           />
         </div>
@@ -21,60 +21,54 @@
 </template>
 
 <script>
-  import Block from '~/components/Block';
-  export default {
-    async asyncData({ app, error, store }) {
-      const locale = store.state.i18n.locale;
-      let content = [];
+import { asText, asHTML } from '@prismicio/client'
 
-      await app.$prismic.api.query(
-        app.$prismic.predicates.at('document.type', 'brandpage'), {
-           lang: `${locale}-ca`
-        }
-      ).then((response) => {
-        response.results.forEach(result => {
-          content = result.data;
-        });
-      })
-
-      let seo = await app.$prismic.api.getByID(content.seo.id)
-      seo = seo.data;
-
-      let blocks = [];
-      for (const block of content.blocks) {
-        const item = await app.$prismic.api.getByID(block.block.id);
-        blocks.push(item.data);
-      }
-
-      if (content) {
-        return {
-          content,
-          blocks,
-          seo
-        }
-      } else {
-        error({ statusCode: 404, message: 'Page not found' })
-      }
-    },
-    head() {
-      return {
-        title: this.$prismic.asText(this.seo.title),
-        link: [
-        //{ rel: 'canonical', href: `https://<DOMAIN>${this.$prismic.linkResolver(this.document)}` }
-        ],
-        meta: [
-          { hid: 'description', name: 'description', content: this.$prismic.asText(this.seo.description) }
-        ]
-      }
-    },
-    components: {
-      Block
-    },
-    nuxtI18n: {
-      paths: {
-        fr: '/marque',
-        en: '/brand'
-      }
-    },
+definePageMeta({
+  i18n: {
+    paths: {
+      fr: '/marque',
+      en: '/brand'
+    }
   }
+})
+
+export default {
+  setup() {
+    const { $prismic } = useNuxtApp()
+    const { locale } = useI18n()
+
+    const { data } = useAsyncData('brand', async () => {
+      const docs = await $prismic.client.getAllByType('brandpage', { lang: `${locale.value}-ca` })
+      if (!docs.length) return null
+      const doc = docs[0].data
+
+      let seo = null
+      if (doc.seo && doc.seo.id) {
+        const seoDoc = await $prismic.client.getByID(doc.seo.id)
+        seo = seoDoc.data
+      }
+
+      const blocks = []
+      for (const block of doc.blocks) {
+        const item = await $prismic.client.getByID(block.block.id)
+        blocks.push(item.data)
+      }
+
+      return { content: doc, blocks, seo }
+    })
+
+    const content = computed(() => data.value?.content ?? null)
+    const blocks = computed(() => data.value?.blocks ?? [])
+    const seo = computed(() => data.value?.seo ?? null)
+
+    useHead(computed(() => ({
+      title: seo.value?.title ? asText(seo.value.title) : 'La Bête',
+      meta: [
+        { name: 'description', content: seo.value?.description ? asText(seo.value.description) : '' }
+      ]
+    })))
+
+    return { content, blocks, asHTML }
+  }
+}
 </script>
