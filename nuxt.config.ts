@@ -66,6 +66,20 @@ export default defineNuxtConfig({
     lazy: true,
   },
 
+  vite: {
+    css: {
+      preprocessorOptions: {
+        scss: {
+          // Bootstrap 5.x uses legacy @import, mix(), unit(), red/green/blue(), and
+          // mixed-decls patterns that Dart Sass now warns about. Suppress them here
+          // since they come from third-party code we cannot change.
+          // See: https://getbootstrap.com/docs/5.3/getting-started/vite/#sass
+          silenceDeprecations: ['import', 'global-builtin', 'color-functions', 'mixed-decls'],
+        },
+      },
+    },
+  },
+
   runtimeConfig: {
     public: {
       swellPublicKey: process.env.SWELL_PUBLIC_KEY,
