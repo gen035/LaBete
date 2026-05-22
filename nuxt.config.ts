@@ -44,6 +44,7 @@ export default defineNuxtConfig({
     '~/plugins/01.swell.ts',
     '~/plugins/02.init.server.ts',
     '~/plugins/lightGallery.client.ts',
+    '~/plugins/bootstrap.client.ts',
   ],
 
   prismic: {
@@ -52,6 +53,10 @@ export default defineNuxtConfig({
 
   i18n: {
     restructureDir: false,
+    customRoutes: 'meta',
+    compilation: {
+      strictMessage: false,
+    },
     locales: [
       { name: 'English',  code: 'en', language: 'en-CA', file: 'en.js' },
       { name: 'Francais', code: 'fr', language: 'fr-CA', file: 'fr.js' },

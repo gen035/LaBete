@@ -12,7 +12,6 @@
   </div>
 </template>
 <script>
-  import Newsletter from '~/components/Newsletter';
   export default {
     setup() {
       const mainStore = useMainStore();
@@ -28,13 +27,13 @@
     methods: {
       close() {
         this.mainStore.setNewsletterOpened(false);
-        this.labeteNewsletter.value = true;
+        this.labeteNewsletter = true;
       },
       resetTimeout() {
         clearTimeout(this.timeoutId);
 
         this.timeoutId = setTimeout(() => {
-          const hasNewsletterCookie = !!this.labeteNewsletter.value;
+          const hasNewsletterCookie = !!this.labeteNewsletter;
 
           if (!hasNewsletterCookie) {
             this.mainStore.setNewsletterOpened(true);
@@ -43,8 +42,5 @@
         }, 10000);
       },
     },
-    components: {
-      Newsletter
-    }
   }
 </script>

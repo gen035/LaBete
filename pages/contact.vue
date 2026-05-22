@@ -1,6 +1,6 @@
 <template>
   <section class="content">
-      <section class="container">
+      <section class="container" v-if="content">
         <div class="row">
             <div
               v-html="asHTML(content.title)"

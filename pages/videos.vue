@@ -1,6 +1,6 @@
 <template>
   <section class="content videos">
-    <section class="container">
+    <section v-if="content" class="container">
       <div class="row">
         <div v-html="asHTML(content.title)" class="col-md-12" />
         <div

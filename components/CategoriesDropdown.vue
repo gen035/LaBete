@@ -1,40 +1,32 @@
 <template>
-  <b-dropdown
-      v-if="getCategories && getCategories.length > 0"
-      id="category"
-      :text="$t('products.categories.text')"
-      class="m-md-2 categories-dropdown"
-  >
-    <template>
-      <NuxtLink
-          :to="localePath('products')"
-          active-class="active"
-          exact
-      >
-        {{$t('products.categories.all')}}
-      </NuxtLink>
-    </template>
-    <template v-for="(category, index) in getCategories">
-      <NuxtLink
-          :to="localePath({name: 'products-slug', params: { category: category.slug }})"
-          active-class="active"
-          v-if="category.slug !== 'featured'"
-          exact
-      >
-        {{$t(`products.categories.${category.slug}`)}}
-      </NuxtLink>
-    </template>
-  </b-dropdown>
+  <div v-if="mainStore.getCategories && mainStore.getCategories.length > 0" class="dropdown m-md-2 categories-dropdown" id="category">
+    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+      {{ $t('products.categories.text') }}
+    </button>
+    <ul class="dropdown-menu">
+      <li>
+        <NuxtLink class="dropdown-item" :to="localePath('products')" active-class="active">
+          {{ $t('products.categories.all') }}
+        </NuxtLink>
+      </li>
+      <template v-for="(category, index) in mainStore.getCategories" :key="index">
+        <li v-if="category.slug !== 'featured'">
+          <NuxtLink class="dropdown-item" :to="localePath({name: 'products-slug', params: { category: category.slug }})" active-class="active">
+            {{ $t(`products.categories.${category.slug}`) }}
+          </NuxtLink>
+        </li>
+      </template>
+    </ul>
+  </div>
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { useMainStore } from '~/stores/main'
 
 export default {
-  computed: {
-    ...mapGetters([
-      "getCategories"
-    ])
+  setup() {
+    const mainStore = useMainStore()
+    return { mainStore }
   }
 }
 </script>

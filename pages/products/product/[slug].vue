@@ -3,11 +3,14 @@
       <section class="container-fluid">
         <div class="row">
           <div class="col-md-6 col-lg-5 col-xl-4 col-xxl-3 offset-lg-1 offset-xl-2 offset-xxl-3 product-slider">
-            <VueSlickCarousel v-if="product && product.images && product.images.length > 0" v-bind="settings">
-              <template v-for="(image, index) in product.images">
+            <Carousel v-if="product && product.images && product.images.length > 0" :wrap-around="true" :autoplay="2000" :pause-autoplay-on-hover="true" :items-to-show="1">
+              <Slide v-for="(image, index) in product.images" :key="index">
                 <v-lazy-image :src="image.file.url" :alt="`${product.name} - ${index}`" src-placeholder="/product_placeholder.jpg"/>
+              </Slide>
+              <template #addons>
+                <Pagination />
               </template>
-            </VueSlickCarousel>
+            </Carousel>
             <img v-if="$i18n.locale === 'fr'" src="~/assets/images/quebec_fr.png" class="product-card-quebec" />
             <img v-if="$i18n.locale === 'en'" src="~/assets/images/quebec_en.png" class="product-card-quebec" />
           </div>
@@ -36,11 +39,12 @@
 </template>
 
 <script>
-import VLazyImage from 'v-lazy-image/v2'
-import VueSlickCarousel from 'vue-slick-carousel'
+import VLazyImage from 'v-lazy-image'
+import { Carousel, Slide, Pagination } from 'vue3-carousel'
+import 'vue3-carousel/dist/carousel.css'
 
 definePageMeta({
-  nuxtI18n: {
+  i18n: {
     paths: {
       fr: '/produits/produit/:slug',
       en: '/products/product/:slug'
@@ -51,7 +55,9 @@ definePageMeta({
 export default {
   components: {
     VLazyImage,
-    VueSlickCarousel
+    Carousel,
+    Slide,
+    Pagination,
   },
 
   setup() {
@@ -81,30 +87,9 @@ export default {
 
     const getProductRecommended = computed(() => productStore.getProductRecommended)
 
-    const settings = {
-      adaptiveHeight: true,
-      arrows: false,
-      autoplay: true,
-      autoplaySpeed: 2000,
-      dots: true,
-      fade: true,
-      infinite: true,
-      pauseOnHover: true,
-      slidesToShow: 1,
-      responsive: [
-        {
-          breakpoint: 768,
-          settings: {
-            dots: true
-          }
-        }
-      ]
-    }
-
     return {
       product,
       getProductRecommended,
-      settings
     }
   }
 }

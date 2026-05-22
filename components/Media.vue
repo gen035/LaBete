@@ -10,7 +10,7 @@
   />
 </template>
 <script>
-  import VLazyImage from "v-lazy-image/v2";
+  import VLazyImage from "v-lazy-image";
   export default {
     props: {
       altProp: {

@@ -5,16 +5,17 @@
       <div v-if="mainStore.message.image && mainStore.message.image.url" class="messageModal-img" v-bind:style="{ 'background-image': 'url(' + mainStore.message.image.url +')' }"></div>
       <div class="messageModal-content">
         <h1 v-if="mainStore.message.title && mainStore.message.title.length > 0">{{ mainStore.message.title[0].text }}</h1>
-        <p v-if="mainStore.message.description && mainStore.message.description.length > 0" v-html="$prismic.asHtml(mainStore.message.description)" />
+        <p v-if="mainStore.message.description && mainStore.message.description.length > 0" v-html="asHTML(mainStore.message.description)" />
       </div>
     </div>
   </div>
 </template>
 <script>
+  import { asHTML } from '@prismicio/client'
   export default {
     setup() {
       const mainStore = useMainStore();
-      return { mainStore };
+      return { mainStore, asHTML };
     },
     methods: {
       close() {

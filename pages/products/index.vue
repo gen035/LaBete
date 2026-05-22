@@ -3,13 +3,13 @@
       <section class="container-fluid">
         <div class="row">
           <div
-            v-html="$prismic.asHtml(pageData?.content?.title)"
+            v-html="asHTML(pageData?.content?.title)"
             class="col-md-8 offset-md-2 col-xl-6 offset-xl-3"
           />
         </div>
         <div class="row" v-if="pageData?.content?.content">
           <div
-            v-html="$prismic.asHtml(pageData?.content?.content)"
+            v-html="asHTML(pageData?.content?.content)"
             class="col-md-8 offset-md-2 col-xl-6 offset-xl-3 text-center product-description"
           />
         </div>
@@ -32,7 +32,7 @@
             </div>
           </div>
           <div v-if="products && (products.page < products.page_count)" class="row">
-            <CustomButton :text="$t('products.more')" v-on:click.native="fetchProducts" icon="fa-plus" size="large" />
+            <CustomButton :text="$t('products.more')" @click="fetchProducts" icon="fa-plus" size="large" />
           </div>
         </template>
       </section>
@@ -40,10 +40,10 @@
 </template>
 
 <script>
-import { asText } from '@prismicio/client'
+import { asText, asHTML } from '@prismicio/client'
 
 definePageMeta({
-  nuxtI18n: {
+  i18n: {
     paths: {
       fr: '/produits',
       en: '/products'
@@ -125,7 +125,8 @@ export default {
       productsResults,
       progress,
       hasFetched,
-      fetchProducts
+      fetchProducts,
+      asHTML
     }
   }
 }

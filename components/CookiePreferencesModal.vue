@@ -66,7 +66,6 @@
 </template>
 
 <script>
-  import CustomButton from "@/components/CustomButton.vue";
   export default {
     setup() {
       const mainStore = useMainStore();
@@ -95,8 +94,8 @@
     },
     data() {
       return {
-        perfEnabled: !!this.labetePrivacyPerf.value,
-        persoEnabled: !!this.labetePrivacyPerso.value,
+        perfEnabled: !!this.labetePrivacyPerf,
+        persoEnabled: !!this.labetePrivacyPerso,
       };
     },
     methods: {
@@ -105,43 +104,36 @@
       },
       setCookieCategory(category) {
         if (category === 'LABETE_PRIVACY_PERF') {
-          if (this.labetePrivacyPerf.value) {
-            console.log(`REMOVE COOKIE - ${category}:`, true);
-            this.labetePrivacyPerf.value = null;
+          if (this.labetePrivacyPerf) {
+            this.labetePrivacyPerf = null;
             this.deleteCookies(category);
           } else {
-            console.log(`ADD COOKIE: - ${category}:`, false);
-            this.labetePrivacyPerf.value = true;
+            this.labetePrivacyPerf = true;
           }
         } else if (category === 'LABETE_PRIVACY_PERSO') {
-          if (this.labetePrivacyPerso.value) {
-            console.log(`REMOVE COOKIE - ${category}:`, true);
-            this.labetePrivacyPerso.value = null;
+          if (this.labetePrivacyPerso) {
+            this.labetePrivacyPerso = null;
             this.deleteCookies(category);
           } else {
-            console.log(`ADD COOKIE: - ${category}:`, false);
-            this.labetePrivacyPerso.value = true;
+            this.labetePrivacyPerso = true;
           }
         }
       },
       save() {
-        this.labeteCookieSeen.value = true;
+        this.labeteCookieSeen = true;
         this.forcePageReload();
       },
       deleteCookies(category) {
         if (category === 'LABETE_PRIVACY_PERF') {
-          this.cookieGa.value = null;
-          this.cookieGid.value = null;
-          this.cookieGat.value = null;
+          this.cookieGa = null;
+          this.cookieGid = null;
+          this.cookieGat = null;
         } else if (category === 'LABETE_PRIVACY_PERSO') {
-          this.cookieI18n.value = null;
-          this.cookieNewsletter.value = null;
-          this.cookieSeen.value = null;
+          this.cookieI18n = null;
+          this.cookieNewsletter = null;
+          this.cookieSeen = null;
         }
       }
-    },
-    components: {
-      CustomButton,
     },
   }
 </script>

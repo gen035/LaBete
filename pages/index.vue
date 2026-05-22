@@ -25,12 +25,11 @@
         </div>
       </div>
     </section>
-    <template v-for="(block, index) in pageData?.top_blocks">
+    <template v-for="(block, index) in pageData?.top_blocks" :key="index">
       <Block
         :block="block"
         :index="index"
         size="small"
-        :key="index"
         :imageType="index === 0 ? 'img' : 'background'"
       />
     </template>
@@ -52,11 +51,10 @@
         </div>
       </div>
     </section>
-    <template v-for="(block, index) in pageData?.blocks">
+    <template v-for="(block, index) in pageData?.blocks" :key="index">
       <Block
         :block="block"
         :index="index"
-        :key="index"
         :imageType="index === 0 ? 'img' : 'background'"
       />
     </template>
@@ -92,7 +90,7 @@
 import { asText } from '@prismicio/client'
 
 definePageMeta({
-  nuxtI18n: {
+  i18n: {
     paths: {
       fr: '/',
       en: '/'

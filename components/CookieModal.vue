@@ -5,7 +5,7 @@
           role="dialog"
           :aria-label="$t('cookie.text')"
           class="cookieModalWrapper"
-          v-if="mainStore.cookieModalOpened && !labeteCookieSeen.value"
+          v-if="mainStore.cookieModalOpened && !labeteCookieSeen"
       >
         <div class="cookieModal">
           <div class="cookieModal-content" v-html="$t('cookie.text')" />
@@ -29,7 +29,6 @@
   </client-only>
 </template>
 <script>
-  import CustomButton from "@/components/CustomButton.vue";
   export default {
     setup() {
       const mainStore = useMainStore();
@@ -41,12 +40,12 @@
     methods: {
       setModalCookie() {
         this.mainStore.setCookieModal(false);
-        this.labeteCookieSeen.value = true;
+        this.labeteCookieSeen = true;
         this.forcePageReload();
       },
       accept() {
-        this.labetePrivacyPerf.value = true;
-        this.labetePrivacyPerso.value = true;
+        this.labetePrivacyPerf = true;
+        this.labetePrivacyPerso = true;
         this.setModalCookie();
       },
       forcePageReload() {
@@ -56,9 +55,6 @@
         this.mainStore.setCookieModal(false);
         this.mainStore.setCookiePreferencesModal(true);
       }
-    },
-    components: {
-      CustomButton,
     },
   }
 </script>

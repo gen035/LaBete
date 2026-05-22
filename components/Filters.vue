@@ -12,11 +12,12 @@
     </div>
     <div v-for="(attribute, index) in getAttributes" :key="index" class="filters-type">
       <h3>{{attribute.name}}</h3>
-      <b-form-checkbox-group
-        v-model="selectedFilters[attribute.id]"
-        :name="attribute.name">
-        <b-form-checkbox v-for="(value, index) in attribute.values" :value="value" :key="index">{{$t(`filters.${attribute.id}.${value}`)}}</b-form-checkbox>
-      </b-form-checkbox-group>
+      <div class="d-flex flex-wrap gap-2" :name="attribute.name">
+        <div v-for="(value, index) in attribute.values" :key="index" class="form-check">
+          <input class="form-check-input" type="checkbox" :id="`filter-${attribute.id}-${index}`" :value="value" v-model="selectedFilters[attribute.id]" />
+          <label class="form-check-label" :for="`filter-${attribute.id}-${index}`">{{$t(`filters.${attribute.id}.${value}`)}}</label>
+        </div>
+      </div>
     </div>
     <div class="filters-clear" @click="clearFilters" data-track="" data-track-category="filters" data-track-action="click" data-track-label="clear">
       <i class="fa fa-undo"></i>{{$t('filters.clear')}}
@@ -24,12 +25,17 @@
   </aside>
 </template>
 <script>
-  import { mapGetters } from 'vuex';
-  import { categorySlugMapping } from '../pages/products/constants.js';
+  import { useMainStore } from '~/stores/main'
+  import { categorySlugMapping } from '~/utils/productConstants.js';
   export default {
+    setup() {
+      const mainStore = useMainStore()
+      const { locale } = useI18n()
+      return { mainStore, locale }
+    },
     data() {
       return {
-        selectedCategories: [], 
+        selectedCategories: [],
         selectedFilters: {}
       }
     },
@@ -59,7 +65,7 @@
         return JSON.parse(JSON.stringify(obj));
       },
       filterSlug(slug) {
-        const locale = this.$store.state.i18n.locale;
+        const locale = this.locale;
         return categorySlugMapping.hasOwnProperty(locale) && categorySlugMapping[locale].hasOwnProperty(slug) && categorySlugMapping[locale][slug] || null;
       },
       clearFilters() {
@@ -68,13 +74,8 @@
       }
     },
     computed: {
-      locale() {
-        return this.$store.state.i18n.locale;
-      },
-      ...mapGetters([
-          "getAttributes",
-          "getCategories"
-      ])
+      getAttributes() { return this.mainStore.getAttributes },
+      getCategories() { return this.mainStore.getCategories },
     }
   }
 </script>

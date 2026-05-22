@@ -14,7 +14,9 @@
           <h2 class="title-h1">{{$t('blog.empty.title')}}</h2>
           <p class="text-center">{{$t('blog.empty.content')}}</p>
         </div>
-        <BlogPost v-else-if v-for="(post, index) in posts" :key="index" :post="post" />
+        <template v-else>
+          <BlogPost v-for="(post, index) in posts" :key="index" :post="post" />
+        </template>
       </div>
     </div>
   </div>

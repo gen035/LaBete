@@ -31,7 +31,7 @@
           </div>
         </div>
         <div v-if="products && (products.page < products.page_count)" class="row">
-          <CustomButton :text="$t('products.more')" v-on:click.native="fetchProducts" icon="fa-plus" size="large" />
+          <CustomButton :text="$t('products.more')" @click="fetchProducts" icon="fa-plus" size="large" />
         </div>
       </template>
     </section>
@@ -42,7 +42,7 @@
 import { asText } from '@prismicio/client'
 
 definePageMeta({
-  nuxtI18n: {
+  i18n: {
     paths: {
       fr: '/produits/:category',
       en: '/products/:category'

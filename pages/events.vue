@@ -1,13 +1,13 @@
 <template>
   <section class="container events">
-    <div class="row">
+    <div v-if="content" class="row">
       <div class="offset-md-2 col-md-8">
-        <h1>{{ content.title[0].text }}</h1>
+        <h1>{{ content.title?.[0]?.text }}</h1>
         <p
             v-html="asHTML(content.content)"
             class="col-md-12 events-content"
         />
-        <h2 class="title-h1">{{ content.title_upcoming[0].text }}</h2>
+        <h2 class="title-h1">{{ content.title_upcoming?.[0]?.text }}</h2>
         <div v-if="upcomingEvents.length === 0" class="events-empty text-center">{{ $t('events.empty') }}</div>
         <template
             v-if="upcomingEvents.length > 0"
@@ -20,14 +20,14 @@
         </template>
       </div>
     </div>
-    <div class="row">
+    <div v-if="content" class="row">
       <div class="offset-md-3 col-md-6">
-        <h2 class="title-h1">{{ content.title_passed[0].text }}</h2>
+        <h2 class="title-h1">{{ content.title_passed?.[0]?.text }}</h2>
         <ul class="accordion">
           <template
-            v-for="(item, index) in passed">
+            v-for="(item, index) in passed"
+            :key="index">
             <PassedEvents
-              :key="index"
               :year="item.year"
               :events="item.events"
             />
