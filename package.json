@@ -1,6 +1,6 @@
 {
   "name": "labete",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "La Bête",
   "author": "Genevieve Perron-Migneron",
   "private": true,
@@ -15,7 +15,7 @@
     "test": "vitest"
   },
   "engines": {
-    "node": "20.x"
+    "node": ">=22.13"
   },
   "dependencies": {
     "@nuxtjs/i18n": "^10.0.0",
