@@ -7,8 +7,9 @@
       padding: 30px 0;
     }
 
-    img {
+    .carousel__slide {
       border-radius: 10px;
+      overflow: hidden;
     }
   }
   &-text-box {

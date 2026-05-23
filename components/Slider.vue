@@ -4,6 +4,7 @@
     :autoplay="data.autoplay ? data.autoplay_speed : 0"
     :pause-autoplay-on-hover="data.pause_on_hover"
     :items-to-show="data.slides_to_show || 1"
+    :height="500"
   >
     <Slide v-for="(item, index) in data.slides" :key="index">
       <Media :image="item.slide" :altProp="item.slide.alt" :ariaHidden="true" />
