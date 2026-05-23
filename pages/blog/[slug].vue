@@ -21,7 +21,7 @@
   </div>
 </template>
 
-<script>
+<script setup>
 import { asText, asHTML } from '@prismicio/client'
 
 definePageMeta({
@@ -33,41 +33,35 @@ definePageMeta({
   }
 })
 
-export default {
-  setup() {
-    const { $prismic } = useNuxtApp()
-    const { locale } = useI18n()
-    const route = useRoute()
+const { $prismic } = useNuxtApp()
+const { locale } = useI18n()
+const route = useRoute()
 
-    const { data: content } = useAsyncData(`blog-post-${route.params.slug}`, async () => {
-      const doc = await $prismic.client.getByUID('blog_post', route.params.slug, {
-        lang: `${locale.value}-ca`
-      })
-      return doc || null
-    })
+const { data: content } = useAsyncData(`blog-post-${route.params.slug}`, async () => {
+  const doc = await $prismic.client.getByUID('blog_post', route.params.slug, {
+    lang: `${locale.value}-ca`
+  }).catch(() => null)
+  return doc || null
+})
 
-    const excerpt = computed(() => {
-      if (!content.value?.data?.content?.[0]?.text) return ''
-      return content.value.data.content[0].text.split(' ').slice(0, 20).join(' ')
-    })
+const excerpt = computed(() => {
+  if (!content.value?.data?.content?.[0]?.text) return ''
+  return content.value.data.content[0].text.split(' ').slice(0, 20).join(' ')
+})
 
-    const formattedDate = computed(() => {
-      if (!content.value?.first_publication_date) return ''
-      const dateObj = new Date(content.value.first_publication_date)
-      const day = String(dateObj.getUTCDate()).padStart(2, '0')
-      const month = String(dateObj.getUTCMonth() + 1).padStart(2, '0')
-      const year = dateObj.getUTCFullYear()
-      return `${day}-${month}-${year}`
-    })
+const formattedDate = computed(() => {
+  if (!content.value?.first_publication_date) return ''
+  const dateObj = new Date(content.value.first_publication_date)
+  const day = String(dateObj.getUTCDate()).padStart(2, '0')
+  const month = String(dateObj.getUTCMonth() + 1).padStart(2, '0')
+  const year = dateObj.getUTCFullYear()
+  return `${day}-${month}-${year}`
+})
 
-    useHead(computed(() => ({
-      title: content.value?.data?.title ? `La Bête | ${asText(content.value.data.title)}` : 'La Bête',
-      meta: [
-        { name: 'description', content: excerpt.value }
-      ]
-    })))
-
-    return { content, formattedDate, asHTML }
-  }
-}
+useHead(computed(() => ({
+  title: content.value?.data?.title ? `La Bête | ${asText(content.value.data.title)}` : 'La Bête',
+  meta: [
+    { name: 'description', content: excerpt.value }
+  ]
+})))
 </script>

@@ -26,7 +26,7 @@
   </section>
 </template>
 
-<script>
+<script setup>
 import { asText, asHTML } from '@prismicio/client'
 
 definePageMeta({
@@ -38,36 +38,33 @@ definePageMeta({
   }
 })
 
-export default {
-  setup() {
-    const { $prismic } = useNuxtApp()
-    const { locale } = useI18n()
+const { $prismic } = useNuxtApp()
+const { locale } = useI18n()
 
-    const { data: content } = useAsyncData('contact', async () => {
-      const docs = await $prismic.client.getAllByType('contact', { lang: `${locale.value}-ca` })
-      if (!docs.length) return null
-      const doc = docs[0].data
-      if (doc.seo && doc.seo.id) {
-        const seoDoc = await $prismic.client.getByID(doc.seo.id)
-        doc._seo = seoDoc.data
-      }
-      return doc
-    })
-
-    useHead(computed(() => ({
-      title: content.value?._seo?.title ? asText(content.value._seo.title) : 'La Bête',
-      meta: [
-        { name: 'description', content: content.value?._seo?.description ? asText(content.value._seo.description) : '' }
-      ]
-    })))
-
-    return { content, asHTML }
-  },
-  methods: {
-    formattedTitle(item) {
-      const title = item && item.label && item.label.length > 0 && item.label[0].text.toLowerCase()
-      return title
+const { data: content } = useAsyncData('contact', async () => {
+  try {
+    const docs = await $prismic.client.getAllByType('contact', { lang: `${locale.value}-ca` })
+    if (!docs.length) return null
+    const doc = docs[0].data
+    if (doc.seo?.id) {
+      const seoDoc = await $prismic.client.getByID(doc.seo.id).catch(() => null)
+      doc._seo = seoDoc?.data ?? null
     }
+    return doc
+  } catch (err) {
+    console.error('[contact] Failed to fetch Prismic data:', err?.message || String(err))
+    return null
   }
+})
+
+useHead(computed(() => ({
+  title: content.value?._seo?.title ? asText(content.value._seo.title) : 'La Bête',
+  meta: [
+    { name: 'description', content: content.value?._seo?.description ? asText(content.value._seo.description) : '' }
+  ]
+})))
+
+const formattedTitle = (item) => {
+  return item && item.label && item.label.length > 0 && item.label[0].text.toLowerCase()
 }
 </script>

@@ -14,7 +14,7 @@
   </section>
 </template>
 
-<script>
+<script setup>
 import { asText, asHTML } from '@prismicio/client'
 
 definePageMeta({
@@ -26,38 +26,32 @@ definePageMeta({
   }
 })
 
-export default {
-  setup() {
-    const { $prismic } = useNuxtApp()
-    const { locale } = useI18n()
+const { $prismic } = useNuxtApp()
+const { locale } = useI18n()
 
-    const { data: content } = useAsyncData('privacy-policy', async () => {
-      try {
-        const doc = await $prismic.client.getByUID('page', 'privacy_policy', {
-          lang: `${locale.value}-ca`
-        })
-        if (!doc) return null
-        const contentData = doc.data
-        if (contentData.seo && contentData.seo.id) {
-          const seoDoc = await $prismic.client.getByID(contentData.seo.id)
-          contentData._seo = seoDoc ? seoDoc.data : null
-        }
-        return contentData
-      } catch (err) {
-        console.error('Error fetching document:', err)
-        return null
-      }
+const { data: content } = useAsyncData('privacy-policy', async () => {
+  try {
+    const doc = await $prismic.client.getByUID('page', 'privacy_policy', {
+      lang: `${locale.value}-ca`
     })
+    if (!doc) return null
+    const contentData = doc.data
+    if (contentData.seo && contentData.seo.id) {
+      const seoDoc = await $prismic.client.getByID(contentData.seo.id)
+      contentData._seo = seoDoc ? seoDoc.data : null
+    }
+    return contentData
+  } catch (err) {
+    console.error('Error fetching document:', err)
+    return null
+  }
+})
 
-    useHead(computed(() => ({
-      title: content.value?._seo?.title ? asText(content.value._seo.title) : 'La Bête',
-    })))
+useHead(computed(() => ({
+  title: content.value?._seo?.title ? asText(content.value._seo.title) : 'La Bête',
+})))
 
-    useSeoMeta(computed(() => ({
-      description: content.value?._seo?.description ? asText(content.value._seo.description) : '',
-    })))
-
-    return { content, asHTML }
-  },
-}
+useSeoMeta(computed(() => ({
+  description: content.value?._seo?.description ? asText(content.value._seo.description) : '',
+})))
 </script>

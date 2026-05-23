@@ -38,7 +38,7 @@
   </section>
 </template>
 
-<script>
+<script setup>
 import { asText, asHTML } from '@prismicio/client'
 
 definePageMeta({
@@ -50,79 +50,77 @@ definePageMeta({
   }
 })
 
-export default {
-  setup() {
-    const { $prismic } = useNuxtApp()
-    const { locale, t } = useI18n()
+const { $prismic } = useNuxtApp()
+const { locale, tm, rt } = useI18n()
 
-    const { data } = useAsyncData('events', async () => {
-      const contentDocs = await $prismic.client.getAllByType('eventpage', { lang: `${locale.value}-ca` })
-      const content = contentDocs.length > 0 ? contentDocs[0].data : null
+const { data } = useAsyncData('events', async () => {
+  try {
+    const contentDocs = await $prismic.client.getAllByType('eventpage', { lang: `${locale.value}-ca` })
+    const content = contentDocs.length > 0 ? contentDocs[0].data : null
 
-      const eventDocs = await $prismic.client.getAllByType('events', {
-        lang: `${locale.value}-ca`,
-        orderings: [{ field: 'my.events.start_date' }],
-        pageSize: 100
-      })
-      const events = eventDocs.map(doc => doc.data)
-
-      let seo = null
-      if (content && content.seo && content.seo.id) {
-        const seoDoc = await $prismic.client.getByID(content.seo.id)
-        seo = seoDoc.data
-      }
-
-      return { content, events, seo }
+    const eventDocs = await $prismic.client.getAllByType('events', {
+      lang: `${locale.value}-ca`,
+      orderings: [{ field: 'my.events.start_date' }],
+      pageSize: 100
     })
+    const events = eventDocs.map(doc => doc.data)
 
-    const content = computed(() => data.value?.content ?? null)
-    const seo = computed(() => data.value?.seo ?? null)
+    let seo = null
+    if (content?.seo?.id) {
+      const seoDoc = await $prismic.client.getByID(content.seo.id).catch(() => null)
+      seo = seoDoc?.data ?? null
+    }
 
-    // Reactive state for events processing
-    const upcomingEvents = ref([])
-    const passed = ref([])
+    return { content, events, seo }
+  } catch (err) {
+    console.error('[events] Failed to fetch Prismic data:', err?.message || String(err))
+    return { content: null, events: [], seo: null }
+  }
+})
 
-    // Process events when data is available (replaces created() + getDynamicPassedEvents)
-    watch(data, (val) => {
-      if (!val) return
-      const today = new Date().setHours(0, 0, 0, 0)
-      const allEvents = val.events || []
+const content = computed(() => data.value?.content ?? null)
+const seo = computed(() => data.value?.seo ?? null)
 
-      // Start with i18n-defined past events
-      const passedList = JSON.parse(JSON.stringify(t('passed_events')))
+const upcomingEvents = ref([])
+const passed = ref([])
 
-      allEvents.forEach((event) => {
-        const endDate = new Date(event.end_date).setHours(23, 59, 59, 999)
-        if (today > endDate) {
-          const eventYear = new Date(event.end_date).getFullYear()
-          passedList.forEach((list, index) => {
-            if (parseInt(list.year) === eventYear) {
-              passedList[index].events.unshift({
-                name: event.name[0].text,
-                city: event.city && event.city.length > 0 && event.city[0].text
-              })
-            }
+watch(data, (val) => {
+  if (!val) return
+  const today = new Date().setHours(0, 0, 0, 0)
+  const allEvents = val.events || []
+
+  const passedList = tm('passed_events').map(item => ({
+    year: rt(item.year),
+    events: Array.isArray(item.events) ? item.events.map(e => ({ name: rt(e.name) })) : [],
+  }))
+
+  allEvents.forEach((event) => {
+    const endDate = new Date(event.end_date).setHours(23, 59, 59, 999)
+    if (today > endDate) {
+      const eventYear = new Date(event.end_date).getFullYear()
+      passedList.forEach((list, index) => {
+        if (parseInt(list.year) === eventYear) {
+          passedList[index].events.unshift({
+            name: event.name[0].text,
+            city: event.city && event.city.length > 0 && event.city[0].text
           })
         }
       })
+    }
+  })
 
-      // Filter upcoming: show if end_date >= today OR show_permanently === true
-      upcomingEvents.value = allEvents.filter(event => {
-        const eventEndDate = new Date(event.end_date + 'T23:59:59.999')
-        return today <= eventEndDate || event.show_permanently === true
-      })
+  upcomingEvents.value = allEvents.filter(event => {
+    const eventEndDate = new Date(event.end_date + 'T23:59:59.999')
+    return today <= eventEndDate || event.show_permanently === true
+  })
 
-      passed.value = passedList
-    }, { immediate: true })
+  passed.value = passedList
+}, { immediate: true })
 
-    useHead(computed(() => ({
-      title: seo.value?.title ? asText(seo.value.title) : 'La Bête',
-      meta: [
-        { name: 'description', content: seo.value?.description ? asText(seo.value.description) : '' }
-      ]
-    })))
-
-    return { content, upcomingEvents, passed, asHTML }
-  }
-}
+useHead(computed(() => ({
+  title: seo.value?.title ? asText(seo.value.title) : 'La Bête',
+  meta: [
+    { name: 'description', content: seo.value?.description ? asText(seo.value.description) : '' }
+  ]
+})))
 </script>

@@ -22,7 +22,7 @@
   </div>
 </template>
 
-<script>
+<script setup>
 import { asText } from '@prismicio/client'
 
 definePageMeta({
@@ -34,36 +34,34 @@ definePageMeta({
   }
 })
 
-export default {
-  setup() {
-    const { $prismic } = useNuxtApp()
-    const { locale } = useI18n()
+const { $prismic } = useNuxtApp()
+const { locale } = useI18n()
 
-    const { data } = useAsyncData('blog-index', async () => {
-      const postDocs = await $prismic.client.getAllByType('blog_post', {
-        lang: `${locale.value}-ca`,
-        orderings: [{ field: 'document.first_publication_date' }]
-      })
-      const posts = postDocs
-
-      const seoId = locale.value === 'en' ? 'Z0E07xMAACQA3yRe' : 'Z0E1IBMAACIA3ySl'
-      const seoDoc = await $prismic.client.getByID(seoId)
-      const seo = seoDoc.data
-
-      return { posts, seo }
+const { data } = useAsyncData('blog-index', async () => {
+  try {
+    const postDocs = await $prismic.client.getAllByType('blog_post', {
+      lang: `${locale.value}-ca`,
+      orderings: [{ field: 'document.first_publication_date' }]
     })
 
-    const posts = computed(() => data.value?.posts ?? [])
-    const seo = computed(() => data.value?.seo ?? null)
+    const seoId = locale.value === 'en' ? 'Z0E07xMAACQA3yRe' : 'Z0E1IBMAACIA3ySl'
+    const seoDoc = await $prismic.client.getByID(seoId).catch(() => null)
+    const seo = seoDoc?.data ?? null
 
-    useHead(computed(() => ({
-      title: seo.value?.title ? asText(seo.value.title) : 'La Bête',
-      meta: [
-        { name: 'description', content: seo.value?.description ? asText(seo.value.description) : '' }
-      ]
-    })))
-
-    return { posts }
+    return { posts: postDocs, seo }
+  } catch (err) {
+    console.error('[blog] Failed to fetch Prismic data:', err?.message || String(err))
+    return { posts: [], seo: null }
   }
-}
+})
+
+const posts = computed(() => data.value?.posts ?? [])
+const seo = computed(() => data.value?.seo ?? null)
+
+useHead(computed(() => ({
+  title: seo.value?.title ? asText(seo.value.title) : 'La Bête',
+  meta: [
+    { name: 'description', content: seo.value?.description ? asText(seo.value.description) : '' }
+  ]
+})))
 </script>

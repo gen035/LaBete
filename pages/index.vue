@@ -86,7 +86,7 @@
   </div>
 </template>
 
-<script>
+<script setup>
 import { asText } from '@prismicio/client'
 
 definePageMeta({
@@ -98,69 +98,84 @@ definePageMeta({
   }
 })
 
-export default {
-  setup() {
-    const { $prismic } = useNuxtApp()
-    const { $swell } = useNuxtApp()
-    const { locale } = useI18n()
+const { $prismic } = useNuxtApp()
+const { $swell } = useNuxtApp()
+const { locale } = useI18n()
 
-    const { data: pageData } = useAsyncData('home', async () => {
-      const lang = `${locale.value}-ca`
+const { data: pageData } = useAsyncData('home', async () => {
+  try {
+    const lang = `${locale.value}-ca`
+    console.log('[home] fetching, lang:', lang, 'side:', import.meta.server ? 'server' : 'client')
 
-      const homeDocs = await $prismic.client.getAllByType('home', { lang })
-      if (homeDocs.length === 0) return null
-      const content = homeDocs[0].data
+    const homeDocs = await $prismic.client.getAllByType('home', { lang })
+    console.log('[home] getAllByType result count:', homeDocs.length)
+    if (homeDocs.length === 0) return null
+    const content = homeDocs[0].data
+    console.log('[home] content keys:', Object.keys(content))
 
-      const [hero_button_doc, seo_doc] = await Promise.all([
-        $prismic.client.getByID(content.hero_button.id),
-        $prismic.client.getByID(content.seo.id),
-      ])
+    const [hero_button_doc, seo_doc] = await Promise.all([
+      content.hero_button?.id ? $prismic.client.getByID(content.hero_button.id) : null,
+      content.seo?.id ? $prismic.client.getByID(content.seo.id) : null,
+    ])
 
-      const cards = await Promise.all(
-        content.cards.map(({ card }) => $prismic.client.getByID(card.id).then(d => d.data))
+    const cards = await Promise.all(
+      (content.cards || []).map(({ card }) =>
+        card?.id ? $prismic.client.getByID(card.id).then(d => d?.data ?? null).catch(() => null) : null
       )
+    )
 
-      const blocks = await Promise.all(
-        content.blocks.map(({ block }) => $prismic.client.getByID(block.id).then(d => d.data))
+    const blocks = await Promise.all(
+      (content.blocks || []).map(({ block }) =>
+        block?.id ? $prismic.client.getByID(block.id).then(d => d?.data ?? null).catch(() => null) : null
       )
+    )
 
-      const sliderDoc = await $prismic.client.getByID(content.slider.id)
+    const sliderDoc = content.slider?.id ? await $prismic.client.getByID(content.slider.id).catch(() => null) : null
 
-      const top_blocks = await Promise.all(
-        content.top_blocks.map(async ({ top_block }) => {
-          const item = await $prismic.client.getByID(top_block.id)
-          if (item.data.button?.id) {
-            item.data.button = await $prismic.client.getByID(item.data.button.id)
-          }
-          return item.data
-        })
-      )
+    const top_blocks = await Promise.all(
+      (content.top_blocks || []).map(async ({ top_block }) => {
+        if (!top_block?.id) return null
+        const item = await $prismic.client.getByID(top_block.id).catch(() => null)
+        if (!item) return null
+        if (item.data.button?.id) {
+          item.data.button = await $prismic.client.getByID(item.data.button.id).catch(() => null)
+        }
+        return item.data
+      })
+    )
 
-      return {
-        content,
-        hero_button: hero_button_doc.data,
-        seo: seo_doc.data,
-        cards,
-        blocks,
-        slider: sliderDoc.data,
-        top_blocks,
-      }
-    })
-
-    const { data: productsResults } = useAsyncData('home-products', async () => {
-      const res = await $swell.products.list({ limit: 4, sort: 'date_created desc', categories: 'featured' })
-      return res?.results ?? []
-    })
-
-    useHead(computed(() => ({
-      title: pageData.value?.seo ? asText(pageData.value.seo.title) : 'La Bête',
-    })))
-
-    useSeoMeta(computed(() => ({
-      description: pageData.value?.seo ? asText(pageData.value.seo.description) : '',
-    })))
-
-    return { pageData, productsResults }
+    const result = {
+      content,
+      hero_button: hero_button_doc?.data ?? null,
+      seo: seo_doc?.data ?? null,
+      cards: cards.filter(Boolean),
+      blocks: blocks.filter(Boolean),
+      slider: sliderDoc?.data ?? null,
+      top_blocks: top_blocks.filter(Boolean),
+    }
+    console.log('[home] returning result, hero_title:', content?.hero_title?.[0]?.text)
+    return result
+  } catch (err) {
+    console.error('[home] Failed to fetch Prismic data:', err?.message || String(err))
+    return null
   }
-}
+})
+
+const { data: productsResults } = useAsyncData('home-products', async () => {
+  const res = await $swell.products.list({ limit: 4, sort: 'date_created desc', categories: 'featured' })
+  return res?.results ?? []
+})
+
+onMounted(() => {
+  console.log('[home] mounted, pageData:', pageData.value)
+  console.log('[home] mounted, hero_title:', pageData.value?.content?.hero_title?.[0]?.text)
+})
+
+useHead(computed(() => ({
+  title: pageData.value?.seo ? asText(pageData.value.seo.title) : 'La Bête',
+})))
+
+useSeoMeta(computed(() => ({
+  description: pageData.value?.seo ? asText(pageData.value.seo.description) : '',
+})))
 </script>

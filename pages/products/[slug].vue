@@ -38,7 +38,7 @@
   </section>
 </template>
 
-<script>
+<script setup>
 import { asText } from '@prismicio/client'
 
 definePageMeta({
@@ -50,101 +50,87 @@ definePageMeta({
   }
 })
 
-export default {
-  setup() {
-    const route = useRoute()
-    const { $prismic } = useNuxtApp()
-    const { $swell } = useNuxtApp()
-    const { locale } = useI18n()
-    const mainStore = useMainStore()
+const route = useRoute()
+const { $prismic, $swell } = useNuxtApp()
+const { locale } = useI18n()
+const mainStore = useMainStore()
 
-    const { data: pageData } = useAsyncData(`products-category-${route.params.slug}`, async () => {
-      const lang = `${locale.value}-ca`
+const { data: pageData } = useAsyncData(`products-category-${route.params.slug}`, async () => {
+  try {
+    const lang = `${locale.value}-ca`
 
-      const response = await $prismic.client.getAllByType('products', { lang })
-      let content = []
-      response.forEach(result => {
-        content = result.data
-      })
+    const response = await $prismic.client.getAllByType('products', { lang })
+    let content = null
+    response.forEach(result => { content = result.data })
 
-      if (!content) return null
+    if (!content) return null
 
-      let seo = await $prismic.client.getByID(content.seo.id)
-      seo = seo.data
+    const seoDoc = content.seo?.id ? await $prismic.client.getByID(content.seo.id).catch(() => null) : null
+    const seo = seoDoc?.data ?? null
 
-      return { content, seo }
-    })
-
-    useHead(computed(() => {
-      const categorySlug = route.params.slug
-      return {
-        title: pageData.value?.seo ? `${asText(pageData.value.seo.title)} - ${categorySlug}` : 'La Bête',
-        meta: [
-          { hid: 'description', name: 'description', content: pageData.value?.seo ? asText(pageData.value.seo.description) : '' }
-        ]
-      }
-    }))
-
-    const count = ref(0)
-    const products = ref(null)
-    const productsResults = ref([])
-    const progress = ref(0)
-    const hasFetched = ref(false)
-
-    const categoryTitle = computed(() => {
-      const categories = mainStore.categories || []
-      const category = categories.find(c => c.slug === route.params.slug)
-      return category ? category.name : ''
-    })
-
-    const categoryDesc = computed(() => {
-      const categories = mainStore.categories || []
-      const category = categories.find(c => c.slug === route.params.slug)
-      return category ? category.description : ''
-    })
-
-    const setProgress = (amount, total) => {
-      progress.value = (amount / total) * 100
-    }
-
-    const fetchProducts = async () => {
-      products.value = await $swell.products.list({
-        limit: 24,
-        sort: 'date_created desc',
-        categories: route.params.slug,
-        page: products.value && products.value.page + 1 || 1
-      })
-
-      if (products.value && products.value.results && products.value.results.length > 0) {
-        const newProducts = products.value.results
-        const uniqueProducts = [
-          ...productsResults.value,
-          ...newProducts.filter(product =>
-            !productsResults.value.some(existingProduct => existingProduct.id === product.id)
-          )
-        ]
-        productsResults.value = uniqueProducts
-      }
-      count.value = products.value.count
-      setProgress(productsResults.value.length, count.value)
-      hasFetched.value = true
-    }
-
-    onMounted(async () => {
-      await fetchProducts()
-    })
-
-    return {
-      pageData,
-      count,
-      products,
-      productsResults,
-      progress,
-      hasFetched,
-      fetchProducts,
-      categoryTitle,
-      categoryDesc
-    }
+    return { content, seo }
+  } catch (err) {
+    console.error('[products-category] Failed to fetch Prismic data:', err?.message || String(err))
+    return null
   }
+})
+
+useHead(computed(() => {
+  const categorySlug = route.params.slug
+  return {
+    title: pageData.value?.seo ? `${asText(pageData.value.seo.title)} - ${categorySlug}` : 'La Bête',
+    meta: [
+      { hid: 'description', name: 'description', content: pageData.value?.seo ? asText(pageData.value.seo.description) : '' }
+    ]
+  }
+}))
+
+const count = ref(0)
+const products = ref(null)
+const productsResults = ref([])
+const progress = ref(0)
+const hasFetched = ref(false)
+
+const categoryTitle = computed(() => {
+  const categories = mainStore.categories || []
+  const category = categories.find(c => c.slug === route.params.slug)
+  return category ? category.name : ''
+})
+
+const categoryDesc = computed(() => {
+  const categories = mainStore.categories || []
+  const category = categories.find(c => c.slug === route.params.slug)
+  return category ? category.description : ''
+})
+
+const setProgress = (amount, total) => {
+  progress.value = (amount / total) * 100
 }
+
+const fetchProducts = async () => {
+  products.value = await $swell.products.list({
+    limit: 24,
+    sort: 'date_created desc',
+    categories: route.params.slug,
+    page: products.value && products.value.page + 1 || 1
+  })
+
+  if (products.value && products.value.results && products.value.results.length > 0) {
+    const newProducts = products.value.results
+    const uniqueProducts = [
+      ...productsResults.value,
+      ...newProducts.filter(product =>
+        !productsResults.value.some(existingProduct => existingProduct.id === product.id)
+      )
+    ]
+    productsResults.value = uniqueProducts
+  }
+  count.value = products.value.count
+  setProgress(productsResults.value.length, count.value)
+  hasFetched.value = true
+}
+
+onMounted(async () => {
+  await fetchProducts()
+})
 </script>

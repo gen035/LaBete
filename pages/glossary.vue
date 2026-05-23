@@ -21,7 +21,7 @@
   </section>
 </template>
 
-<script>
+<script setup>
 import { asText, asHTML } from '@prismicio/client'
 
 definePageMeta({
@@ -33,39 +33,38 @@ definePageMeta({
   }
 })
 
-export default {
-  setup() {
-    const { $prismic } = useNuxtApp()
-    const { locale } = useI18n()
+const { $prismic } = useNuxtApp()
+const { locale } = useI18n()
 
-    const { data } = useAsyncData('glossary', async () => {
-      const pageDoc = await $prismic.client.getByUID('page', 'glossary', { lang: `${locale.value}-ca` })
-      const content = pageDoc ? pageDoc.data : null
+const { data } = useAsyncData('glossary', async () => {
+  try {
+    const pageDoc = await $prismic.client.getByUID('page', 'glossary', { lang: `${locale.value}-ca` }).catch(() => null)
+    const content = pageDoc ? pageDoc.data : null
 
-      const glossaryCardDocs = await $prismic.client.getAllByType('glossarycard', { lang: `${locale.value}-ca` })
-      const glossaryCards = glossaryCardDocs.map(doc => doc.data)
+    const glossaryCardDocs = await $prismic.client.getAllByType('glossarycard', { lang: `${locale.value}-ca` })
+    const glossaryCards = glossaryCardDocs.map(doc => doc.data)
 
-      let seo = null
-      if (content && content.seo && content.seo.id) {
-        const seoDoc = await $prismic.client.getByID(content.seo.id)
-        seo = seoDoc.data
-      }
+    let seo = null
+    if (content?.seo?.id) {
+      const seoDoc = await $prismic.client.getByID(content.seo.id).catch(() => null)
+      seo = seoDoc?.data ?? null
+    }
 
-      return { content, glossaryCards, seo }
-    })
-
-    const content = computed(() => data.value?.content ?? null)
-    const glossaryCards = computed(() => data.value?.glossaryCards ?? [])
-    const seo = computed(() => data.value?.seo ?? null)
-
-    useHead(computed(() => ({
-      title: seo.value?.title ? asText(seo.value.title) : 'La Bête',
-      meta: [
-        { name: 'description', content: seo.value?.description ? asText(seo.value.description) : '' }
-      ]
-    })))
-
-    return { content, glossaryCards, asHTML }
+    return { content, glossaryCards, seo }
+  } catch (err) {
+    console.error('[glossary] Failed to fetch Prismic data:', err?.message || String(err))
+    return { content: null, glossaryCards: [], seo: null }
   }
-}
+})
+
+const content = computed(() => data.value?.content ?? null)
+const glossaryCards = computed(() => data.value?.glossaryCards ?? [])
+const seo = computed(() => data.value?.seo ?? null)
+
+useHead(computed(() => ({
+  title: seo.value?.title ? asText(seo.value.title) : 'La Bête',
+  meta: [
+    { name: 'description', content: seo.value?.description ? asText(seo.value.description) : '' }
+  ]
+})))
 </script>

@@ -38,7 +38,7 @@
   </section>
 </template>
 
-<script>
+<script setup>
 import VLazyImage from 'v-lazy-image'
 import { Carousel, Slide, Pagination } from 'vue3-carousel'
 import 'vue3-carousel/dist/carousel.css'
@@ -52,45 +52,29 @@ definePageMeta({
   }
 })
 
-export default {
-  components: {
-    VLazyImage,
-    Carousel,
-    Slide,
-    Pagination,
-  },
+const route = useRoute()
+const { $swell } = useNuxtApp()
+const productStore = useProductStore()
 
-  setup() {
-    const route = useRoute()
-    const { $swell } = useNuxtApp()
-    const productStore = useProductStore()
+const { data: product } = useAsyncData(`product-${route.params.slug}`, async () => {
+  const p = await $swell.products.get(route.params.slug, {
+    expand: ['cross_sells', 'up_sells']
+  })
 
-    const { data: product } = useAsyncData(`product-${route.params.slug}`, async () => {
-      const p = await $swell.products.get(route.params.slug, {
-        expand: ['cross_sells', 'up_sells']
-      })
-
-      if (p) {
-        const upSells = p.up_sells && p.up_sells.length > 0 ? p.up_sells : null
-        await productStore.fetchProductsBySlugs(upSells)
-      }
-
-      return p || null
-    })
-
-    useHead(computed(() => ({
-      title: product.value ? `La Bête | ${product.value.meta_title || product.value.name}` : 'La Bête',
-      meta: [
-        { hid: 'description', name: 'description', content: product.value ? `${product.value.meta_description || product.value.description}` : '' }
-      ]
-    })))
-
-    const getProductRecommended = computed(() => productStore.getProductRecommended)
-
-    return {
-      product,
-      getProductRecommended,
-    }
+  if (p) {
+    const upSells = p.up_sells && p.up_sells.length > 0 ? p.up_sells : null
+    await productStore.fetchProductsBySlugs(upSells)
   }
-}
+
+  return p || null
+})
+
+useHead(computed(() => ({
+  title: product.value ? `La Bête | ${product.value.meta_title || product.value.name}` : 'La Bête',
+  meta: [
+    { hid: 'description', name: 'description', content: product.value ? `${product.value.meta_description || product.value.description}` : '' }
+  ]
+})))
+
+const getProductRecommended = computed(() => productStore.getProductRecommended)
 </script>

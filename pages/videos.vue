@@ -37,7 +37,7 @@
   </section>
 </template>
 
-<script>
+<script setup>
 import { asText, asHTML } from '@prismicio/client'
 
 definePageMeta({
@@ -49,49 +49,47 @@ definePageMeta({
   }
 })
 
-export default {
-  setup() {
-    const { $prismic } = useNuxtApp()
-    const { locale } = useI18n()
+const { $prismic } = useNuxtApp()
+const { locale } = useI18n()
 
-    const { data: content } = useAsyncData('videos', async () => {
-      const docs = await $prismic.client.getAllByType('videos_page', { lang: `${locale.value}-ca` })
-      if (!docs.length) return null
-      const doc = docs[0].data
-      if (doc.seo && doc.seo.id) {
-        const seoDoc = await $prismic.client.getByID(doc.seo.id)
-        doc._seo = seoDoc.data
-      }
-      return doc
-    })
-
-    useHead(computed(() => ({
-      title: content.value?._seo?.title ? asText(content.value._seo.title) : 'La Bête',
-      meta: [
-        { name: 'description', content: content.value?._seo?.description ? asText(content.value._seo.description) : '' }
-      ]
-    })))
-
-    return { content, asText, asHTML }
-  },
-  methods: {
-    responsiveEmbed(html) {
-      return (html || '')
-        .replace(/width="[^"]*"/i, 'width="100%"')
-        .replace(/height="[^"]*"/i, 'height="100%"')
-    },
-
-    formatDate(dateStr) {
-      try {
-        return new Date(dateStr).toLocaleDateString('fr-CA', {
-          year: 'numeric',
-          month: 'long',
-          day: 'numeric',
-        })
-      } catch (e) {
-        return dateStr
-      }
+const { data: content } = useAsyncData('videos', async () => {
+  try {
+    const docs = await $prismic.client.getAllByType('videos_page', { lang: `${locale.value}-ca` })
+    if (!docs.length) return null
+    const doc = docs[0].data
+    if (doc.seo?.id) {
+      const seoDoc = await $prismic.client.getByID(doc.seo.id).catch(() => null)
+      doc._seo = seoDoc?.data ?? null
     }
+    return doc
+  } catch (err) {
+    console.error('[videos] Failed to fetch Prismic data:', err?.message || String(err))
+    return null
+  }
+})
+
+useHead(computed(() => ({
+  title: content.value?._seo?.title ? asText(content.value._seo.title) : 'La Bête',
+  meta: [
+    { name: 'description', content: content.value?._seo?.description ? asText(content.value._seo.description) : '' }
+  ]
+})))
+
+const responsiveEmbed = (html) => {
+  return (html || '')
+    .replace(/width="[^"]*"/i, 'width="100%"')
+    .replace(/height="[^"]*"/i, 'height="100%"')
+}
+
+const formatDate = (dateStr) => {
+  try {
+    return new Date(dateStr).toLocaleDateString('fr-CA', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+    })
+  } catch (e) {
+    return dateStr
   }
 }
 </script>
