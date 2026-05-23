@@ -105,13 +105,10 @@ const { locale } = useI18n()
 const { data: pageData } = useAsyncData('home', async () => {
   try {
     const lang = `${locale.value}-ca`
-    console.log('[home] fetching, lang:', lang, 'side:', import.meta.server ? 'server' : 'client')
 
     const homeDocs = await $prismic.client.getAllByType('home', { lang })
-    console.log('[home] getAllByType result count:', homeDocs.length)
     if (homeDocs.length === 0) return null
     const content = homeDocs[0].data
-    console.log('[home] content keys:', Object.keys(content))
 
     const [hero_button_doc, seo_doc] = await Promise.all([
       content.hero_button?.id ? $prismic.client.getByID(content.hero_button.id) : null,
@@ -153,7 +150,6 @@ const { data: pageData } = useAsyncData('home', async () => {
       slider: sliderDoc?.data ?? null,
       top_blocks: top_blocks.filter(Boolean),
     }
-    console.log('[home] returning result, hero_title:', content?.hero_title?.[0]?.text)
     return result
   } catch (err) {
     console.error('[home] Failed to fetch Prismic data:', err?.message || String(err))
@@ -164,11 +160,6 @@ const { data: pageData } = useAsyncData('home', async () => {
 const { data: productsResults } = useAsyncData('home-products', async () => {
   const res = await $swell.products.list({ limit: 4, sort: 'date_created desc', categories: 'featured' })
   return res?.results ?? []
-})
-
-onMounted(() => {
-  console.log('[home] mounted, pageData:', pageData.value)
-  console.log('[home] mounted, hero_title:', pageData.value?.content?.hero_title?.[0]?.text)
 })
 
 useHead(computed(() => ({
