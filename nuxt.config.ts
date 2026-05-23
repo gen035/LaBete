@@ -28,8 +28,10 @@ export default defineNuxtConfig({
         { rel: 'stylesheet', href: '/font-awesome/css/all.min.css' },
       ],
       script: [
-        { src: 'https://www.googletagmanager.com/gtag/js?id=G-TBQWHYP39H', async: true },
-        ...(process.env.NODE_ENV === 'production' ? [{ src: '/ga.js', async: true }] : []),
+        ...(process.env.NODE_ENV === 'production' ? [
+          { src: 'https://www.googletagmanager.com/gtag/js?id=G-TBQWHYP39H', async: true },
+          { src: '/ga.js', async: true },
+        ] : []),
       ],
     },
   },
@@ -49,6 +51,8 @@ export default defineNuxtConfig({
 
   prismic: {
     endpoint: 'labete',
+    preview: false,
+    toolbar: false,
   },
 
   i18n: {
@@ -64,6 +68,7 @@ export default defineNuxtConfig({
     langDir: 'locales/',
     defaultLocale: 'fr',
     lazy: true,
+    detectBrowserLanguage: false,
   },
 
   vite: {
