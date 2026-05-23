@@ -110,7 +110,8 @@
   export default {
     setup() {
       const mainStore = useMainStore()
-      return { mainStore }
+      const localePath = useLocalePath()
+      return { mainStore, localePath }
     },
     computed: {
       facebook() {

@@ -26,7 +26,8 @@ import { useMainStore } from '~/stores/main'
 export default {
   setup() {
     const mainStore = useMainStore()
-    return { mainStore }
+    const localePath = useLocalePath()
+    return { mainStore, localePath }
   }
 }
 </script>

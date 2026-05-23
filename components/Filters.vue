@@ -31,7 +31,8 @@
     setup() {
       const mainStore = useMainStore()
       const { locale } = useI18n()
-      return { mainStore, locale }
+      const localePath = useLocalePath()
+      return { mainStore, locale, localePath }
     },
     data() {
       return {

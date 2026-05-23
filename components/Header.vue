@@ -71,38 +71,28 @@
       const { locale } = useI18n()
       const mainStore = useMainStore()
       const cartStore = useCartStore()
-      return { locale, mainStore, cartStore }
+      const localePath = useLocalePath()
+      const switchLocalePath = useSwitchLocalePath()
+      return { locale, mainStore, cartStore, localePath, switchLocalePath }
     },
     computed: {
       promo() {
         return this.mainStore.settings && this.mainStore.settings.promo;
       },
-    },
-    data() {
-      return {
-        nav: [],
-      }
-    },
-    created() {
-      this.getNavLinks();
-    },
-    watch: {
-      locale() {
-        this.getNavLinks();
-      }
+      nav() {
+        const links = this.$tm('nav.links');
+        if (!Array.isArray(links)) return [];
+        return links.map(link => ({
+          name: this.$rt(link.name),
+          text: this.$rt(link.text),
+          path: this.$rt(link.path),
+        }));
+      },
     },
     methods: {
       toggleMobileNav() {
         const { body } = document;
         body.classList.toggle('is-nav-opened');
-      },
-      getNavLinks() {
-        const links = this.$t('nav.links');
-        this.nav = [];
-
-        links.forEach((item) => {
-          this.nav.push(item);
-        });
       },
       openModal() {
         this.mainStore.setMessageOpened(true);

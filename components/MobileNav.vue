@@ -33,20 +33,20 @@
 <script>
   export default {
     setup() {
-      const { t } = useI18n()
-      return { t }
+      const localePath = useLocalePath()
+      const switchLocalePath = useSwitchLocalePath()
+      return { localePath, switchLocalePath }
     },
-    data() {
-      return {
-        nav: []
-      }
-    },
-    created() {
-      const links = this.t('nav.links');
-
-      links.map((item) => {
-        this.nav.push(item);
-      });
+    computed: {
+      nav() {
+        const links = this.$tm('nav.links');
+        if (!Array.isArray(links)) return [];
+        return links.map(link => ({
+          name: this.$rt(link.name),
+          text: this.$rt(link.text),
+          path: this.$rt(link.path),
+        }));
+      },
     },
     mounted() {
       window.addEventListener('resize', this.handleResize);
