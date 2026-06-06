@@ -1,8 +1,6 @@
 <template></template>
 
 <script setup>
-import GLightbox from 'glightbox'
-
 const props = defineProps({
   images: { type: Array, required: true },
   index: { type: Number, default: null },
@@ -12,7 +10,8 @@ const emit = defineEmits(['close'])
 
 let lightbox = null
 
-const openAt = (idx) => {
+const openAt = async (idx) => {
+  const { default: GLightbox } = await import('glightbox')
   if (lightbox) lightbox.destroy()
   lightbox = GLightbox({
     elements: props.images.map(img => ({
@@ -27,7 +26,7 @@ const openAt = (idx) => {
   lightbox.open()
 }
 
-watch(() => props.index, (idx) => {
+watch(() => props.index, async (idx) => {
   if (idx !== null && idx !== undefined) {
     openAt(idx)
   }
