@@ -12,12 +12,14 @@
           <Media :image="image" />
         </div>
       </div>
-      <LightGallery
-          :images="images"
-          :index="index"
-          :disable-scroll="false"
-          @close="index = null"
-      />
+      <ClientOnly>
+        <LightGallery
+            :images="images"
+            :index="index"
+            :disable-scroll="false"
+            @close="index = null"
+        />
+      </ClientOnly>
     </section>
   </section>
 </template>

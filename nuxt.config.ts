@@ -45,7 +45,6 @@ export default defineNuxtConfig({
   plugins: [
     '~/plugins/01.swell.ts',
     '~/plugins/02.init.server.ts',
-    '~/plugins/lightGallery.client.ts',
     '~/plugins/bootstrap.client.ts',
   ],
 
