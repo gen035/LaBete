@@ -37,7 +37,7 @@ const { data: content } = useAsyncData('return-policy', async () => {
     if (!doc) return null
     const contentData = doc.data
     if (contentData.seo && contentData.seo.id) {
-      const seoDoc = await $prismic.client.getByID(contentData.seo.id)
+      const seoDoc = await $prismic.client.getByID(contentData.seo.id).catch(() => null)
       contentData._seo = seoDoc ? seoDoc.data : null
     }
     return contentData
