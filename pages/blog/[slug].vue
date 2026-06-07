@@ -24,12 +24,10 @@
 <script setup>
 import { asText, asHTML } from '@prismicio/client'
 
-definePageMeta({
-  i18n: {
-    paths: {
-      fr: '/blogue/:slug',
-      en: '/blog/:slug'
-    }
+defineI18nRoute({
+  paths: {
+    fr: '/blogue/:slug',
+    en: '/blog/:slug'
   }
 })
 

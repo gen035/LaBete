@@ -40,12 +40,10 @@
 <script setup>
 import { asText, asHTML } from '@prismicio/client'
 
-definePageMeta({
-  i18n: {
-    paths: {
-      fr: '/videos',
-      en: '/videos'
-    }
+defineI18nRoute({
+  paths: {
+    fr: '/videos',
+    en: '/videos'
   }
 })
 

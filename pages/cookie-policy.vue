@@ -17,12 +17,10 @@
 <script setup>
 import { asText, asHTML } from '@prismicio/client'
 
-definePageMeta({
-  i18n: {
-    paths: {
-      fr: '/politique-cookie',
-      en: '/cookie-policy'
-    }
+defineI18nRoute({
+  paths: {
+    fr: '/politique-cookie',
+    en: '/cookie-policy'
   }
 })
 

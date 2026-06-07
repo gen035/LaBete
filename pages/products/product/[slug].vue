@@ -43,12 +43,10 @@ import VLazyImage from 'v-lazy-image'
 import { Carousel, Slide, Pagination } from 'vue3-carousel'
 import 'vue3-carousel/dist/carousel.css'
 
-definePageMeta({
-  i18n: {
-    paths: {
-      fr: '/produits/produit/:slug',
-      en: '/products/product/:slug'
-    }
+defineI18nRoute({
+  paths: {
+    fr: '/produits/produit/:slug',
+    en: '/products/product/:slug'
   }
 })
 

@@ -41,12 +41,10 @@
 <script setup>
 import { asText, asHTML } from '@prismicio/client'
 
-definePageMeta({
-  i18n: {
-    paths: {
-      fr: '/evenements',
-      en: '/events'
-    }
+defineI18nRoute({
+  paths: {
+    fr: '/evenements',
+    en: '/events'
   }
 })
 

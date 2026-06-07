@@ -29,12 +29,10 @@
 <script setup>
 import { asText, asHTML } from '@prismicio/client'
 
-definePageMeta({
-  i18n: {
-    paths: {
-      fr: '/contact',
-      en: '/contact'
-    }
+defineI18nRoute({
+  paths: {
+    fr: '/contact',
+    en: '/contact'
   }
 })
 

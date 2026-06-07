@@ -24,12 +24,10 @@
 <script setup>
 import { asText, asHTML } from '@prismicio/client'
 
-definePageMeta({
-  i18n: {
-    paths: {
-      fr: '/glossaire',
-      en: '/glossary'
-    }
+defineI18nRoute({
+  paths: {
+    fr: '/glossaire',
+    en: '/glossary'
   }
 })
 

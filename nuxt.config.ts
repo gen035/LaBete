@@ -56,7 +56,7 @@ export default defineNuxtConfig({
 
   i18n: {
     restructureDir: false,
-    customRoutes: 'meta',
+    customRoutes: 'page',
     compilation: {
       strictMessage: false,
     },
