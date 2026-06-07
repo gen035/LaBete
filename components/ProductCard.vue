@@ -45,7 +45,7 @@
     },
     methods: {
       goTo() {
-        const pathPrefix = this.locale.value === 'en' ? `/${this.locale.value}/products/product/` : '/produits/produit/';
+        const pathPrefix = this.locale === 'en' ? '/en/products/product/' : '/produits/produit/';
         this.router.push(`${pathPrefix}${this.product.slug}`);
       }
     },

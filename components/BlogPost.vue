@@ -35,7 +35,7 @@
     },
     methods: {
       goTo() {
-        const pathPrefix = this.locale.value === 'en' ? `/${this.locale.value}/blog/` : '/blogue/';
+        const pathPrefix = this.locale === 'en' ? '/en/blog/' : '/blogue/';
         this.router.push(`${pathPrefix}${this.post.uid}`);
       }
     },
