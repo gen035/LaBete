@@ -1,0 +1,38 @@
+.page-loader {
+  position: fixed;
+  inset: 0;
+  z-index: $z-index-10;
+  background: rgba(244, 242, 239, 0.92);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &__diamond {
+    width: 36px;
+    height: 36px;
+    background-color: $gold;
+    animation: loader-pulse 1s ease-in-out infinite;
+    transform: rotate(45deg);
+  }
+}
+
+@keyframes loader-pulse {
+  0%, 100% {
+    transform: rotate(45deg) scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: rotate(45deg) scale(0.5);
+    opacity: 0.4;
+  }
+}
+
+.page-loader-enter-active,
+.page-loader-leave-active {
+  transition: opacity 0.2s ease;
+}
+
+.page-loader-enter-from,
+.page-loader-leave-to {
+  opacity: 0;
+}

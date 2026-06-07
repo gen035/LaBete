@@ -3,6 +3,7 @@
     <Header />
     <Cart />
     <Notification />
+    <PageLoader />
     <slot />
     <MobileNav />
     <NewsletterModal />
