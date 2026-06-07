@@ -3,11 +3,11 @@
       <section class="container-fluid">
         <div class="row">
           <div class="col-md-6 col-lg-5 col-xl-4 col-xxl-3 offset-lg-1 offset-xl-2 offset-xxl-3 product-slider">
-            <Carousel v-if="product && product.images && product.images.length > 0" :wrap-around="true" :autoplay="2000" :pause-autoplay-on-hover="true" :items-to-show="1">
+            <Carousel v-if="product && product.images && product.images.length > 0" :wrap-around="true" :autoplay="product.images.length > 1 ? 2000 : 0" :pause-autoplay-on-hover="true" :items-to-show="1">
               <Slide v-for="(image, index) in product.images" :key="index">
                 <v-lazy-image :src="image.file.url" :alt="`${product.name} - ${index}`" src-placeholder="/product_placeholder.jpg"/>
               </Slide>
-              <template #addons>
+              <template v-if="product.images.length > 1" #addons>
                 <Pagination />
               </template>
             </Carousel>
