@@ -26,8 +26,8 @@ import { asText, asHTML } from '@prismicio/client'
 
 defineI18nRoute({
   paths: {
-    fr: '/blogue/:slug',
-    en: '/blog/:slug'
+    fr: '/blogue/[slug]',
+    en: '/blog/[slug]'
   }
 })
 

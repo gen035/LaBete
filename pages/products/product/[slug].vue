@@ -45,8 +45,8 @@ import 'vue3-carousel/dist/carousel.css'
 
 defineI18nRoute({
   paths: {
-    fr: '/produits/produit/:slug',
-    en: '/products/product/:slug'
+    fr: '/produits/produit/[slug]',
+    en: '/products/product/[slug]'
   }
 })
 

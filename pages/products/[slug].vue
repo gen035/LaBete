@@ -43,8 +43,8 @@ import { asText } from '@prismicio/client'
 
 defineI18nRoute({
   paths: {
-    fr: '/produits/:category',
-    en: '/products/:category'
+    fr: '/produits/[category]',
+    en: '/products/[category]'
   }
 })
 
