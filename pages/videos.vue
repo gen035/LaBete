@@ -56,7 +56,7 @@ const { data: content } = useAsyncData('videos', async () => {
     if (!docs.length) return null
     const doc = docs[0].data
     if (doc.seo?.id) {
-      const seoDoc = await $prismic.client.getByID(doc.seo.id).catch(() => null)
+      const seoDoc = await $prismic.client.getByID(doc.seo.id, { lang: '*' }).catch(() => null)
       doc._seo = seoDoc?.data ?? null
     }
     return doc

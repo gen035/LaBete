@@ -65,7 +65,7 @@ const { data } = useAsyncData('events', async () => {
 
     let seo = null
     if (content?.seo?.id) {
-      const seoDoc = await $prismic.client.getByID(content.seo.id).catch(() => null)
+      const seoDoc = await $prismic.client.getByID(content.seo.id, { lang: '*' }).catch(() => null)
       seo = seoDoc?.data ?? null
     }
 

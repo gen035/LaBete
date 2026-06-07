@@ -33,7 +33,7 @@ defineI18nRoute({
 const { $prismic } = useNuxtApp()
 const { locale } = useI18n()
 
-const { data } = useAsyncData('brand', async () => {
+const { data } = useAsyncData(`brand-${locale.value}`, async () => {
   try {
     const docs = await $prismic.client.getAllByType('brandpage', { lang: `${locale.value}-ca` })
     if (!docs.length) return null
@@ -41,14 +41,14 @@ const { data } = useAsyncData('brand', async () => {
 
     let seo = null
     if (doc.seo?.id) {
-      const seoDoc = await $prismic.client.getByID(doc.seo.id).catch(() => null)
+      const seoDoc = await $prismic.client.getByID(doc.seo.id, { lang: '*' }).catch(() => null)
       seo = seoDoc?.data ?? null
     }
 
     const blocks = []
     for (const block of (doc.blocks || [])) {
       if (!block.block?.id) continue
-      const item = await $prismic.client.getByID(block.block.id).catch(() => null)
+      const item = await $prismic.client.getByID(block.block.id, { lang: '*' }).catch(() => null)
       if (item) blocks.push(item.data)
     }
 

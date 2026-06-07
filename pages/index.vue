@@ -4,7 +4,7 @@
       <div class="container">
         <div class="row">
           <div class="col-md-8 col-sm-12">
-            <Slider :data="pageData?.slider" />
+            <Slider v-if="pageData?.slider" :data="pageData.slider" />
           </div>
           <div class="col-md-4 d-none d-md-block position-relative">
             <div class="home-text-box">
@@ -100,7 +100,7 @@ const { $prismic } = useNuxtApp()
 const { $swell } = useNuxtApp()
 const { locale } = useI18n()
 
-const { data: pageData } = useAsyncData('home', async () => {
+const { data: pageData } = useAsyncData(`home-${locale.value}`, async () => {
   try {
     const lang = `${locale.value}-ca`
 
@@ -109,31 +109,31 @@ const { data: pageData } = useAsyncData('home', async () => {
     const content = homeDocs[0].data
 
     const [hero_button_doc, seo_doc] = await Promise.all([
-      content.hero_button?.id ? $prismic.client.getByID(content.hero_button.id) : null,
-      content.seo?.id ? $prismic.client.getByID(content.seo.id) : null,
+      content.hero_button?.id ? $prismic.client.getByID(content.hero_button.id, { lang: '*' }).catch(() => null) : null,
+      content.seo?.id ? $prismic.client.getByID(content.seo.id, { lang: '*' }).catch(() => null) : null,
     ])
 
     const cards = await Promise.all(
       (content.cards || []).map(({ card }) =>
-        card?.id ? $prismic.client.getByID(card.id).then(d => d?.data ?? null).catch(() => null) : null
+        card?.id ? $prismic.client.getByID(card.id, { lang: '*' }).then(d => d?.data ?? null).catch(() => null) : null
       )
     )
 
     const blocks = await Promise.all(
       (content.blocks || []).map(({ block }) =>
-        block?.id ? $prismic.client.getByID(block.id).then(d => d?.data ?? null).catch(() => null) : null
+        block?.id ? $prismic.client.getByID(block.id, { lang: '*' }).then(d => d?.data ?? null).catch(() => null) : null
       )
     )
 
-    const sliderDoc = content.slider?.id ? await $prismic.client.getByID(content.slider.id).catch(() => null) : null
+    const sliderDoc = content.slider?.id ? await $prismic.client.getByID(content.slider.id, { lang: '*' }).catch(() => null) : null
 
     const top_blocks = await Promise.all(
       (content.top_blocks || []).map(async ({ top_block }) => {
         if (!top_block?.id) return null
-        const item = await $prismic.client.getByID(top_block.id).catch(() => null)
+        const item = await $prismic.client.getByID(top_block.id, { lang: '*' }).catch(() => null)
         if (!item) return null
         if (item.data.button?.id) {
-          item.data.button = await $prismic.client.getByID(item.data.button.id).catch(() => null)
+          item.data.button = await $prismic.client.getByID(item.data.button.id, { lang: '*' }).catch(() => null)
         }
         return item.data
       })

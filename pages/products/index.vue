@@ -62,7 +62,7 @@ const { data: pageData } = useAsyncData('products-index', async () => {
 
     if (!content) return null
 
-    const seoDoc = content.seo?.id ? await $prismic.client.getByID(content.seo.id).catch(() => null) : null
+    const seoDoc = content.seo?.id ? await $prismic.client.getByID(content.seo.id, { lang: '*' }).catch(() => null) : null
     const seo = seoDoc?.data ?? null
 
     return { content, seo }
