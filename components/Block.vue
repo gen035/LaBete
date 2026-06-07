@@ -12,7 +12,7 @@
         'block-text'
       ]">
         <div>
-          <div v-html="$prismic.asHtml(block.description)" />
+          <div v-html="asHTML(block.description)" />
           <a class="button-simple" v-if="block.button?.data?.url" :href="block.button.data.url.url">{{block.button?.data?.text}}</a>
         </div>
       </div>
@@ -22,8 +22,7 @@
   </section>
 </template>
 <script>
-  import Media from '~/components/Media';
-
+  import { asHTML } from '@prismicio/client'
   export default {
     props: {
       block: {
@@ -52,6 +51,9 @@
         default: "horizontal"
       }
     },
+    setup() {
+      return { asHTML }
+    },
     computed: {
       isOdd() {
         if (this.index % 2 === 1) {
@@ -60,8 +62,5 @@
         return ''
       },
     },
-    components: {
-      Media
-    }
   }
 </script>

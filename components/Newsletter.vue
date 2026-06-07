@@ -13,7 +13,7 @@
         <input style="display:none;" type="text" id="ci_verification" name="ci_verification" />
         <input type="hidden" id="ci_groups" name="ci_groups" value="6" />
         <input type="hidden" id="ci_account" name="ci_account" value="910db7f6-7751-4942-41d3-c59a8ef52f8f" />
-        <input type="hidden" id="ci_language" name="ci_language" :value="`${locale}_ca`" />
+        <input type="hidden" id="ci_language" name="ci_language" :value="`${locale.value}_ca`" />
         <input type="hidden" id="ci_sent_url" name="ci_sent_url" value="" />
         <input type="hidden" id="ci_error_url" name="ci_error_url" value="" />
         <input type="hidden" id="ci_confirm_url" name="ci_confirm_url" value="" />
@@ -23,6 +23,7 @@
   </div>
 </template>
 <script>
+  import { useMainStore } from '~/stores/main'
   export default {
     props: {
       isModal: {
@@ -31,10 +32,11 @@
         default: false
       }
     },
-    computed: {
-      locale() {
-        return this.$store.state.i18n.locale;
-      }
+    setup() {
+      const mainStore = useMainStore()
+      const { locale } = useI18n()
+      const labeteNewsletter = useCookie('labete_newsletter', { maxAge: 365 * 24 * 60 * 60 })
+      return { mainStore, locale, labeteNewsletter }
     },
     data() {
       return {
@@ -44,16 +46,10 @@
     },
     methods: {
       closeModal() {
-        this.$store.commit('SET_NEWSLETTER', false);
+        this.mainStore.setNewsletterOpened(false);
 
-        if(this.isModal) {
-          this.$cookies.set(
-            'labete_newsletter',
-            true,
-            {
-              maxAge: 365 * 24 * 60 * 60
-            }
-          );
+        if (this.isModal) {
+          this.labeteNewsletter = true;
         }
       }
     },

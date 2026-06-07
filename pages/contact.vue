@@ -1,9 +1,9 @@
 <template>
   <section class="content">
-      <section class="container">
+      <section class="container" v-if="content">
         <div class="row">
             <div
-              v-html="$prismic.asHtml(content.title)"
+              v-html="asHTML(content.title)"
               class="col-md-12"
             />
         </div>
@@ -19,67 +19,50 @@
           </div>
           <div class="col-md-4">
             <Media :image="content.image" :altProp="$t('contact.alt')" classes="contact-img-1"/>
-            <Media :image="content.image_mobile" :altProp="$t('contact.alt')" classes="contact-img-2"/>
+            <Media :image="content.mobile_image" :altProp="$t('contact.alt')" classes="contact-img-2"/>
           </div>
         </div>
       </section>
   </section>
 </template>
 
-<script>
-  import Media from '~/components/Media';
-  export default {
-    async asyncData({ app, error, store }) {
-      const locale = store.state.i18n.locale;
-      let content = []
+<script setup>
+import { asText, asHTML } from '@prismicio/client'
 
-      await app.$prismic.api.query(
-        app.$prismic.predicates.at('document.type', 'contact'), {
-           lang: `${locale}-ca`
-        }
-      ).then((response) => {
-        response.results.forEach(result => {
-          content = result.data;
-        });
-      })
-
-      let seo = await app.$prismic.api.getByID(content.seo.id)
-      seo = seo.data;
-
-      if (content) {
-        return {
-          content,
-          seo
-        }
-      } else {
-        error({ statusCode: 404, message: 'Page not found' })
-      }
-    },
-    methods: {
-      formattedTitle(item) {
-        const title = item && item.label && item.label.length > 0 && item.label[0].text.toLowerCase();
-        return title;
-      }
-    },
-    head() {
-      return {
-        title: this.$prismic.asText(this.seo.title),
-        link: [
-        //{ rel: 'canonical', href: `https://<DOMAIN>${this.$prismic.linkResolver(this.document)}` }
-        ],
-        meta: [
-          { hid: 'description', name: 'description', content: this.$prismic.asText(this.seo.description) }
-        ]
-      }
-    },
-    components: {
-      Media
-    },
-    nuxtI18n: {
-      paths: {
-        fr: '/contact',
-        en: '/contact'
-      }
-    },
+defineI18nRoute({
+  paths: {
+    fr: '/contact',
+    en: '/contact'
   }
+})
+
+const { $prismic } = useNuxtApp()
+const { locale } = useI18n()
+
+const { data: content } = useAsyncData('contact', async () => {
+  try {
+    const docs = await $prismic.client.getAllByType('contact', { lang: `${locale.value}-ca` })
+    if (!docs.length) return null
+    const doc = docs[0].data
+    if (doc.seo?.id) {
+      const seoDoc = await $prismic.client.getByID(doc.seo.id, { lang: '*' }).catch(() => null)
+      doc._seo = seoDoc?.data ?? null
+    }
+    return doc
+  } catch (err) {
+    console.error('[contact] Failed to fetch Prismic data:', err?.message || String(err))
+    return null
+  }
+})
+
+useHead(computed(() => ({
+  title: content.value?._seo?.title ? asText(content.value._seo.title) : 'La Bête',
+  meta: [
+    { name: 'description', content: content.value?._seo?.description ? asText(content.value._seo.description) : '' }
+  ]
+})))
+
+const formattedTitle = (item) => {
+  return item && item.label && item.label.length > 0 && item.label[0].text.toLowerCase()
+}
 </script>

@@ -23,9 +23,7 @@
   </client-only>
 </template>
 <script>
-  import AddToCart from '~/components/AddToCart';
-  import Media from '~/components/Media';
-  import VLazyImage from "v-lazy-image/v2";
+  import VLazyImage from 'v-lazy-image';
 
   export default {
     props: {
@@ -35,6 +33,11 @@
         default: () => ({})
       }
     },
+    setup() {
+      const { locale } = useI18n()
+      const router = useRouter()
+      return { locale, router }
+    },
     data() {
       return {
         in_stock: this.product.stock_level > 0
@@ -42,15 +45,10 @@
     },
     methods: {
       goTo() {
-        const locale = this.$store.state.i18n.locale;
-        const pathPrefix = locale === 'en' ? `/${locale}/products/product/` : '/produits/produit/';
-        this.$router.push(`${pathPrefix}${this.product.slug}`);
+        const pathPrefix = this.locale === 'en' ? '/en/products/product/' : '/produits/produit/';
+        this.router.push(`${pathPrefix}${this.product.slug}`);
       }
     },
-    components: {
-      AddToCart,
-      Media,
-      VLazyImage
-    }
+    components: { VLazyImage }
   }
 </script>

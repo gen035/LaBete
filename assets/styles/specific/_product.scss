@@ -16,6 +16,18 @@
     img {
       border-radius: 10px;
     }
+
+    .carousel__pagination-button::after {
+      width: 10px;
+      height: 10px;
+      border-radius: 0;
+      transform: rotate(45deg);
+      background-color: $medium-grey;
+    }
+
+    .carousel__pagination-button--active::after {
+      background-color: $gold;
+    }
   }
   &-title {
     margin: 18px auto;

@@ -1,13 +1,23 @@
 <template>
-  <VueSlickCarousel v-bind="settings">
-    <template v-for="(item, index) in data.slides">
-      <Media :key="index" :image="item.slide" :altProp="item.slide.alt" :ariaHidden="true"/>
+  <Carousel
+    :wrap-around="data.infinite"
+    :autoplay="data.autoplay ? data.autoplay_speed : 0"
+    :pause-autoplay-on-hover="data.pause_on_hover"
+    :items-to-show="data.slides_to_show || 1"
+    :height="500"
+  >
+    <Slide v-for="(item, index) in data.slides" :key="index">
+      <Media :image="item.slide" :altProp="item.slide.alt" :ariaHidden="true" />
+    </Slide>
+    <template #addons>
+      <Pagination v-if="data.dots" />
+      <Navigation v-if="data.arrows" />
     </template>
-  </VueSlickCarousel>
+  </Carousel>
 </template>
 <script>
-  import VueSlickCarousel from 'vue-slick-carousel';
-  import Media from '~/components/Media';
+  import { Carousel, Slide, Pagination, Navigation } from 'vue3-carousel';
+  import 'vue3-carousel/dist/carousel.css';
   export default {
     props: {
       data: {
@@ -16,32 +26,11 @@
         default: () => ({})
       }
     },
-    data(){
-      return {
-        settings: {
-          arrows: this.data.arrows,
-          autoplay: this.data.autoplay,
-          autoplaySpeed: this.data.autoplay_speed,
-          dots: this.data.dots,
-          fade: this.data.fade,
-          infinite: this.data.infinite,
-          pauseOnHover: this.data.pause_on_hover,
-          slidesToShow: this.data.slides_to_show,
-          speed: this.data.speed,
-          responsive: [
-            {
-              breakpoint: 768,
-              settings: {
-                dots: this.data.dots
-              }
-            }
-          ]
-        }
-      }
-    },
     components: {
-      Media,
-      VueSlickCarousel
+      Carousel,
+      Slide,
+      Pagination,
+      Navigation
     }
   }
 </script>

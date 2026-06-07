@@ -3,7 +3,8 @@
     <Header />
     <Cart />
     <Notification />
-    <nuxt />
+    <PageLoader />
+    <slot />
     <MobileNav />
     <NewsletterModal />
     <CookieModal />
@@ -13,26 +14,5 @@
   </div>
 </template>
 <script>
-  import Cart from './../components/Cart';
-  import CookieModal from './../components/CookieModal';
-  import CookiePreferencesModal from './../components/CookiePreferencesModal';
-  import Footer from './Footer';
-  import Header from './Header';
-  import MobileNav from './MobileNav';
-  import NewsletterModal from './../components/NewsletterModal';
-  import Notification from './Notification';
-  import MessageModal from './../components/MessageModal';
-  export default {
-    components: {
-      Cart,
-      CookieModal,
-      CookiePreferencesModal,
-      Footer,
-      Header,
-      MobileNav,
-      NewsletterModal,
-      Notification,
-      MessageModal
-    }
-  }
+  export default {}
 </script>

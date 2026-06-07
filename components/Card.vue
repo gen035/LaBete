@@ -16,7 +16,7 @@
   </a>
 </template>
 <script>
-  import Media from '~/components/Media';
+  import { useMainStore } from '~/stores/main'
 
   export default {
     props: {
@@ -26,27 +26,27 @@
         default: () => ({})
       }
     },
+    setup() {
+      const { locale } = useI18n()
+      const mainStore = useMainStore()
+      return { locale, mainStore }
+    },
     computed: {
       computedHref() {
         if (!this.card.open_modal) {
-          const locale = this.$store.state.i18n.locale;
           const url = this.card?.link?.url || '#';
           const page = url.split('/').pop();
-          return `${locale === 'en' ? '/' + locale : ''}/${page}`;
+          return `${this.locale.value === 'en' ? '/' + this.locale.value : ''}/${page}`;
         }
         return 'javascript:void(0);';  // Avoid page navigation when modal is true
       }
     },
     methods: {
       goTo() {
-        const openModal = this.card.open_modal;
-        if(openModal) {
-          this.$store.commit('SET_MESSAGE', true);
+        if (this.card.open_modal) {
+          this.mainStore.setMessageOpened(true);
         }
       }
     },
-    components: {
-      Media
-    }
   }
 </script>

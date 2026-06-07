@@ -17,7 +17,7 @@
         <div class="event-name">{{ event.name[0].text }}</div>
         <div v-if="event.city && event.city.length > 0" class="event-city">{{ event.city[0].text }}</div>
         <div v-if="event.venue && event.venue.length > 0" class="event-venue">{{ event.venue[0].text }}</div>
-        <div class="event-desc" v-html="$prismic.asHtml(event.description)"/>
+        <div class="event-desc" v-html="asHTML(event.description)"/>
         <div class="event-links">
           <div v-if="event.google_maps_link.url" class="event-link">
             <a
@@ -55,6 +55,7 @@
   </div>
 </template>
 <script>
+  import { asHTML } from '@prismicio/client'
   export default {
     props: {
       event: {
@@ -67,6 +68,9 @@
         required: true,
         default: 0
       }
+    },
+    setup() {
+      return { asHTML }
     },
     data() {
       return {

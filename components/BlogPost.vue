@@ -5,7 +5,7 @@
         <Media :image="post.data.image" placeholder="horizontal" />
       </div>
       <div class="blog-post-item-body align-content-center col-lg-6 col-12 py-2 py-lg-0">
-        <div v-html="$prismic.asHtml(post.data.title)" />
+        <div v-html="asHTML(post.data.title)" />
         <time :datetime="post.first_publication_date" class="blog-post-item-date my-2 d-block">{{formattedDate}}</time>
         <div>
           <p>{{createExcerpt}}</p>
@@ -19,7 +19,7 @@
   </div>
 </template>
 <script>
-  import Media from '~/components/Media';
+  import { asHTML } from '@prismicio/client'
   export default {
     props: {
       post: {
@@ -28,11 +28,15 @@
         default: () => ({})
       }
     },
+    setup() {
+      const { locale } = useI18n()
+      const router = useRouter()
+      return { locale, router, asHTML }
+    },
     methods: {
       goTo() {
-        const locale = this.$store.state.i18n.locale;
-        const pathPrefix = locale === 'en' ? `/${locale}/blog/` : '/blogue/';
-        this.$router.push(`${pathPrefix}${this.post.uid}`);
+        const pathPrefix = this.locale === 'en' ? '/en/blog/' : '/blogue/';
+        this.router.push(`${pathPrefix}${this.post.uid}`);
       }
     },
     computed: {
@@ -54,8 +58,5 @@
         return formattedDate;
       }
     },
-    components: {
-      Media
-    }
   }
 </script>

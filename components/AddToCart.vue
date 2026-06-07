@@ -1,15 +1,14 @@
 <template>
   <CustomButton
       :aria-label="$t('cart.addToCart')"
-      v-on:click.native="addToCart"
-      :text="getCartUpdating && getCartUpdatingId === this.product.id ? $t('cart.addToCartPending') : $t('cart.addToCart')"
-      :disabled="this.product.stock_status !== 'in_stock'"
+      @click="addToCart"
+      :text="cartStore.getCartUpdating && cartStore.getCartUpdatingId === product.id ? $t('cart.addToCartPending') : $t('cart.addToCart')"
+      :disabled="product.stock_status !== 'in_stock'"
       icon="fa-shopping-cart"
   />
 </template>
 <script>
-import CustomButton from "@/components/CustomButton.vue";
-import {mapGetters} from "vuex";
+import { useCartStore } from '~/stores/cart'
 export default {
   props: {
     product: {
@@ -18,24 +17,14 @@ export default {
       default: () => ({})
     }
   },
+  setup() {
+    const cartStore = useCartStore()
+    return { cartStore }
+  },
   methods: {
     async addToCart() {
-      await this.$store.dispatch('cart/addCartItem', {
-        product_id: this.product.id,
-        quantity: 1
-      });
+      await this.cartStore.addCartItem({ product_id: this.product.id, quantity: 1 })
     }
-  },
-  computed: {
-    ...mapGetters('cart', [
-      'getCart',
-      'getCartProducts',
-      'getCartUpdating',
-      'getCartUpdatingId'
-    ])
-  },
-  components: {
-    CustomButton,
-  },
+  }
 }
 </script>

@@ -4,8 +4,6 @@
   </div>
 </template>
 <script>
-  import ProductCard from '~/components/ProductCard';
-
   export default {
     props: {
       products: {
@@ -14,11 +12,5 @@
         default: () => ({})
       }
     },
-    created() {
-    },
-    methods: {
-    },
-    components: {
-    }
   }
 </script>

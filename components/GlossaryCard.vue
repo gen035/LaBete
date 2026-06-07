@@ -6,18 +6,21 @@
       </figure>
       <div class="glossary-card-body">
         <div
-          v-html="$prismic.asHtml(data.title)"
+          v-html="asHTML(data.title)"
         />
         <div
-          v-html="$prismic.asHtml(data.content)"
+          v-html="asHTML(data.content)"
         />
       </div>
     </div>
   </div>
 </template>
 <script>
-  import Media from '~/components/Media';
+  import { asHTML } from '@prismicio/client'
   export default {
+    setup() {
+      return { asHTML }
+    },
     props: {
       data: {
         type: Object,
@@ -25,8 +28,5 @@
         default: () => ({})
       }
     },
-    components: {
-      Media
-    }
   }
 </script>

@@ -13,7 +13,7 @@
       <h2 class="store-name">
         {{ store.name[0].text }}
       </h2>
-      <p class="store-address" v-html="$prismic.asHtml(store.adresse)"/>
+      <p class="store-address" v-html="asHTML(store.adresse)"/>
       <p class="store-phone">
         {{ store.phone[0].text }}
       </p>
@@ -21,7 +21,11 @@
   </div>
 </template>
 <script>
+  import { asHTML } from '@prismicio/client'
   export default {
+    setup() {
+      return { asHTML }
+    },
     props: {
       store: {
         type: Object,

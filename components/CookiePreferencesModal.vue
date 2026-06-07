@@ -4,7 +4,7 @@
       <div
           role="dialog"
           class="cookiePreferencesModalWrapper"
-          v-if="$store.state.cookiePreferencesModalOpened"
+          v-if="mainStore.cookiePreferencesModalOpened"
       >
         <div class="cookiePreferencesModal">
           <div class="cookiePreferencesModal-content">
@@ -16,7 +16,9 @@
               <h3>{{ $t('cookie.list.essential') }}</h3>
               <p>{{ $t('cookie.list.essential_description') }}</p>
             </div>
-            <b-form-checkbox checked="true" name="check-button" size="md" switch disabled/>
+            <div class="form-check form-switch">
+              <input class="form-check-input" type="checkbox" checked disabled>
+            </div>
           </div>
 
           <div class="cookiePreferencesModal-cookie">
@@ -24,13 +26,15 @@
               <h3>{{ $t('cookie.list.performance') }}</h3>
               <p>{{ $t('cookie.list.performance_description') }}</p>
             </div>
-            <b-form-checkbox
-                v-model="$cookies.get('LABETE_PRIVACY_PERF')"
-                name="check-button"
-                size="md"
+            <div class="form-check form-switch">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                v-model="perfEnabled"
+                id="perfCheck"
                 @change="setCookieCategory('LABETE_PRIVACY_PERF')"
-                switch
-            />
+              >
+            </div>
           </div>
 
           <div class="cookiePreferencesModal-cookie">
@@ -38,17 +42,19 @@
               <h3>{{ $t('cookie.list.personalisation') }}</h3>
               <p>{{ $t('cookie.list.personalisation_description') }}</p>
             </div>
-            <b-form-checkbox
-                v-model="$cookies.get('LABETE_PRIVACY_PERSO')"
-                name="check-button"
-                size="md"
+            <div class="form-check form-switch">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                v-model="persoEnabled"
+                id="persoCheck"
                 @change="setCookieCategory('LABETE_PRIVACY_PERSO')"
-                switch
-            />
+              >
+            </div>
           </div>
 
           <CustomButton
-              v-on:click.native="save"
+              @click="save"
               :aria-label="$t('cookie.save')"
               :text="$t('cookie.save')"
               icon="fa-save"
@@ -60,43 +66,74 @@
 </template>
 
 <script>
-  import CustomButton from "@/components/CustomButton.vue";
   export default {
+    setup() {
+      const mainStore = useMainStore();
+      const labeteCookieSeen = useCookie('labete_cookie_seen', { maxAge: 365 * 24 * 60 * 60 });
+      const labetePrivacyPerf = useCookie('LABETE_PRIVACY_PERF', { maxAge: 365 * 24 * 60 * 60 });
+      const labetePrivacyPerso = useCookie('LABETE_PRIVACY_PERSO', { maxAge: 365 * 24 * 60 * 60 });
+      // Cookies to clear when revoking consent categories
+      const cookieGa = useCookie('_ga');
+      const cookieGid = useCookie('_gid');
+      const cookieGat = useCookie('_gat');
+      const cookieI18n = useCookie('i18n_redirected');
+      const cookieNewsletter = useCookie('labete_newsletter');
+      const cookieSeen = useCookie('labete_cookie_seen');
+      return {
+        mainStore,
+        labeteCookieSeen,
+        labetePrivacyPerf,
+        labetePrivacyPerso,
+        cookieGa,
+        cookieGid,
+        cookieGat,
+        cookieI18n,
+        cookieNewsletter,
+        cookieSeen,
+      };
+    },
+    data() {
+      return {
+        perfEnabled: !!this.labetePrivacyPerf,
+        persoEnabled: !!this.labetePrivacyPerso,
+      };
+    },
     methods: {
       forcePageReload() {
         window.location.reload();
       },
       setCookieCategory(category) {
-        const cookieExists = this.checkCookie(category);
-        if(cookieExists) {
-          console.log(`REMOVE COOKIE - ${category}:`, cookieExists);
-          this.$cookies.remove(category);
-          this.deleteCookies(category);
-        } else {
-          console.log(`ADD COOKIE: - ${category}:`, cookieExists)
-          this.$cookies.set(category, true, { maxAge: 365 * 24 * 60 * 60 });
+        if (category === 'LABETE_PRIVACY_PERF') {
+          if (this.labetePrivacyPerf) {
+            this.labetePrivacyPerf = null;
+            this.deleteCookies(category);
+          } else {
+            this.labetePrivacyPerf = true;
           }
+        } else if (category === 'LABETE_PRIVACY_PERSO') {
+          if (this.labetePrivacyPerso) {
+            this.labetePrivacyPerso = null;
+            this.deleteCookies(category);
+          } else {
+            this.labetePrivacyPerso = true;
+          }
+        }
       },
       save() {
-        this.$cookies.set('labete_cookie_seen', true, { maxAge: 365 * 24 * 60 * 60 });
+        this.labeteCookieSeen = true;
         this.forcePageReload();
       },
-      checkCookie(cookie) {
-        return this.$cookies.get(cookie) || false;
-      },
       deleteCookies(category) {
-        const cookies = {
-          LABETE_PRIVACY_PERF: ['_ga', '_gid', '_gat'],
-          LABETE_PRIVACY_PERSO: ['i18n_redirected', 'labete_newsletter', 'labete_cookie_seen']
+        if (category === 'LABETE_PRIVACY_PERF') {
+          this.cookieGa = null;
+          this.cookieGid = null;
+          this.cookieGat = null;
+        } else if (category === 'LABETE_PRIVACY_PERSO') {
+          this.cookieI18n = null;
+          this.cookieNewsletter = null;
+          this.cookieSeen = null;
         }
-
-        cookies && cookies[category].forEach((cookieName) => {
-          this.$cookies.remove(cookieName);
-        });
       }
-    },
-    components: {
-      CustomButton,
     },
   }
 </script>
