@@ -57,16 +57,21 @@ const { $swell } = useNuxtApp()
 const productStore = useProductStore()
 
 const { data: product } = useAsyncData(`product-${route.params.slug}`, async () => {
-  const p = await $swell.products.get(route.params.slug, {
-    expand: ['cross_sells', 'up_sells']
-  })
+  try {
+    const p = await $swell.products.get(route.params.slug, {
+      expand: ['cross_sells', 'up_sells']
+    })
 
-  if (p) {
-    const upSells = p.up_sells && p.up_sells.length > 0 ? p.up_sells : null
-    await productStore.fetchProductsBySlugs(upSells)
+    if (p) {
+      const upSells = p.up_sells && p.up_sells.length > 0 ? p.up_sells : null
+      await productStore.fetchProductsBySlugs(upSells)
+    }
+
+    return p || null
+  } catch (err) {
+    console.error('[product] Failed to fetch product:', err?.message || String(err))
+    return null
   }
-
-  return p || null
 })
 
 useHead(computed(() => ({

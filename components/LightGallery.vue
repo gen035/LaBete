@@ -11,6 +11,7 @@ const emit = defineEmits(['close'])
 let lightbox = null
 
 const openAt = async (idx) => {
+  await import('glightbox/dist/css/glightbox.min.css')
   const { default: GLightbox } = await import('glightbox')
   if (lightbox) lightbox.destroy()
   lightbox = GLightbox({
