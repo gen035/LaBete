@@ -84,6 +84,10 @@ export default defineNuxtConfig({
     },
   },
 
+  nitro: {
+    preset: 'vercel',
+  },
+
   runtimeConfig: {
     public: {
       swellPublicKey: process.env.SWELL_PUBLIC_KEY,
