@@ -1,6 +1,7 @@
 <template>
   <div
-    :class="`event ${isOdd}`">
+    :class="['event', isOdd]"
+    :data-event="eventSlug">
     <div
       class="event-image"
       :style="`background-image: url('${event.image.url}')`">
@@ -78,6 +79,14 @@
       }
     },
     computed: {
+      eventSlug() {
+        return this.event.name[0].text
+          .normalize('NFD')
+          .replace(/[\u0300-\u036f]/g, '')
+          .toLowerCase()
+          .replace(/[^a-z0-9]+/g, '-')
+          .replace(/^-|-$/g, '');
+      },
       isOdd() {
         if (this.index % 2 === 1) {
           return 'flex-row-reverse';

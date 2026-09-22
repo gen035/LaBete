@@ -11,10 +11,11 @@
   opacity: .8;
 }
 .event-content {
+  flex: 1 1 40%;
   width: 100%;
   @media (min-width: 992px) {
     min-height: 300px;
-    width: 40%;
+    width: auto;
   }
 }
 .event-content > div {
@@ -22,12 +23,12 @@
   width: 100%;
 }
 .event-image {
+  aspect-ratio: 1100 / 600;
   background-position: center;
   background-size: 100% auto;
-  min-height: 200px;
   width: 100%;
   @media (min-width: 992px) {
-    width: 60%;
+    flex: 0 0 60%;
   }
 }
 .event-image a {
@@ -55,6 +56,11 @@
   }
   p {
     margin: 3px 0;
+  }
+
+  h2 {
+    font-weight: 600;
+    font-size: 24px;
   }
 }
 .event-links {
