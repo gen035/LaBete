@@ -1,10 +1,13 @@
+import { fileURLToPath } from 'node:url'
 import { defineConfig } from 'vitest/config'
+
+const root = fileURLToPath(new URL('./', import.meta.url))
 
 export default defineConfig({
   resolve: {
     alias: {
-      '~': '/Users/gen035/src/LaBete',
-      '@': '/Users/gen035/src/LaBete',
+      '~': root,
+      '@': root,
     },
   },
   test: {
