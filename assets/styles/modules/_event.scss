@@ -3,6 +3,8 @@
   display: block;
   margin-bottom: 32px;
   transition: opacity 250ms ease-in;
+  border-radius: 10px;
+  overflow: hidden;
   @media (min-width: 992px) {
     display: flex;
   }
