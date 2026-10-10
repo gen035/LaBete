@@ -25,6 +25,12 @@
       position: absolute;
       inset: 0;
 
+      iframe {
+        border-radius: 10px;
+        border: 1px solid $gold;
+        box-shadow: 5px 5px 20px 5px rgba(0,0,0,0.3);
+      }
+
       :deep(iframe) {
         width: 100%;
         height: 100%;
