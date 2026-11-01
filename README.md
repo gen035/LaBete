@@ -20,6 +20,16 @@ yarn install
 bun install
 ```
 
+## Branching workflow
+
+Feature branches start from `staging`:
+
+```bash
+git switch --create <feature-name> staging
+```
+
+Open feature pull requests against `staging`, and merge only completed and validated feature work into `staging`. After staging validation, promote `staging` → `master` through a pull request. Never target feature branches directly at `master`.
+
 ## Development Server
 
 Start the development server on `http://localhost:3000`:
