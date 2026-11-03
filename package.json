@@ -39,6 +39,7 @@
   },
   "devDependencies": {
     "@nuxt/test-utils": "^3.23.0",
+    "@vitejs/plugin-vue": "^6.0.9",
     "happy-dom": "^20.14.6",
     "postcss": "^8.5.29",
     "postcss-scss": "^4.0.9",

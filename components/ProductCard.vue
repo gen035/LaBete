@@ -18,7 +18,7 @@
           <span>{{$t('product.sold')}}</span>
         </div>
       </div>
-      <AddToCart :product="product" />
+      <AddToCart v-if="product.preview_only !== true" :product="product" />
     </div>
   </client-only>
 </template>

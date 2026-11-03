@@ -88,9 +88,11 @@ export default defineNuxtConfig({
   },
 
   runtimeConfig: {
+    swellSecretKey: process.env.SWELL_SECRET_KEY,
     public: {
       swellPublicKey: process.env.SWELL_PUBLIC_KEY,
       swellStoreId:   process.env.SWELL_STORE_ID,
+      swellPreview:   process.env.VERCEL_ENV !== 'production',
     },
   },
 })
