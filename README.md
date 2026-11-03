@@ -20,6 +20,15 @@ yarn install
 bun install
 ```
 
+## Swell product sourcing
+
+Non-production deployments can read inactive and published Swell products together through the server-side Backend API. Configure these variables in every non-production deployment:
+
+- `SWELL_STORE_ID` and `SWELL_PUBLIC_KEY` for the existing storefront client.
+- `SWELL_SECRET_KEY` for authenticated Backend API reads.
+
+The Backend API path is enabled automatically when `VERCEL_ENV` is not `production`. Production deployments use Swell's public Frontend API and only published products are returned; the secret is never included in public runtime configuration.
+
 ## Branching workflow
 
 Feature branches start from `staging`:
