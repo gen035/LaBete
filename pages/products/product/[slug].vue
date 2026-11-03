@@ -25,7 +25,7 @@
               <span>{{product.price}}$</span>
               <s>{{product.orig_price}}$</s>
             </div>
-            <AddToCart v-if="product && product.stock_level > 0" :product="product" />
+            <AddToCart v-if="product && product.stock_level > 0 && product.preview_only !== true" :product="product" />
           </div>
         </div>
         <div class="row" v-if="getProductRecommended && getProductRecommended.length > 0">
@@ -51,17 +51,21 @@ defineI18nRoute({
 })
 
 const route = useRoute()
-const { $swell } = useNuxtApp()
+const productApi = useProductApi()
 const productStore = useProductStore()
 
 const { data: product } = useAsyncData(`product-${route.params.slug}`, async () => {
   try {
-    const p = await $swell.products.get(route.params.slug, {
+    const p = await productApi.get(route.params.slug, {
       expand: ['cross_sells', 'up_sells']
     })
 
     if (p) {
-      const upSells = p.up_sells && p.up_sells.length > 0 ? p.up_sells : null
+      const upSells = Array.isArray(p.up_sells)
+        ? p.up_sells.filter(item =>
+          typeof item === 'object' && item !== null && !Array.isArray(item),
+        )
+        : []
       await productStore.fetchProductsBySlugs(upSells)
     }
 

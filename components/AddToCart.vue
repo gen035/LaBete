@@ -23,7 +23,11 @@ export default {
   },
   methods: {
     async addToCart() {
-      await this.cartStore.addCartItem({ product_id: this.product.id, quantity: 1 })
+      await this.cartStore.addCartItem({
+        product_id: this.product.id,
+        quantity: 1,
+        preview_only: this.product.preview_only === true
+      })
     }
   }
 }

@@ -97,8 +97,8 @@ defineI18nRoute({
 })
 
 const { $prismic } = useNuxtApp()
-const { $swell } = useNuxtApp()
 const { locale } = useI18n()
+const productApi = useProductApi()
 
 const { data: pageData } = useAsyncData(`home-${locale.value}`, async () => {
   try {
@@ -156,7 +156,7 @@ const { data: pageData } = useAsyncData(`home-${locale.value}`, async () => {
 })
 
 const { data: productsResults } = useAsyncData('home-products', async () => {
-  const res = await $swell.products.list({ limit: 4, sort: 'date_created desc', categories: 'featured' })
+  const res = await productApi.list({ limit: 4, sort: 'date_created desc', categories: 'featured' })
   return res?.results ?? []
 })
 

@@ -49,8 +49,9 @@ defineI18nRoute({
   }
 })
 
-const { $prismic, $swell } = useNuxtApp()
+const { $prismic } = useNuxtApp()
 const { locale } = useI18n()
+const productApi = useProductApi()
 
 const { data: pageData } = useAsyncData('products-index', async () => {
   try {
@@ -90,7 +91,7 @@ const setProgress = (amount, total) => {
 }
 
 const fetchProducts = async () => {
-  products.value = await $swell.products.list({
+  products.value = await productApi.list({
     limit: 24,
     sort: 'date_created desc',
     page: products.value && products.value.page + 1 || 1
