@@ -4,7 +4,7 @@
       <div role="button" :aria-label="product?.name" class="product-card-wrapper" @click="goTo">
         <div v-if="product.sale && this.in_stock" class="product-card-sale">{{$t('product.sale')}}</div>
         <div class="product-card-image">
-          <v-lazy-image :src="product.images[0].file.url" src-placeholder="/product_placeholder.jpg"/>
+          <v-lazy-image :src="product.images?.[0]?.file?.url || '/product_placeholder.jpg'" src-placeholder="/product_placeholder.jpg"/>
           <img v-if="$i18n.locale === 'fr'" src="~/assets/images/quebec_fr.png" class="product-card-quebec" />
           <img v-if="$i18n.locale === 'en'" src="~/assets/images/quebec_en.png" class="product-card-quebec" />
         </div>
@@ -18,7 +18,7 @@
           <span>{{$t('product.sold')}}</span>
         </div>
       </div>
-      <AddToCart :product="product" />
+      <AddToCart v-if="product.preview_only !== true" :product="product" />
     </div>
   </client-only>
 </template>

@@ -21,14 +21,14 @@ export const useCartStore = defineStore('cart', {
     setNotification(n: any)         { this.notification = n },
 
     async checkCartItemHasStock({ item, id }: { item?: any; id?: string }) {
-      const { $swell } = useNuxtApp()
+      const productApi = useProductApi()
       const items = this.cart?.items
       let cartItem: any
       let product: any
       const quantityToAdd = item ? item.quantity : 1
 
-      if (item)     product = await $swell.products.get(item.productId)
-      else if (id)  product = await $swell.products.get(id)
+      if (item)     product = await productApi.get(item.productId)
+      else if (id)  product = await productApi.get(id)
 
       if (!product) throw new Error('Product in cart could not be found.')
 
@@ -52,9 +52,13 @@ export const useCartStore = defineStore('cart', {
     },
 
     async addCartItem(item: any) {
+      if (item?.preview_only === true) {
+        this.setNotification({ show: true, type: 'danger', dismissible: true, text: 'cart.unavailable' })
+        return
+      }
+
       const { $swell } = useNuxtApp()
       if (this.isUpdating) return
-
       if (this.cart?.items?.some((ci: any) => ci.product_id === item.product_id)) {
         this.setNotification({ show: true, type: 'danger', dismissible: true, text: 'cart.already' })
         return

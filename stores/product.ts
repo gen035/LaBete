@@ -1,29 +1,43 @@
 import { defineStore } from 'pinia'
+import { useProductApi, type ProductRecord } from '~/composables/useProductApi'
 
-declare function useNuxtApp(): any
+type RecommendationRef = {
+  product_id?: string
+}
 
 export const useProductStore = defineStore('product', {
   state: () => ({
-    recommended: null as any[] | null,
-    error:       null as any,
+    recommended: null as ProductRecord[] | null,
+    error:       null as unknown,
   }),
 
   actions: {
-    setRecommended(products: any[] | null) { this.recommended = products },
+    setRecommended(products: ProductRecord[] | null) { this.recommended = products },
 
-    async fetchProductsBySlugs(products: any[]) {
-      const { $swell } = useNuxtApp()
+    async fetchProductsBySlugs(products: RecommendationRef[]) {
+      const productApi = useProductApi()
       if (!Array.isArray(products) || products.length === 0) {
         this.setRecommended(null)
         return
       }
 
       try {
-        const ids = products.map(({ product_id }: any) => product_id).filter(Boolean)
+        const ids = products
+          .map(product => product.product_id)
+          .filter((id): id is string => Boolean(id))
         const fetched = await Promise.all(
-          ids.map(async (id: string) => {
+          ids.map(async (id): Promise<ProductRecord | null> => {
             try {
-              return await $swell.products.get({ where: { id } })
+              const response = await productApi.get(id)
+              if (!response) return null
+              const results = response.results
+              if (Array.isArray(results)) {
+                const first = results[0]
+                return first && typeof first === 'object' && !Array.isArray(first)
+                  ? first as ProductRecord
+                  : null
+              }
+              return response
             } catch {
               return null
             }
@@ -31,9 +45,9 @@ export const useProductStore = defineStore('product', {
         )
 
         const valid = fetched
-          .filter((p: any) => p?.results?.length > 0)
-          .map((p: any) => p.results[0])
-          .filter((p: any) => p.stock_level > 0)
+          .filter((product): product is ProductRecord =>
+            product !== null && typeof product.stock_level === 'number' && product.stock_level > 0,
+          )
           .slice(0, 3)
 
         this.setRecommended(valid)
