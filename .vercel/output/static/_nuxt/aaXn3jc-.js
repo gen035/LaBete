@@ -1,0 +1,1 @@
+var e=(e,t=` `)=>{let n=``;for(let r=0;r<e.length;r++)`text`in e[r]&&(n+=(n?t:``)+e[r].text);return n},t=(t,...n)=>{if(t){let[r]=n,i;return i=typeof r==`string`?{separator:r}:{...r},e(t,i.separator)}return null};export{t};
