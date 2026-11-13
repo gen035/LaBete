@@ -1,1 +1,0 @@
-async function e({store:e,$swell:t}){let n=await t.attributes.list();n=n&&n.results&&n.results.length>0?n.results:[];let r=n.filter(e=>e.filterable);console.log(r),e.commit(`SET_ATTRIBUTES`,r)}export{e as default};

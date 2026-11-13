@@ -92,3 +92,5 @@ bun run preview
 ```
 
 Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+
+For Vercel deployments, the Nitro server build inlines `unhead` so the serverless function does not depend on runtime package installation.
