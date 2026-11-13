@@ -1,7 +1,7 @@
 import { defineProdDiagnostics } from 'nostics';
 import { ansiFormatter } from 'nostics/formatters/ansi';
 import { createApp, provide, onErrorCaptured, onServerPrefetch, unref, createVNode, resolveDynamicComponent, shallowReactive, reactive, effectScope, hasInjectionContext, getCurrentInstance, inject, mergeProps, getCurrentScope, toRef, shallowRef, isReadonly, defineComponent, createElementBlock, cloneVNode, h, toRaw, onScopeDispose, defineAsyncComponent, computed, ref, useSSRContext, isRef, isShallow, isReactive, Fragment, watch, isVNode, createCommentVNode, withCtx, resolveComponent, customRef, shallowReadonly, Suspense, nextTick, watchEffect, toValue, queuePostFlushCb, Text } from 'vue';
-import { f as createError, $ as $fetch$1, B as baseURL, t as joinURL, C as getRequestURL, D as klona, E as defu, F as withQuery, G as sanitizeStatusCode, H as parseURL, I as decodePath, J as getRequestHeader, K as getCookie, L as hasProtocol, M as isEqual, O as withBase, P as splitCookiesString, Q as getResponseHeader, R as setCookie, S as deleteCookie, T as createDefu, U as parsePath, V as parseQuery, W as withTrailingSlash, X as withoutTrailingSlash, Y as isScriptProtocol, Z as isEqual$1 } from '../nitro/nitro.mjs';
+import { c as createError, $ as $fetch$1, G as baseURL, A as joinURL, H as getRequestURL, I as klona, J as defu, K as withQuery, L as sanitizeStatusCode, M as parseURL, O as decodePath, P as getRequestHeader, Q as getCookie, R as hasProtocol, S as isEqual, T as withBase, U as splitCookiesString, V as getResponseHeader, W as setCookie, X as deleteCookie, Y as createDefu, Z as parsePath, _ as parseQuery, a0 as withTrailingSlash, a1 as withoutTrailingSlash, a2 as isScriptProtocol, a3 as isEqual$1 } from '../nitro/nitro.mjs';
 import { FlatMetaPlugin } from 'unhead/plugins';
 import { walkResolver, hasOwn } from 'unhead/utils';
 import { defineStore, setActivePinia, createPinia, shouldHydrate } from 'pinia';
@@ -966,6 +966,7 @@ var _showErrorUnlessCrawler = async (nuxtApp, error) => {
 //#endregion
 //#region virtual:nuxt:node_modules%2F.cache%2Fnuxt%2F.nuxt%2Ffetch.mjs
 if (!globalThis.$fetch) globalThis.$fetch = $fetch$1.create({ baseURL: baseURL() });
+var $fetch$2 = globalThis.$fetch;
 //#endregion
 //#region virtual:nuxt:node_modules%2F.cache%2Fnuxt%2F.nuxt%2Fglobal-polyfills.mjs
 if (!("global" in globalThis)) globalThis.global = globalThis;
@@ -1323,162 +1324,162 @@ var virtual_nuxt_node_modules_2F_cache_2Fnuxt_2F_nuxt_2Froutes_default = [
 	{
 		name: "products-product-slug___en",
 		path: "/en/products/product/:slug()",
-		component: () => import('../build/_slug_-BdTHIcfY.mjs')
+		component: () => import('../build/_slug_-yDM6LSbD.mjs')
 	},
 	{
 		name: "products-product-slug___fr",
 		path: "/produits/produit/:slug()",
-		component: () => import('../build/_slug_-BdTHIcfY.mjs')
+		component: () => import('../build/_slug_-yDM6LSbD.mjs')
 	},
 	{
 		name: "blog-slug___en",
 		path: "/en/blog/:slug()",
-		component: () => import('../build/_slug_-Cf1VmGKW.mjs')
+		component: () => import('../build/_slug_-jYZ3zjRF.mjs')
 	},
 	{
 		name: "blog-slug___fr",
 		path: "/blogue/:slug()",
-		component: () => import('../build/_slug_-Cf1VmGKW.mjs')
+		component: () => import('../build/_slug_-jYZ3zjRF.mjs')
 	},
 	{
 		name: "products-slug___en",
 		path: "/en/products/:category()",
-		component: () => import('../build/_slug_-Dd9cYiho.mjs')
+		component: () => import('../build/_slug_-DVl_FtJ3.mjs')
 	},
 	{
 		name: "products-slug___fr",
 		path: "/produits/:category()",
-		component: () => import('../build/_slug_-Dd9cYiho.mjs')
+		component: () => import('../build/_slug_-DVl_FtJ3.mjs')
 	},
 	{
 		name: "artist___en",
 		path: "/en/artist",
-		component: () => import('../build/artist-DzNuN__y.mjs')
+		component: () => import('../build/artist-DbYM2bQL.mjs')
 	},
 	{
 		name: "artist___fr",
 		path: "/artiste",
-		component: () => import('../build/artist-DzNuN__y.mjs')
+		component: () => import('../build/artist-DbYM2bQL.mjs')
 	},
 	{
 		name: "blog___en",
 		path: "/en/blog",
-		component: () => import('../build/blog-BW_aqxRA.mjs')
+		component: () => import('../build/blog-D9gAWoPp.mjs')
 	},
 	{
 		name: "blog___fr",
 		path: "/blogue",
-		component: () => import('../build/blog-BW_aqxRA.mjs')
+		component: () => import('../build/blog-D9gAWoPp.mjs')
 	},
 	{
 		name: "brand___en",
 		path: "/en/brand",
-		component: () => import('../build/brand-CsBOvtmH.mjs')
+		component: () => import('../build/brand-B24NAtik.mjs')
 	},
 	{
 		name: "brand___fr",
 		path: "/marque",
-		component: () => import('../build/brand-CsBOvtmH.mjs')
+		component: () => import('../build/brand-B24NAtik.mjs')
 	},
 	{
 		name: "contact___en",
 		path: "/en/contact",
-		component: () => import('../build/contact-CI5rWj_Q.mjs')
+		component: () => import('../build/contact-efcuGg3Y.mjs')
 	},
 	{
 		name: "contact___fr",
 		path: "/contact",
-		component: () => import('../build/contact-CI5rWj_Q.mjs')
+		component: () => import('../build/contact-efcuGg3Y.mjs')
 	},
 	{
 		name: "cookie-policy___en",
 		path: "/en/cookie-policy",
-		component: () => import('../build/cookie-policy-D3piAlGp.mjs')
+		component: () => import('../build/cookie-policy-CXQosuyJ.mjs')
 	},
 	{
 		name: "cookie-policy___fr",
 		path: "/politique-cookie",
-		component: () => import('../build/cookie-policy-D3piAlGp.mjs')
+		component: () => import('../build/cookie-policy-CXQosuyJ.mjs')
 	},
 	{
 		name: "creations___en",
 		path: "/en/our-creations",
-		component: () => import('../build/creations-BI-YuCrJ.mjs')
+		component: () => import('../build/creations-CLkYCYbP.mjs')
 	},
 	{
 		name: "creations___fr",
 		path: "/nos-creations",
-		component: () => import('../build/creations-BI-YuCrJ.mjs')
+		component: () => import('../build/creations-CLkYCYbP.mjs')
 	},
 	{
 		name: "events___en",
 		path: "/en/events",
-		component: () => import('../build/events-BWH7QJwh.mjs')
+		component: () => import('../build/events-GQF31qNm.mjs')
 	},
 	{
 		name: "events___fr",
 		path: "/evenements",
-		component: () => import('../build/events-BWH7QJwh.mjs')
+		component: () => import('../build/events-GQF31qNm.mjs')
 	},
 	{
 		name: "glossary___en",
 		path: "/en/glossary",
-		component: () => import('../build/glossary-DIAWoX5y.mjs')
+		component: () => import('../build/glossary-BIB9_a76.mjs')
 	},
 	{
 		name: "glossary___fr",
 		path: "/glossaire",
-		component: () => import('../build/glossary-DIAWoX5y.mjs')
+		component: () => import('../build/glossary-BIB9_a76.mjs')
 	},
 	{
 		name: "privacy-policy___en",
 		path: "/en/privacy-policy",
-		component: () => import('../build/privacy-policy-DY5Ivdzf.mjs')
+		component: () => import('../build/privacy-policy-BTnE7Ms_.mjs')
 	},
 	{
 		name: "privacy-policy___fr",
 		path: "/politique-confidentialite",
-		component: () => import('../build/privacy-policy-DY5Ivdzf.mjs')
+		component: () => import('../build/privacy-policy-BTnE7Ms_.mjs')
 	},
 	{
 		name: "products___en",
 		path: "/en/products",
-		component: () => import('../build/products-U0Uyd_S_.mjs')
+		component: () => import('../build/products-DUHD1qM0.mjs')
 	},
 	{
 		name: "products___fr",
 		path: "/produits",
-		component: () => import('../build/products-U0Uyd_S_.mjs')
+		component: () => import('../build/products-DUHD1qM0.mjs')
 	},
 	{
 		name: "return___en",
 		path: "/en/return-policy",
-		component: () => import('../build/return-CHxgQJHS.mjs')
+		component: () => import('../build/return-Cl4Tnizf.mjs')
 	},
 	{
 		name: "return___fr",
 		path: "/politique-retour",
-		component: () => import('../build/return-CHxgQJHS.mjs')
+		component: () => import('../build/return-Cl4Tnizf.mjs')
 	},
 	{
 		name: "videos___en",
 		path: "/en/videos",
-		component: () => import('../build/videos-DFkA1KEz.mjs')
+		component: () => import('../build/videos-DHEOD8GS.mjs')
 	},
 	{
 		name: "videos___fr",
 		path: "/videos",
-		component: () => import('../build/videos-DFkA1KEz.mjs')
+		component: () => import('../build/videos-DHEOD8GS.mjs')
 	},
 	{
 		name: "index___en",
 		path: "/en",
-		component: () => import('../build/pages-Gnpvmwgl.mjs')
+		component: () => import('../build/pages-iulYuITr.mjs')
 	},
 	{
 		name: "index___fr",
 		path: "/",
-		component: () => import('../build/pages-Gnpvmwgl.mjs')
+		component: () => import('../build/pages-iulYuITr.mjs')
 	}
 ];
 //#endregion
@@ -7487,7 +7488,7 @@ var NuxtLoadingIndicator = defineComponent({
 });
 //#endregion
 //#region virtual:nuxt:node_modules%2F.cache%2Fnuxt%2F.nuxt%2Flayouts.mjs
-var virtual_nuxt_node_modules_2F_cache_2Fnuxt_2F_nuxt_2Flayouts_default = { default: defineAsyncComponent(() => import('../build/default-QCYbKBR_.mjs').then((m) => m.default || m)) };
+var virtual_nuxt_node_modules_2F_cache_2Fnuxt_2F_nuxt_2Flayouts_default = { default: defineAsyncComponent(() => import('../build/default-COWMgQRu.mjs').then((m) => m.default || m)) };
 //#endregion
 //#region node_modules/nuxt/dist/app/components/nuxt-layout.js
 var LayoutLoader = defineComponent({
@@ -7921,5 +7922,5 @@ const entry = /*#__PURE__*/Object.freeze(/*#__PURE__*/Object.defineProperty({
 	default: entry_default
 }, Symbol.toStringTag, { value: 'Module' }));
 
-export { ClientOnly as C, Media_default as M, NuxtLink as N, _plugin_vue_export_helper_default as _, useNuxtApp as a, useAsyncData as b, useHead as c, useI18n as d, useMainStore as e, useRouter as f, useSeoMeta as g, useLocalePath as h, useSwitchLocalePath as i, useCookie as j, entry as k, useRoute$1 as u };
+export { $fetch$2 as $, ClientOnly as C, Media_default as M, NuxtLink as N, _plugin_vue_export_helper_default as _, useAsyncData as a, useHead as b, useNuxtApp as c, useI18n as d, useMainStore as e, useRouter as f, useSeoMeta as g, useLocalePath as h, useSwitchLocalePath as i, useCookie as j, useRuntimeConfig as k, entry as l, useRoute$1 as u };
 //# sourceMappingURL=entry.mjs.map

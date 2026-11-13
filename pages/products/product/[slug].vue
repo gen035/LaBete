@@ -5,7 +5,7 @@
           <div class="col-md-6 col-lg-5 col-xl-4 col-xxl-3 offset-lg-1 offset-xl-2 offset-xxl-3 product-slider">
             <Carousel v-if="product && product.images && product.images.length > 0" :wrap-around="true" :autoplay="product.images.length > 1 ? 2000 : 0" :pause-autoplay-on-hover="true" :items-to-show="1">
               <Slide v-for="(image, index) in product.images" :key="index">
-                <v-lazy-image :src="image.file.url" :alt="`${product.name} - ${index}`" src-placeholder="/product_placeholder.jpg"/>
+                <v-lazy-image :src="withSwellImageWidth(image.file.url, 750)" :alt="`${product.name} - ${index}`" src-placeholder="/product_placeholder.jpg"/>
               </Slide>
               <template v-if="product.images.length > 1" #addons>
                 <Pagination />
@@ -39,8 +39,8 @@
 </template>
 
 <script setup>
+import { withSwellImageWidth } from '~/utils/swellImage'
 import VLazyImage from 'v-lazy-image'
-import { Carousel, Slide, Pagination } from 'vue3-carousel'
 import 'vue3-carousel/dist/carousel.css'
 
 defineI18nRoute({

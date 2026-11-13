@@ -260,7 +260,7 @@ function withQuery(input, query) {
   parsed.search = stringifyQuery(mergedQuery);
   return stringifyParsedURL(parsed);
 }
-function getQuery(input) {
+function getQuery$1(input) {
   return parseQuery(parseURL(input).search);
 }
 function isEmptyURL(url) {
@@ -1013,6 +1013,10 @@ function sendError(event, error, debug) {
 }
 function isError(input) {
   return input?.constructor?.__h3_error__ === true;
+}
+
+function getQuery(event) {
+  return getQuery$1(event.path || "");
 }
 function getRouterParams(event, opts = {}) {
   let params = event.context.params || {};
@@ -4493,7 +4497,7 @@ function _expandFromEnv(value) {
 const _inlineRuntimeConfig = {
   "app": {
     "baseURL": "/",
-    "buildId": "48665990-605c-42a8-af71-c611c9286ed5",
+    "buildId": "c57b8e53-1ddd-47b9-853d-20f758bab896",
     "buildAssetsDir": "/_nuxt/",
     "cdnURL": ""
   },
@@ -4525,6 +4529,7 @@ const _inlineRuntimeConfig = {
   "public": {
     "swellPublicKey": "pk_zwh3HYYJbF9iNE90yZ6fGJS4IYSaovx3",
     "swellStoreId": "la-bte-crations-dapparat",
+    "swellPreview": true,
     "prismic": {
       "endpoint": "labete",
       "environment": "",
@@ -4588,7 +4593,8 @@ const _inlineRuntimeConfig = {
         }
       }
     }
-  }
+  },
+  "swellSecretKey": "G7oiQ5LCWBpkyCQYMpoZdV8ot58f9Afw"
 };
 const envOptions = {
   prefix: "NITRO_",
@@ -4771,7 +4777,7 @@ function createRouteRulesHandler(ctx) {
         }
         target = joinURL(target.slice(0, -3), targetPath);
       } else if (event.path.includes("?")) {
-        const query = getQuery(event.path);
+        const query = getQuery$1(event.path);
         target = withQuery(target, query);
       }
       return sendRedirect(event, target, routeRules.redirect.statusCode);
@@ -4791,7 +4797,7 @@ function createRouteRulesHandler(ctx) {
         }
         target = joinURL(target.slice(0, -3), targetPath);
       } else if (event.path.includes("?")) {
-        const query = getQuery(event.path);
+        const query = getQuery$1(event.path);
         target = withQuery(target, query);
       }
       return proxyRequest(event, target, {
@@ -6796,6 +6802,85 @@ function createPathIndexLanguageParser(index = 0) {
   };
 }
 
+const SWELL_BACKEND_URL = "https://api.swell.store";
+const SWELL_PRODUCT_EXPAND = "cross_sells,up_sells";
+function isRecord(value) {
+  return typeof value === "object" && value !== null && !Array.isArray(value);
+}
+function requireBackendCredentials(config) {
+  var _a;
+  if (!((_a = config.public) == null ? void 0 : _a.swellStoreId) || !config.swellSecretKey) {
+    throw createError$1({
+      statusCode: 503,
+      statusMessage: "Non-production product access requires Swell backend credentials"
+    });
+  }
+}
+function assertSwellBackendEnabled(config) {
+  var _a;
+  if (((_a = config.public) == null ? void 0 : _a.swellPreview) !== true) {
+    throw createError$1({
+      statusCode: 404,
+      statusMessage: "Non-production product access is disabled"
+    });
+  }
+}
+function backendHeaders(config) {
+  requireBackendCredentials(config);
+  const credentials = `${config.public.swellStoreId}:${config.swellSecretKey}`;
+  return {
+    Authorization: `Basic ${Buffer.from(credentials).toString("base64")}`
+  };
+}
+async function backendRequest(path, config, query) {
+  const headers = backendHeaders(config);
+  try {
+    return await $fetch$1(`${SWELL_BACKEND_URL}${path}`, {
+      headers,
+      query
+    });
+  } catch (error) {
+    const message = error instanceof Error ? error.message : "Unknown Swell error";
+    throw createError$1({
+      statusCode: 502,
+      statusMessage: `Swell Backend API request failed: ${message}`
+    });
+  }
+}
+function normalizeSwellProduct(product) {
+  if (!isRecord(product)) return null;
+  return {
+    ...product,
+    preview_only: product.active === false
+  };
+}
+function normalizeSwellProductList(response) {
+  const responseObject = isRecord(response) ? response : {};
+  const products = Array.isArray(responseObject.results) ? responseObject.results.map(normalizeSwellProduct).filter((product) => product !== null) : [];
+  const normalized = { results: products };
+  if (typeof responseObject.count === "number") normalized.count = responseObject.count;
+  if (typeof responseObject.page === "number") normalized.page = responseObject.page;
+  if (typeof responseObject.page_count === "number") normalized.page_count = responseObject.page_count;
+  return normalized;
+}
+async function listSwellProducts(query, config) {
+  const response = await backendRequest("/products", config, {
+    limit: query.limit,
+    page: query.page,
+    sort: query.sort,
+    ...query.categories ? { categories: query.categories } : {}
+  });
+  return normalizeSwellProductList(response);
+}
+async function getSwellProduct(identifier, config) {
+  const product = await backendRequest(
+    `/products/${encodeURIComponent(identifier)}`,
+    config,
+    { expand: SWELL_PRODUCT_EXPAND }
+  );
+  return normalizeSwellProduct(product);
+}
+
 function useRuntimeI18n(nuxtApp, event) {
   {
     const getRuntimeConfig = useRuntimeConfig;
@@ -7477,9 +7562,13 @@ const _Xg5BpR = _messagesHandlerCached;
 
 const _SxA8c9 = defineEventHandler(() => {});
 
+const _lazy__wCQTl = () => import('../routes/api/products/_slug_.get.mjs');
+const _lazy_wLUf3z = () => import('../routes/api/index.get.mjs');
 const _lazy_aIDp_4 = () => import('../routes/renderer.mjs');
 
 const handlers = [
+  { route: '/api/products/:slug', handler: _lazy__wCQTl, lazy: true, middleware: false, method: "get" },
+  { route: '/api/products', handler: _lazy_wLUf3z, lazy: true, middleware: false, method: "get" },
   { route: '/__nuxt_error', handler: _lazy_aIDp_4, lazy: true, middleware: false, method: undefined },
   { route: '/_i18n/:hash/:locale/messages.json', handler: _Xg5BpR, lazy: false, middleware: false, method: undefined },
   { route: '/__nuxt_island/**', handler: _SxA8c9, lazy: false, middleware: false, method: undefined },
@@ -7659,5 +7748,5 @@ const listener = function(req, res) {
   return handler(req, res);
 };
 
-export { $fetch$1 as $, setResponseHeader as A, baseURL as B, getRequestURL as C, klona as D, defu as E, withQuery as F, sanitizeStatusCode as G, parseURL as H, decodePath as I, getRequestHeader as J, getCookie as K, hasProtocol as L, isEqual as M, NUXT_PRERENDER_NO_SSR_ROUTES as N, withBase as O, splitCookiesString as P, getResponseHeader as Q, setCookie as R, deleteCookie as S, createDefu as T, parsePath as U, parseQuery as V, withTrailingSlash as W, withoutTrailingSlash as X, isScriptProtocol as Y, isEqual$1 as Z, listener as _, appRootTag as a, appRootAttrs as b, appSpaLoaderTag as c, appSpaLoaderAttrs as d, buildAssetsURL as e, createError$1 as f, getRouteRules as g, useRuntimeConfig as h, createHead as i, unheadOptions as j, appId as k, getQuery as l, appHead as m, destr as n, NUXT_SSR_STREAMING as o, publicAssetsURL as p, appTeleportAttrs as q, renderSSRHeadOptions as r, NUXT_NO_SCRIPTS_PATTERNS as s, joinURL as t, useNitroApp as u, appTeleportTag as v, writeEarlyHints as w, NUXT_PAGE_PATTERNS as x, defineRenderHandler as y, toRequestEvent as z };
+export { $fetch$1 as $, joinURL as A, appTeleportTag as B, NUXT_PAGE_PATTERNS as C, defineRenderHandler as D, toRequestEvent as E, setResponseHeader as F, baseURL as G, getRequestURL as H, klona as I, defu as J, withQuery as K, sanitizeStatusCode as L, parseURL as M, NUXT_PRERENDER_NO_SSR_ROUTES as N, decodePath as O, getRequestHeader as P, getCookie as Q, hasProtocol as R, isEqual as S, withBase as T, splitCookiesString as U, getResponseHeader as V, setCookie as W, deleteCookie as X, createDefu as Y, parsePath as Z, parseQuery as _, assertSwellBackendEnabled as a, withTrailingSlash as a0, withoutTrailingSlash as a1, isScriptProtocol as a2, isEqual$1 as a3, listener as a4, getQuery as b, createError$1 as c, defineEventHandler as d, appRootTag as e, appRootAttrs as f, getSwellProduct as g, appSpaLoaderTag as h, appSpaLoaderAttrs as i, buildAssetsURL as j, useNitroApp as k, listSwellProducts as l, getRouteRules as m, createHead as n, unheadOptions as o, publicAssetsURL as p, appId as q, getQuery$1 as r, appHead as s, destr as t, useRuntimeConfig as u, NUXT_SSR_STREAMING as v, writeEarlyHints as w, renderSSRHeadOptions as x, appTeleportAttrs as y, NUXT_NO_SCRIPTS_PATTERNS as z };
 //# sourceMappingURL=nitro.mjs.map
