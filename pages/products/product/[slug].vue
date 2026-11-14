@@ -39,6 +39,7 @@
 </template>
 
 <script setup>
+import { Carousel, Slide, Pagination } from 'vue3-carousel'
 import { withSwellImageWidth } from '~/utils/swellImage'
 import VLazyImage from 'v-lazy-image'
 import 'vue3-carousel/dist/carousel.css'
