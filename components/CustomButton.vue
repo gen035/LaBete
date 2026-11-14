@@ -1,5 +1,5 @@
 <template>
-  <button :arial-label="aria" :class="['button', {'button--disabled' : (this.disabled)}, `button--${size}`]" v-on:click="click">
+    <button :disabled="disabled" :arial-label="aria" :class="['button', {'button--disabled' : (this.disabled)}, `button--${size}`]" v-on:click="click">
     <p class="button-text">
       {{this.text}}
     </p>
