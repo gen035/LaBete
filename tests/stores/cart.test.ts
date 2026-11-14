@@ -53,14 +53,14 @@ describe('useCartStore', () => {
     expect(store.notification).toMatchObject({ show: true, text: 'cart.unavailable' })
   })
 
-  it('keeps the existing Swell path for active products', async () => {
+  it('omits preview-only metadata from the Swell cart payload', async () => {
     swell.settings.get.mockReturnValue(false)
     swell.cart.addItem.mockResolvedValue({ items: [], item_quantity: 1 })
     const store = useCartStore()
 
-    await store.addCartItem({ product_id: 'published-1', preview_only: false })
+    await store.addCartItem({ product_id: 'published-1', quantity: 1, preview_only: false })
 
-    expect(swell.cart.addItem).toHaveBeenCalledWith({ product_id: 'published-1', preview_only: false })
+    expect(swell.cart.addItem).toHaveBeenCalledWith({ product_id: 'published-1', quantity: 1 })
     expect(store.cart).toEqual({ items: [], item_quantity: 1 })
   })
 })
