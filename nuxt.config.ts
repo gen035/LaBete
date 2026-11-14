@@ -28,7 +28,7 @@ export default defineNuxtConfig({
         { rel: 'stylesheet', href: '/font-awesome/css/all.min.css' },
       ],
       script: [
-        ...(process.env.NODE_ENV === 'production' ? [
+        ...(process.env.VERCEL_ENV?.toLowerCase() === 'production' ? [
           { src: 'https://www.googletagmanager.com/gtag/js?id=G-TBQWHYP39H', async: true },
           { src: '/ga.js', async: true },
         ] : []),
@@ -95,7 +95,7 @@ export default defineNuxtConfig({
     public: {
       swellPublicKey: process.env.SWELL_PUBLIC_KEY,
       swellStoreId:   process.env.SWELL_STORE_ID,
-      swellPreview:   process.env.VERCEL_ENV !== 'production',
+      swellPreview:   process.env.VERCEL_ENV?.toLowerCase() !== 'production',
     },
   },
 })
