@@ -78,7 +78,8 @@ export const useCartStore = defineStore('cart', {
           }
         }
 
-        const cart = await $swell.cart.addItem(item)
+        const { preview_only: _previewOnly, ...cartItem } = item
+        const cart = await $swell.cart.addItem(cartItem)
         if (cart.errors) {
           this.setCartError(cart.errors)
         } else {
