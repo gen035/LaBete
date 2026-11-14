@@ -5,7 +5,7 @@
           <div class="col-md-6 col-lg-5 col-xl-4 col-xxl-3 offset-lg-1 offset-xl-2 offset-xxl-3 product-slider">
             <Carousel v-if="product && product.images && product.images.length > 0" :wrap-around="true" :autoplay="product.images.length > 1 ? 2000 : 0" :pause-autoplay-on-hover="true" :items-to-show="1">
               <Slide v-for="(image, index) in product.images" :key="index">
-                <v-lazy-image :src="image.file.url" :alt="`${product.name} - ${index}`" src-placeholder="/product_placeholder.jpg"/>
+                <v-lazy-image :src="withSwellImageWidth(image.file.url, 750)" :alt="`${product.name} - ${index}`" src-placeholder="/product_placeholder.jpg"/>
               </Slide>
               <template v-if="product.images.length > 1" #addons>
                 <Pagination />
@@ -25,7 +25,7 @@
               <span>{{product.price}}$</span>
               <s>{{product.orig_price}}$</s>
             </div>
-            <AddToCart v-if="product && product.stock_level > 0" :product="product" />
+            <AddToCart v-if="product && product.stock_level > 0 && product.preview_only !== true" :product="product" />
           </div>
         </div>
         <div class="row" v-if="getProductRecommended && getProductRecommended.length > 0">
@@ -39,8 +39,8 @@
 </template>
 
 <script setup>
+import { withSwellImageWidth } from '~/utils/swellImage'
 import VLazyImage from 'v-lazy-image'
-import { Carousel, Slide, Pagination } from 'vue3-carousel'
 import 'vue3-carousel/dist/carousel.css'
 
 defineI18nRoute({
@@ -51,17 +51,21 @@ defineI18nRoute({
 })
 
 const route = useRoute()
-const { $swell } = useNuxtApp()
+const productApi = useProductApi()
 const productStore = useProductStore()
 
 const { data: product } = useAsyncData(`product-${route.params.slug}`, async () => {
   try {
-    const p = await $swell.products.get(route.params.slug, {
+    const p = await productApi.get(route.params.slug, {
       expand: ['cross_sells', 'up_sells']
     })
 
     if (p) {
-      const upSells = p.up_sells && p.up_sells.length > 0 ? p.up_sells : null
+      const upSells = Array.isArray(p.up_sells)
+        ? p.up_sells.filter(item =>
+          typeof item === 'object' && item !== null && !Array.isArray(item),
+        )
+        : []
       await productStore.fetchProductsBySlugs(upSells)
     }
 
